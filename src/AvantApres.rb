@@ -5,7 +5,7 @@ class AvantApres
 
 	private_class_method :new
 
-	def AvantApres.nouveau(avant, apres)
+	def AvantApres.creer(avant, apres)
 		new(avant, apres)
 	end
 

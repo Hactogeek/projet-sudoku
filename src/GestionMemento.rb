@@ -16,18 +16,18 @@ class GestionMemento
 	end
 
 	def canUndo?
-		return @undos.empty?
+		return @undos.empty? == false
 	end
 
 	def canRedo?
-		return @redos.empty?
+		return @redos.empty? == false
 	end
 
 	def exec(action)
 		avant = plateau.etatCourant
 		action.exec
 		apres = plateau.etatCourant
-		@undos.push(AvantApres.nouveau(avant, apres))
+		@undos.push(AvantApres.creer(avant, apres))
 		@redos.clear
 	end
 

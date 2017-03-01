@@ -1,3 +1,3 @@
-class SymbolePlacer < ActionAbstraite
-	@etat
+class SymbolePlacer
+	
 end
