@@ -4,33 +4,39 @@ class Case
 	# Initialisation de la position d'une case de la grille
 	def initialize (posX, posY)
 		@position = Position.new(posX, posY)
-		@solution = "."
+		@solutionOriginale = "."
+		@solutionJoueur = "."
+		@candidat = Array.new()
 	end
 
-	# Initialisation d'une case de la grille
-	#def initialize (posX, posY, sol, ori)
-	#	self posX posY
-	#	@solution, @original = sol, ori
-	#end
-
-	# Méthode pour la MAJ de l'original de la case
-	#def setOriginal(ori)
-	#	@original = ori
-	#end
-
-	# Méthode qui retourne true si une cas est originale, false si elle ne l'est pas 
-	#def estCaseOriginal?
-	#	return @original
-	#end
-
-	# Méthode pour la MAJ de la solution de la case
-	def setSolution(sol)
-		@solution = sol
+	# Méthode pour la MAJ de la solution originale de la case
+	def setSolutionOriginale(solOriginale)
+		@solutionOriginale = solOriginale
 	end
 
-	# Méthode qui retourne la solution de la case
-	def getSolution
-		return @solution
+	# Méthode pour la MAJ de la solution du joueur de la case
+	def setSolutionJoueur(solJoueur)
+		@solutionJoueur = solJoueur
+	end
+
+	# Méthode pour la MAJ de la liste des candidats de la case
+	def setCandidat(candidat)
+		@candidat.add(candidat)
+	end
+
+	# Méthode qui retourne la solution originale de la case
+	def getSolutionOriginale
+		return @solutionOriginale
+	end
+
+	# Méthode qui retourne la solution du joueur de la case
+	def getSolutionJoueur
+		return @solutionJoueur
+	end
+
+	# Méthode qui retourne la liste des candidats de la case
+	def setCandidat(candidat)
+		return @candidat
 	end
 
 	# Méthode qui retourne la position de la case 
@@ -40,18 +46,6 @@ class Case
 
 	# Affichage d'une solution de la Case
 	def to_s
-		return "#{@solution}"
+		return "#{@solutionOriginale}"
 	end
 end
-
-class CaseJoueur < Case
-
-end
-
-#case2 = Case.new(0,1)
-#case1 = Case.new(1, true, 0, 0)
-
-#puts case1.getSolution
-
-#print "Position : ", case1.getPosition, "\n"
-#print "Position : ", case2.getPosition, "\n"

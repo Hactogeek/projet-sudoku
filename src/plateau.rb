@@ -23,7 +23,7 @@ class Plateau
 	# @param [Fixnum] posY La position Y de la case
 	# @return (Solution)
 	def getCase(posX, posY)
-		return @grid[posX][posY].getSolution
+		return @grid[posX][posY].getSolutionOriginale
 	end
 
 	# Méthode pour la MAJ de la solution de la case
@@ -32,7 +32,7 @@ class Plateau
 	# @param [Fixnum] valeur La valeur de la case
 	# @return (self)
 	def setCase(posX, posY, valeur)
-		@grid[posX][posY].setSolution(valeur)
+		@grid[posX][posY].setSolutionOriginale(valeur)
 		return self
 	end
 
@@ -69,6 +69,5 @@ plateau = Plateau.new()
 plateau.setCase(1,0,1)
 plateau.setCase(8,8,2)
 
-print "\n -> ", plateau.getCase(8,8)
 
-print "\n",plateau
+print "\n", plateau
