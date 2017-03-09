@@ -6,7 +6,7 @@ class Plateau
 	def initialize
 		# Taille de la grille
 		@base = 3
-      	@size = @base*@base
+      		@size = @base*@base
 		
 		# Création de la grille
 		@grid = Array.new(@size) do |i|
@@ -18,15 +18,15 @@ class Plateau
       return self
 	end
 
-	# Méthode qui retourne la solution de la case originale
+	# Méthode qui retourne la solution orignale de la case 
 	# @param [Fixnum] posX La position X de la case
 	# @param [Fixnum] posY La position Y de la case
-	# @return (Solution)
+	# @return (SolutionOriginale)
 	def getCaseOriginale(posX, posY)
 		return @grid[posX][posY].getSolutionOriginale
 	end
 
-	# Méthode pour la MAJ de la solution de la case originale
+	# Méthode pour la MAJ de la solution originale de la case 
 	# @param [Fixnum] posX La position X de la case
 	# @param [Fixnum] posY La position Y de la case
 	# @param [Fixnum] valeur La valeur de la case
@@ -35,12 +35,19 @@ class Plateau
 		@grid[posX][posY].setSolutionOriginale(valeur)
 		return self
 	end
-
+	
+	# Méthode qui retourne la solution du joueur pour la case	
+	# @param [Fixnum] posX La position X de la case
+	# @param [Fixnum] posY La position Y de la case
+	# @return (SolutionJoueur)
 	def getCaseJoueur(posX, posY,valeur)
 		return @grid[posX][posY].getSolutionJoueur
-		return self
 	end
 
+	# Méthode pour la MAJ de la solution du joueur pour la case
+	# @param [Fixnum] posX La position X de la case
+	# @param [Fixnum] posY La position Y de la case
+	# @return (self)
 	def setCaseJoueur(posX, posY, valeur)
 		@grid[posX][posY].setSolutionJoueur(valeur)
 		return self
@@ -172,13 +179,52 @@ class Plateau
 		return !tableauRegion.include?(chiffre)
 	end
 
-	def candidatPossible(posX, posY)
+	# def candidatPossible(posX, posY)
+	# 	tableauRetour = Array.new(9)
 
-	end
+	# 	if(posX <=2 && posY<=2)
+	# 		region = 1
+	# 	elsif(posX <= 2 && posY >= 3 && posY <= 5)
+	# 		region = 2
+	# 	elsif(posX <= 2 && posY >= 6)
+	# 		region = 3
+	# 	elsif(posX >= 3 && posX <= 5 && posY <= 2)
+	# 		region = 4
+	# 	elsif(posX >= 3 && posX <= 5 && posY >= 3 && posY <= 5)
+	# 		region = 5
+	# 	elsif(posX >= 3 && posX <= 5 && posY >= 6)
+	# 		region = 6
+	# 	elsif()
+	# 		region = 7
+	# 	elsif()
+	# 		region = 8
+	# 	elsif()
+	# 		region = 9
 
-	def candidatImpossible(posX, posY)
+	# 	for i in (0...9)
+	# 		if(absentLigne(i,posX) && absentColonne(i, poY))
+	# 			tableauRetour.insert(i,i)
+	# 		end
+	# 	end
+	# 	return tableauRetour
+	# end
 
-	end
+	# def candidatImpossible(posX, posY)
+
+	# end
+
+	# Méthode pour générer une grille complete aléatoirement
+	def completeGrille
+		pattern = Array.new(@size){|i| i+1}.shuffle
+		@size.times do |y|
+			@size.times do |x|
+      			setCaseOriginale(x, y, pattern[x])
+    		end
+    		@base.times{|i| pattern.push pattern.shift}
+    		pattern.push pattern.shift if @base - (y % @base) == 1
+  		end
+      	self
+    end
 
 	# Méthode pour le parcours de la grille du plateau
 	# @yield [x, y, val] la position et la valeur courante
@@ -197,11 +243,11 @@ class Plateau
 	def to_s
 		res  = ""
 		@size.times do |x|
-			res += "\n" if x>0 && x%@base == 0
+			res += "\n" if x>0 && x % @base == 0
 			@size.times do |y|
-				res += " " if y>0 && y%@base == 0
-				res += @grid[x][y].printJoueur
-				#res+= @grid[x][y].printOri
+				res += " " if y>0 && y % @base == 0
+				# res += @grid[x][y].printJoueur
+				res+= @grid[x][y].printOri
 			end
 			res += "\n"
 		end
@@ -211,8 +257,10 @@ end
 
 plateau = Plateau.new()
 
-plateau.setCaseJoueur(1,0,1)
-plateau.setCaseJoueur(8,8,2)
+plateau.completeGrille()
+
+#plateau.setCaseJoueur(1,0,1)
+#plateau.setCaseJoueur(8,8,2)
 
 
 print "\n", plateau
