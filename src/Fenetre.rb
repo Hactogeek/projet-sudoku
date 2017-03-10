@@ -21,6 +21,8 @@ class Fenetre < Gtk::Window
 		# Property
 		set_title "Sudoku Pre-Alpha Ultimate Premium Professional Familial Exclusive Edition (Version d'Evaluation)"
 		set_default_size 670, 480
+		set_resizable(false)
+
 
 		#=====================================#
 		# Initialisation des classe interface #

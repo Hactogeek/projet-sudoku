@@ -38,6 +38,39 @@ class ListeCandidat
 		return @tableauCandidat.include?(symbole)
 	end
 
+	# Les méthodes de classe
+	class << self
+		
+		# Méthode qui permet de placer un candidat sur une case
+		# @param plateau plateau
+		# @param position pos
+		# @param [Fixnum] symbole
+		# @return listeCandidat
+		def placerCandidat(plateau, pos, symbole)
+			listeCandidat = plateau.getCaseListeCandidat(pos)
+			if listeCandidat == nil then
+				listeCandidat = Candidat.creer
+			end
+			listeCandidat.add(symbole)
+			plateau.setCaseListeCandidat(pos, listeCandidat)
+			return listeCandidat
+		end 
+
+		# Méthode qui permet d'enlever un candidat d'une case
+		# @param plateau plateau
+		# @param position pos
+		# @param [Fixnum] symbole
+		# @return listeCandidat
+		def retirerCandidat(plateau, pos, symbole)
+			listeCandidat = plateau.getCaseListeCandidat(pos)
+			if listeCandidat != nil then
+				listeCandidat.remove(symbole)
+				plateau.setCaseListeCandidat(pos, listeCandidat)
+			end
+			return listeCandidat
+		end
+
+	end
 end
 
 
