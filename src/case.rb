@@ -2,8 +2,8 @@ require './position'
 
 class Case
 	# Initialisation de la position d'une case de la grille
-	def initialize (posX, posY)
-		@position = Position.new(posX, posY)
+	def initialize (position)
+		@position = position
 		@solutionOriginale = "."
 		@solutionJoueur = nil
 		@candidat = nil
