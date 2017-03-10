@@ -6,7 +6,7 @@ class Plateau
 	def initialize
 		# Taille de la grille
 		@base = 3
-      		@size = @base*@base
+		@size = @base*@base
 		
 		# Création de la grille
 		@grid = Array.new(@size) do |i|
@@ -18,12 +18,26 @@ class Plateau
       return self
 	end
 
-	# Méthode qui retourne la solution orignale de la case 
+	################################################################################
+	#### 							GETTERS										####
+	################################################################################
+
+	# Méthode pour la MAJ de la solution du joueur pour la case
 	# @param [Fixnum] posX La position X de la case
 	# @param [Fixnum] posY La position Y de la case
-	# @return (SolutionOriginale)
-	def getCaseOriginale(posX, posY)
-		return @grid[posX][posY].getSolutionOriginale
+	# @return (self)
+	def setCaseJoueur(position, valeur)
+		@grid[position.getX][position.getY].setSolutionJoueur(valeur)
+		return self
+	end
+
+	# OK
+	# Méthode pour la MAJ de la liste des candidats de la case
+	# @param [Position] position La position de la case
+	# @param [Candidat] candidat La liste des candidats de la case
+	def setCaseListeCandidat(position, candidat)
+		@grid[position.getX][position.getY].setListeCandidat(candidat)
+		return self
 	end
 
 	# Méthode pour la MAJ de la solution originale de la case 
@@ -31,26 +45,37 @@ class Plateau
 	# @param [Fixnum] posY La position Y de la case
 	# @param [Fixnum] valeur La valeur de la case
 	# @return (self)
-	def setCaseOriginale(posX, posY, valeur)
-		@grid[posX][posY].setSolutionOriginale(valeur)
+	def setCaseOriginale(position, valeur)
+		@grid[position.getX][position.getY].setSolutionOriginale(valeur)
 		return self
+	end
+
+	################################################################################
+	#### 							SETTERS										####
+	################################################################################
+
+	# Méthode qui retourne la solution orignale de la case 
+	# @param [Fixnum] posX La position X de la case
+	# @param [Fixnum] posY La position Y de la case
+	# @return (SolutionOriginale)
+	def getCaseOriginale(position)
+		return @grid[position.getX][position.getY].getSolutionOriginale
 	end
 	
 	# Méthode qui retourne la solution du joueur pour la case	
 	# @param [Fixnum] posX La position X de la case
 	# @param [Fixnum] posY La position Y de la case
 	# @return (SolutionJoueur)
-	def getCaseJoueur(posX, posY,valeur)
-		return @grid[posX][posY].getSolutionJoueur
+	def getCaseJoueur(position)
+		return @grid[position.getX][position.getY].getSolutionJoueur
 	end
 
-	# Méthode pour la MAJ de la solution du joueur pour la case
-	# @param [Fixnum] posX La position X de la case
-	# @param [Fixnum] posY La position Y de la case
-	# @return (self)
-	def setCaseJoueur(posX, posY, valeur)
-		@grid[posX][posY].setSolutionJoueur(valeur)
-		return self
+	# OK
+	# Méthode qui retourne la liste des candidats pour la case
+	# @param [Position] position La position de la case
+	# @return [Candidat]
+	def getCaseListeCandidat(position)
+		return @grid[position.getX][position.getY].getListeCandidat
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une ligne spécifié

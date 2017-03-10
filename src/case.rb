@@ -6,7 +6,8 @@ class Case
 		@position = Position.new(posX, posY)
 		@solutionOriginale = "."
 		@solutionJoueur = nil
-		@candidat = Array.new()
+		@candidat = nil
+		@originale = false
 	end
 
 	# Méthode pour la MAJ de la solution originale de la case
@@ -21,10 +22,17 @@ class Case
 		@solutionJoueur = solJoueur
 	end
 
+	# OK
 	# Méthode pour la MAJ de la liste des candidats de la case
 	# @param [Fixnum] candidat Candiat pour la case
-	def setCandidat(candidat)
-		@candidat.add(candidat)
+	def setListeCandidat(candidat)
+		@candidat = candidat
+	end
+
+	# Méthode qui retourne si une case est originale du puzzle
+	# @return boolean
+	def getOriginaleGrille
+		return @originale
 	end
 
 	# Méthode qui retourne la solution originale de la case
@@ -39,9 +47,10 @@ class Case
 		return @solutionJoueur
 	end
 
+	# OK
 	# Méthode qui retourne la liste des candidats de la case
-	# @return (Integer[])
-	def setCandidat(candidat)
+	# @return [Candidat]
+	def getListeCandidat()
 		return @candidat
 	end
 
