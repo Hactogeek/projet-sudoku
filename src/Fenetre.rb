@@ -19,7 +19,7 @@ class Fenetre < Gtk::Window
 		end
 
 		# Property
-		set_title "Sudoku Pre-Alpha Ultimate Premium Professional Familial Exclusive Edition (Version d'Evaluation)"
+		set_title "ku"
 		set_default_size 670, 480
 		set_resizable(false)
 
@@ -101,8 +101,6 @@ class Fenetre < Gtk::Window
 	    	@grille.setCaseValeur(x+1,y+1,val)
 	    }
 
-	    @grille.testCouleur()
-	    @grille.setCouleurCase(8,8, COUL_BLEU)
 	    show_all
 	    Gtk.main
 	end
