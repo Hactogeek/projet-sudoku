@@ -5,18 +5,31 @@ COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
 COUL_VERT   = Gdk::RGBA::new(0.5,0.9,0.3,1.0)
 COUL_JAUNE  = Gdk::RGBA::new(1.0,0.9,0.3,1.0)
 COUL_VIOLET = Gdk::RGBA::new(0.7,0.4,0.8,1.0)
+COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
+
+
 
 class Grille < Gtk::Table
+	@previousFocus 
 	@focus # case actuellement selectionné
+
 
 	def initialize ()
 		super(9, 9, true)
 		set_margin_left(1)
 		for i in 0..8
 			for y in 0..8
-				attach(Gtk::EventBox.new(), y, y+1, i, i+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
-				children().first().add(Gtk::Label.new().set_markup("<span font-weight=\"bold\">#{y+1}</span>"))
-				children().first().set_size_request(46,46)
+
+				btn = Gtk::Button.new()
+				btn.signal_connect "clicked" do |widget|
+					@previousFocus = @focus 
+					@focus = widget
+					setCouleurSurFocus(COUL_JAUNE)
+				end
+
+				attach(btn, y, y+1, i, i+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
+				btn.add(Gtk::Label.new().set_markup("<span font-weight=\"bold\">#{y+1}</span>"))
+				btn.set_size_request(46,46)
 			end
 		end
 	end
@@ -26,7 +39,11 @@ class Grille < Gtk::Table
 	end
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
-		children()[1].children[0].set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+		@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+	end
+
+	def setCouleurSurFocus(couleur) # change couleur du focus
+		@focus.override_background_color(:normal, couleur)
 	end
 
 	def setCouleurCase(x, y, couleur)
