@@ -254,17 +254,3 @@ class Plateau
       return res
 	end
 end
-
-plateau = Plateau.new()
-
-plateau.completeGrille()
-
-#plateau.setCaseJoueur(1,0,1)
-#plateau.setCaseJoueur(8,8,2)
-
-
-print "\n", plateau
-
-puts plateau.absentRegion(1,1)
-puts plateau.absentLigne(1,1)
-puts plateau.absentColonne(1,0)
