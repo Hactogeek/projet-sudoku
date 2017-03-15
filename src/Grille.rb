@@ -10,7 +10,6 @@ COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
 
 
 class Grille < Gtk::Table
-	@previousFocus 
 	@focus # case actuellement selectionné
 
 
@@ -21,8 +20,9 @@ class Grille < Gtk::Table
 			for y in 0..8
 
 				btn = Gtk::Button.new()
+				btn.override_background_color(:normal, COUL_BLANC)
 				btn.signal_connect "clicked" do |widget|
-					@previousFocus = @focus 
+						resetCouleurSurFocus()
 					@focus = widget
 					setCouleurSurFocus(COUL_JAUNE)
 				end
@@ -39,11 +39,36 @@ class Grille < Gtk::Table
 	end
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
-		@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+		if (@focus)
+			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+		end
 	end
 
 	def setCouleurSurFocus(couleur) # change couleur du focus
-		@focus.override_background_color(:normal, couleur)
+		if (@focus)
+			@focus.override_background_color(:normal, couleur)
+		end
+		
+	end
+
+	def setColorOnValue(value)
+		for i in 0..self.children().size()-1
+			if (self.children()[i].children().first().text == value)
+				self.children()[i].override_background_color(:normal, COUL_VERT)
+			end
+		end
+	end
+
+	def resetColorOnAll()
+		for i in 0..self.children().size()-1
+			self.children()[i].override_background_color(:normal, COUL_BLANC)
+		end
+	end
+
+	def resetCouleurSurFocus() # change couleur du focus
+		if (@focus)
+			@focus.override_background_color(:normal, COUL_BLANC)
+		end
 	end
 
 	def setCouleurCase(x, y, couleur)
