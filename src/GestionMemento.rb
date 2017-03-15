@@ -1,5 +1,4 @@
 class GestionMemento
-	#@plateau
 	#@undos
 	#@redos
 
@@ -7,14 +6,13 @@ class GestionMemento
 
 	# Constructeur de la classe
 	# @param : plateau	
-	def GestionAction.creer(plateau)
-		new(plateau)
+	def GestionMemento.creer
+		new
 	end
 
-	def initialize(plateau)
+	def initialize
 		@undos = Array.new
 		@redos = Array.new
-		@plateau = plateau
 		return self
 	end
 
@@ -30,37 +28,34 @@ class GestionMemento
 		return @redos.empty? == false
 	end
 
-	# Méthode qui permet d'executer une action placée en paramètre, elle gère également la sauvegarde de l'état precedant et suivant l'action dans le memento.
-	# @param action : action a executer
+	# Méthode qui permet de sauvegarder un memento.
+	# @param : etat
 	# @return : self
-	def exec(action)
-		avant = plateau.etatCourant
-		action.exec
-		apres = plateau.etatCourant
-		@undos.push(AvantApres.creer(avant, apres))
+	def addMemento(etat)
+		@undos.push(etat)
 		@redos.clear
 		return self
 	end
 
 	# Méthode qui permet de revenir à l'état précédant la dernière action
-	# @return : self
+	# @return : memento ou nil
 	def undo
 		if @undos.empty? == false
 			dernierMemento = @undos.pop
-			dernierMemento.avant.restaurer
 			@redos.push(dernierMemento)
+			return dernierMemento
 		end
-		return self
+		return nil
 	end
 
 	# Méthode qui permet de revenir à l'état suivant la dernière action
-	# @return : self
+	# @return : memento ou nil
 	def redo
 		if @redos.empty? == false
 			dernierMemento = @redos.pop
-			dernierMemento.apres.restaurer
 			@undos.push(dernierMemento)
+			return dernierMemento
 		end
-		return self
+		return nil
 	end
 end
