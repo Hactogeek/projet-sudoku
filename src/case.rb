@@ -54,6 +54,12 @@ class Case
 		return @candidat
 	end
 
+	# Méthode qui retourne la position de la case
+	# @return Position
+	def getPosition()
+		return @position
+	end
+
 	# Méthode qui retourne la position de la case 
 	#def getPosition
 	#	return @position
@@ -65,6 +71,9 @@ class Case
 	end
 
 	def printJoueur
+		if @solutionJoueur == nil
+			return "0"
+		end
 		return "#{@solutionJoueur}"
 	end
 end

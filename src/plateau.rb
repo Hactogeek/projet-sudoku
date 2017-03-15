@@ -146,7 +146,7 @@ class Plateau
 	def candidatPossible(position)
 		tableauRetour = Array.new(9)
 
-		for i in (0...9)
+		for i in (1...9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tableauRetour.insert(i,i)
 			end
@@ -162,7 +162,7 @@ class Plateau
 	def candidatImpossible(position)
 		tableauRetour = Array.new(9)
 
-		for i in (0...9)
+		for i in (1...9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
 				tableauRetour.insert(i,i)
 			end
@@ -172,11 +172,13 @@ class Plateau
 	end
 
 	# Méthode pour générer une grille complete aléatoirement
+	# @return self
 	def completeGrille
 		pattern = Array.new(@size){|i| i+1}.shuffle
 		@size.times do |y|
 			@size.times do |x|
       			setCaseOriginale(Position.new(x, y), pattern[x])
+      			setCaseJoueur(Position.new(x, y), pattern[x])
     		end
     		@base.times{|i| pattern.push pattern.shift}
     		pattern.push pattern.shift if @base - (y % @base) == 1
@@ -201,7 +203,7 @@ class Plateau
 
         @size.times do |k|
         	if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-        		setCaseJoueur(Position.new(x,y), k+1)
+        		#setCaseJoueur(Position.new(x,y), k+1)
 
         		if valideGrille(position+1)
         			return true
@@ -211,6 +213,31 @@ class Plateau
        	setCaseJoueur(Position.new(x,y), nil)
 
     	return false
+    end
+
+    # Méthode pour réduire une grille en la gardant jouable
+    # @return self
+    def reduireGrille (position)
+
+    	listeCase = Array.new()
+
+    	@size.times do |y|
+			@size.times do |x|
+				listeCase.insert(y*9+x, @grid[x][y])
+			end
+		end
+
+		listeCase.shuffle!
+
+		for uneCase in listeCase
+			setCaseJoueur(uneCase.getPosition, nil)
+
+	    	if(candidatPossible(uneCase.getPosition).compact.count > 1)
+	    		setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
+			end
+		end
+
+		return self
     end
 
 	# Méthode pour le parcours de la grille du plateau
@@ -242,11 +269,12 @@ class Plateau
 	end
 end
 
-=begin 
+#=begin 
 plateau = Plateau.new
 
 plateau.completeGrille
 
+=begin
 plateau.setCaseJoueur(Position.new(0,1), 4)
 plateau.setCaseJoueur(Position.new(0,3), 1)
 plateau.setCaseJoueur(Position.new(1,2), 3)
@@ -273,7 +301,10 @@ plateau.setCaseJoueur(Position.new(7,5), 2)
 plateau.setCaseJoueur(Position.new(7,6), 4)
 plateau.setCaseJoueur(Position.new(8,5), 4)
 plateau.setCaseJoueur(Position.new(8,7), 9)
-
-print plateau.valideGrille(0)
 =end
+
+plateau.reduireGrille(0)
+
+print plateau
+#=end
 
