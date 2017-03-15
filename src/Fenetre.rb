@@ -21,7 +21,7 @@ class Fenetre < Gtk::Window
 		# Property
 		set_title "ku"
 	#	set_default_size 670, 480
-		set_default_size 670, 600
+	#	set_default_size 670, 600
 		set_resizable(false)
 
 
@@ -81,7 +81,7 @@ class Fenetre < Gtk::Window
 		#==========#
 
 	    vboxMain.pack_start(menuBar,:expand => false, :fill => false, :padding => 0)
-	    tableMain = Gtk::Table.new(10, 11)
+	    tableMain = Gtk::Table.new(10, 10)
 	    vboxMain.pack_start(tableMain,:expand => true, :fill => true, :padding => 0)
 	   
 
@@ -91,7 +91,7 @@ class Fenetre < Gtk::Window
 
 		tableMain.attach(@sousGrille, 0,5,0,8) # Support Grille (background + sous grille + grille)
 		tableMain.attach(@cadreAide , 5,9,0,8) # Aide
-		tableMain.attach(@boutons   , 0,9,8,10) # Boutons
+		tableMain.attach(@boutons   , 0,9,8,9) # Boutons
 
 		#==========================#
 		# Remplissage de la grille #
