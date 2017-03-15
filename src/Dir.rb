@@ -32,11 +32,12 @@ class Dir
 		new(unPseudo)
 	end 	
 	def initialize(unPseudo)
-		Dir.chdir("/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil")
+		#Dir.chdir("/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil")
+		Dir.chdir("profil")
 		if(!Dir.exist?(unPseudo))	
-			Dir.mkdir(File.join(Dir.getwd, unPseudo), 0700)		
+			Dir.mkdir(unPseudo)
 		end
-		
+		Dir.chdir("../")
 	end 
 	# * *Description*:
 	# 
@@ -51,7 +52,7 @@ class Dir
 	# dossier.semettreDansProfil("Yassine")
 	#
 	def semettreDansProfil(unPseudo)
-		Dir.chdir("/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil/#{unPseudo}")
+		Dir.chdir("profil/#{unPseudo}")
 	end 
 	# * *Description*:
 	# 
@@ -66,8 +67,9 @@ class Dir
 	# profil.supprimerProfil("Yassine")
 	#
 	def supprimerProfil(unPseudo)
-		Dir.chdir("/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil")
-		Dir.rmdir(unPseudo) 
+		Dir.chdir("profil")
+		Dir.rmdir(unPseudo)
+		Dir.chdir("../")
 	end
 
 end

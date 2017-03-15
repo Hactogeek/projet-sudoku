@@ -20,7 +20,7 @@ class Joueur
 	# repertoire (profil)
 	#@d
 
-	#attr_accessor:d
+	attr_accessor:d
 	attr_reader :pseudo
 	private_class_method :new
 
@@ -44,7 +44,7 @@ class Joueur
 		@pseudo=unPseudo
 		@@identifiant+=1
 		
-		#@d=Dir.creer(unPseudo)
+		@d=Dir.creer(unPseudo)
 		#@d.semettreDansProfil(unPseudo)
 		#@d.supprimerProfil(unPseudo)	
 	end
