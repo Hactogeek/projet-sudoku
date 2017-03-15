@@ -99,103 +99,18 @@ class Plateau
 	# Méthode qui retourne un tableau des valeurs d'une region spécifié
 	# @param [Fixnum] region La region qu'il faut retourner 1-9
 	# @return [ArrayFixnum]
-	def getRegion(region)
+	def getRegion(posX, posY)
 		tableauRetour = Array.new()
-		i = 0
-		case region
-		when 1
-			for n in (0...3)
-				for m in (0...3)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
+
+		posX = posX-(posX%3)
+		posY = posY-(posY%3)
+
+		for n in (posX...posX+3)
+			for m in (posY...posY+3)
+				tableauRetour.insert(n, @grid[n][m].getSolutionJoueur)
 			end
-		when 2
-			for n in (0...3)
-				for m in (3...6)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 3
-			for n in (0...3)
-				for m in (6...9)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 4
-			for n in (3...6)
-				for m in (0...3)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 5
-			for n in (3...6)
-				for m in (3...6)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 6
-			for n in (3...6)
-				for m in (6...9)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 7
-			for n in (6...9)
-				for m in (0...3)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 8
-			for n in (6...9)
-				for m in (3...6)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		when 9
-			for n in (6...9)
-				for m in (6...9)
-					tableauRetour.insert(i, @grid[n][m].getSolutionJoueur)
-					i = i + 1
-				end
-			end
-		end
+		end	
 		return tableauRetour
-	end
-
-
-	# Méthode qui retourne le numéro de la région en fonction de la position
-	# @param [Position] positon La position de la case
-	# @return [Fixnum]
-	def getRegionNumero(position)
-		if(position.getX <= 2 && position.getY <= 2)
-			region = 1
-		elsif(position.getX <= 2 && position.getY >= 3 && position.getY <= 5)
-			region = 2
-		elsif(position.getX <= 2 && position.getY >= 6)
-			region = 3
-		elsif(position.getX >= 3 && position.getX <= 5 && position.getY <= 2)
-			region = 4
-		elsif(position.getX >= 3 && position.getX <= 5 && position.getY >= 3 && position.getY <= 5)
-			region = 5
-		elsif(position.getX >= 3 && position.getX <= 5 && position.getY >= 6)
-			region = 6
-		elsif(position.getX >= 6 && position.getY <= 2)
-			region = 7
-		elsif(position.getX >= 6 && position.getY >= 3 && position.getY <= 5)
-			region = 8
-		elsif(position.getX >= 6 && position.getY >= 6)
-			region = 9
-		end
-
-		return region
 	end
 
 	# Méthode qui vérifie si un chiffre est sur une ligne
@@ -220,8 +135,8 @@ class Plateau
 	# @param chiffre Le chiffre
 	# @param ligne La ligne 
 	# @return boolean
-	def absentRegion(chiffre, region)
-		tableauRegion = self.getRegion(region)
+	def absentRegion(chiffre, posX, posY)
+		tableauRegion = self.getRegion(posX,posY)
 		return !tableauRegion.include?(chiffre)
 	end
 
@@ -231,10 +146,8 @@ class Plateau
 	def candidatPossible(position)
 		tableauRetour = Array.new(9)
 
-		region = self.getRegionNumero(position)
-
 		for i in (0...9)
-			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, region))
+			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tableauRetour.insert(i,i)
 			end
 		end
@@ -249,10 +162,8 @@ class Plateau
 	def candidatImpossible(position)
 		tableauRetour = Array.new(9)
 
-		region = self.getRegionNumero(position)
-
 		for i in (0...9)
-			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, region))
+			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
 				tableauRetour.insert(i,i)
 			end
 		end
@@ -271,6 +182,35 @@ class Plateau
     		pattern.push pattern.shift if @base - (y % @base) == 1
   		end
       	self
+    end
+
+    # Méthode pour savoir si une grille est valide
+    # @param 	Fixnum 	position	
+    # @return 	(boolean)
+    def valideGrille(position)
+    	if (position == @size * @size)
+    		return true
+    	end
+
+    	x = position/9
+    	y = position%9
+
+    	if (@grid[x][y].getSolutionJoueur !=  nil)
+        	return valideGrille(position+1)
+        end
+
+        @size.times do |k|
+        	if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
+        		setCaseJoueur(Position.new(x,y), k+1)
+
+        		if valideGrille(position+1)
+        			return true
+        		end
+        	end
+        end
+       	setCaseJoueur(Position.new(x,y), nil)
+
+    	return false
     end
 
 	# Méthode pour le parcours de la grille du plateau
@@ -293,11 +233,47 @@ class Plateau
 			res += "\n" if x>0 && x % @base == 0
 			@size.times do |y|
 				res += " " if y>0 && y % @base == 0
-				# res += @grid[x][y].printJoueur
-				res+= @grid[x][y].printOri
+				res += @grid[x][y].printJoueur
+				#res+= @grid[x][y].printOri
 			end
 			res += "\n"
 		end
       return res
 	end
 end
+
+=begin 
+plateau = Plateau.new
+
+plateau.completeGrille
+
+plateau.setCaseJoueur(Position.new(0,1), 4)
+plateau.setCaseJoueur(Position.new(0,3), 1)
+plateau.setCaseJoueur(Position.new(1,2), 3)
+plateau.setCaseJoueur(Position.new(1,3), 5)
+plateau.setCaseJoueur(Position.new(1,7), 1)
+plateau.setCaseJoueur(Position.new(1,8), 9)
+plateau.setCaseJoueur(Position.new(2,5), 6)
+plateau.setCaseJoueur(Position.new(2,8), 3)
+plateau.setCaseJoueur(Position.new(3,2), 7)
+plateau.setCaseJoueur(Position.new(3,5), 5)
+plateau.setCaseJoueur(Position.new(3,7), 8)
+plateau.setCaseJoueur(Position.new(4,1), 8)
+plateau.setCaseJoueur(Position.new(4,2), 1)
+plateau.setCaseJoueur(Position.new(4,6), 9)
+plateau.setCaseJoueur(Position.new(4,7), 6)
+plateau.setCaseJoueur(Position.new(5,0), 9)
+plateau.setCaseJoueur(Position.new(5,3), 2)
+plateau.setCaseJoueur(Position.new(5,6), 7)
+plateau.setCaseJoueur(Position.new(6,0), 6)
+plateau.setCaseJoueur(Position.new(6,3), 9)
+plateau.setCaseJoueur(Position.new(7,0), 8)
+plateau.setCaseJoueur(Position.new(7,1), 1)
+plateau.setCaseJoueur(Position.new(7,5), 2)
+plateau.setCaseJoueur(Position.new(7,6), 4)
+plateau.setCaseJoueur(Position.new(8,5), 4)
+plateau.setCaseJoueur(Position.new(8,7), 9)
+
+print plateau.valideGrille(0)
+=end
+
