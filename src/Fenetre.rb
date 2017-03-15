@@ -20,7 +20,8 @@ class Fenetre < Gtk::Window
 
 		# Property
 		set_title "ku"
-		set_default_size 670, 480
+	#	set_default_size 670, 480
+	#	set_default_size 670, 600
 		set_resizable(false)
 
 
@@ -101,7 +102,7 @@ class Fenetre < Gtk::Window
 	    	@grille.setCaseValeur(x+1,y+1,val)
 	    }
 
-	    show_all
+	    show_all	
 	    Gtk.main
 	end
 

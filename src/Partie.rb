@@ -24,15 +24,15 @@ class Partie
 		print @plateau
 	end
 
-	def setSave()
-		f=File.new("save", "w+")
+	def setSave(nomPartie)
+		f=File.new(nomPartie+".txt", "w+")
 		f.write(@plateau)
 		f.close
 	end
 
 	#nomPartie est le nom du fichier à charger.
 	def loadSave(nomPartie)
-		f=File.open(nomPartie, "r")
+		f=File.open(nomPartie+".txt", "r")
 		@plateau=f.read
 		f.close
 	end

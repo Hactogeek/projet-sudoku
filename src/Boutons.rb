@@ -19,9 +19,24 @@ class Boutons < Gtk::Box
 			btn = Gtk::Button.new(:label => i.to_s(), :use_underline => nil, :stock_id => nil)
 			btn.signal_connect "clicked" do |widget|
 				@grille.setValeurSurFocus(widget.label)
+				@grille.resetColorOnAll()
+				@grille.setColorOnValue(widget.label, COUL_VERT)
 			end
 			add(btn)
 		end
 
 	end
+
+	def setCouleurSurFocus(couleur) # change couleur du focus
+		if (@focus)
+			@focus.override_background_color(:normal, couleur)
+		end
+	end
+
+	def resetCouleurSurFocus() # change couleur du focus
+		if (@focus)
+			@focus.override_background_color(:normal, COUL_BLANC)
+		end
+	end
+
 end
