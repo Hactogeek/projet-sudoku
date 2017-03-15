@@ -4,6 +4,7 @@
 # Date : mardi 07 Mars 2017
 # Description : fichier contenant la class Joueur d'une partie de Sudoku
 
+load "Dir.rb"
 
 #
 # Joueur, un joueur de sudoku
@@ -16,7 +17,10 @@ class Joueur
 	@pseudo
 	#identifiant du joueur
 	@@identifiant=0
-	
+	# repertoire (profil)
+	#@d
+
+	#attr_accessor:d
 	attr_reader :pseudo
 	private_class_method :new
 
@@ -40,8 +44,10 @@ class Joueur
 		@pseudo=unPseudo
 		@@identifiant+=1
 		
+		#@d=Dir.creer(unPseudo)
+		#@d.semettreDansProfil(unPseudo)
+		#@d.supprimerProfil(unPseudo)	
 	end
-	
 	# * *Description*:
 	# 
 	# méthode qui permet de donner le pseudo du joueur.
@@ -65,6 +71,8 @@ class Joueur
 	def getIdentifiant()
 		return @@identifiant
 	end 
+
+
 	# * *Description*:
 	# 
 	# méthode d'affichage d'un joueur
@@ -94,5 +102,12 @@ class Joueur
 	#
 	def <=>(unJoueur)
 		return self.pseudo==unJoueur.pseudo
-	end
+	end	
+
 end
+
+
+#j= Joueur.creer("modira")
+
+#d = Dir.creer(j.getPseudo())
+#d.semettreDansProfil(j.getPseudo())
