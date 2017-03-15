@@ -38,6 +38,12 @@ class ListeCandidat
 		return @tableauCandidat.include?(symbole)
 	end
 
+	# Méthode qui retourne le tableau des candidats
+	# @return : [Fixnum] Array
+	def getListeCandidat
+		return @tableauCandidat
+	end
+
 	# Les méthodes de classe
 	class << self
 		
