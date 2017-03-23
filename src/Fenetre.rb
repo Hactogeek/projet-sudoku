@@ -1,5 +1,4 @@
 require 'gtk3'
-require './Generateur.rb'
 require './CadreAide.rb'
 require './Boutons.rb'
 require './Grille.rb'

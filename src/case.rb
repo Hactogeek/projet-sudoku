@@ -60,6 +60,7 @@ class Case
 		return @position
 	end
 
+
 	# Méthode qui retourne la position de la case 
 	#def getPosition
 	#	return @position

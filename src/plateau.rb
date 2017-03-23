@@ -270,9 +270,9 @@ class Plateau
 end
 
 #=begin 
-plateau = Plateau.new
+#plateau = Plateau.new
 
-plateau.completeGrille
+#plateau.completeGrille
 
 =begin
 plateau.setCaseJoueur(Position.new(0,1), 4)
@@ -303,8 +303,8 @@ plateau.setCaseJoueur(Position.new(8,5), 4)
 plateau.setCaseJoueur(Position.new(8,7), 9)
 =end
 
-plateau.reduireGrille(0)
+#plateau.reduireGrille(0)
 
-print plateau
+#print plateau
 #=end
 
