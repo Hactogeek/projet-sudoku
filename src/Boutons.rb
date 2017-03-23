@@ -8,7 +8,7 @@ class Boutons < Gtk::Box
 	end
 
 	def initialize(grille)
-		super(:horizontal, 10)
+		super(:horizontal, 11)
 		set_homogeneous(true)
 
 		@grille = grille
@@ -24,6 +24,11 @@ class Boutons < Gtk::Box
 			end
 			add(btn)
 		end
+		btn = Gtk::Button.new(:label => "Stylo", :use_underline => nil, :stock_id => nil)
+		btn.signal_connect "clicked" do |widget|
+
+		end
+		add(btn)
 
 	end
 
