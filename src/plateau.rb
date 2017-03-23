@@ -203,9 +203,10 @@ class Plateau
 
         @size.times do |k|
         	if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-        		#setCaseJoueur(Position.new(x,y), k+1)
+        		setCaseJoueur(Position.new(x,y), k+1)
 
         		if valideGrille(position+1)
+        			setCaseJoueur(Position.new(x,y), nil)
         			return true
         		end
         	end
@@ -274,6 +275,8 @@ plateau = Plateau.new
 
 plateau.completeGrille
 
+puts plateau
+
 =begin
 plateau.setCaseJoueur(Position.new(0,1), 4)
 plateau.setCaseJoueur(Position.new(0,3), 1)
@@ -305,6 +308,10 @@ plateau.setCaseJoueur(Position.new(8,7), 9)
 
 plateau.reduireGrille(0)
 
-print plateau
+puts plateau
+
+puts plateau.valideGrille(0)
+
+puts plateau
 #=end
 
