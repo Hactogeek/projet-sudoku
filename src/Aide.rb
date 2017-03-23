@@ -1,12 +1,12 @@
 require './plateau'
 
 class Aide
-	def Aide.creer()
-		new()
+	def Aide.creer(plateau)
+		new(plateau)
 	end
 
-	def initialize()
-		@plateau=Plateau.new
+	def initialize(plateau)
+		@plateau=plateau
 	end
 
 	#Place tous les candidats de la case
