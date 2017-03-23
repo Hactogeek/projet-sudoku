@@ -1,4 +1,4 @@
-require './case'
+require './Case'
 
 class Plateau
 	# Constructeur du plateau de jeu

@@ -1,4 +1,4 @@
-require './position'
+require './Position'
 
 class Case
 	# Initialisation de la position d'une case de la grille
