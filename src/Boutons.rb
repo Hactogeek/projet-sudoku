@@ -30,6 +30,11 @@ class Boutons < Gtk::Box
 		end
 		add(btn)
 
+		btn = Gtk::Button.new(:label => "Gommer", :use_underline => nil, :stock_id => nil)
+		btn.signal_connect "clicked" do |widget|
+			@grille.setValeurSurFocus("")
+		end
+		#add(btn)
 	end
 
 	def setCouleurSurFocus(couleur) # change couleur du focus
