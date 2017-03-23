@@ -309,9 +309,9 @@ class Plateau
 end
 
 #=begin 
-plateau = Plateau.new
+#plateau = Plateau.new
 
-plateau.completeGrille
+#plateau.completeGrille
 
 
 
@@ -346,8 +346,11 @@ plateau.setCaseJoueur(Position.new(8,5), 4)
 plateau.setCaseJoueur(Position.new(8,7), 9)
 =end
 
-plateau.reduireGrille(0)
+#plateau.reduireGrille(0)
 
+<<<<<<< HEAD:src/plateau.rb
+#print plateau
+=======
 puts plateau
 
 puts plateau.valideGrille(0)
@@ -355,5 +358,6 @@ puts plateau.valideGrille(0)
 puts plateau
 
 
+>>>>>>> 937208a309742b9ca33e51083443565ab9e9f5ae:src/Plateau.rb
 #=end
 

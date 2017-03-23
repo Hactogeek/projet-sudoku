@@ -1,4 +1,7 @@
 require 'gtk3'
+require './position.rb'
+require './plateau.rb'
+require './Partie.rb'
 
 COUL_BLEU   = Gdk::RGBA::new(0.4,0.7,1.0,1.0)
 COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
@@ -12,6 +15,7 @@ COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
 
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
+	@partie
 
 	def initialize ()
 		super(9, 9, true)
@@ -20,8 +24,8 @@ class Grille < Gtk::Table
 		#==========================#
 		# Remplissage de la grille #
 		#==========================#
-	    @generateur = Generateur.new
-	    @generateur.make_valid
+	    @partie = Partie.new
+	    @partie.creerPartie()
 	    remplirGrille()
 	end
 
@@ -32,6 +36,11 @@ class Grille < Gtk::Table
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
 		if (@focus)
+			i = 80 - children().index(@focus)
+			pos = Position.new(i%9,i-(i%9*9))
+			print("\n", i, " : x=",i%9, " y=", i-(i%9*9))
+			@partie.getPlateau().setCaseJoueur(pos,valeur)
+			valeur = @partie.getPlateau().getCaseJoueur(pos)
 			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
 		end
 	end
@@ -40,7 +49,7 @@ class Grille < Gtk::Table
 		if (@focus)
 			css=<<-EOT
 	   		#cell{
-	      	background: #{COUL_BLEU};
+	      	background: #{COUL_JAUNE};
 	    	}
 	    	EOT
 	    	css_provider = Gtk::CssProvider.new
@@ -53,7 +62,14 @@ class Grille < Gtk::Table
 	def setColorOnValue(value, couleur)
 		for i in 0..self.children().size()-1
 			if (self.children()[i].children().first().text == value)
-				self.children()[i].override_background_color(:normal, couleur)
+				css=<<-EOT
+		   		#cell{
+		      	background: #{COUL_JAUNE_PALE};
+		    	}
+		    	EOT
+		    	css_provider = Gtk::CssProvider.new
+		    	css_provider.load :data=>css
+				self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 			end
 		end
 	end
@@ -96,7 +112,7 @@ class Grille < Gtk::Table
 	end
 
 	def remplirGrille()
-		@generateur.each { |x,y,val|  
+		@partie.getPlateau().each { |x,y,val|
 			btn = Gtk::Button.new()
 			btn.override_background_color(:normal, COUL_BLANC)
 			btn.signal_connect "clicked" do |widget|
@@ -108,7 +124,7 @@ class Grille < Gtk::Table
 			end
 			resetColorOnAll()
 			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
-			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val}</span>"))
+			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
 			btn.set_size_request(46,46)
 			btn.set_name "cell"
 	    }
