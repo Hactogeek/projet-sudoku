@@ -97,9 +97,24 @@ class Fenetre < Gtk::Window
 		    checkpointMenu.append(revenirCPMenuItem)
 
 
+		# Menu User
+	    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false) # Item Checkpoint
+	    userMenu = Gtk::Menu.new() # Menu de checkpoint
+	    userMenuItem.set_submenu(userMenu)
+
+		    # se connecter user
+		    connecterMenuItem = Gtk::MenuItem.new(:label => "Se connecter", :use_underline => false)
+		    userMenu.append(connecterMenuItem)
+		    
+		    # creer compte
+		    creerCompteMenuItem = Gtk::MenuItem.new(:label => "Créer compte", :use_underline => false)
+		    userMenu.append(creerCompteMenuItem)
+
+
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
+	    menuBar.append(userMenuItem)
 		
 
 		#==========#
