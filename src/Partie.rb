@@ -12,18 +12,23 @@ class Partie
 		@plateau = Plateau.new()
 	end
 
+	#Creer une partie jouable
 	def creerPartie()
 		@plateau.completeGrille()
+		@plateau.reduireGrille(0)
 	end
 
+	#Retourne le plateau
 	def getPlateau()
 		return @plateau
 	end
 
+	#Affiche le plateau (thank's Captain Obvious)
 	def afficherPlateau()
 		print @plateau
 	end
 
+	#Sauvegarde une partie en créant un fichier txt dont le nom sera nomPartie
 	def setSave(nomPartie)
 		f=File.new(nomPartie+".txt", "w+")
 		f.write(@plateau)
