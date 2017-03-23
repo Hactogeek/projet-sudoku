@@ -17,6 +17,7 @@ class Sauvegarde
 		@jeu.loadSave(nomPartie)
 	end
 
+	#Sauvegarde dans le dossier du profil correspondant.
 	def savePartie(nomJoueur, partie, nomPartie)
 		loadProfil(nomJoueur)
 		@jeu=partie
@@ -30,6 +31,6 @@ class Sauvegarde
 
 	#Permet d'enregistrer un profil
 	def saveProfil()
-
+		
 	end
 end
