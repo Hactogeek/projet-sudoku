@@ -37,8 +37,8 @@ class Grille < Gtk::Table
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
 		if (@focus)
 			i = 80 - children().index(@focus)
-			pos = Position.new(i%9,i-(i%9*9))
-			print("\n", i, " : x=",i%9, " y=", i-(i%9*9))
+			pos = Position.new(i/9,i%9)
+			print("\n", i, " : x=",i/9, " y=", i%9)
 			@partie.getPlateau().setCaseJoueur(pos,valeur)
 			valeur = @partie.getPlateau().getCaseJoueur(pos)
 			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
