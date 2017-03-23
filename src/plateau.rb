@@ -21,6 +21,7 @@ class Plateau
 	################################################################################
 	#### 								SETTERS									####
 	################################################################################
+	
 
 	# Méthode pour la MAJ de la solution du joueur pour la case
 	# @param [Position] position La position de la case
