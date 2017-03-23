@@ -1,4 +1,4 @@
-require './position'
+require './Position'
 
 class Case
 	# Initialisation de la position d'une case de la grille
@@ -9,6 +9,10 @@ class Case
 		@candidat = nil
 		@originale = false
 	end
+
+	################################################################################
+	#### 								SETTERS									####
+	################################################################################
 
 	# Méthode pour la MAJ de la solution originale de la case
 	# @param [Fixnum] solOriginale Solution originale de la case
@@ -28,6 +32,14 @@ class Case
 	def setListeCandidat(candidat)
 		@candidat = candidat
 	end
+
+	def setOriginale(originale)
+		@originale = originale
+	end
+
+	################################################################################
+	#### 								GETTERS									####
+	################################################################################
 
 	# Méthode qui retourne si une case est originale du puzzle
 	# @return boolean
@@ -59,6 +71,7 @@ class Case
 	def getPosition()
 		return @position
 	end
+
 
 	# Méthode qui retourne la position de la case 
 	#def getPosition

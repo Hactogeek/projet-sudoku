@@ -11,7 +11,7 @@ class GestionMemento
 		new(plateau)
 	end
 
-	def initialize
+	def initialize(plateau)
 		@undos = Array.new
 		@redos = Array.new
 		@plateau = plateau
