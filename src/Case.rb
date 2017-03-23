@@ -10,6 +10,10 @@ class Case
 		@originale = false
 	end
 
+	################################################################################
+	#### 								SETTERS									####
+	################################################################################
+
 	# Méthode pour la MAJ de la solution originale de la case
 	# @param [Fixnum] solOriginale Solution originale de la case
 	def setSolutionOriginale(solOriginale)
@@ -28,6 +32,14 @@ class Case
 	def setListeCandidat(candidat)
 		@candidat = candidat
 	end
+
+	def setOriginale(originale)
+		@originale = originale
+	end
+
+	################################################################################
+	#### 								GETTERS									####
+	################################################################################
 
 	# Méthode qui retourne si une case est originale du puzzle
 	# @return boolean

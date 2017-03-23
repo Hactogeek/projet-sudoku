@@ -16,6 +16,7 @@ class Fenetre < Gtk::Window
 			Gtk.main_quit
 		end
 
+
 		# Property
 		set_title "ku"
 	#	set_default_size 670, 480
@@ -54,7 +55,7 @@ class Fenetre < Gtk::Window
 	        # Nouveau
 	        nouveauMenuItem = Gtk::MenuItem.new(:label => "Nouveau", :use_underline => false)
 	        nouveauMenuItem.signal_connect "activate" do
-                setAide("Bouton nouveau", [], "Permet de créer un nouveau fichier")
+                #setAide("Bouton nouveau", [], "Permet de créer un nouveau fichier")
             end
 	        fileMenu.append(nouveauMenuItem)
 	        
@@ -69,8 +70,35 @@ class Fenetre < Gtk::Window
             end
             fileMenu.add(fermerMenuItem)
 
-        # Menu Option
+
+		# Menu Checkpoint
+	    checkpointMenuItem = Gtk::MenuItem.new(:label => "Checkpoint", :use_underline => false) # Item Checkpoint
+	    checkpointMenu = Gtk::Menu.new() # Menu de checkpoint
+	    checkpointMenuItem.set_submenu(checkpointMenu)
+
+		    # Undo
+		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
+		    undoMenuItem.signal_connect "activate" do
+
+		    end
+		    checkpointMenu.append(undoMenuItem)
+		    
+		    # Redo
+		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
+		    checkpointMenu.append(redoMenuItem)
+
+		    # Placer checkpoint
+		    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
+		    checkpointMenu.append(placerCPMenuItem)
+
+			# revenir checkpoint
+		    revenirCPMenuItem = Gtk::MenuItem.new(:label => "Revenir au Checkpoint", :use_underline => false)
+		    checkpointMenu.append(revenirCPMenuItem)
+
+
+        # Barre des menus 
 	    menuBar.append(fileMenuItem)	
+	    menuBar.append(checkpointMenuItem)
 		
 
 		#==========#

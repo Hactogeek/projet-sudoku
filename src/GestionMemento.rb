@@ -1,4 +1,5 @@
 class GestionMemento
+	#@plateau
 	#@undos
 	#@redos
 
@@ -6,13 +7,14 @@ class GestionMemento
 
 	# Constructeur de la classe
 	# @param : plateau	
-	def GestionMemento.creer
-		new
+	def GestionMemento.creer(plateau)
+		new(plateau)
 	end
 
 	def initialize
 		@undos = Array.new
 		@redos = Array.new
+		@plateau = plateau
 		return self
 	end
 
@@ -29,10 +31,9 @@ class GestionMemento
 	end
 
 	# Méthode qui permet de sauvegarder un memento.
-	# @param : etat
 	# @return : self
-	def addMemento(etat)
-		@undos.push(etat)
+	def addMemento()
+		@undos.push(@plateau)
 		@redos.clear
 		return self
 	end

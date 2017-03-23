@@ -21,6 +21,7 @@ class Plateau
 	################################################################################
 	#### 								SETTERS									####
 	################################################################################
+	
 
 	# Méthode pour la MAJ de la solution du joueur pour la case
 	# @param [Position] position La position de la case
@@ -43,9 +44,13 @@ class Plateau
 	# @param [Position] position La position de la case
 	# @param [Fixnum] valeur La valeur de la case
 	# @return (self)
-	def setCaseOriginale(position, valeur)
+	def setCaseSolutionOriginale(position, valeur)
 		@grid[position.getX][position.getY].setSolutionOriginale(valeur)
 		return self
+	end
+
+	def setCaseOriginale(position, originale)
+		@grid[position.getX][position.getY].setOriginale(originale)
 	end
 
 	################################################################################
@@ -177,13 +182,14 @@ class Plateau
 		pattern = Array.new(@size){|i| i+1}.shuffle
 		@size.times do |y|
 			@size.times do |x|
-      			setCaseOriginale(Position.new(x, y), pattern[x])
+      			setCaseSolutionOriginale(Position.new(x, y), pattern[x])
+      			setCaseOriginale(Position.new(x, y), true)
       			setCaseJoueur(Position.new(x, y), pattern[x])
     		end
     		@base.times{|i| pattern.push pattern.shift}
     		pattern.push pattern.shift if @base - (y % @base) == 1
   		end
-      	self
+      	return self
     end
 
     # Méthode pour savoir si une grille est valide
@@ -203,9 +209,10 @@ class Plateau
 
         @size.times do |k|
         	if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-        		#setCaseJoueur(Position.new(x,y), k+1)
+        		setCaseJoueur(Position.new(x,y), k+1)
 
         		if valideGrille(position+1)
+        			setCaseJoueur(Position.new(x,y), nil)
         			return true
         		end
         	end
@@ -231,9 +238,11 @@ class Plateau
 
 		for uneCase in listeCase
 			setCaseJoueur(uneCase.getPosition, nil)
+			setCaseOriginale(uneCase.getPosition, false)
 
 	    	if(candidatPossible(uneCase.getPosition).compact.count > 1)
 	    		setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
+	    		setCaseOriginale(uneCase.getPosition, true)
 			end
 		end
 
@@ -267,12 +276,46 @@ class Plateau
 		end
       return res
 	end
+
+	# Affichage propre des valeurs originale de la grille du Plateau
+	# @return (String)
+	def printOri
+		res  = ""
+		@size.times do |x|
+			res += "\n" if x>0 && x % @base == 0
+			@size.times do |y|
+				res += " " if y>0 && y % @base == 0
+				res+= @grid[x][y].printOri
+			end
+			res += "\n"
+		end
+      return res
+	end
+
+	# Affichage propre des solutions du joueur de la grille du Plateau
+	# @return (String)
+	def to_s
+		res  = ""
+		@size.times do |x|
+			res += "\n" if x>0 && x % @base == 0
+			@size.times do |y|
+				res += " " if y>0 && y % @base == 0
+				res += @grid[x][y].printJoueur
+			end
+			res += "\n"
+		end
+      return res
+	end
 end
 
 #=begin 
 #plateau = Plateau.new
 
 #plateau.completeGrille
+
+
+
+puts plateau
 
 =begin
 plateau.setCaseJoueur(Position.new(0,1), 4)
@@ -305,6 +348,16 @@ plateau.setCaseJoueur(Position.new(8,7), 9)
 
 #plateau.reduireGrille(0)
 
+<<<<<<< HEAD:src/plateau.rb
 #print plateau
+=======
+puts plateau
+
+puts plateau.valideGrille(0)
+
+puts plateau
+
+
+>>>>>>> 937208a309742b9ca33e51083443565ab9e9f5ae:src/Plateau.rb
 #=end
 
