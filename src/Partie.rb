@@ -1,4 +1,6 @@
 require './Plateau'
+require './Aide'
+require './GestionMemento'
 
 class Partie
 	#@plateau sur lequel on travaille
