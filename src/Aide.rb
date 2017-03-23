@@ -1,4 +1,4 @@
-require './plateau'
+require './Plateau'
 
 class Aide
 	def Aide.creer(plateau)

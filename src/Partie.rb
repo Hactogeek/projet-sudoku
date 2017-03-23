@@ -1,4 +1,4 @@
-require './plateau'
+require './Plateau'
 
 class Partie
 	#@plateau sur lequel on travaille
