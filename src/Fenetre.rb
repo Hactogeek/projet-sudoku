@@ -10,7 +10,6 @@ class Fenetre < Gtk::Window
 	@boutons
 	@sousGrille
 	@grille
-	@generateur
 
 	def initialize ()
 		super
@@ -29,7 +28,6 @@ class Fenetre < Gtk::Window
 		# Initialisation des classe interface #
 		#=====================================#
 
-	    @generateur = Generateur.new
 		@grille = Grille.new
 		@cadreAide = CadreAide.new
 		@boutons = Boutons.new(@grille) 
@@ -92,15 +90,6 @@ class Fenetre < Gtk::Window
 		tableMain.attach(@sousGrille, 0,5,0,8) # Support Grille (background + sous grille + grille)
 		tableMain.attach(@cadreAide , 5,9,0,8) # Aide
 		tableMain.attach(@boutons   , 0,9,8,9) # Boutons
-
-		#==========================#
-		# Remplissage de la grille #
-		#==========================#
-
-	    @generateur.make_valid
-	    @generateur.each { |x,y,val|  
-	    	@grille.setCaseValeur(x+1,y+1,val)
-	    }
 
 	    show_all	
 	    Gtk.main
