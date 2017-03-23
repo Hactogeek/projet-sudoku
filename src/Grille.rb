@@ -38,7 +38,8 @@ class Grille < Gtk::Table
 	end
 
 	def setCaseValeur(x, y, valeur)
-		children()[81 - ((x)+((y-1)*9))].children[0].set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+
+		#children()[81 - ((x)+((y-1)*9))].children[0].set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
 	end
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
