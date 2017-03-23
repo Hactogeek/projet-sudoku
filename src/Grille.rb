@@ -1,7 +1,7 @@
 require 'gtk3'
 require './position.rb'
 require './plateau.rb'
-require './partie.rb'
+require './Partie.rb'
 
 COUL_BLEU   = Gdk::RGBA::new(0.4,0.7,1.0,1.0)
 COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
