@@ -10,6 +10,9 @@ class Partie
 
 	def initialize()
 		@plateau = Plateau.new()
+		@aide = Aide.creer(@plateau)
+		@undoRedo = GestionMemento.creer(@plateau)
+		@checkPoint = GestionMemento.creer(@plateau)
 	end
 
 	#Creer une partie jouable
@@ -26,6 +29,18 @@ class Partie
 	#Affiche le plateau (thank's Captain Obvious)
 	def afficherPlateau()
 		print @plateau
+	end
+
+	def getUndoRedo()
+		return @undoRedo
+	end
+
+	def getCheckPoint()
+		return @checkPoint
+	end
+
+	def getAide()
+		return @aide
 	end
 
 	#Sauvegarde une partie en créant un fichier txt dont le nom sera nomPartie
