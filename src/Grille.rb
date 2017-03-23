@@ -13,28 +13,16 @@ COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 
-
 	def initialize ()
 		super(9, 9, true)
 		set_margin_left(1)
-		for i in 0..8
-			for y in 0..8
 
-				btn = Gtk::Button.new()
-				btn.override_background_color(:normal, COUL_BLANC)
-				btn.signal_connect "clicked" do |widget|
-						resetCouleurSurFocus()
-					@focus = widget
-					resetColorOnAll()
-					setColorOnValue(widget.children().first().text, COUL_JAUNE_PALE)
-					setCouleurSurFocus(COUL_JAUNE)
-				end
-
-				attach(btn, y, y+1, i, i+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
-				btn.add(Gtk::Label.new().set_markup("<span font-weight=\"bold\">#{y+1}</span>"))
-				btn.set_size_request(46,46)
-			end
-		end
+		#==========================#
+		# Remplissage de la grille #
+		#==========================#
+	    @generateur = Generateur.new
+	    @generateur.make_valid
+	    remplirGrille()
 	end
 
 	def setCaseValeur(x, y, valeur)
@@ -50,7 +38,14 @@ class Grille < Gtk::Table
 
 	def setCouleurSurFocus(couleur) # change couleur du focus
 		if (@focus)
-			@focus.override_background_color(:normal, couleur)
+			css=<<-EOT
+	   		#cell{
+	      	background: #{COUL_BLEU};
+	    	}
+	    	EOT
+	    	css_provider = Gtk::CssProvider.new
+	    	css_provider.load :data=>css
+			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
 		
 	end
@@ -65,13 +60,27 @@ class Grille < Gtk::Table
 
 	def resetColorOnAll()
 		for i in 0..self.children().size()-1
-			self.children()[i].override_background_color(:normal, COUL_BLANC)
+			css=<<-EOT
+	   		#cell{
+	      	background: #{COUL_BLANC};
+	    	}
+	    	EOT
+	    	css_provider = Gtk::CssProvider.new
+	    	css_provider.load :data=>css
+			self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 		end
 	end
 
 	def resetCouleurSurFocus() # change couleur du focus
 		if (@focus)
-			@focus.override_background_color(:normal, COUL_BLANC)
+			css=<<-EOT
+	   		#cell{
+	      	background: #{COUL_BLANC};
+	    	}
+	    	EOT
+	    	css_provider = Gtk::CssProvider.new
+	    	css_provider.load :data=>css
+			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
 	end
 
@@ -79,16 +88,29 @@ class Grille < Gtk::Table
 		children()[81 - ((x)+((y-1)*9))].override_background_color(:normal, couleur)
 	end
 
-	def testCouleur()
-		children()[76].override_background_color(:normal, COUL_VIOLET)
-	    children()[11].override_background_color(:normal, COUL_JAUNE)
-	    children()[49].override_background_color(:normal, COUL_BLEU)
-	    children()[52].override_background_color(:normal, COUL_ROUGE)
-	    children()[37].override_background_color(:normal, COUL_VERT)	    
-	    children()[38].override_background_color(:normal, COUL_VIOLET)	
-	    children()[42].override_background_color(:normal, COUL_VERT)    
-	    children()[45].override_background_color(:normal, COUL_JAUNE)
-	    children()[25].override_background_color(:normal, COUL_ROUGE)	    
-	    children()[67].override_background_color(:normal, COUL_BLEU)
+	def rafraichirGrille()
+		@generateur.each { |x,y,val|
+			print(x , " " , y)  
+			children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val}</span>")
+	    }
+	end
+
+	def remplirGrille()
+		@generateur.each { |x,y,val|  
+			btn = Gtk::Button.new()
+			btn.override_background_color(:normal, COUL_BLANC)
+			btn.signal_connect "clicked" do |widget|
+				resetCouleurSurFocus()
+				@focus = widget
+				resetColorOnAll()
+				setColorOnValue(widget.children().first().text, COUL_JAUNE_PALE)
+				setCouleurSurFocus(COUL_JAUNE)
+			end
+			resetColorOnAll()
+			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
+			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val}</span>"))
+			btn.set_size_request(46,46)
+			btn.set_name "cell"
+	    }
 	end
 end
