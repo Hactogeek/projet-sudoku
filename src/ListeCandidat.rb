@@ -5,12 +5,12 @@ class ListeCandidat
 
 	# Constructeur de la classe
 	# @return : self
-	def Candidat.creer
+	def ListeCandidat.creer
 		new
 	end
 
 	def initialize
-		@tableauCandidat = Array.new	
+		@tableauCandidat = Array.new(9)	
 		return self
 	end
 
@@ -78,6 +78,8 @@ class ListeCandidat
 
 	end
 end
+
+liste = ListeCandidat.creer()
 
 
 
