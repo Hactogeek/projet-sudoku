@@ -17,14 +17,14 @@ class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 	@partie
 
-	def initialize ()
+	def initialize (partie)
 		super(9, 9, true)
 		set_margin_left(1)
 
 		#==========================#
 		# Remplissage de la grille #
 		#==========================#
-	    @partie = Partie.new
+	    @partie = partie
 	    @partie.creerPartie()
 	    remplirGrille()
 	end
@@ -42,6 +42,9 @@ class Grille < Gtk::Table
 			@partie.getPlateau().setCaseJoueur(pos,valeur)
 			valeur = @partie.getPlateau().getCaseJoueur(pos)
 			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
+			
+			#Sauvegarde du plateau dans le undoRedo
+			@partie.getUndoRedo().addMemento
 		end
 	end
 
@@ -105,9 +108,10 @@ class Grille < Gtk::Table
 	end
 
 	def rafraichirGrille()
-		@generateur.each { |x,y,val|
+		@partie.getPlateau().each { |x,y,val|
 			print(x , " " , y)  
-			children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val}</span>")
+			
+			children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
 	    }
 	end
 

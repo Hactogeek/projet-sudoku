@@ -27,8 +27,10 @@ class Fenetre < Gtk::Window
 		#=====================================#
 		# Initialisation des classe interface #
 		#=====================================#
+		@partie = Partie.nouvelle
 
-		@grille = Grille.new
+		
+		@grille = Grille.new(@partie)
 		@cadreAide = CadreAide.new
 		@boutons = Boutons.new(@grille) 
 		@sousGrille = SousGrille.new(@grille)
@@ -79,16 +81,28 @@ class Fenetre < Gtk::Window
 		    # Undo
 		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
 		    undoMenuItem.signal_connect "activate" do
-
+			@partie.getUndoRedo().undo
+			@grille.rafraichirGrille
+			print("\n","Undo effectue")
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
 		    # Redo
 		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
+		    redoMenuItem.signal_connect "activate" do
+			@partie.getUndoRedo().redo
+			@grille.rafraichirGrille
+			print("\n","Redo effectue")
+		    end
 		    checkpointMenu.append(redoMenuItem)
+
 
 		    # Placer checkpoint
 		    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
+		    placerCPMenuItem.signal_connect "activate" do
+			@grille.rafraichirGrille
+			print("\n","actualisation de la grille effectue")
+		    end
 		    checkpointMenu.append(placerCPMenuItem)
 
 			# revenir checkpoint
