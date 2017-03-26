@@ -96,7 +96,6 @@ class Fenetre < Gtk::Window
 		    undoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().undo
 			@grille.rafraichirGrille
-			print("\n","Undo effectue")
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
@@ -105,7 +104,6 @@ class Fenetre < Gtk::Window
 		    redoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().redo
 			@grille.rafraichirGrille
-			print("\n","Redo effectue")
 		    end
 		    checkpointMenu.append(redoMenuItem)
 
@@ -120,6 +118,9 @@ class Fenetre < Gtk::Window
 
 			# revenir checkpoint
 		    revenirCPMenuItem = Gtk::MenuItem.new(:label => "Revenir au Checkpoint", :use_underline => false)
+		    revenirCPMenuItem.signal_connect "activate" do
+			print("\nCanUndo? =", @partie.getUndoRedo().canUndo?)
+		    end
 		    checkpointMenu.append(revenirCPMenuItem)
 
 

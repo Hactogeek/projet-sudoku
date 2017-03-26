@@ -1,5 +1,5 @@
 class GestionMemento
-	#@plateau
+	#@partie
 	#@undos
 	#@redos
 
@@ -7,14 +7,14 @@ class GestionMemento
 
 	# Constructeur de la classe
 	# @param : plateau	
-	def GestionMemento.creer(plateau)
-		new(plateau)
+	def GestionMemento.creer(partie)
+		new(partie)
 	end
 
-	def initialize(plateau)
+	def initialize(partie)
 		@undos = Array.new
 		@redos = Array.new
-		@plateau = plateau
+		@partie = partie
 		return self
 	end
 
@@ -33,7 +33,8 @@ class GestionMemento
 	# Méthode qui permet de sauvegarder un memento.
 	# @return : self
 	def addMemento()
-		@undos.push(@plateau)
+		plateau = Marshal.dump(@partie.getPlateau())
+		@undos.push(plateau)
 		@redos.clear
 		return self
 	end
@@ -41,10 +42,12 @@ class GestionMemento
 	# Méthode qui permet de revenir à l'état précédant la dernière action
 	# @return : memento ou nil
 	def undo
-		if @undos.empty? == false
+		if self.canUndo? then
 			dernierMemento = @undos.pop
 			@redos.push(dernierMemento)
-			return dernierMemento
+			dernierMemento = Marshal.load(dernierMemento)
+			@partie.setPlateau(dernierMemento)
+			print("\n","Undo effectue")
 		end
 		return nil
 	end
@@ -52,10 +55,12 @@ class GestionMemento
 	# Méthode qui permet de revenir à l'état suivant la dernière action
 	# @return : memento ou nil
 	def redo
-		if @redos.empty? == false
+		if self.canRedo? then
 			dernierMemento = @redos.pop
 			@undos.push(dernierMemento)
-			return dernierMemento
+			dernierMemento = Marshal.load(dernierMemento)
+			@partie.setPlateau(dernierMemento)
+			print("\n","Redo effectue")
 		end
 		return nil
 	end

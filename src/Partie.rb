@@ -14,8 +14,8 @@ class Partie
 	def initialize()
 		@plateau = Plateau.new()
 		@aide = Aide.creer(@plateau)
-		@undoRedo = GestionMemento.creer(@plateau)
-		@checkPoint = GestionMemento.creer(@plateau)
+		@undoRedo = GestionMemento.creer(self)
+		@checkPoint = GestionMemento.creer(self)
 	end
 
 	#Creer une partie jouable
@@ -27,6 +27,11 @@ class Partie
 	#Retourne le plateau
 	def getPlateau()
 		return @plateau
+	end
+
+	#Retourne le plateau
+	def setPlateau(plateau)
+		@plateau = plateau
 	end
 
 	#Affiche le plateau (thank's Captain Obvious)
