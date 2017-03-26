@@ -12,14 +12,14 @@ class Sauvegarde
 		@jeu=Partie.nouvelle()
 	end
 
-	def loadPartie(nomJoueur, nomPartie)
-		loadProfil(nomJoueur)
-		@jeu.loadSave(nomPartie)
+	def loadPartie(nomJoueur, partie, nomPartie)
+		#loadProfil(nomJoueur)
+		partie.loadSave(nomPartie)
 	end
 
 	#Sauvegarde dans le dossier du profil correspondant.
 	def savePartie(nomJoueur, partie, nomPartie)
-		loadProfil(nomJoueur)
+		#loadProfil(nomJoueur)
 		@jeu=partie
 		partie.setSave(nomPartie)
 	end
@@ -31,6 +31,6 @@ class Sauvegarde
 
 	#Permet d'enregistrer un profil
 	def saveProfil()
-		
+		Dir.creer(nomJoueur).semettreDansProfil(nomJoueur)
 	end
 end

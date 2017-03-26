@@ -28,8 +28,8 @@ class Fenetre < Gtk::Window
 		# Initialisation des classe interface #
 		#=====================================#
 		@partie = Partie.nouvelle
-
-		
+		@joueur = ""
+		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
 		@cadreAide = CadreAide.new
 		@boutons = Boutons.new(@grille) 
@@ -63,7 +63,20 @@ class Fenetre < Gtk::Window
 	        
 	        # Sauvegarder
 	        sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
+	        sauvergarderMenuItem.signal_connect "activate" do
+	        	@sauvegarde.savePartie(@joueur,@partie,"partie1")
+	        	print("\n","Sauvegarde réussi")
+	        end
 	        fileMenu.append(sauvergarderMenuItem)
+
+	        # Sauvegarder
+	        chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
+	        chargerMenuItem.signal_connect "activate" do
+	        	@sauvegarde.loadPartie(@joueur,@partie,"partie1")
+	        	print("\n","Chargement réussi")
+	        	@grille.rafraichirGrille
+	        end
+	        fileMenu.append(chargerMenuItem)
 
 	        # Fermer
 	        fermerMenuItem = Gtk::MenuItem.new(:label => "Fermer", :use_underline => false)
@@ -117,6 +130,11 @@ class Fenetre < Gtk::Window
 
 		    # se connecter user
 		    connecterMenuItem = Gtk::MenuItem.new(:label => "Se connecter", :use_underline => false)
+		    connecterMenuItem.signal_connect "activate" do
+		    @sauvegarde.loadProfil("profilTest")
+		    @joueur="profilTest"
+		    print("\n","Connexion réussi a profilTest")
+			end
 		    userMenu.append(connecterMenuItem)
 		    
 		    # creer compte

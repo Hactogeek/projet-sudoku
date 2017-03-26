@@ -1,6 +1,7 @@
 require './Plateau'
 require './Aide'
 require './GestionMemento'
+require './Sauvegarde'
 
 class Partie
 	#@plateau sur lequel on travaille
@@ -47,16 +48,17 @@ class Partie
 
 	#Sauvegarde une partie en créant un fichier txt dont le nom sera nomPartie
 	def setSave(nomPartie)
-		f=File.new(nomPartie+".txt", "w+")
-		f.write(@plateau)
-		f.close
+		serialized_array = Marshal.dump(@plateau)
+		File.open(nomPartie+".txt", 'w') {|f| f.write(serialized_array) }
+		#f=File.new(nomPartie+".txt", "w+")
+		#f.write(@plateau)
+		#f.close
 	end
 
 	#nomPartie est le nom du fichier à charger.
 	def loadSave(nomPartie)
-		f=File.open(nomPartie+".txt", "r")
-		@plateau=f.read
-		f.close
+		#f=File.open(nomPartie+".txt", "r")
+		@plateau=Marshal.load File.read(nomPartie+".txt")
 	end
 
 end
