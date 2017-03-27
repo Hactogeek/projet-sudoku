@@ -12,7 +12,6 @@ COUL_VIOLET = Gdk::RGBA::new(0.7,0.4,0.8,1.0)
 COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
 
 
-
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 	@partie
@@ -64,6 +63,9 @@ class Grille < Gtk::Table
 	end
 
 	def setColorOnValue(value, couleur)
+		if (value == "")
+			return
+		end
 		for i in 0..self.children().size()-1
 			if (self.children()[i].children().first().text == value)
 				css=<<-EOT
@@ -133,5 +135,9 @@ class Grille < Gtk::Table
 			btn.set_name "cell"
 	    }
 	   	resetColorOnAll()
+	end
+
+	def getPartie()
+		return @partie
 	end
 end
