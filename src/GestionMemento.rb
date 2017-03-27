@@ -43,10 +43,11 @@ class GestionMemento
 	# @return : memento ou nil
 	def undo
 		if self.canUndo? then
-			dernierMemento = @undos.pop
+			dernierMemento = Marshal.dump(@partie.getPlateau())
 			@redos.push(dernierMemento)
-			dernierMemento = Marshal.load(dernierMemento)
-			@partie.setPlateau(dernierMemento)
+			plateau = @undos.pop
+			plateau = Marshal.load(plateau)
+			@partie.setPlateau(plateau)
 			print("\n","Undo effectue")
 		end
 		return nil
@@ -56,10 +57,11 @@ class GestionMemento
 	# @return : memento ou nil
 	def redo
 		if self.canRedo? then
-			dernierMemento = @redos.pop
+			dernierMemento = Marshal.dump(@partie.getPlateau())
 			@undos.push(dernierMemento)
-			dernierMemento = Marshal.load(dernierMemento)
-			@partie.setPlateau(dernierMemento)
+			plateau = @redos.pop
+			plateau = Marshal.load(plateau)
+			@partie.setPlateau(plateau)
 			print("\n","Redo effectue")
 		end
 		return nil

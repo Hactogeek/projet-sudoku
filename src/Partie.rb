@@ -23,6 +23,7 @@ class Partie
 		@plateau.completeGrille()
 		puts @plateau.printOri()
 		@plateau.reduireGrille(0)
+		@checkPoint.addMemento
 	end
 
 	#Retourne le plateau
