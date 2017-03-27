@@ -69,10 +69,11 @@ class Fenetre < Gtk::Window
 	        end
 	        fileMenu.append(sauvergarderMenuItem)
 
-	        # Sauvegarder
+	        # Charger
 	        chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
 	        chargerMenuItem.signal_connect "activate" do
-	        	@sauvegarde.loadPartie(@joueur,@partie,"partie1")
+	        	@partie=@sauvegarde.loadPartie(@joueur,"partie1")
+	        	@grille.setPartie(@partie)
 	        	print("\n","Chargement réussi")
 	        	@grille.rafraichirGrille
 	        end

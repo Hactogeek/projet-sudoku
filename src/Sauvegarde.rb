@@ -12,16 +12,19 @@ class Sauvegarde
 		@jeu=Partie.nouvelle()
 	end
 
-	def loadPartie(nomJoueur, partie, nomPartie)
+	def loadPartie(nomJoueur, nomPartie)
 		#loadProfil(nomJoueur)
-		partie.loadSave(nomPartie)
+		@jeu=Marshal.load  File.open(nomPartie+'.txt', 'rb').read
+		return @jeu
 	end
 
 	#Sauvegarde dans le dossier du profil correspondant.
 	def savePartie(nomJoueur, partie, nomPartie)
 		#loadProfil(nomJoueur)
 		@jeu=partie
-		partie.setSave(nomPartie)
+		serialized_array = Marshal.dump(@jeu)
+		File.open(nomPartie+".txt", 'wb') {|f| f.write(serialized_array) }
+		#partie.setSave(nomPartie)
 	end
 
 	#Permet de rentrer dans le répertoire du profil

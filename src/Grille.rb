@@ -140,4 +140,8 @@ class Grille < Gtk::Table
 	def getPartie()
 		return @partie
 	end
+
+	def setPartie(partie)
+		@partie=partie
+	end
 end

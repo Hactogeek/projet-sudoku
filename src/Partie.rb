@@ -53,19 +53,16 @@ class Partie
 		return @aide
 	end
 
+	#Perso je trouve ça inutile, sachant que la sauvegarde se fait avec la class Sauvegarde.
 	#Sauvegarde une partie en créant un fichier txt dont le nom sera nomPartie
 	def setSave(nomPartie)
-		serialized_array = Marshal.dump(@plateau)
-		File.open(nomPartie+".txt", 'w') {|f| f.write(serialized_array) }
-		#f=File.new(nomPartie+".txt", "w+")
-		#f.write(@plateau)
-		#f.close
+		serialized_array = Marshal.dump(self)
+		File.open(nomPartie+".txt", 'wb') {|f| f.write(serialized_array) }
 	end
 
 	#nomPartie est le nom du fichier à charger.
-	def loadSave(nomPartie)
-		#f=File.open(nomPartie+".txt", "r")
-		@plateau=Marshal.load File.read(nomPartie+".txt")
+	def Partie.loadSave(nomPartie)
+		return Marshal.load  File.open(nomPartie+'.txt', 'rb').read
 	end
 
 end
