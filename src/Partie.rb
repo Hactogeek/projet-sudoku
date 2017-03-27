@@ -20,6 +20,7 @@ class Partie
 	#Creer une partie jouable
 	def creerPartie()
 		@plateau.completeGrille()
+		puts @plateau.printOri()
 		@plateau.reduireGrille(0)
 	end
 

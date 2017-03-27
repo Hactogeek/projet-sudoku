@@ -10,8 +10,8 @@ class Aide
 	end
 
 	#Place tous les candidats de la case
-	def candidatPossible(pos)
-
+	def candidatPossible(position)
+		@plateau.setCaseListeCandidat(position, @plateau.candidatPossible(position))
 	end
 
 	#Place tous les candidats de chaque case du plateau

@@ -1,4 +1,5 @@
 require './Case'
+require './ListeCandidat'
 
 class Plateau
 	# Constructeur du plateau de jeu
@@ -27,7 +28,7 @@ class Plateau
 	# @param [Position] position La position de la case
 	# @return (self)
 	def setCaseJoueur(position, valeur)
-		@grid[position.getX][position.getY].setSolutionJoueur(valeur)
+		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
 		return self
 	end
 
@@ -147,33 +148,37 @@ class Plateau
 
 	# Méthode qui retourne les listes des candidats pour une case
 	# @param [Position] position La position de la case
-	# @return [ArrayFixnum]
+	# @return [ListeCandidat]
 	def candidatPossible(position)
-		tableauRetour = Array.new(9)
+		tabCandidatPossible = ListeCandidat.creer()
+		# tableauRetour = Array.new(9)
 
 		for i in (1...9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
-				tableauRetour.insert(i,i)
+				tabCandidatPossible.add(i)
+				# tableauRetour.insert(i,i)
 			end
 		end
-
-		return tableauRetour
+		return tabCandidatPossible
+		# return tableauRetour
 	end
 
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# @param [Position] position La position de la case
-	# @return [ArrayFixnum]
+	# @return [ListeCandidat]
 	def candidatImpossible(position)
-		tableauRetour = Array.new(9)
+		tabCandidatImpossible = ListeCandidat.creer()
+		# tableauRetour = Array.new(9)
 
 		for i in (1...9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
-				tableauRetour.insert(i,i)
+				tabCandidatImpossible.add(i);
+				# tableauRetour.insert(i,i)
 			end
 		end
-
-		return tableauRetour
+		return tabCandidatImpossible
+		# return tableauRetour
 	end
 
 	# Méthode pour générer une grille complete aléatoirement
@@ -240,7 +245,7 @@ class Plateau
 			setCaseJoueur(uneCase.getPosition, nil)
 			setCaseOriginale(uneCase.getPosition, false)
 
-	    	if(candidatPossible(uneCase.getPosition).compact.count > 1)
+	    	if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > 1)
 	    		setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
 	    		setCaseOriginale(uneCase.getPosition, true)
 			end
