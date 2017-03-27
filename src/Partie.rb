@@ -22,6 +22,7 @@ class Partie
 	def creerPartie()
 		@plateau.completeGrille()
 		@plateau.reduireGrille(0)
+		@checkPoint.addMemento
 	end
 
 	#Retourne le plateau

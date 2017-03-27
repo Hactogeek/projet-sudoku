@@ -111,16 +111,26 @@ class Fenetre < Gtk::Window
 		    # Placer checkpoint
 		    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
 		    placerCPMenuItem.signal_connect "activate" do
-			@grille.rafraichirGrille
-			print("\n","actualisation de la grille effectue")
+			@partie.getCheckPoint().addMemento()
 		    end
 		    checkpointMenu.append(placerCPMenuItem)
 
-			# revenir checkpoint
-		    revenirCPMenuItem = Gtk::MenuItem.new(:label => "Revenir au Checkpoint", :use_underline => false)
-		    revenirCPMenuItem.signal_connect "activate" do
+		    # undo checkpoint
+		    undoCPMenuItem = Gtk::MenuItem.new(:label => "Undo Checkpoint", :use_underline => false)
+		    undoCPMenuItem.signal_connect "activate" do
+			@partie.getCheckPoint().undo
+			@grille.rafraichirGrille
 		    end
-		    checkpointMenu.append(revenirCPMenuItem)
+		    checkpointMenu.append(undoCPMenuItem)
+
+		    # redo checkpoint
+		    redoCPMenuItem = Gtk::MenuItem.new(:label => "Redo Checkpoint", :use_underline => false)
+		    redoCPMenuItem.signal_connect "activate" do
+			@partie.getCheckPoint().redo
+			@grille.rafraichirGrille
+		    end
+		    checkpointMenu.append(redoCPMenuItem)
+
 
 
 		# Menu User
