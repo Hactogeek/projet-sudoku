@@ -119,7 +119,6 @@ class Fenetre < Gtk::Window
 			# revenir checkpoint
 		    revenirCPMenuItem = Gtk::MenuItem.new(:label => "Revenir au Checkpoint", :use_underline => false)
 		    revenirCPMenuItem.signal_connect "activate" do
-			print("\nCanUndo? =", @partie.getUndoRedo().canUndo?)
 		    end
 		    checkpointMenu.append(revenirCPMenuItem)
 
