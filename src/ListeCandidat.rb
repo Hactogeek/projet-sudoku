@@ -18,8 +18,8 @@ class ListeCandidat
 	# @param [Fixnum] symbole
 	# @return : self	
 	def add(symbole)
-		@tableauCandidat.push(symbole)
-		@tableauCandidat.uniq
+		@tableauCandidat.insert(symbole, symbole)
+		# @tableauCandidat.uniq
 		return self
 	end
 
