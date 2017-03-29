@@ -37,7 +37,7 @@ class Boutons < Gtk::Box
 		setCouleurBoutons("#4169E1")
 
 		#quand le bouton "stylo" est clique, passe en mode "crayon", et inversement
-		btn = Gtk::Button.new(:label => "Crayon", :use_underline => nil, :stock_id => nil)
+		btn = Gtk::Button.new(:label => "Craie", :use_underline => nil, :stock_id => nil)
 		btn.signal_connect "clicked" do |widget|
 			if(@stylo)
 				widget.set_label("Stylo")
@@ -45,7 +45,7 @@ class Boutons < Gtk::Box
 				@stylo = false	
 
 			else
-				widget.set_label("Crayo")	
+				widget.set_label("Craie")	
 				setCouleurBoutons("#4169E1")
 				@stylo = true
 			end
