@@ -23,7 +23,7 @@ class Boutons < Gtk::Box
 				@grille.setValeurSurFocus(widget.label)
 				@grille.resetColorOnAll()
 				@grille.setColorOnValue(widget.label, COUL_VERT)
-				@sousGrille.reloadCandidatsFocus()
+				@sousGrille.loadAllCandidats()
 			end
 			add(btn)
 		end
