@@ -6,7 +6,7 @@ class Case
 		@position = position
 		@solutionOriginale = "."
 		@solutionJoueur = nil
-		@candidat = nil
+		@candidat = ListeCandidat.creer()
 		@originale = false
 	end
 
@@ -26,14 +26,15 @@ class Case
 		if !@originale then
 			@solutionJoueur = solJoueur
 		end
+		@candidat = ListeCandidat.creer()
 	end
 
-	# OK
-	# Méthode pour la MAJ de la liste des candidats de la case
-	# @param [Fixnum] candidat Candiat pour la case
-	def setListeCandidat(candidat)
-		@candidat = candidat
-	end
+	# # OK
+	# # Méthode pour la MAJ de la liste des candidats de la case
+	# # @param [Fixnum] candidat Candiat pour la case
+	# def setListeCandidat(candidat)
+	# 	@candidat = candidat
+	# end
 
 	def setOriginale(originale)
 		@originale = originale
