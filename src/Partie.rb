@@ -22,24 +22,18 @@ class Partie
 	def creerPartie()
 		@plateau.completeGrille()
 		puts @plateau.printOri()
-		@plateau.reduireGrille(0)
+		@plateau.reduireGrille(0,3) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
 		@checkPoint.addMemento
 	end
 
 	# Méthode qui fait le traitement de fin de partie si la grille est complete
-	def finPartie
-		if @plateau.complete?
-			print("La grille est complete")
-		end
-		if @plateau.plein?
-			print("La grille est pleine")
-		end
-		if @plateau.correctGrille?
-			print("La grille est correct")
-		end
-		
-		
-	end
+ 	def finPartie
+ 		if @plateau.complete?
+ 			print("La grille est complete")
+ 		end
+ 		
+ 		
+ 	end
 
 	#Retourne le plateau
 	def getPlateau()
