@@ -3,11 +3,9 @@ require 'gtk3'
 
 class Boutons < Gtk::Box
 	@grille
-<<<<<<< HEAD
 	@stylo = true
-=======
 	@sousGrille
->>>>>>> 5ee8f93dee20d53b97ec9fce28f676981f6fb263
+
 
 	def new(grille, sousGrille)
 		initialize(grille, sousGrille)
