@@ -23,7 +23,9 @@ class Case
 	# Méthode pour la MAJ de la solution du joueur de la case
 	# @param [Fixnum] solJoueur Solution du joueur pour la case
 	def setSolutionJoueur(solJoueur)
-		@solutionJoueur = solJoueur
+		if !@originale then
+			@solutionJoueur = solJoueur
+		end
 	end
 
 	# OK
