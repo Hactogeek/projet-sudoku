@@ -35,6 +35,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 	end
 
+
+
 	def loadCandidatsCase(x, y)
 		if (@grille.getPartie().getPlateau().getCaseJoueur(Position.new(x,y)) != nil)
 			return
@@ -48,4 +50,17 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    end
 		end
 	end
+
+	def setCandidatSurFocus(candidat)
+		posFocus = @grille.getCoordFocus()
+		pos = (posFocus.getX()*81 + posFocus.getY()*3) + 1
+	    for i in 0..2
+		    for u in 0..2
+		    	if (candidat == (u+i*3)) # peut etre +1 à la fin
+		    		@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat}</span>")
+		    	end
+		    end
+		end
+	end
+	
 end
