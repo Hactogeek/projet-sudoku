@@ -30,8 +30,6 @@ class Plateau
 	def setCaseJoueur(position, valeur)
 		# Ajout de la solution du joueur
 		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
-		# Recalcule de la liste des candidats sur la ligne/colonne/region
-		# recalculeCandidat(position)
 		return self
 	end
 
@@ -161,6 +159,7 @@ class Plateau
 	# @return [ListeCandidat]
 	def candidatPossible(position)
 		tabCandidatPossible = ListeCandidat.creer()
+		# tableauRetour = Array.new(9)
 
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
@@ -177,29 +176,8 @@ class Plateau
 
 		# print "\n Candidat en #{position.getX+1},#{position.getY+1}:", tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,"\n"
 		return tabCandidatPossible
+		# return tableauRetour
 	end
-
-	# Méthode qui recalcule la liste des candidats des cases sur la même ligne/colonne/region
-	# def recalculeCandidat(position)
-	# 	# La ligne
-	# 	for x in (0..8)
-	# 		candidatPossible(Position.new(x, position.getY))
-	# 	end
-	# 	# La colone
-	# 	for y in (0..8)
-	# 		candidatPossible(Position.new(position.getX, y))
-	# 	end
-	# 	# La region
-	# 	posX = position.getX
-	# 	posY = position.getY
-	# 	posX = posX-(posX%3)
-	# 	posY = posY-(posY%3)
-	# 	for x in (posX...posX+3)
-	# 		for y in (posY...posY+3)
-	# 			candidatPossible(Position.new(x, y))
-	# 		end
-	# 	end	
-	# end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# @param [Position] position La position de la case
@@ -208,7 +186,7 @@ class Plateau
 		tabCandidatImpossible = ListeCandidat.creer()
 		# tableauRetour = Array.new(9)
 
-		for i in (1..9)
+		for i in (1...9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
 				tabCandidatImpossible.add(i);
 				# tableauRetour.insert(i,i)
@@ -264,9 +242,71 @@ class Plateau
     	return false
     end
 
+    # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
+     # @return true or false
+     def deuxOccurenceTab?(tab)
+     	occurence = false
+     	for i in (0...9)
+     		if tab[i] != nil
+     			kase1 = tab[i]
+     		else
+     			kase1 = nil
+     		end
+     		for j in (0...9)
+     			if tab[j] != nil
+     				kase2= tab[j]
+     			else
+     				kase2 = nil
+     			end
+     			if (i != j) && kase1 == kase2 && kase1 != nil
+     				return true
+     			end	
+     		end
+
+     	end
+
+     	return false
+     end
+
+     # Méthode qui vérifie si la grille est correct
+     # @return true or false
+     def correctGrille?
+     	self.each { |x,y,kase|
+     		ligne = getLigne(y)
+     		colonne = getColonne(x)
+     		region = getRegion(x/3, y/3)
+     		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+     			return false
+     		end
+     	}
+     	return true
+     end
+
+     # Méthode qui vérifie si toutes les cases de la grilles sont remplies
+     # @return true or false
+     def plein?
+     	pleine = true
+     	self.each { |x,y,kase|
+     		if  kase.getSolutionJoueur == nil
+     			pleine = false
+     		end
+     	}
+     	return pleine
+     end
+
+     # Méthode qui vérifie si la grille est complète et correct
+     # @return true or false
+     def complete?
+     	complete = false
+     	if self.plein? && self.correctGrille?
+     		complete = true
+     	end
+     	return complete
+     end
+
     # Méthode pour réduire une grille en la gardant jouable
     # @return self
-    def reduireGrille (position)
+    def reduireGrille (position, niveauDifficulte)
 
     	listeCase = Array.new()
 
@@ -282,7 +322,7 @@ class Plateau
     		setCaseJoueur(uneCase.getPosition, nil)
     		setCaseOriginale(uneCase.getPosition, false)
 
-    		if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > 1)
+    		if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
     			setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
     			setCaseOriginale(uneCase.getPosition, true)
     		end
