@@ -47,7 +47,7 @@ class Grille < Gtk::Table
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
 				newValeur = @partie.getPlateau().getCaseJoueur(pos)
 				if (newValeur == valeur)
-					@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#707090\" font-weight=\"bold\">#{newValeur}</span>")
+					@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{newValeur}</span>")
 					setCouleurSurFocus(COUL_VERT)
 				else
 					setCouleurSurFocus(COUL_ROUGE)
@@ -126,7 +126,11 @@ class Grille < Gtk::Table
 		@partie.getPlateau().each { |x,y,val|
 			print(x , " " , y)  
 			
-			children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+			if(@partie.getPlateau().getCase(Position.new(x,y)).getOriginaleGrille == false)
+				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+	    	else
+	    		children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+	    	end
 	    }
 	end
 
