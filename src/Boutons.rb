@@ -46,7 +46,7 @@ class Boutons < Gtk::Box
 
 			else
 				widget.set_label("Craie")	
-				setCouleurBoutons("#4169E1")
+				setCouleurBoutons("#900090")
 				@stylo = true
 			end
 
