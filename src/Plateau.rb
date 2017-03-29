@@ -252,6 +252,61 @@ class Plateau
 
     	return false
     end
+    
+    # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
+    # @return true or false
+    def deuxOccurenceTab?(tab)
+	occurence = false
+	for i in (0...9)
+		kase1 = tab[i].getSolutionJoueur
+		for j in (0...9)
+			kase2 = tab[j].getSolutionJoueur
+			if (i != j) && kase1 == kase2
+				return true
+			end	
+		end
+			
+	end
+
+	return false
+    end
+
+    # Méthode qui vérifie si la grille est correct
+    # @return true or false
+    def correctGrille?
+	self.each { |x,y,kase|
+		ligne = getLigne(y)
+		colonne = getColonne(x)
+		region = getRegion(x/3, y/3)
+		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+			return false
+		end
+	}
+	return true
+    end
+
+    # Méthode qui vérifie si toutes les cases de la grilles sont remplies
+    # @return true or false
+    def pleine?
+	pleine = true
+	self.each { |x,y,kase|
+		if  kase.getSolutionJoueur == nil
+			pleine = false
+		end
+	}
+	return pleine
+    end
+
+    # Méthode qui vérifie si la grille est complète et correct
+    # @return true or false
+    def complete?
+	complete = false
+	if self.plein? && self.correct?
+		complete = true
+	end
+	return complete
+    end
+
 
     # Méthode pour réduire une grille en la gardant jouable
     # @return self
