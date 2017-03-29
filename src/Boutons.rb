@@ -76,7 +76,7 @@ class Boutons < Gtk::Box
 	def setCouleurBoutons(couleur) # change couleur du focus
 		for i in 2..10
 			text = children()[children().size()-i].label
-			children()[children().size()-i].children()[0].set_markup("<span size=\"large\" font-weight=\"bold\" foreground=\"#{couleur}\">#{text}</span>")
+			children()[children().size()-i].children()[0].set_markup("<span foreground=\"#{couleur}\">#{text}</span>")
 		end
 	end
 
