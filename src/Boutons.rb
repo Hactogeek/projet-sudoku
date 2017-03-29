@@ -23,13 +23,13 @@ class Boutons < Gtk::Box
 		for i in 1..9
 			btn = Gtk::Button.new(:label => i.to_s(), :use_underline => nil, :stock_id => nil)
 			btn.signal_connect "clicked" do |widget|
-				if (stylo)
+				if (@stylo)
 					@grille.setValeurSurFocus(widget.label)
 					@grille.resetColorOnAll()
 					@grille.setColorOnValue(widget.label, COUL_VERT)
 					@sousGrille.loadAllCandidats()
 				else
-					@grille.setCandidatSurFocus(widget.label)
+					@sousGrille.setCandidatSurFocus(widget.label)
 				end
 			end
 			add(btn)
