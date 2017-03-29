@@ -258,10 +258,18 @@ class Plateau
     def deuxOccurenceTab?(tab)
 	occurence = false
 	for i in (0...9)
-		kase1 = tab[i].getSolutionJoueur
+		if tab[i] != nil
+			kase1 = tab[i]
+		else
+			kase1 = nil
+		end
 		for j in (0...9)
-			kase2 = tab[j].getSolutionJoueur
-			if (i != j) && kase1 == kase2
+			if tab[j] != nil
+			kase2= tab[j]
+			else
+				kase2 = nil
+			end
+			if (i != j) && kase1 == kase2 && kase1 != nil
 				return true
 			end	
 		end
@@ -287,7 +295,7 @@ class Plateau
 
     # Méthode qui vérifie si toutes les cases de la grilles sont remplies
     # @return true or false
-    def pleine?
+    def plein?
 	pleine = true
 	self.each { |x,y,kase|
 		if  kase.getSolutionJoueur == nil
@@ -301,7 +309,7 @@ class Plateau
     # @return true or false
     def complete?
 	complete = false
-	if self.plein? && self.correct?
+	if self.plein? && self.correctGrille?
 		complete = true
 	end
 	return complete
