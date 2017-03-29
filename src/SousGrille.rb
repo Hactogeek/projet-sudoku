@@ -39,28 +39,13 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		if (@grille.getPartie().getPlateau().getCaseJoueur(Position.new(x,y)) != nil)
 			return
 		end
-		candidat = @grille.getPartie().getPlateau().candidatPossible(Position.new(x, y)).getListeCandidat()
-		print("\n Candidat en #{x+1},#{y+1}: ", candidat)
+		candidat = @grille.getPartie().getPlateau().getCaseListeCandidat(Position.new(x, y)).getListeCandidat()
+		#print("\n Candidat en #{x+1},#{y+1}: ", candidat)
 		pos = (x*81 + y*3) + 1
 	    for i in 0..2
 		    for u in 0..2
 		      	@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat[(u+i*3)+1]}</span>")
 		    end
-		end
-	end
-
-	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
-		if (@focus)
-			#Sauvegarde du plateau dans le undoRedo
-			@partie.getUndoRedo().addMemento
-
-			i = 80 - children().index(@focus)
-			pos = Position.new(i%9,i/9)
-			print("\n", i, " : x=",i/9, " y=", i%9)
-			@partie.getPlateau().setCaseJoueur(pos,valeur)
-			valeur = @partie.getPlateau().getCaseJoueur(pos)
-			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
-
 		end
 	end
 

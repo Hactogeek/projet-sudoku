@@ -35,16 +35,24 @@ class Grille < Gtk::Table
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
 		if (@focus)
-			#Sauvegarde du plateau dans le undoRedo
-			@partie.getUndoRedo().addMemento
 
 			i = 80 - children().index(@focus)
 			pos = Position.new(i%9,i/9)
 			print("\n", i, " : x=",i/9, " y=", i%9)
-			@partie.getPlateau().setCaseJoueur(pos,valeur)
-			valeur = @partie.getPlateau().getCaseJoueur(pos)
-			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
 
+			if (@partie.getPlateau().getCaseJoueur(pos) != valeur) && (@partie.getPlateau().getCase(pos).getOriginaleGrille == false)
+				#Sauvegarde du plateau dans le undoRedo
+				@partie.getUndoRedo().addMemento
+
+				@partie.getPlateau().setCaseJoueur(pos,valeur)
+				newValeur = @partie.getPlateau().getCaseJoueur(pos)
+				if (newValeur == valeur)
+					@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{newValeur}</span>")
+					setCouleurSurFocus(COUL_VERT)
+				else
+					setCouleurSurFocus(COUL_ROUGE)
+				end
+			end
 		end
 	end
 
@@ -59,7 +67,6 @@ class Grille < Gtk::Table
 	    	css_provider.load :data=>css
 			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
-		
 	end
 
 	def setColorOnValue(value, couleur)
@@ -110,11 +117,20 @@ class Grille < Gtk::Table
 		children()[81 - ((x)+((y-1)*9))].override_background_color(:normal, couleur)
 	end
 
+	def getCoordFocus()
+		i = 80 - children().index(@focus)
+		return Position.new(i%9,i/9)
+	end
+
 	def rafraichirGrille()
 		@partie.getPlateau().each { |x,y,val|
 			print(x , " " , y)  
 			
-			children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+			if(@partie.getPlateau().getCase(Position.new(x,y)).getOriginaleGrille == false)
+				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+	    	else
+	    		children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+	    	end
 	    }
 	end
 
