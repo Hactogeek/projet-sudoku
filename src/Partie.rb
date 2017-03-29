@@ -26,6 +26,21 @@ class Partie
 		@checkPoint.addMemento
 	end
 
+	# Méthode qui fait le traitement de fin de partie si la grille est complete
+	def finPartie
+		if @plateau.complete?
+			print("La grille est complete")
+		end
+		if @plateau.pleine?
+			print("La grille est pleine")
+		end
+		if @plateau.correctGrille?
+			print("La grille est correct")
+		end
+		
+		
+	end
+
 	#Retourne le plateau
 	def getPlateau()
 		return @plateau

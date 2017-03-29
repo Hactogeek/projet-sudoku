@@ -52,6 +52,8 @@ class Grille < Gtk::Table
 				else
 					setCouleurSurFocus(COUL_ROUGE)
 				end
+
+				@partie.finPartie
 			end
 		end
 	end
