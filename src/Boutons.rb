@@ -2,16 +2,18 @@ require 'gtk3'
 
 class Boutons < Gtk::Box
 	@grille
+	@sousGrille
 
-	def new(grille)
-		initialize(grille)
+	def new(grille, sousGrille)
+		initialize(grille, sousGrille)
 	end
 
-	def initialize(grille)
+	def initialize(grille, sousGrille)
 		super(:horizontal, 11)
 		set_homogeneous(true)
 
 		@grille = grille
+		@sousGrille = sousGrille
 
 		override_background_color(:normal, Gdk::RGBA::new(0.3,0.3,0.3,1.0))
 
@@ -21,6 +23,7 @@ class Boutons < Gtk::Box
 				@grille.setValeurSurFocus(widget.label)
 				@grille.resetColorOnAll()
 				@grille.setColorOnValue(widget.label, COUL_VERT)
+				@sousGrille.reloadCandidatsFocus()
 			end
 			add(btn)
 		end
