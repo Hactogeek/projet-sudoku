@@ -31,12 +31,6 @@ class Partie
 		if @plateau.complete?
 			print("La grille est complete")
 		end
-		if @plateau.plein?
-			print("La grille est pleine")
-		end
-		if @plateau.correctGrille?
-			print("La grille est correct")
-		end
 		
 		
 	end
