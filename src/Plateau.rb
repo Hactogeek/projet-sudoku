@@ -151,16 +151,14 @@ class Plateau
 	# @return [ListeCandidat]
 	def candidatPossible(position)
 		tabCandidatPossible = ListeCandidat.creer()
-		# tableauRetour = Array.new(9)
 
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tabCandidatPossible.add(i)
-				# tableauRetour.insert(i,i)
 			end
 		end
+		setCaseListeCandidat(position, tabCandidatPossible)
 		return tabCandidatPossible
-		# return tableauRetour
 	end
 
 

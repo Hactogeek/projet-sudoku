@@ -39,8 +39,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		if (@grille.getPartie().getPlateau().getCaseJoueur(Position.new(x,y)) != nil)
 			return
 		end
-		candidat = @grille.getPartie().getPlateau().candidatPossible(Position.new(x, y)).getListeCandidat()
-		print("\n Candidat en #{x+1},#{y+1}: ", candidat)
+		candidat = @grille.getPartie().getPlateau().getCaseListeCandidat(Position.new(x, y)).getListeCandidat()
+		# print("\n Candidat en #{x+1},#{y+1}: ", candidat)
 		pos = (x*81 + y*3) + 1
 	    for i in 0..2
 		    for u in 0..2
