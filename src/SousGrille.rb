@@ -69,8 +69,13 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	    for i in 0..2
 		    for u in 0..2
 		    	if (candidat.to_i == u+i*3+1)
-		    		@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat}</span>")
-		    		return
+		    		if (@grilleCandidat.children()[729-(pos+u+i*27)].text == candidat)
+		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
+		    			return
+		    		else
+		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat}</span>")
+		    			return
+		    		end
 		    	end
 		    end
 		end
