@@ -31,7 +31,7 @@ class Plateau
 		# Ajout de la solution du joueur
 		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
 		# Recalcule de la liste des candidats sur la ligne/colonne/region
- -		recalculeCandidat(position)
+ 		recalculeCandidat(position)
 		return self
 	end
 
