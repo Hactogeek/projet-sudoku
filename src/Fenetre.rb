@@ -19,8 +19,6 @@ class Fenetre < Gtk::Window
 
 		# Property
 		set_title "ku"
-	#	set_default_size 670, 480
-	#	set_default_size 670, 600
 		set_resizable(false)
 
 
@@ -32,8 +30,8 @@ class Fenetre < Gtk::Window
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
 		@cadreAide = CadreAide.new
-		@boutons = Boutons.new(@grille) 
 		@sousGrille = SousGrille.new(@grille)
+		@boutons = Boutons.new(@grille, @sousGrille) 
 
 		#==========#
 		# Niveau 1 #

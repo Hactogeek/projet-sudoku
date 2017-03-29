@@ -49,4 +49,18 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 	end
 
+	def reloadCandidatsFocus()
+		coord = @grille.getCoordFocus()
+		if (@grille.getPartie().getPlateau().getCaseJoueur(coord) == nil)
+			loadCandidatsCase(coord.getX(), coord.getY())
+			return
+		else
+			pos = (coord.getX()*81 + coord.getY()*3) + 1
+			for i in 0..2
+				for u in 0..2
+					@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\"></span>")
+				end
+			end
+		end
+	end
 end

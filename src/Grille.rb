@@ -42,9 +42,13 @@ class Grille < Gtk::Table
 			pos = Position.new(i%9,i/9)
 			print("\n", i, " : x=",i/9, " y=", i%9)
 			@partie.getPlateau().setCaseJoueur(pos,valeur)
-			valeur = @partie.getPlateau().getCaseJoueur(pos)
-			@focus.children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{valeur}</span>")
-
+			newValeur = @partie.getPlateau().getCaseJoueur(pos)
+			if (newValeur == valeur)
+				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#707090\" font-weight=\"bold\">#{newValeur}</span>")
+				setCouleurSurFocus(COUL_VERT)
+			else
+				setCouleurSurFocus(COUL_ROUGE)
+			end
 		end
 	end
 
@@ -59,7 +63,6 @@ class Grille < Gtk::Table
 	    	css_provider.load :data=>css
 			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
-		
 	end
 
 	def setColorOnValue(value, couleur)
@@ -108,6 +111,11 @@ class Grille < Gtk::Table
 
 	def setCouleurCase(x, y, couleur)
 		children()[81 - ((x)+((y-1)*9))].override_background_color(:normal, couleur)
+	end
+
+	def getCoordFocus()
+		i = 80 - children().index(@focus)
+		return Position.new(i%9,i/9)
 	end
 
 	def rafraichirGrille()
