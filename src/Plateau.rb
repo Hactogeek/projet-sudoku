@@ -28,7 +28,10 @@ class Plateau
 	# @param [Position] position La position de la case
 	# @return (self)
 	def setCaseJoueur(position, valeur)
+		# Ajout de la solution du joueur
 		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
+		# Recalcule de la liste des candidats sur la ligne/colonne/region
+		recalculeCandidat(position)
 		return self
 	end
 
@@ -63,6 +66,10 @@ class Plateau
 	# @return (SolutionJoueur)
 	def getCaseJoueur(position)
 		return @grid[position.getX][position.getY].getSolutionJoueur
+	end
+
+	def getCase(position)
+		return @grid[position.getX][position.getY]
 	end
 
 	# OK
@@ -151,18 +158,37 @@ class Plateau
 	# @return [ListeCandidat]
 	def candidatPossible(position)
 		tabCandidatPossible = ListeCandidat.creer()
-		# tableauRetour = Array.new(9)
 
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tabCandidatPossible.add(i)
-				# tableauRetour.insert(i,i)
 			end
 		end
+		setCaseListeCandidat(position, tabCandidatPossible)
 		return tabCandidatPossible
-		# return tableauRetour
 	end
 
+	# Méthode qui recalcule la liste des candidats des cases sur la même ligne/colonne/region
+	def recalculeCandidat(position)
+		# La ligne
+		for x in (0..8)
+			candidatPossible(Position.new(x, position.getY))
+		end
+		# La colone
+		for y in (0..8)
+			candidatPossible(Position.new(position.getX, y))
+		end
+		# La region
+		posX = position.getX
+		posY = position.getY
+		posX = posX-(posX%3)
+		posY = posY-(posY%3)
+		for x in (posX...posX+3)
+			for y in (posY...posY+3)
+				candidatPossible(Position.new(x, y))
+			end
+		end	
+	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# @param [Position] position La position de la case
@@ -171,7 +197,7 @@ class Plateau
 		tabCandidatImpossible = ListeCandidat.creer()
 		# tableauRetour = Array.new(9)
 
-		for i in (1...9)
+		for i in (1..9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
 				tabCandidatImpossible.add(i);
 				# tableauRetour.insert(i,i)
