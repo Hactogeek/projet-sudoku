@@ -68,6 +68,10 @@ class Plateau
 		return @grid[position.getX][position.getY].getSolutionJoueur
 	end
 
+	def getCase(position)
+		return @grid[position.getX][position.getY]
+	end
+
 	# OK
 	# Méthode qui retourne la liste des candidats pour la case
 	# @param [Position] position La position de la case
