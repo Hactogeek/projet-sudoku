@@ -23,13 +23,13 @@ class Boutons < Gtk::Box
 		for i in 1..9
 			btn = Gtk::Button.new(:label => i.to_s(), :use_underline => nil, :stock_id => nil)
 			btn.signal_connect "clicked" do |widget|
-				if (stylo)
+				if (@stylo)
 					@grille.setValeurSurFocus(widget.label)
 					@grille.resetColorOnAll()
 					@grille.setColorOnValue(widget.label, COUL_VERT)
 					@sousGrille.loadAllCandidats()
 				else
-					@grille.setCandidatSurFocus(widget.label)
+					@sousGrille.setCandidatSurFocus(widget.label)
 				end
 			end
 			add(btn)
@@ -45,7 +45,7 @@ class Boutons < Gtk::Box
 				@stylo = false	
 
 			else
-				widget.set_label("Crayon")	
+				widget.set_label("Crayo")	
 				setCouleurBoutons("#4169E1")
 				@stylo = true
 			end
@@ -76,7 +76,7 @@ class Boutons < Gtk::Box
 	def setCouleurBoutons(couleur) # change couleur du focus
 		for i in 2..10
 			text = children()[children().size()-i].label
-			children()[children().size()-i].children()[0].set_markup("<span size=\"large\" font-weight=\"bold\" foreground=\"#{couleur}\">#{text}</span>")
+			children()[children().size()-i].children()[0].set_markup("<span foreground=\"#{couleur}\">#{text}</span>")
 		end
 	end
 
