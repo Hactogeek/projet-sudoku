@@ -3,6 +3,7 @@ require './Grille'
 
 class SousGrille < Gtk::Table # contenant elle même une grille
 	@grilleCandidat
+	@candidat
 	@grille
 
 	def new(grille)
@@ -13,6 +14,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		super(1,1,true)
 		@grille = grille
 		@grilleCandidat = Gtk::Table.new(26, 26, true)
+		@candidat = false;
 		background = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "grille.png", :width => 432, :heigth => 432)))
 		attach(@grilleCandidat, 0, 1, 0, 1)
 		attach(@grille    , 0, 1, 0, 1)
@@ -28,6 +30,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def loadAllCandidats()
+		if(!@candidat)
+			return
+		end
 		# print "Version Joueur : \n", @grille.getPartie().getPlateau()
 		# print "Version Originale : \n", @grille.getPartie().getPlateau().printOri
 
@@ -38,9 +43,11 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 	end
 
-
-
 	def loadCandidatsCase(x, y)
+		if (!@candidat)
+			return
+		end
+
 		position = Position.new(x,y)
 		if (@grille.getPartie().getPlateau().getCaseJoueur(position) != nil)
 			pos = (x*81 + y*3) + 1
@@ -66,6 +73,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def setCandidatSurFocus(candidat)
+		if (!candidat)
+			return
+		end
 		posFocus = @grille.getCoordFocus()
 		if (posFocus == nil || @grille.getPartie().getPlateau().getCaseJoueur(posFocus) != nil)
 			return
@@ -90,6 +100,15 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    end
 		end
 	end
-	
+
+	def setCandidatState(bool)
+		@candidat = bool
+		if (@candidat)
+			@grilleCandidat.show()
+			loadAllCandidats()
+		else
+			@grilleCandidat.hide()
+		end
+	end
 end
 

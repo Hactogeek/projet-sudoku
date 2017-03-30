@@ -32,8 +32,8 @@ class Fenetre < Gtk::Window
 		@joueur = ""
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
-		@cadreAide = CadreAide.new(@grille)
 		@sousGrille = SousGrille.new(@grille)
+		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
 
 		#==========#
