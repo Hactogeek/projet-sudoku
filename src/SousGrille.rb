@@ -28,8 +28,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def loadAllCandidats()
-		print "Version Joueur : \n", @grille.getPartie().getPlateau()
-		print "Version Originale : \n", @grille.getPartie().getPlateau().printOri
+		# print "Version Joueur : \n", @grille.getPartie().getPlateau()
+		# print "Version Originale : \n", @grille.getPartie().getPlateau().printOri
 
 		for x in 0..8
 			for y in 0..8
