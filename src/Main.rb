@@ -1,3 +1,8 @@
 require "./Fenetre.rb"
+require "./Index.rb"
 
-fenetre = Fenetre.new
+#index = Index.new
+
+fenetre = Fenetre.new(2)
+
+Gtk.main

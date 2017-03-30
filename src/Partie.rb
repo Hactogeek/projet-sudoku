@@ -7,22 +7,23 @@ class Partie
 	#@plateau sur lequel on travaille
 
 	# Constructeur d'une partie
-	def Partie.nouvelle()
-		new()
+	def Partie.nouvelle(difficulte)
+		new(difficulte)
 	end
 
-	def initialize()
+	def initialize(difficulte)
 		@plateau = Plateau.new()
-		@aide = Aide.creer(@plateau)
+		@aide = Aide.creer(self)
 		@undoRedo = GestionMemento.creer(self)
 		@checkPoint = GestionMemento.creer(self)
+		@difficulte=difficulte
 	end
 
 	#Creer une partie jouable
 	def creerPartie()
 		@plateau.completeGrille()
 		puts @plateau.printOri()
-		@plateau.reduireGrille(0,3) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
+		@plateau.reduireGrille(0,@difficulte) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
 		@checkPoint.addMemento
 	end
 

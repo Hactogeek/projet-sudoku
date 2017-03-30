@@ -16,7 +16,7 @@ class Plateau
 			end
 		end
 
-      return self
+		return self
 	end
 
 	################################################################################
@@ -30,19 +30,17 @@ class Plateau
 	def setCaseJoueur(position, valeur)
 		# Ajout de la solution du joueur
 		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
-		# Recalcule de la liste des candidats sur la ligne/colonne/region
- 		recalculeCandidat(position)
 		return self
 	end
 
-	# OK
-	# Méthode pour la MAJ de la liste des candidats de la case
-	# @param [Position] position La position de la case
-	# @param [Candidat] candidat La liste des candidats de la case
-	def setCaseListeCandidat(position, candidat)
-		@grid[position.getX][position.getY].setListeCandidat(candidat)
-		return self
-	end
+	# # OK
+	# # Méthode pour la MAJ de la liste des candidats de la case
+	# # @param [Position] position La position de la case
+	# # @param [Candidat] candidat La liste des candidats de la case
+	# def setCaseListeCandidat(position, candidat)
+	# 	@grid[position.getX][position.getY].setListeCandidat(candidat)
+	# 	return self
+	# end
 
 	# Méthode pour la MAJ de la solution originale de la case 
 	# @param [Position] position La position de la case
@@ -69,8 +67,8 @@ class Plateau
 	end
 
 	def getCase(position)
- 		return @grid[position.getX][position.getY]
- 	end
+		return @grid[position.getX][position.getY]
+	end
 
 	# OK
 	# Méthode qui retourne la liste des candidats pour la case
@@ -95,6 +93,7 @@ class Plateau
 		for n in (0...9)
 			tableauRetour.insert(n, @grid[ligne][n].getSolutionJoueur)
 		end
+		# print "Ligne : ", tableauRetour
 		return tableauRetour
 	end
 
@@ -105,7 +104,8 @@ class Plateau
 		tableauRetour = Array.new()
 		for n in (0...9)
 			tableauRetour.insert(n, @grid[n][colonne].getSolutionJoueur)
-		end	
+		end
+		# print "Colonne : ", tableauRetour
 		return tableauRetour
 	end
 
@@ -122,7 +122,8 @@ class Plateau
 			for m in (posY...posY+3)
 				tableauRetour.insert(n, @grid[n][m].getSolutionJoueur)
 			end
-		end	
+		end
+		# print "Region : ", tableauRetour
 		return tableauRetour
 	end
 
@@ -163,35 +164,20 @@ class Plateau
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tabCandidatPossible.add(i)
-				# tableauRetour.insert(i,i)
+				if(!@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().add(i)
+				end
+			else
+				if (@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().remove(i)
+				end
 			end
 		end
-		setCaseListeCandidat(position, tabCandidatPossible)
+
+		# print "\n Candidat en #{position.getX+1},#{position.getY+1}:", tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,"\n"
 		return tabCandidatPossible
 		# return tableauRetour
 	end
-
-	# Méthode qui recalcule la liste des candidats des cases sur la même ligne/colonne/region
- 	def recalculeCandidat(position)
- 		# La ligne
- 		for x in (0..8)
- 			candidatPossible(Position.new(x, position.getY))
- 		end
- 		# La colone
- 		for y in (0..8)
- 			candidatPossible(Position.new(position.getX, y))
- 		end
- 		# La region
- 		posX = position.getX
- 		posY = position.getY
- 		posX = posX-(posX%3)
- 		posY = posY-(posY%3)
- 		for x in (posX...posX+3)
- 			for y in (posY...posY+3)
- 				candidatPossible(Position.new(x, y))
- 			end
- 		end	
- 	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# @param [Position] position La position de la case
@@ -216,15 +202,15 @@ class Plateau
 		pattern = Array.new(@size){|i| i+1}.shuffle
 		@size.times do |y|
 			@size.times do |x|
-      			setCaseSolutionOriginale(Position.new(x, y), pattern[x])
-      			setCaseOriginale(Position.new(x, y), true)
-      			setCaseJoueur(Position.new(x, y), pattern[x])
-    		end
-    		@base.times{|i| pattern.push pattern.shift}
-    		pattern.push pattern.shift if @base - (y % @base) == 1
-  		end
-      	return self
-    end
+				setCaseSolutionOriginale(Position.new(x, y), pattern[x])
+				setCaseOriginale(Position.new(x, y), true)
+				setCaseJoueur(Position.new(x, y), pattern[x])
+			end
+			@base.times{|i| pattern.push pattern.shift}
+			pattern.push pattern.shift if @base - (y % @base) == 1
+		end
+		return self
+	end
 
     # Méthode pour savoir si une grille est valide
     # @param 	Fixnum 	position	
@@ -238,20 +224,20 @@ class Plateau
     	y = position%9
 
     	if (@grid[x][y].getSolutionJoueur !=  nil)
-        	return valideGrille(position+1)
-        end
+    		return valideGrille(position+1)
+    	end
 
-        @size.times do |k|
-        	if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-        		setCaseJoueur(Position.new(x,y), k+1)
+    	@size.times do |k|
+    		if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
+    			setCaseJoueur(Position.new(x,y), k+1)
 
-        		if valideGrille(position+1)
-        			setCaseJoueur(Position.new(x,y), nil)
-        			return true
-        		end
-        	end
-        end
-       	setCaseJoueur(Position.new(x,y), nil)
+    			if valideGrille(position+1)
+    				setCaseJoueur(Position.new(x,y), nil)
+    				return true
+    			end
+    		end
+    	end
+    	setCaseJoueur(Position.new(x,y), nil)
 
     	return false
     end
@@ -259,63 +245,63 @@ class Plateau
     # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
      # @return true or false
      def deuxOccurenceTab?(tab)
-	 	occurence = false
-	 	for i in (0...9)
-	 		if tab[i] != nil
-	 			kase1 = tab[i]
-	 		else
-	 			kase1 = nil
-	 		end
-	 		for j in (0...9)
-	 			if tab[j] != nil
-	 			kase2= tab[j]
-	 			else
-	 				kase2 = nil
-	 			end
-	 			if (i != j) && kase1 == kase2 && kase1 != nil
-	 				return true
-	 			end	
-	 		end
-	 			
-	 	end
-	 
-	 	return false
+     	occurence = false
+     	for i in (0...9)
+     		if tab[i] != nil
+     			kase1 = tab[i]
+     		else
+     			kase1 = nil
+     		end
+     		for j in (0...9)
+     			if tab[j] != nil
+     				kase2= tab[j]
+     			else
+     				kase2 = nil
+     			end
+     			if (i != j) && kase1 == kase2 && kase1 != nil
+     				return true
+     			end	
+     		end
+
+     	end
+
+     	return false
      end
- 
+
      # Méthode qui vérifie si la grille est correct
      # @return true or false
      def correctGrille?
-	 	self.each { |x,y,kase|
-	 		ligne = getLigne(y)
-	 		colonne = getColonne(x)
-	 		region = getRegion(x/3, y/3)
-	 		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
-	 			return false
-	 		end
-	 	}
-	 	return true
+     	self.each { |x,y,kase|
+     		ligne = getLigne(y)
+     		colonne = getColonne(x)
+     		region = getRegion(x/3, y/3)
+     		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+     			return false
+     		end
+     	}
+     	return true
      end
- 
+
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
      # @return true or false
      def plein?
-	 	pleine = true
-	 	self.each { |x,y,kase|
-	 		if  kase.getSolutionJoueur == nil
-	 			pleine = false
-	 		end
-	 	}
-	 	return pleine
+     	pleine = true
+     	self.each { |x,y,kase|
+     		if  kase.getSolutionJoueur == nil
+     			pleine = false
+     		end
+     	}
+     	return pleine
      end
- 
+
      # Méthode qui vérifie si la grille est complète et correct
      # @return true or false
      def complete?
-	 	complete = false
-	 	if self.plein? && self.correctGrille?
-	 		complete = true
-	 	end
-	 	return complete
+     	complete = false
+     	if self.plein? && self.correctGrille?
+     		complete = true
+     	end
+     	return complete
      end
 
     # Méthode pour réduire une grille en la gardant jouable
@@ -325,24 +311,24 @@ class Plateau
     	listeCase = Array.new()
 
     	@size.times do |y|
-			@size.times do |x|
-				listeCase.insert(y*9+x, @grid[x][y])
-			end
-		end
+    		@size.times do |x|
+    			listeCase.insert(y*9+x, @grid[x][y])
+    		end
+    	end
 
-		listeCase.shuffle!
+    	listeCase.shuffle!
 
-		for uneCase in listeCase
-			setCaseJoueur(uneCase.getPosition, nil)
-			setCaseOriginale(uneCase.getPosition, false)
+    	for uneCase in listeCase
+    		setCaseJoueur(uneCase.getPosition, nil)
+    		setCaseOriginale(uneCase.getPosition, false)
 
-	    	if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
-	    		setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
-	    		setCaseOriginale(uneCase.getPosition, true)
-			end
-		end
+    		if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
+    			setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
+    			setCaseOriginale(uneCase.getPosition, true)
+    		end
+    	end
 
-		return self
+    	return self
     end
 
 	# Méthode pour le parcours de la grille du plateau
@@ -370,7 +356,7 @@ class Plateau
 			end
 			res += "\n"
 		end
-      return res
+		return res
 	end
 
 	# Affichage propre des valeurs originale de la grille du Plateau
@@ -385,22 +371,7 @@ class Plateau
 			end
 			res += "\n"
 		end
-      return res
-	end
-
-	# Affichage propre des solutions du joueur de la grille du Plateau
-	# @return (String)
-	def to_s
-		res  = ""
-		@size.times do |x|
-			res += "\n" if x>0 && x % @base == 0
-			@size.times do |y|
-				res += " " if y>0 && y % @base == 0
-				res += @grid[x][y].printJoueur
-			end
-			res += "\n"
-		end
-      return res
+		return res
 	end
 end
 

@@ -9,7 +9,6 @@ class Sauvegarde
 	end
 
 	def initialize
-		@jeu=Partie.nouvelle()
 	end
 
 	def loadPartie(nomJoueur, nomPartie)

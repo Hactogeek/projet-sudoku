@@ -3,6 +3,8 @@ require './CadreAide.rb'
 require './Boutons.rb'
 require './Grille.rb'
 require './SousGrille.rb'
+require './Index.rb'
+require './FinJeu.rb'
 
 class Fenetre < Gtk::Window 
 	@cadreAide
@@ -10,8 +12,8 @@ class Fenetre < Gtk::Window
 	@sousGrille
 	@grille
 
-	def initialize ()
-		super
+	def initialize (difficulte)
+		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do
 			Gtk.main_quit
 		end
@@ -19,18 +21,19 @@ class Fenetre < Gtk::Window
 
 		# Property
 		set_title "ku"
+		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
 
 		#=====================================#
 		# Initialisation des classe interface #
 		#=====================================#
-		@partie = Partie.nouvelle
+		@partie = Partie.nouvelle(difficulte)
 		@joueur = ""
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
-		@cadreAide = CadreAide.new
 		@sousGrille = SousGrille.new(@grille)
+		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
 
 		#==========#
@@ -95,6 +98,7 @@ class Fenetre < Gtk::Window
 		    undoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().undo
 			@grille.rafraichirGrille
+			@sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
@@ -103,6 +107,7 @@ class Fenetre < Gtk::Window
 		    redoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().redo
 			@grille.rafraichirGrille
+		    @sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(redoMenuItem)
 
@@ -133,8 +138,8 @@ class Fenetre < Gtk::Window
 
 
 		# Menu User
-	    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false) # Item Checkpoint
-	    userMenu = Gtk::Menu.new() # Menu de checkpoint
+	    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false)
+	    userMenu = Gtk::Menu.new()
 	    userMenuItem.set_submenu(userMenu)
 
 		    # se connecter user
@@ -150,11 +155,35 @@ class Fenetre < Gtk::Window
 		    creerCompteMenuItem = Gtk::MenuItem.new(:label => "Créer compte", :use_underline => false)
 		    userMenu.append(creerCompteMenuItem)
 
+		# Menu Aide
+	    aideMenuItem = Gtk::MenuItem.new(:label => "Aides", :use_underline => false)
+	    aideMenu = Gtk::Menu.new()
+	    aideMenuItem.set_submenu(aideMenu)
+
+		    # Candidat possible
+		    candidatPossibleMenuItem = Gtk::MenuItem.new(:label => "Candidat possible", :use_underline => false)
+		    candidatPossibleMenuItem.signal_connect "activate" do
+
+			end
+		    aideMenu.append(candidatPossibleMenuItem)
+
+		    # verification grille
+		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
+		    verificationGrilleMenuItem.signal_connect "activate" do
+				@grille.colorCaseIncorrect()
+			end
+		    aideMenu.append(verificationGrilleMenuItem)
+		    
+		    #############################################################################
+		    ###############Rajouter la même chose chose qu'au dessus#####################
+		    #############################################################################
+
 
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
 	    menuBar.append(userMenuItem)
+	    menuBar.append(aideMenuItem)
 		
 
 		#==========#
@@ -174,8 +203,7 @@ class Fenetre < Gtk::Window
 		tableMain.attach(@cadreAide , 5,9,0,8) # Aide
 		tableMain.attach(@boutons   , 0,9,8,9) # Boutons
 
-	    show_all	
-	    Gtk.main
+	    show_all
 	end
 
 end
