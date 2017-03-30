@@ -67,7 +67,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 
 	def setCandidatSurFocus(candidat)
 		posFocus = @grille.getCoordFocus()
-		if (posFocus == nil)
+		if (posFocus == nil || @grille.getPartie().getPlateau().getCaseJoueur(posFocus) != nil)
 			return
 		end
 

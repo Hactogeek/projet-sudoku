@@ -1,0 +1,19 @@
+{
+	"folders":
+	[
+		{
+			"path": "./"
+		}
+	],
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"ruby", "./Main.rb"
+			],
+			"name": "Run",
+			"shell": true
+		},
+	],
+}
