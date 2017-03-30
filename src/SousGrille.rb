@@ -72,6 +72,23 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 	end
 
+	def resetAllCandidats()
+		for x in 0..8
+			for y in 0..8
+				resetCandidatCase(x,y)
+			end
+		end
+	end
+
+	def resetCandidatCase(x,y)
+		pos = (x*81 + y*3) + 1
+		for i in 0..2
+			for u in 0..2
+				@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
+			end
+		end
+	end
+
 	def setCandidatSurFocus(candidat)
 		if (!candidat)
 			return
@@ -104,10 +121,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	def setCandidatState(bool)
 		@candidat = bool
 		if (@candidat)
-			@grilleCandidat.show()
 			loadAllCandidats()
 		else
-			@grilleCandidat.hide()
+			resetAllCandidats()
 		end
 	end
 end

@@ -109,7 +109,7 @@ class CadreAide < Gtk::Table
 		end
 	end
 
-	def setAide(titre, listeCase, desc) # à adapté quand on aura remis un label dans le cadre...
+	def setAide(titre, listeCase, desc)
 		titreFormat = "<span font-weight=\"bold\" size=\"x-large\" foreground=\"#200020\">"+titre+"</span>\n"
 		listeCaseFormat = "<span font-style=\"italic\" size=\"large\" >Case:"+ (listeCase.empty? ? "Aucune" : listeCase.to_s) +"</span>\n"
 		descFormat = "<span>"+desc+"</span>"
