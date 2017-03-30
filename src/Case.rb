@@ -65,7 +65,7 @@ class Case
 	# OK
 	# Méthode qui retourne la liste des candidats de la case
 	# @return [Candidat]
-	def getListeCandidat()
+	def getCandidat()
 		return @candidat
 	end
 

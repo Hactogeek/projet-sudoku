@@ -28,8 +28,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def loadAllCandidats()
-		print "Version Joueur : \n", @grille.getPartie().getPlateau()
-		print "Version Originale : \n", @grille.getPartie().getPlateau().printOri
+		# print "Version Joueur : \n", @grille.getPartie().getPlateau()
+		# print "Version Originale : \n", @grille.getPartie().getPlateau().printOri
 
 		for x in 0..8
 			for y in 0..8
@@ -53,7 +53,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 		
 		@grille.getPartie().getPlateau().candidatPossible(position)
-		candidat = @grille.getPartie().getPlateau().getCase(position).getListeCandidat().getListeCandidat()
+		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
 		
 
 		# print("\n Candidat en #{x+1},#{y+1}: ", candidat)
@@ -77,13 +77,13 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    	if (candidat.to_i == u+i*3+1)
 		    		if (@grilleCandidat.children()[729-(pos+u+i*27)].text.to_i == candidat)
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
-		    			@grille.getPartie().getPlateau().getCase(posFocus).getListeCandidat.remove(candidat)
-		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getListeCandidat.getListeCandidat())
+		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.remove(candidat)
+		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			return
 		    		else
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat}</span>")
-		    			@grille.getPartie().getPlateau().getCase(posFocus).getListeCandidat.add(candidat)
-		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getListeCandidat.getListeCandidat())
+		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.add(candidat)
+		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			return
 		    		end
 		    	end

@@ -28,6 +28,7 @@ class ListeCandidat
 	# @return : self
 	def remove(symbole)
 		@tableauCandidat.delete(symbole)
+		@tableauCandidat.insert(symbole, nil)
 		return self
 	end
 
