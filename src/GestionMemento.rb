@@ -6,7 +6,8 @@ class GestionMemento
 	private_class_method :new
 
 	# Constructeur de la classe
-	# @param : plateau	
+	# * [Paramètre :]
+	# 				plateau	
 	def GestionMemento.creer(partie)
 		new(partie)
 	end
@@ -19,19 +20,22 @@ class GestionMemento
 	end
 
 	# Méthode qui retourne vrai si on peut undo, sinon faux
-	# @return : vrai ou faux
+	# * [Retourne :]
+	# 				booleen	
 	def canUndo?
 		return @undos.empty? == false
 	end
 
 	# Méthode qui retourne vrai si on peut redo, sinon faux
-	# @return : vrai ou faux
+	# * [Retourne :]
+	# 				booleen	
 	def canRedo?
 		return @redos.empty? == false
 	end
 
 	# Méthode qui permet de sauvegarder un memento.
-	# @return : self
+	# * [Retourne :]
+	# 				self	
 	def addMemento()
 		plateau = Marshal.dump(@partie.getPlateau())
 		@undos.push(plateau)
@@ -40,7 +44,8 @@ class GestionMemento
 	end
 
 	# Méthode qui permet de revenir à l'état précédant la dernière action
-	# @return : memento ou nil
+	# * [Retourne :]
+	# 				memento ou nil	
 	def undo
 		if self.canUndo? then
 			dernierMemento = Marshal.dump(@partie.getPlateau())
@@ -54,7 +59,8 @@ class GestionMemento
 	end
 
 	# Méthode qui permet de revenir à l'état suivant la dernière action
-	# @return : memento ou nil
+	# * [Retourne :]
+	# 				memento ou nil	
 	def redo
 		if self.canRedo? then
 			dernierMemento = Marshal.dump(@partie.getPlateau())

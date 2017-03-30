@@ -184,7 +184,7 @@ href="Timer.html">Timer</a></p>
 
           
           <div class="method-source-code" id="penalite-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 88</span>
+            <pre><span class="ruby-comment"># File src/Timer.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">penalite</span> (<span class="ruby-identifier">s</span>)
   <span class="ruby-ivar">@accumulated</span> = <span class="ruby-ivar">@accumulated</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +227,7 @@ href="Timer.html">Timer</a></p>
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 69</span>
+            <pre><span class="ruby-comment"># File src/Timer.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>
 
   <span class="ruby-ivar">@accumulated</span> = <span class="ruby-value">0</span>
@@ -278,7 +278,7 @@ souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 42</span>
+            <pre><span class="ruby-comment"># File src/Timer.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span> (<span class="ruby-identifier">secStart</span>)
   <span class="ruby-ivar">@accumulated</span> = <span class="ruby-identifier">secStart</span>
   <span class="ruby-ivar">@elapsed</span> = <span class="ruby-value">0</span>
@@ -324,7 +324,7 @@ souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 
           
           <div class="method-source-code" id="stop-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 57</span>
+            <pre><span class="ruby-comment"># File src/Timer.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stop</span>
   <span class="ruby-ivar">@accumulated</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@elapsed</span>
 <span class="ruby-keyword">end</span></pre>
@@ -362,7 +362,7 @@ souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 
           
           <div class="method-source-code" id="tick-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 97</span>
+            <pre><span class="ruby-comment"># File src/Timer.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tick</span>
   <span class="ruby-ivar">@elapsed</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-ivar">@accumulated</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@elapsed</span>

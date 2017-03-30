@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Dir - RDoc Documentation</title>
+<title>class Score - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -74,9 +74,9 @@
     
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-semettreDansProfil">#semettreDansProfil</a>
+    <li ><a href="#method-i-getScore">#getScore</a>
     
-    <li ><a href="#method-i-supprimerProfil">#supprimerProfil</a>
+    <li ><a href="#method-i-setScore">#setScore</a>
     
   </ul>
 </div>
@@ -84,19 +84,13 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Dir">
-  <h1 id="class-Dir" class="class">
-    class Dir
+<main role="main" aria-labelledby="class-Score">
+  <h1 id="class-Score" class="class">
+    class Score
   </h1>
 
   <section class="description">
-    
-<p><a href="Dir.html">Dir</a>, repertoire de creation de profil(joueur)</p>
-<ul><li>
-<p><strong>Variable</strong>  :</p>
-
-<pre>- +pseudo+ -&gt; pseudo du joueur</pre>
-</li><li>
+    <ul><li>
 <p><strong>Heritage</strong>  : Aucun lien</p>
 </li></ul>
 
@@ -125,7 +119,7 @@
         
         <div class="method-heading">
           <span class="method-name">creer</span><span
-            class="method-args">(unPseudo)</span>
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -134,28 +128,15 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<p>méthode de création d&#39;un repertoire(profil)</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>unDossier=Dir.creer(“Yassine”)</p>
+          
           
           
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-identifier">new</span>(<span class="ruby-identifier">unPseudo</span>)
+            <pre><span class="ruby-comment"># File src/Score.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Score</span>.<span class="ruby-identifier">creer</span>
+      <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -171,7 +152,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(unPseudo)</span>
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -180,20 +161,15 @@
 
         <div class="method-description">
           
-          
+          <p>Constructeur de la classe  <a href="Score.html">Score</a></p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-comment">#Dir.chdir(&quot;/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil&quot;)</span>
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;profil&quot;</span>)
-        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-constant">Dir</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">unPseudo</span>))     
-                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;../&quot;</span>)
+            <pre><span class="ruby-comment"># File src/Score.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> 
+        <span class="ruby-ivar">@score</span>=<span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -213,11 +189,11 @@
        </header>
 
     
-      <div id="method-i-semettreDansProfil" class="method-detail ">
+      <div id="method-i-getScore" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">semettreDansProfil</span><span
-            class="method-args">(unPseudo)</span>
+          <span class="method-name">getScore</span><span
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -230,24 +206,22 @@
 <p><strong>Description</strong>:</p>
 </li></ul>
 
-<p>méthode qui permet de se mettre dans un repertoire(profil)</p>
+<p>méthode permettant de donner le score d&#39;un joueur</p>
 <ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
+<p>*Paramètre*: Aucun</p>
 </li><li>
 <p><strong>Exemple</strong>:</p>
 </li></ul>
 
-<p>dossier.semettreDansProfil(“Yassine”)</p>
+<p><a href="Score.html#method-i-getScore">#getScore</a></p>
           
           
 
           
-          <div class="method-source-code" id="semettreDansProfil-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">semettreDansProfil</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-node">&quot;profil/#{unPseudo}&quot;</span>)
+          <div class="method-source-code" id="getScore-source">
+            <pre><span class="ruby-comment"># File src/Score.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getScore</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@score</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -259,11 +233,11 @@
       </div>
 
     
-      <div id="method-i-supprimerProfil" class="method-detail ">
+      <div id="method-i-setScore" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">supprimerProfil</span><span
-            class="method-args">(unPseudo)</span>
+          <span class="method-name">setScore</span><span
+            class="method-args">(time,niveauDifficulte)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -276,26 +250,27 @@
 <p><strong>Description</strong>:</p>
 </li></ul>
 
-<p>méthode qui permet de supprimer un repertoire (profil)</p>
+<p>méthode permettant de modifier le score d&#39;un joueur</p>
 <ul><li>
 <p>*Paramètre*:</p>
 </li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
+<p><code>time</code> -&gt; le temps d&#39;une partie</p>
+</li><li>
+<p><code>niveauDifficulte</code> -&gt; niveau de difficulté de la partie où a
+été réalisé le score</p>
 </li><li>
 <p><strong>Exemple</strong>:</p>
 </li></ul>
 
-<p>profil.supprimerProfil(“Yassine”)</p>
+<p><a href="Score.html#method-i-setScore">#setScore</a></p>
           
           
 
           
-          <div class="method-source-code" id="supprimerProfil-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">supprimerProfil</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;profil&quot;</span>)
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">unPseudo</span>)
-        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;../&quot;</span>)
+          <div class="method-source-code" id="setScore-source">
+            <pre><span class="ruby-comment"># File src/Score.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setScore</span>(<span class="ruby-identifier">time</span>,<span class="ruby-identifier">niveauDifficulte</span>)
+         <span class="ruby-ivar">@score</span>=(<span class="ruby-value">1000</span><span class="ruby-operator">*</span><span class="ruby-identifier">niveauDifficulte</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">time</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

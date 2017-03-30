@@ -147,7 +147,7 @@
 
           
           <div class="method-source-code" id="loadSave-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 74</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Partie</span>.<span class="ruby-identifier">loadSave</span>(<span class="ruby-identifier">nomPartie</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&#39;.txt&#39;</span>, <span class="ruby-string">&#39;rb&#39;</span>).<span class="ruby-identifier">read</span>
 <span class="ruby-keyword">end</span></pre>
@@ -258,7 +258,7 @@
 
           
           <div class="method-source-code" id="afficherPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 50</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherPlateau</span>()
         <span class="ruby-identifier">print</span> <span class="ruby-ivar">@plateau</span>
 <span class="ruby-keyword">end</span></pre>
@@ -332,8 +332,7 @@
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">complete?</span>
                 <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;La grille est complete&quot;</span>)
         <span class="ruby-keyword">end</span>
-        
-        
+
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -364,7 +363,7 @@
 
           
           <div class="method-source-code" id="getAide-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 62</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getAide</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@aide</span>
 <span class="ruby-keyword">end</span></pre>
@@ -397,7 +396,7 @@
 
           
           <div class="method-source-code" id="getCheckPoint-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 58</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCheckPoint</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@checkPoint</span>
 <span class="ruby-keyword">end</span></pre>
@@ -430,7 +429,7 @@
 
           
           <div class="method-source-code" id="getPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 40</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getPlateau</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@plateau</span>
 <span class="ruby-keyword">end</span></pre>
@@ -463,7 +462,7 @@
 
           
           <div class="method-source-code" id="getUndoRedo-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 54</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getUndoRedo</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@undoRedo</span>
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +495,7 @@
 
           
           <div class="method-source-code" id="setPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 45</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setPlateau</span>(<span class="ruby-identifier">plateau</span>)
         <span class="ruby-ivar">@plateau</span> = <span class="ruby-identifier">plateau</span>
 <span class="ruby-keyword">end</span></pre>
@@ -523,16 +522,21 @@
 
         <div class="method-description">
           
-          <p>Perso je trouve ça inutile, sachant que la sauvegarde se fait avec la class
-<a href="Sauvegarde.html">Sauvegarde</a>. <a
-href="Sauvegarde.html">Sauvegarde</a> une partie en créant un fichier txt
-dont le nom sera nomPartie</p>
+          <pre>--</pre>
+
+<p>Perso je trouve ça inutile, sachant que la sauvegarde se fait avec la class
+<a href="Sauvegarde.html">Sauvegarde</a>.</p>
+
+<pre>++</pre>
+
+<p><a href="Sauvegarde.html">Sauvegarde</a> une partie en créant un fichier
+txt dont le nom sera nomPartie</p>
           
           
 
           
           <div class="method-source-code" id="setSave-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 68</span>
+            <pre><span class="ruby-comment"># File src/Partie.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setSave</span>(<span class="ruby-identifier">nomPartie</span>)
         <span class="ruby-identifier">serialized_array</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-keyword">self</span>)
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.txt&quot;</span>, <span class="ruby-string">&#39;wb&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">serialized_array</span>) }

@@ -1,13 +1,3 @@
-
-##
-# Auteur Yassine M'CHAAR
-# Version 0.1
-# Date : mardi 13 Mars 2017
-# Description : fichier contenant la class Dir d'une partie de Sudoku
-
-
-
-#
 # Dir, repertoire de creation de profil(joueur)
 # * *Variable*	:
 #    - +pseudo+ -> pseudo du joueur

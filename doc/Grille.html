@@ -72,6 +72,10 @@
     
     <li class="calls-super" ><a href="#method-c-new">::new</a>
     
+    <li ><a href="#method-i-colorCaseIncorrect">#colorCaseIncorrect</a>
+    
+    <li ><a href="#method-i-colorCaseResolvable">#colorCaseResolvable</a>
+    
     <li ><a href="#method-i-getCoordFocus">#getCoordFocus</a>
     
     <li ><a href="#method-i-getPartie">#getPartie</a>
@@ -154,7 +158,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 20</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">partie</span>)
         <span class="ruby-keyword">super</span>(<span class="ruby-value">9</span>, <span class="ruby-value">9</span>, <span class="ruby-keyword">true</span>)
         <span class="ruby-identifier">set_margin_left</span>(<span class="ruby-value">1</span>)
@@ -184,6 +188,83 @@
        </header>
 
     
+      <div id="method-i-colorCaseIncorrect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">colorCaseIncorrect</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="colorCaseIncorrect-source">
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">colorCaseIncorrect</span>()
+        <span class="ruby-identifier">listePos</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getAide</span>().<span class="ruby-identifier">verificationGrille</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">empty?</span>
+                <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\nIl n&#39;y a pas d&#39;erreur dans la grille&quot;</span>)      
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">setCouleurCase</span>(<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getX</span>(), <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getY</span>(), <span class="ruby-constant">COUL_ROUGE</span>)
+                }
+        <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-colorCaseResolvable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">colorCaseResolvable</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="colorCaseResolvable-source">
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">colorCaseResolvable</span>()
+        <span class="ruby-identifier">casesResolvable</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getAide</span>().<span class="ruby-identifier">caseResolvable</span>()
+        <span class="ruby-identifier">casesResolvable</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">setCouleurCase</span>(<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getX</span>(), <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getY</span>(), <span class="ruby-constant">COUL_ROSE</span>)
+        }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-getCoordFocus" class="method-detail ">
         
         <div class="method-heading">
@@ -203,7 +284,7 @@
 
           
           <div class="method-source-code" id="getCoordFocus-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 131</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCoordFocus</span>()
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
                 <span class="ruby-keyword">return</span>
@@ -240,7 +321,7 @@
 
           
           <div class="method-source-code" id="getPartie-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 170</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getPartie</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@partie</span>
 <span class="ruby-keyword">end</span></pre>
@@ -273,7 +354,7 @@
 
           
           <div class="method-source-code" id="rafraichirGrille-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 139</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rafraichirGrille</span>()
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
                 <span class="ruby-identifier">print</span>(<span class="ruby-identifier">x</span> , <span class="ruby-string">&quot; &quot;</span> , <span class="ruby-identifier">y</span>)  
@@ -314,7 +395,7 @@
 
           
           <div class="method-source-code" id="remplirGrille-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 151</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remplirGrille</span>()
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
                 <span class="ruby-identifier">btn</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>()
@@ -362,7 +443,7 @@
 
           
           <div class="method-source-code" id="resetColorOnAll-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 101</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resetColorOnAll</span>()
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">children</span>().<span class="ruby-identifier">size</span>()<span class="ruby-operator">-</span><span class="ruby-value">1</span>
                 <span class="ruby-identifier">css</span>=<span class="ruby-value">&lt;&lt;-EOT
@@ -374,6 +455,7 @@
        <span class="ruby-identifier">css_provider</span>.<span class="ruby-identifier">load</span> <span class="ruby-value">:data=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">css</span>
                 <span class="ruby-keyword">self</span>.<span class="ruby-identifier">children</span>()[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">style_context</span>.<span class="ruby-identifier">add_provider</span> <span class="ruby-identifier">css_provider</span>,<span class="ruby-constant">GLib</span><span class="ruby-operator">::</span><span class="ruby-constant">MAXUINT</span>
         <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">setCouleurSurFocus</span>(<span class="ruby-constant">COUL_JAUNE</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -404,7 +486,7 @@
 
           
           <div class="method-source-code" id="resetCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 114</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resetCouleurSurFocus</span>() <span class="ruby-comment"># change couleur du focus</span>
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-identifier">css</span>=<span class="ruby-value">&lt;&lt;-EOT
@@ -446,7 +528,7 @@
 
           
           <div class="method-source-code" id="setCaseValeur-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 32</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCaseValeur</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">valeur</span>)
 
         <span class="ruby-comment">#children()[81 - ((x)+((y-1)*9))].children[0].set_markup(&quot;&lt;span size=\&quot;x-large\&quot; font-weight=\&quot;bold\&quot;&gt;#{valeur}&lt;/span&gt;&quot;)</span>
@@ -480,7 +562,7 @@
 
           
           <div class="method-source-code" id="setColorOnValue-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 83</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setColorOnValue</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">couleur</span>)
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>)
                 <span class="ruby-keyword">return</span>
@@ -527,9 +609,16 @@
 
           
           <div class="method-source-code" id="setCouleurCase-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 127</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurCase</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">couleur</span>)
-        <span class="ruby-identifier">children</span>()[<span class="ruby-value">81</span> <span class="ruby-operator">-</span> ((<span class="ruby-identifier">x</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">y</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)<span class="ruby-operator">*</span><span class="ruby-value">9</span>))].<span class="ruby-identifier">override_background_color</span>(<span class="ruby-value">:normal</span>, <span class="ruby-identifier">couleur</span>)
+        <span class="ruby-identifier">css</span>=<span class="ruby-value">&lt;&lt;-EOT
+        #cell{
+        background: #{couleur};
+}
+EOT</span>
+<span class="ruby-identifier">css_provider</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">CssProvider</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">css_provider</span>.<span class="ruby-identifier">load</span> <span class="ruby-value">:data=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">css</span>
+<span class="ruby-keyword">self</span>.<span class="ruby-identifier">children</span>()[<span class="ruby-value">81</span> <span class="ruby-operator">-</span> ((<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)<span class="ruby-operator">+</span>((<span class="ruby-identifier">y</span>)<span class="ruby-operator">*</span><span class="ruby-value">9</span>))].<span class="ruby-identifier">style_context</span>.<span class="ruby-identifier">add_provider</span> <span class="ruby-identifier">css_provider</span>,<span class="ruby-constant">GLib</span><span class="ruby-operator">::</span><span class="ruby-constant">MAXUINT</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -560,7 +649,7 @@
 
           
           <div class="method-source-code" id="setCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 70</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurSurFocus</span>(<span class="ruby-identifier">couleur</span>) <span class="ruby-comment"># change couleur du focus</span>
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-identifier">css</span>=<span class="ruby-value">&lt;&lt;-EOT
@@ -602,7 +691,7 @@
 
           
           <div class="method-source-code" id="setPartie-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 174</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setPartie</span>(<span class="ruby-identifier">partie</span>)
         <span class="ruby-ivar">@partie</span>=<span class="ruby-identifier">partie</span>
 <span class="ruby-keyword">end</span></pre>
@@ -635,7 +724,7 @@
 
           
           <div class="method-source-code" id="setValeurSurFocus-source">
-            <pre><span class="ruby-comment"># File src/Grille.rb, line 37</span>
+            <pre><span class="ruby-comment"># File src/Grille.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setValeurSurFocus</span>(<span class="ruby-identifier">valeur</span>) <span class="ruby-comment"># Mettre en place systeme focus quand click sur Case</span>
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
 

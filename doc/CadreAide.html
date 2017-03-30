@@ -112,7 +112,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">()</span>
+            class="method-args">(grille, sousGrille)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -132,12 +132,17 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/CadreAide.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> ()
+            <pre><span class="ruby-comment"># File src/CadreAide.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">grille</span>, <span class="ruby-identifier">sousGrille</span>)
         <span class="ruby-keyword">super</span>(<span class="ruby-value">12</span>,<span class="ruby-value">8</span>,<span class="ruby-keyword">true</span>)
+        <span class="ruby-ivar">@grille</span> = <span class="ruby-identifier">grille</span>
+        <span class="ruby-ivar">@sousGrille</span> = <span class="ruby-identifier">sousGrille</span>
         <span class="ruby-comment">#add( Gtk::Image.new( :pixbuf =&gt; GdkPixbuf::Pixbuf.new(:file =&gt; &quot;help.png&quot;, :width =&gt; 432, :heigth =&gt; 432)))</span>
         <span class="ruby-identifier">methode1</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Methode du poney&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-identifier">methode2</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Methode de dragibus&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
+        <span class="ruby-identifier">methode2</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
+                <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">colorCaseResolvable</span>()
+        <span class="ruby-keyword">end</span>
         <span class="ruby-identifier">methode3</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Methode du couscous&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-identifier">methode4</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Methode de caribou&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-identifier">methode5</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Methode de la methode&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
@@ -149,6 +154,13 @@
         <span class="ruby-identifier">attach</span>(<span class="ruby-identifier">methode5</span>, <span class="ruby-value">0</span>,<span class="ruby-value">8</span>, <span class="ruby-value">4</span>,<span class="ruby-value">5</span>)
 
         <span class="ruby-identifier">candidatSwitch</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Switch</span>.<span class="ruby-identifier">new</span>()
+        <span class="ruby-identifier">candidatSwitch</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&#39;state-set&#39;</span>) <span class="ruby-keyword">do</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">candidatSwitch</span>.<span class="ruby-identifier">active?</span>
+                        <span class="ruby-ivar">@sousGrille</span>.<span class="ruby-identifier">setCandidatState</span>(<span class="ruby-keyword">true</span>)
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@sousGrille</span>.<span class="ruby-identifier">setCandidatState</span>(<span class="ruby-keyword">false</span>)
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
         <span class="ruby-identifier">candidatLabel</span>  = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Activer/Desactiver Candidats :&quot;</span>)
         <span class="ruby-identifier">attach</span>(<span class="ruby-identifier">candidatSwitch</span>, <span class="ruby-value">6</span>,<span class="ruby-value">8</span>, <span class="ruby-value">11</span>,<span class="ruby-value">12</span>)
         <span class="ruby-identifier">attach</span>(<span class="ruby-identifier">candidatLabel</span> , <span class="ruby-value">3</span>,<span class="ruby-value">6</span>, <span class="ruby-value">11</span>,<span class="ruby-value">12</span>)
@@ -190,7 +202,7 @@
 
           
           <div class="method-source-code" id="setAide-source">
-            <pre><span class="ruby-comment"># File src/CadreAide.rb, line 25</span>
+            <pre><span class="ruby-comment"># File src/CadreAide.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setAide</span>(<span class="ruby-identifier">titre</span>, <span class="ruby-identifier">listeCase</span>, <span class="ruby-identifier">desc</span>) <span class="ruby-comment"># à adapté quand on aura remis un label dans le cadre...</span>
         <span class="ruby-identifier">titreFormat</span> = <span class="ruby-node">&quot;&lt;span font-weight=\&quot;bold\&quot; size=\&quot;x-large\&quot; foreground=\&quot;#200020\&quot;&gt;&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">titre</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;&lt;/span&gt;\n&quot;</span>
         <span class="ruby-identifier">listeCaseFormat</span> = <span class="ruby-string">&quot;&lt;span font-style=\&quot;italic\&quot; size=\&quot;large\&quot; &gt;Case:&quot;</span><span class="ruby-operator">+</span> (<span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;Aucune&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">+</span><span class="ruby-string">&quot;&lt;/span&gt;\n&quot;</span>

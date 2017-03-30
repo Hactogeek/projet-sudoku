@@ -140,7 +140,7 @@
 
         <span class="ruby-comment"># Property</span>
         <span class="ruby-identifier">set_title</span> <span class="ruby-string">&quot;ku&quot;</span>
-        <span class="ruby-identifier">set_window_position</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Window</span><span class="ruby-operator">::</span><span class="ruby-constant">POS_CENTER</span>)
+        <span class="ruby-identifier">set_window_position</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">WindowPosition</span><span class="ruby-operator">::</span><span class="ruby-constant">CENTER</span>)
         <span class="ruby-identifier">set_resizable</span>(<span class="ruby-keyword">false</span>)
 
 
@@ -151,8 +151,8 @@
         <span class="ruby-ivar">@joueur</span> = <span class="ruby-string">&quot;&quot;</span>
         <span class="ruby-ivar">@sauvegarde</span> = <span class="ruby-constant">Sauvegarde</span>.<span class="ruby-identifier">creer</span>()
         <span class="ruby-ivar">@grille</span> = <span class="ruby-constant">Grille</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@partie</span>)
-        <span class="ruby-ivar">@cadreAide</span> = <span class="ruby-constant">CadreAide</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@sousGrille</span> = <span class="ruby-constant">SousGrille</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@grille</span>)
+        <span class="ruby-ivar">@cadreAide</span> = <span class="ruby-constant">CadreAide</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@grille</span>, <span class="ruby-ivar">@sousGrille</span>)
         <span class="ruby-ivar">@boutons</span> = <span class="ruby-constant">Boutons</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@grille</span>, <span class="ruby-ivar">@sousGrille</span>) 
 
         <span class="ruby-comment">#==========#</span>
@@ -289,7 +289,7 @@
             <span class="ruby-comment"># verification grille</span>
             <span class="ruby-identifier">verificationGrilleMenuItem</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">MenuItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Verifier la grille&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
             <span class="ruby-identifier">verificationGrilleMenuItem</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;activate&quot;</span> <span class="ruby-keyword">do</span>
-                        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getAide</span>().<span class="ruby-identifier">verificationGrille</span>
+                        <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">colorCaseIncorrect</span>()
                 <span class="ruby-keyword">end</span>
             <span class="ruby-identifier">aideMenu</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">verificationGrilleMenuItem</span>)
             

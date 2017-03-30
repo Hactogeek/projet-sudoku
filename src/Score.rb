@@ -1,11 +1,3 @@
-##
-# Auteur Yassine M'CHAAR	
-# Version 1.0
-# Date : 30/03/2017
-# Description : fichier contenant la class Score du Sudoku
-
-
-#
 # Score 
 # * *Variable*	:
 #    - +score+ ->  le score du joueur

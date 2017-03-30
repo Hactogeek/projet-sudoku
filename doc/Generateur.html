@@ -242,13 +242,14 @@
           <p>Parcourt tout le sudoku</p>
 
 <pre>@yield [x, y, val] la position et la valeur courante
-@return (self)</pre>
+* [Retourne :]
+            self</pre>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 34</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
   <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -282,13 +283,14 @@
           
           <p>Renvoie la valeur en x,y</p>
 
-<pre>@return (Fixnum)</pre>
+<pre>* [Retourne :]
+            Fixnum</pre>
           
           
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 24</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span><span class="ruby-operator">&gt;=</span><span class="ruby-identifier">size</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">y</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">y</span><span class="ruby-operator">&gt;=</span><span class="ruby-identifier">size</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Is there a #{x},#{y} cell in a #{size}x#{size} sudoku ?&quot;</span>
@@ -320,14 +322,14 @@
           
           <p>Remplit la diagonale descendante de 1 a self.size</p>
 
-<pre class="ruby"><span class="ruby-ivar">@return</span> [<span class="ruby-keyword">self</span>]
-</pre>
+<pre>* [Retourne :]
+            self</pre>
           
           
 
           
           <div class="method-source-code" id="make_diagonal-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 45</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_diagonal</span>
   <span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">set</span> <span class="ruby-identifier">x</span>,<span class="ruby-identifier">x</span>,<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">==</span><span class="ruby-identifier">y</span>}
   <span class="ruby-keyword">self</span>
@@ -357,14 +359,14 @@
           
           <p>Remplit tout le sudoku de maniere a ce qu&#39;il soit valide</p>
 
-<pre class="ruby"><span class="ruby-ivar">@return</span> [<span class="ruby-keyword">self</span>]
-</pre>
+<pre>* [Retourne :]
+            self</pre>
           
           
 
           
           <div class="method-source-code" id="make_valid-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 52</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_valid</span>
   <span class="ruby-identifier">pattern</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">size</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>}.<span class="ruby-identifier">shuffle</span>
   <span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -401,14 +403,16 @@
           
           <p>Cree un sudoku valide et laisse des cases vides au hasard</p>
 
-<pre>@param [Fixnum] seed Le parametre a utiliser pour rand()
-@return [self]</pre>
+<pre>* [Parametre :]
+            [Fixnum]seed Le parametre a utiliser pour rand()
+* [Retourne :]
+            self</pre>
           
           
 
           
           <div class="method-source-code" id="make_valid_incomplete-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 67</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_valid_incomplete</span> <span class="ruby-identifier">seed</span>=<span class="ruby-value">2</span>
   <span class="ruby-identifier">pattern</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">size</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>}.<span class="ruby-identifier">shuffle</span>
   <span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -445,13 +449,14 @@
           
           <p>Renvoie le coté du Sudoku</p>
 
-<pre>@return (Fixnum)</pre>
+<pre>* [Retourne :]
+            Fixnum</pre>
           
           
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 15</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">val</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span><span class="ruby-operator">&gt;=</span><span class="ruby-identifier">size</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">y</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">y</span><span class="ruby-operator">&gt;=</span><span class="ruby-identifier">size</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">val</span><span class="ruby-operator">&lt;</span><span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">size</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{x},#{y} =&gt; #{val} is impossible in a #{size}x#{size} sudoku&quot;</span>
@@ -483,13 +488,14 @@
           
           <p>Représentation texte humainement lisible</p>
 
-<pre>@return (String)</pre>
+<pre>* [Retourne :]
+            string</pre>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File src/Generateur.rb, line 81</span>
+            <pre><span class="ruby-comment"># File src/Generateur.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">res</span>  = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">width</span> = <span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>

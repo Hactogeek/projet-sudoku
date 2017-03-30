@@ -131,13 +131,18 @@
 
         <div class="method-description">
           
-          <p>Constructeur de la classe @param : plateau</p>
+          <p>Constructeur de la classe</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>plateau</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 10</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">GestionMemento</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">partie</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">partie</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -170,7 +175,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 14</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">partie</span>)
         <span class="ruby-ivar">@undos</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@redos</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
@@ -208,13 +213,18 @@
 
         <div class="method-description">
           
-          <p>Méthode qui permet de sauvegarder un memento. @return : self</p>
+          <p>Méthode qui permet de sauvegarder un memento.</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="addMemento-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 35</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addMemento</span>()
         <span class="ruby-identifier">plateau</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>())
         <span class="ruby-ivar">@undos</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">plateau</span>)
@@ -244,14 +254,18 @@
 
         <div class="method-description">
           
-          <p>Méthode qui retourne vrai si on peut redo, sinon faux @return : vrai ou
-faux</p>
+          <p>Méthode qui retourne vrai si on peut redo, sinon faux</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="canRedo-3F-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 29</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">canRedo?</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@redos</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -278,14 +292,18 @@ faux</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne vrai si on peut undo, sinon faux @return : vrai ou
-faux</p>
+          <p>Méthode qui retourne vrai si on peut undo, sinon faux</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="canUndo-3F-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 23</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">canUndo?</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@undos</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -312,14 +330,18 @@ faux</p>
 
         <div class="method-description">
           
-          <p>Méthode qui permet de revenir à l&#39;état suivant la dernière action
-@return : memento ou nil</p>
+          <p>Méthode qui permet de revenir à l&#39;état suivant la dernière action</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>memento ou nil</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="redo-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 58</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">redo</span>
         <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">canRedo?</span> <span class="ruby-keyword">then</span>
                 <span class="ruby-identifier">dernierMemento</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>())
@@ -354,14 +376,18 @@ faux</p>
 
         <div class="method-description">
           
-          <p>Méthode qui permet de revenir à l&#39;état précédant la dernière action
-@return : memento ou nil</p>
+          <p>Méthode qui permet de revenir à l&#39;état précédant la dernière action</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>memento ou nil</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="undo-source">
-            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 44</span>
+            <pre><span class="ruby-comment"># File src/GestionMemento.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">undo</span>
         <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">canUndo?</span> <span class="ruby-keyword">then</span>
                 <span class="ruby-identifier">dernierMemento</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>())

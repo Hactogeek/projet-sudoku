@@ -10,6 +10,8 @@ class Aide
 	end
 
 	#Place tous les candidats de la case
+	# * [Paramètre :]
+	# 				position
 	def candidatPossible(position)
 		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
@@ -40,12 +42,16 @@ class Aide
 	#Le joueur indique en paramètre le symbole candidat de la position
 	#si c'est possible, on retourne true. Sinon, on retourne
 	#la position du symbole qui indique l'impossibilité de placer le symbole candidat
+	# * [Paramètre :]
+	# 				candidat
+	# 				pos	
 	def explicationChoix(candidat, pos)
 
 	end
 
 	# Méthode qui retourne les cases incorrects
-	# @return tableau de case
+	# * [Retourne :]
+	# 				tableau de case	
 	def verificationGrille
 		listeCase = Array.new
 		@partie.getPlateau().each { |x,y,kase|

@@ -82,8 +82,6 @@
     
     <li ><a href="#method-i-candidatPossible">#candidatPossible</a>
     
-    <li ><a href="#method-i-caseIncorrect">#caseIncorrect</a>
-    
     <li ><a href="#method-i-complete-3F">#complete?</a>
     
     <li ><a href="#method-i-completeGrille">#completeGrille</a>
@@ -171,13 +169,18 @@
 
         <div class="method-description">
           
-          <p>Constructeur du plateau de jeu @return (self)</p>
+          <p>Constructeur du plateau de jeu</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 7</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-comment"># Taille de la grille</span>
         <span class="ruby-ivar">@base</span> = <span class="ruby-value">3</span>
@@ -223,14 +226,22 @@
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si un chiffre est dans une colonne @param chiffre Le
-chiffre @param ligne La ligne  @return boolean</p>
+          <p>Méthode qui vérifie si un chiffre est dans une colonne</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>chiffre Le chiffre ligne La ligne</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="absentColonne-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 143</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">chiffre</span>, <span class="ruby-identifier">colonne</span>)
         <span class="ruby-identifier">tableauColonne</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">colonne</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-operator">!</span><span class="ruby-identifier">tableauColonne</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">chiffre</span>)
@@ -258,14 +269,22 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si un chiffre est sur une ligne @param chiffre Le
-chiffre @param ligne La ligne  @return boolean</p>
+          <p>Méthode qui vérifie si un chiffre est sur une ligne</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>chiffre Le chiffre ligne La ligne</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="absentLigne-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 134</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">chiffre</span>, <span class="ruby-identifier">ligne</span>)
         <span class="ruby-identifier">tableauLigne</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">ligne</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-operator">!</span><span class="ruby-identifier">tableauLigne</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">chiffre</span>)
@@ -293,14 +312,22 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si un chiffre est dans une région @param chiffre Le
-chiffre @param ligne La ligne  @return boolean</p>
+          <p>Méthode qui vérifie si un chiffre est dans une région</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>chiffre Le chiffre ligne La ligne</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="absentRegion-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 152</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">absentRegion</span>(<span class="ruby-identifier">chiffre</span>, <span class="ruby-identifier">posX</span>, <span class="ruby-identifier">posY</span>)
         <span class="ruby-identifier">tableauRegion</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getRegion</span>(<span class="ruby-identifier">posX</span>,<span class="ruby-identifier">posY</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-operator">!</span><span class="ruby-identifier">tableauRegion</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">chiffre</span>)
@@ -328,17 +355,24 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne les listes des candidats impossibles pour une case
-@param [Position] position La position de la case @return [ListeCandidat]</p>
+          <p>Méthode qui retourne les listes des candidats impossibles pour une case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p><a href="ListeCandidat.html">ListeCandidat</a></p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="candidatImpossible-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 185</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatImpossible</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-identifier">tabCandidatImpossible</span> = <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>()
-        <span class="ruby-comment"># tableauRetour = Array.new(9)</span>
 
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">1</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
                 <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">i</span>,<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">absentRegion</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>, <span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>))
@@ -346,8 +380,8 @@ chiffre @param ligne La ligne  @return boolean</p>
                         <span class="ruby-comment"># tableauRetour.insert(i,i)</span>
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
+
         <span class="ruby-keyword">return</span> <span class="ruby-identifier">tabCandidatImpossible</span>
-        <span class="ruby-comment"># return tableauRetour</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -372,14 +406,22 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne les listes des candidats pour une case @param
-[Position] position La position de la case @return [ListeCandidat]</p>
+          <p>Méthode qui retourne les listes des candidats pour une case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p><a href="ListeCandidat.html">ListeCandidat</a></p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="candidatPossible-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 160</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-identifier">tabCandidatPossible</span> = <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>()
         <span class="ruby-comment"># tableauRetour = Array.new(9)</span>
@@ -399,49 +441,6 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <span class="ruby-comment"># print &quot;\n Candidat en #{position.getX+1},#{position.getY+1}:&quot;, tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,&quot;\n&quot;</span>
         <span class="ruby-keyword">return</span> <span class="ruby-identifier">tabCandidatPossible</span>
-        <span class="ruby-comment"># return tableauRetour</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-caseIncorrect" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">caseIncorrect</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Méthode qui retourne les cases incorrects @return tableau de case</p>
-          
-          
-
-          
-          <div class="method-source-code" id="caseIncorrect-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 287</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">caseIncorrect</span>
-   <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
-           <span class="ruby-keyword">if</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-                   <span class="ruby-keyword">if</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionOriginale</span>
-                           <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;test&quot;</span>)
-                           <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
-                   <span class="ruby-keyword">end</span>
-           <span class="ruby-keyword">end</span>
-   }
-   <span class="ruby-keyword">return</span> <span class="ruby-identifier">listeCase</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -466,14 +465,22 @@ chiffre @param ligne La ligne  @return boolean</p>
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si la grille est complète et correct @return true or
-false</p>
+          <p>Méthode qui vérifie si la grille est complète et correct</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 314</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 350</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
    <span class="ruby-identifier">complete</span> = <span class="ruby-keyword">false</span>
    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">plein?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">correctGrille?</span>
@@ -504,13 +511,18 @@ false</p>
 
         <div class="method-description">
           
-          <p>Méthode pour générer une grille complete aléatoirement @return self</p>
+          <p>Méthode pour générer une grille complete aléatoirement</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="completeGrille-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 201</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">completeGrille</span>
         <span class="ruby-identifier">pattern</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@size</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>}.<span class="ruby-identifier">shuffle</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -547,13 +559,18 @@ false</p>
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si la grille est correct @return true or false</p>
+          <p>Méthode qui vérifie si la grille est correct</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="correctGrille-3F-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 273</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">correctGrille?</span>
    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
            <span class="ruby-identifier">ligne</span> = <span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">y</span>)
@@ -589,13 +606,18 @@ false</p>
         <div class="method-description">
           
           <p>Méthode qui vérifie si il y a au moins deux occurence d&#39;un symbole dans
-un tableau @return true or false</p>
+un tableau</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="deuxOccurenceTab-3F-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 247</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 292</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">tab</span>)
    <span class="ruby-identifier">occurence</span> = <span class="ruby-keyword">false</span>
    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
@@ -643,13 +665,18 @@ un tableau @return true or false</p>
         <div class="method-description">
           
           <p>Méthode pour le parcours de la grille du plateau @yield [x, y, val] la
-position et la valeur courante @return (self)</p>
+position et la valeur courante</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 352</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
                 <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -687,7 +714,7 @@ position et la valeur courante @return (self)</p>
 
           
           <div class="method-source-code" id="getCase-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 69</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCase</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -715,14 +742,21 @@ position et la valeur courante @return (self)</p>
         <div class="method-description">
           
           <p>Méthode qui retourne la solution du joueur pour la case</p>
-
-<p>@param [Position] position La position de la case @return (SolutionJoueur)</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>SolutionJoueur</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getCaseJoueur-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 65</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCaseJoueur</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getSolutionJoueur</span>
 <span class="ruby-keyword">end</span></pre>
@@ -749,14 +783,22 @@ position et la valeur courante @return (self)</p>
 
         <div class="method-description">
           
-          <p>OK Méthode qui retourne la liste des candidats pour la case @param
-[Position] position La position de la case @return [Candidat]</p>
+          <p>OK Méthode qui retourne la liste des candidats pour la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>candidat</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getCaseListeCandidat-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 77</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCaseListeCandidat</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getListeCandidat</span>
 <span class="ruby-keyword">end</span></pre>
@@ -783,14 +825,22 @@ position et la valeur courante @return (self)</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne la solution orignale de la case  @param [Position]
-position La position de la case @return (SolutionOriginale)</p>
+          <p>Méthode qui retourne la solution orignale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>SolutionOriginale</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getCaseOriginale-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 84</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCaseOriginale</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getSolutionOriginale</span>
 <span class="ruby-keyword">end</span></pre>
@@ -817,15 +867,22 @@ position La position de la case @return (SolutionOriginale)</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne un tableau des valeurs d&#39;une colonne spécifié
-@param [Fixnum] colonne La colonne qu&#39;il faut retourner 0-8 @return
-[ArrayFixnum]</p>
+          <p>Méthode qui retourne un tableau des valeurs d&#39;une colonne spécifié</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>colonne La colonne qu&#39;il faut retourner 0-8</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>ArrayFixnum</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getColonne-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 103</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">colonne</span>)
         <span class="ruby-identifier">tableauRetour</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">n</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
@@ -857,14 +914,22 @@ position La position de la case @return (SolutionOriginale)</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne un tableau des valeurs d&#39;une ligne spécifié @param
-[Fixnum] ligne La ligne qu&#39;il faut retourner 0-8 @return [ArrayFixnum]</p>
+          <p>Méthode qui retourne un tableau des valeurs d&#39;une ligne spécifié</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>ligne La ligne qu&#39;il faut retourner 0-8</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>ArrayFixnum</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getLigne-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 91</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">ligne</span>)
         <span class="ruby-identifier">tableauRetour</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">n</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
@@ -896,15 +961,22 @@ position La position de la case @return (SolutionOriginale)</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne un tableau des valeurs d&#39;une region spécifié
-@param [Fixnum] region La region qu&#39;il faut retourner 1-9 @return
-[ArrayFixnum]</p>
+          <p>Méthode qui retourne un tableau des valeurs d&#39;une region spécifié</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>region La region qu&#39;il faut retourner 1-9</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>ArrayFixnum</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getRegion-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 115</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getRegion</span>(<span class="ruby-identifier">posX</span>, <span class="ruby-identifier">posY</span>)
         <span class="ruby-identifier">tableauRetour</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
 
@@ -942,14 +1014,18 @@ position La position de la case @return (SolutionOriginale)</p>
 
         <div class="method-description">
           
-          <p>Méthode qui vérifie si toutes les cases de la grilles sont remplies @return
-true or false</p>
+          <p>Méthode qui vérifie si toutes les cases de la grilles sont remplies</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="plein-3F-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 302</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 334</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">plein?</span>
    <span class="ruby-identifier">pleine</span> = <span class="ruby-keyword">true</span>
    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
@@ -983,13 +1059,18 @@ true or false</p>
         <div class="method-description">
           
           <p>Affichage propre des valeurs originale de la grille du <a
-href="Plateau.html">Plateau</a> @return (String)</p>
+href="Plateau.html">Plateau</a></p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>string</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="printOri-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 379</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 420</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">printOri</span>
         <span class="ruby-identifier">res</span>  = <span class="ruby-string">&quot;&quot;</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1025,13 +1106,18 @@ href="Plateau.html">Plateau</a> @return (String)</p>
 
         <div class="method-description">
           
-          <p>Méthode pour réduire une grille en la gardant jouable @return self</p>
+          <p>Méthode pour réduire une grille en la gardant jouable</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="reduireGrille-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 324</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 361</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reduireGrille</span> (<span class="ruby-identifier">position</span>, <span class="ruby-identifier">niveauDifficulte</span>)
 
     <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
@@ -1079,14 +1165,22 @@ href="Plateau.html">Plateau</a> @return (String)</p>
 
         <div class="method-description">
           
-          <p>Méthode pour la MAJ de la solution du joueur pour la case @param [Position]
-position La position de la case @return (self)</p>
+          <p>Méthode pour la MAJ de la solution du joueur pour la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="setCaseJoueur-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 30</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-identifier">position</span>, <span class="ruby-identifier">valeur</span>)
         <span class="ruby-comment"># Ajout de la solution du joueur</span>
         <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>()][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>()].<span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-identifier">valeur</span>)
@@ -1121,7 +1215,7 @@ position La position de la case @return (self)</p>
 
           
           <div class="method-source-code" id="setCaseOriginale-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 54</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCaseOriginale</span>(<span class="ruby-identifier">position</span>, <span class="ruby-identifier">originale</span>)
         <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setOriginale</span>(<span class="ruby-identifier">originale</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1148,15 +1242,22 @@ position La position de la case @return (self)</p>
 
         <div class="method-description">
           
-          <p>Méthode pour la MAJ de la solution originale de la case  @param [Position]
-position La position de la case @param [Fixnum] valeur La valeur de la case
-@return (self)</p>
+          <p>Méthode pour la MAJ de la solution originale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>position La position de la case valeur La valeur de la case</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="setCaseSolutionOriginale-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 49</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCaseSolutionOriginale</span>(<span class="ruby-identifier">position</span>, <span class="ruby-identifier">valeur</span>)
         <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-identifier">valeur</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
@@ -1184,14 +1285,18 @@ position La position de la case @param [Fixnum] valeur La valeur de la case
 
         <div class="method-description">
           
-          <p>Affichage propre de la grille du <a href="Plateau.html">Plateau</a> @return
-(String)</p>
+          <p>Affichage propre de la grille du <a href="Plateau.html">Plateau</a></p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>string</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 363</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 403</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-identifier">res</span>  = <span class="ruby-string">&quot;&quot;</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1228,15 +1333,22 @@ position La position de la case @param [Fixnum] valeur La valeur de la case
 
         <div class="method-description">
           
-          <p>Méthode pour savoir si une grille est valide @param    Fixnum    position</p>
-
-<p>@return   (boolean)</p>
+          <p>Méthode pour savoir si une grille est valide</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>fixnum position</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="valideGrille-source">
-            <pre><span class="ruby-comment"># File src/Plateau.rb, line 218</span>
+            <pre><span class="ruby-comment"># File src/Plateau.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@size</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@size</span>)
             <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>

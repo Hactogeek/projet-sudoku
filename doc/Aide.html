@@ -219,7 +219,7 @@
 
           
           <div class="method-source-code" id="afficherLesMethodesDeResolution-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 66</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherLesMethodesDeResolution</span>
 
 <span class="ruby-keyword">end</span></pre>
@@ -252,7 +252,7 @@
 
           
           <div class="method-source-code" id="candidatGrille-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 31</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatGrille</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -280,12 +280,15 @@
         <div class="method-description">
           
           <p>Place tous les candidats de la case</p>
+
+<pre>* [Paramètre :]
+                             position</pre>
           
           
 
           
           <div class="method-source-code" id="candidatPossible-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 13</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">position</span>)
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">setCaseListeCandidat</span>(<span class="ruby-identifier">position</span>, <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">position</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -318,7 +321,7 @@
 
           
           <div class="method-source-code" id="candidatsUniques-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 71</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatsUniques</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -351,7 +354,7 @@
 
           
           <div class="method-source-code" id="caseResolvable-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 18</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">caseResolvable</span>
         <span class="ruby-identifier">tabCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
 
@@ -392,7 +395,7 @@
 
           
           <div class="method-source-code" id="coupSuivant-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 61</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coupSuivant</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -422,12 +425,16 @@
           <p>Le joueur indique en paramètre le symbole candidat de la position si
 c&#39;est possible, on retourne true. Sinon, on retourne la position du
 symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
+
+<pre>* [Paramètre :]
+                             candidat
+                             pos</pre>
           
           
 
           
           <div class="method-source-code" id="explicationChoix-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 43</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">explicationChoix</span>(<span class="ruby-identifier">candidat</span>, <span class="ruby-identifier">pos</span>)
 
 <span class="ruby-keyword">end</span></pre>
@@ -460,7 +467,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="resoudre-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 36</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resoudre</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -487,23 +494,28 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
         <div class="method-description">
           
-          <p>Indique si la case à cette position est valide</p>
+          <p>Méthode qui retourne les cases incorrects</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>tableau de case</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="verificationGrille-source">
-            <pre><span class="ruby-comment"># File src/Aide.rb, line 48</span>
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verificationGrille</span>
-        <span class="ruby-identifier">listePos</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">caseIncorrect</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">empty?</span>
-                <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\nIl n&#39;y a pas d&#39;erreur dans la grille&quot;</span>)      
-        <span class="ruby-keyword">else</span>
-                <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\nVoici la ou les cases erronées :&quot;</span>)
-                <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span><span class="ruby-operator">|</span>
-                        <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\n\tcase x = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getX</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;, y = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getY</span>.<span class="ruby-identifier">to_s</span>)
-                }
-        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionOriginale</span>
+                                <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">listeCase</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

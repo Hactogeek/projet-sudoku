@@ -3,7 +3,8 @@ require './ListeCandidat'
 
 class Plateau
 	# Constructeur du plateau de jeu
-	# @return (self)
+	# * [Retourne :]
+	# 				self	
 	def initialize
 		# Taille de la grille
 		@base = 3
@@ -25,14 +26,18 @@ class Plateau
 	
 
 	# Méthode pour la MAJ de la solution du joueur pour la case
-	# @param [Position] position La position de la case
-	# @return (self)
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				self	
 	def setCaseJoueur(position, valeur)
 		# Ajout de la solution du joueur
 		@grid[position.getX()][position.getY()].setSolutionJoueur(valeur)
 		return self
 	end
 
+	# --
 	# # OK
 	# # Méthode pour la MAJ de la liste des candidats de la case
 	# # @param [Position] position La position de la case
@@ -41,11 +46,15 @@ class Plateau
 	# 	@grid[position.getX][position.getY].setListeCandidat(candidat)
 	# 	return self
 	# end
+	# ++
 
 	# Méthode pour la MAJ de la solution originale de la case 
-	# @param [Position] position La position de la case
-	# @param [Fixnum] valeur La valeur de la case
-	# @return (self)
+	# * [Paramètre :]
+	# 				position La position de la case
+	# 				valeur La valeur de la case
+	#
+	# * [Retourne :]
+	# 				self	
 	def setCaseSolutionOriginale(position, valeur)
 		@grid[position.getX][position.getY].setSolutionOriginale(valeur)
 		return self
@@ -60,8 +69,11 @@ class Plateau
 	################################################################################
 	
 	# Méthode qui retourne la solution du joueur pour la case	
-	# @param [Position] position La position de la case
-	# @return (SolutionJoueur)
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				SolutionJoueur	
 	def getCaseJoueur(position)
 		return @grid[position.getX][position.getY].getSolutionJoueur
 	end
@@ -72,22 +84,31 @@ class Plateau
 
 	# OK
 	# Méthode qui retourne la liste des candidats pour la case
-	# @param [Position] position La position de la case
-	# @return [Candidat]
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				candidat	
 	def getCaseListeCandidat(position)
 		return @grid[position.getX][position.getY].getListeCandidat
 	end
 
 	# Méthode qui retourne la solution orignale de la case 
-	# @param [Position] position La position de la case
-	# @return (SolutionOriginale)
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				SolutionOriginale	
 	def getCaseOriginale(position)
 		return @grid[position.getX][position.getY].getSolutionOriginale
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une ligne spécifié
-	# @param [Fixnum] ligne La ligne qu'il faut retourner 0-8
-	# @return [ArrayFixnum]
+	# * [Paramètre :]
+	# 				ligne La ligne qu'il faut retourner 0-8
+	#
+	# * [Retourne :]
+	# 				ArrayFixnum	
 	def getLigne(ligne)
 		tableauRetour = Array.new()
 		for n in (0...9)
@@ -98,8 +119,11 @@ class Plateau
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une colonne spécifié
-	# @param [Fixnum] colonne La colonne qu'il faut retourner 0-8
-	# @return [ArrayFixnum]
+	# * [Paramètre :]
+	# 				colonne La colonne qu'il faut retourner 0-8
+	#
+	# * [Retourne :]
+	# 				ArrayFixnum	
 	def getColonne(colonne)
 		tableauRetour = Array.new()
 		for n in (0...9)
@@ -110,8 +134,11 @@ class Plateau
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une region spécifié
-	# @param [Fixnum] region La region qu'il faut retourner 1-9
-	# @return [ArrayFixnum]
+	# * [Paramètre :]
+	# 				region La region qu'il faut retourner 1-9
+	#
+	# * [Retourne :]
+	# 				ArrayFixnum	
 	def getRegion(posX, posY)
 		tableauRetour = Array.new()
 
@@ -128,35 +155,47 @@ class Plateau
 	end
 
 	# Méthode qui vérifie si un chiffre est sur une ligne
-	# @param chiffre Le chiffre
-	# @param ligne La ligne 
-	# @return boolean
+	# * [Paramètre :]
+	# 				chiffre Le chiffre
+	# 				ligne La ligne 
+	#
+	# * [Retourne :]
+	# 				booleen	
 	def absentLigne(chiffre, ligne)
 		tableauLigne = self.getLigne(ligne)
 		return !tableauLigne.include?(chiffre)
 	end
 
 	# Méthode qui vérifie si un chiffre est dans une colonne
-	# @param chiffre Le chiffre
-	# @param ligne La ligne 
-	# @return boolean
+	# * [Paramètre :]
+	# 				chiffre Le chiffre
+	# 				ligne La ligne 
+	#
+	# * [Retourne :]
+	# 				booleen
 	def absentColonne(chiffre, colonne)
 		tableauColonne = self.getColonne(colonne)
 		return !tableauColonne.include?(chiffre)
 	end
 
 	# Méthode qui vérifie si un chiffre est dans une région
-	# @param chiffre Le chiffre
-	# @param ligne La ligne 
-	# @return boolean
+	# * [Paramètre :]
+	# 				chiffre Le chiffre
+	# 				ligne La ligne
+	#
+	# * [Retourne :]
+	# 				booleen	
 	def absentRegion(chiffre, posX, posY)
 		tableauRegion = self.getRegion(posX,posY)
 		return !tableauRegion.include?(chiffre)
 	end
 
 	# Méthode qui retourne les listes des candidats pour une case
-	# @param [Position] position La position de la case
-	# @return [ListeCandidat]
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				ListeCandidat
 	def candidatPossible(position)
 		tabCandidatPossible = ListeCandidat.creer()
 		# tableauRetour = Array.new(9)
@@ -179,8 +218,11 @@ class Plateau
 	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
-	# @param [Position] position La position de la case
-	# @return [ListeCandidat]
+	# * [Paramètre :]
+	# 				position La position de la case
+	#
+	# * [Retourne :]
+	# 				ListeCandidat
 	def candidatImpossible(position)
 		tabCandidatImpossible = ListeCandidat.creer()
 
@@ -195,7 +237,8 @@ class Plateau
 	end
 
 	# Méthode pour générer une grille complete aléatoirement
-	# @return self
+	# * [Retourne :]
+	# 				self	
 	def completeGrille
 		pattern = Array.new(@size){|i| i+1}.shuffle
 		@size.times do |y|
@@ -211,8 +254,11 @@ class Plateau
 	end
 
     # Méthode pour savoir si une grille est valide
-    # @param 	Fixnum 	position	
-    # @return 	(boolean)
+    # * [Paramètre :]
+	# 				fixnum position
+	#
+	# * [Retourne :]
+	# 				booleen
     def valideGrille(position)
     	if (position == @size * @size)
     		return true
@@ -241,7 +287,8 @@ class Plateau
     end
 
     # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
-     # @return true or false
+	# * [Retourne :]
+	# 				booleen
      def deuxOccurenceTab?(tab)
      	occurence = false
      	for i in (0...9)
@@ -267,7 +314,8 @@ class Plateau
      end
 
      # Méthode qui vérifie si la grille est correct
-     # @return true or false
+	# * [Retourne :]
+	# 				booleen	
      def correctGrille?
      	self.each { |x,y,kase|
      		ligne = getLigne(y)
@@ -281,7 +329,8 @@ class Plateau
      end
 
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
-     # @return true or false
+	# * [Retourne :]
+	# 				booleen	
      def plein?
      	pleine = true
      	self.each { |x,y,kase|
@@ -292,8 +341,12 @@ class Plateau
      	return pleine
      end
 
-     # Méthode qui vérifie si la grille est complète et correct
-     # @return true or false
+    # Méthode qui vérifie si la grille est complète et correct
+	# * [Paramètre :]
+	# 				symbole
+	#
+	# * [Retourne :]
+	# 				booleen	
      def complete?
      	complete = false
      	if self.plein? && self.correctGrille?
@@ -303,7 +356,8 @@ class Plateau
      end
 
     # Méthode pour réduire une grille en la gardant jouable
-    # @return self
+	# * [Retourne :]
+	# 				self	
     def reduireGrille (position, niveauDifficulte)
 
     	listeCase = Array.new()
@@ -331,7 +385,9 @@ class Plateau
 
 	# Méthode pour le parcours de la grille du plateau
 	# @yield [x, y, val] la position et la valeur courante
-	# @return (self)
+	#
+	# * [Retourne :]
+	# 				self	
 	def each
 		@size.times do |y|
 			@size.times do |x|
@@ -342,7 +398,8 @@ class Plateau
 	end
 
 	# Affichage propre de la grille du Plateau
-	# @return (String)
+	# * [Retourne :]
+	# 				string
 	def to_s
 		res  = ""
 		@size.times do |x|
@@ -358,7 +415,8 @@ class Plateau
 	end
 
 	# Affichage propre des valeurs originale de la grille du Plateau
-	# @return (String)
+	# * [Retourne :]
+	# 				string	
 	def printOri
 		res  = ""
 		@size.times do |x|

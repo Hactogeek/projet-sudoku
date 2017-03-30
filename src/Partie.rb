@@ -75,7 +75,9 @@ class Partie
 		return @aide
 	end
 
+	# --
 	#Perso je trouve ça inutile, sachant que la sauvegarde se fait avec la class Sauvegarde.
+	# ++
 	#Sauvegarde une partie en créant un fichier txt dont le nom sera nomPartie
 	def setSave(nomPartie)
 		serialized_array = Marshal.dump(self)

@@ -249,14 +249,14 @@
 
         <div class="method-description">
           
-          
+          <p>change couleur du focus</p>
           
           
 
           
           <div class="method-source-code" id="resetCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File src/Boutons.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resetCouleurSurFocus</span>() <span class="ruby-comment"># change couleur du focus</span>
+            <pre><span class="ruby-comment"># File src/Boutons.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resetCouleurSurFocus</span>() 
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-ivar">@focus</span>.<span class="ruby-identifier">override_background_color</span>(<span class="ruby-value">:normal</span>, <span class="ruby-constant">COUL_BLANC</span>)
         <span class="ruby-keyword">end</span>
@@ -284,14 +284,14 @@
 
         <div class="method-description">
           
-          
+          <p>change couleur du focus</p>
           
           
 
           
           <div class="method-source-code" id="setCouleurBoutons-source">
-            <pre><span class="ruby-comment"># File src/Boutons.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurBoutons</span>(<span class="ruby-identifier">couleur</span>) <span class="ruby-comment"># change couleur du focus</span>
+            <pre><span class="ruby-comment"># File src/Boutons.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurBoutons</span>(<span class="ruby-identifier">couleur</span>) 
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">10</span>
                 <span class="ruby-identifier">text</span> = <span class="ruby-identifier">children</span>()[<span class="ruby-identifier">children</span>().<span class="ruby-identifier">size</span>()<span class="ruby-operator">-</span><span class="ruby-identifier">i</span>].<span class="ruby-identifier">label</span>
                 <span class="ruby-identifier">children</span>()[<span class="ruby-identifier">children</span>().<span class="ruby-identifier">size</span>()<span class="ruby-operator">-</span><span class="ruby-identifier">i</span>].<span class="ruby-identifier">children</span>()[<span class="ruby-value">0</span>].<span class="ruby-identifier">set_markup</span>(<span class="ruby-node">&quot;&lt;span foreground=\&quot;#{couleur}\&quot;&gt;#{text}&lt;/span&gt;&quot;</span>)
@@ -320,14 +320,14 @@
 
         <div class="method-description">
           
-          
+          <p>change couleur du focus</p>
           
           
 
           
           <div class="method-source-code" id="setCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File src/Boutons.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurSurFocus</span>(<span class="ruby-identifier">couleur</span>) <span class="ruby-comment"># change couleur du focus</span>
+            <pre><span class="ruby-comment"># File src/Boutons.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurSurFocus</span>(<span class="ruby-identifier">couleur</span>) 
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-ivar">@focus</span>.<span class="ruby-identifier">override_background_color</span>(<span class="ruby-value">:normal</span>, <span class="ruby-identifier">couleur</span>)
         <span class="ruby-keyword">end</span>

@@ -1,9 +1,3 @@
-##
-# Auteur Yassine M'CHAAR
-# Version 0.1
-# Date : mardi 07 Mars 2017
-# Description : fichier contenant la class Joueur d'une partie de Sudoku
-
 load "Dir.rb"
 
 #

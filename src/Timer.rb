@@ -1,12 +1,3 @@
-##
-# Auteur Yassine M'CHAAR	
-# Version 1.0
-# Date : 28/03/2017
-# Description : fichier contenant la class Timer du Sudoku
-
-
-
-#
 # Timer, le chronomètre du Sudoku
 # * *Variable*	:
 #    - +accumulated+ ->  Le temps accumulé  (seconde)
