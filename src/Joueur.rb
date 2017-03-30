@@ -18,8 +18,9 @@ class Joueur
 	@pseudo
 	#identifiant du joueur
 	@@identifiant=0
+	@tabScore
 	
-	attr_accessor: @tabScore
+	attr_accessor:tabScore
 	attr_accessor:d
 	attr_reader :pseudo
 	private_class_method :new
