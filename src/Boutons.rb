@@ -56,7 +56,6 @@ class Boutons < Gtk::Box
 		end
 
 		add(btn)
-
 	end
 
 	def setCouleurSurFocus(couleur) # change couleur du focus
