@@ -14,6 +14,19 @@ class Aide
 		@plateau.setCaseListeCandidat(position, @plateau.candidatPossible(position))
 	end
 
+	# Méthode qui retourne la position des cases avec un unique candidat
+	def caseResolvable
+		tabCase = Array.new()
+
+		@plateau.each do |x,y,laCase| 
+			if laCase.getCandidat().getListeCandidat().compact().length() == 1
+				tabCase.push(Position.new(x,y))
+			end
+		end
+
+		return tabCase
+	end
+
 	#Place tous les candidats de chaque case du plateau
 	def candidatGrille()
 

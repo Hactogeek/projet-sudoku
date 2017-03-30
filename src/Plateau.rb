@@ -164,12 +164,12 @@ class Plateau
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tabCandidatPossible.add(i)
-				if(!@grid[position.getX][position.getY].getListeCandidat().include?(i))
-					@grid[position.getX][position.getY].getListeCandidat().add(i)
+				if(!@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().add(i)
 				end
 			else
-				if (@grid[position.getX][position.getY].getListeCandidat().include?(i))
-					@grid[position.getX][position.getY].getListeCandidat().remove(i)
+				if (@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().remove(i)
 				end
 			end
 		end
