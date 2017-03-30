@@ -17,6 +17,7 @@ COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 	@partie
+	@cadreAide
 
 	def initialize (partie)
 		super(9, 9, true)
@@ -49,6 +50,8 @@ class Grille < Gtk::Table
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
+
+				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placer la case machin")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
@@ -201,5 +204,9 @@ class Grille < Gtk::Table
 
 	def setPartie(partie)
 		@partie=partie
+	end
+
+	def setCadreAide(cadreAide)
+		@cadreAide = cadreAide
 	end
 end
