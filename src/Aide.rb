@@ -32,8 +32,16 @@ class Aide
 	end
 
 	#Indique si la case à cette position est valide
-	def validerCase(pos)
-
+	def verificationGrille
+		listePos = @plateau.caseIncorrect
+		if listePos.empty?
+			print("\nIl n'y a pas d'erreur dans la grille")	
+		else
+			print("\nVoici la ou les cases erronées :")
+			listePos.each { |pos|
+				print("\n\tcase x = "+pos.getX+", y = "+pos.getY)
+			}
+		end
 	end
 
 	#Indique la position du coup suivant à jouer

@@ -282,6 +282,20 @@ class Plateau
      	return true
      end
 
+     # Méthode qui retourne les cases incorrects
+     # @return tableau de case
+     def caseIncorrect
+	listeCase = Array.new
+     	self.each { |x,y,kase|
+     		if kase.getSolutionJoueur != nil
+			if kase.getSolutionJoueur != kase.getSolutionOriginale
+				listeCase.add(Position.new(x,y))
+			end
+     		end
+     	}
+     	return listeCase
+     end
+
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
      # @return true or false
      def plein?
