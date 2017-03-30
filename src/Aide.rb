@@ -44,17 +44,18 @@ class Aide
 
 	end
 
-	#Indique si la case à cette position est valide
+	# Méthode qui retourne les cases incorrects
+	# @return tableau de case
 	def verificationGrille
-		listePos = @partie.getPlateau().caseIncorrect
-		if listePos.empty?
-			print("\nIl n'y a pas d'erreur dans la grille")	
-		else
-			print("\nVoici la ou les cases erronées :")
-			listePos.each { |pos|
-				print("\n\tcase x = "+pos.getX.to_s+", y = "+pos.getY.to_s)
-			}
-		end
+		listeCase = Array.new
+		@partie.getPlateau().each { |x,y,kase|
+			if kase.getSolutionJoueur != nil
+				if kase.getSolutionJoueur != kase.getSolutionOriginale
+					listeCase.push(Position.new(x,y))
+				end
+			end
+		}
+		return listeCase
 	end
 
 	#Indique la position du coup suivant à jouer

@@ -120,6 +120,18 @@ class Grille < Gtk::Table
 		}
 	end
 
+	def colorCaseIncorrect()
+		listePos = @partie.getAide().verificationGrille
+		if listePos.empty?
+			print("\nIl n'y a pas d'erreur dans la grille")	
+		else
+			listePos.each { |pos|
+				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+			}
+		end
+
+	end
+
 	def resetCouleurSurFocus() # change couleur du focus
 		if (@focus)
 			css=<<-EOT

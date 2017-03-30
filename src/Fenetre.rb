@@ -170,7 +170,7 @@ class Fenetre < Gtk::Window
 		    # verification grille
 		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
 		    verificationGrilleMenuItem.signal_connect "activate" do
-				@partie.getAide().verificationGrille
+				@grille.colorCaseIncorrect()
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
 		    
