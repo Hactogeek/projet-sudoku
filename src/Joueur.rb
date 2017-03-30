@@ -44,10 +44,27 @@ class Joueur
 		@pseudo=unPseudo
 		@@identifiant+=1
 		
-		@d=Dir.creer(unPseudo)
+		#@d=Dir.creer(unPseudo)
 		#@d.semettreDansProfil(unPseudo)
 		#@d.supprimerProfil(unPseudo)	
 	end
+
+	#Créer un dossier ayant comme nom @pseudo. Retourne true si le dossier existe déjà. False sinon, et le créé.
+	def creerProfil()
+		currentPath=Dir.pwd
+		Dir.chdir(currentPath+"/profil")
+		if(Dir.exist?(@pseudo))
+			Dir.chdir("../")
+		 	return true
+		else
+			Dir.mkdir(@pseudo)
+			Dir.chdir(@pseudo)
+			return false
+		end
+	end
+
+
+
 	# * *Description*:
 	# 
 	# méthode qui permet de donner le pseudo du joueur.

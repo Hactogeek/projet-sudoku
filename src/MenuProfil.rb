@@ -12,11 +12,14 @@ class MenuProfil < Gtk::Window
 		end
 
 		set_title "Menu"
-		set_window_position(Gtk::Window::POS_CENTER)
+		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
 		#Taille de la fenêtre, correspondant à celle du jeu.
 		set_default_size(919, 602)
+
+		#Création du label
+		nomJoueur = Gtk::Label.new(File.split(Dir.getwd)[-1])
 
 		#Création des boutons
 		nouvellePartie = Gtk::Button.new(:label => "Nouvelle partie")
@@ -54,6 +57,7 @@ class MenuProfil < Gtk::Window
 		end
 
 		#Placement des boutons et ajout dans la table
+		tableMain.attach(nomJoueur, 4, 6, 0, 1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(nouvellePartie, 4, 6, 1, 2, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(importerGrille, 4, 6, 2, 3, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(chargerPartie, 4, 6, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)

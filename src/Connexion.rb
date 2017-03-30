@@ -22,6 +22,7 @@ class Connexion < Gtk::Window
 
 		#Création des boutons
 		choixNom = Gtk::Button.new(:label => "Se connecter")
+		valider = Gtk::Button.new(:label => "Valider")
 
 		#Création de la table contenant les boutons
 		tableMain = Gtk::Table.new(10, 10)
@@ -33,8 +34,9 @@ class Connexion < Gtk::Window
 		end
 
 		#Placement des boutons et ajout dans la table
-		tableMain.attach(nomLabel, 4, 6, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(choixNom, 4, 6, 5, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(nomLabel, 4, 6, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(choixNom, 4, 6, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(valider, 4, 6, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		add(tableMain)
 

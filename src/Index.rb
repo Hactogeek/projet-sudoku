@@ -13,7 +13,7 @@ class Index < Gtk::Window
 		end
 
 		set_title "Index"
-		set_window_position(Gtk::Window::POS_CENTER)
+		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
 		#Taille de la fenêtre, correspondant à celle du jeu.
@@ -30,6 +30,7 @@ class Index < Gtk::Window
 		#Redirection des boutons
 		seConnecter.signal_connect "clicked" do |widget|
 			hide
+			Dir.chdir(currentPath+"/profil")
 			newWindow=Connexion.new
 		end
 		creerProfil.signal_connect "clicked" do |widget|
