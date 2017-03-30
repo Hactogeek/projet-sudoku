@@ -32,9 +32,20 @@ class Partie
  		if @plateau.complete?
  			print("La grille est complete")
  		end
- 		
- 		
  	end
+
+ 	def lanceTemps(init)
+ 		@timer=Timer.new
+		@timer.start(init)
+	end
+
+	def stopTemps
+		@timer.stop
+	end
+
+	def getTimer
+		return @timer
+	end
 
 	#Retourne le plateau
 	def getPlateau()

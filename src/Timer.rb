@@ -24,6 +24,8 @@ class Timer
   @elapsed
   #Variable du temps
   @start
+  #Temps du timer
+  @time
 
   attr_reader :accumulated, :elapsed
 
@@ -55,6 +57,7 @@ class Timer
 	# unTimer.stop
 	#
   def stop
+  	@elapsed = Time.now - @start
     @accumulated += @elapsed
   end
 
@@ -95,13 +98,17 @@ class Timer
 	#
 
   def tick
-    @elapsed = Time.now - @start
-    time = @accumulated + @elapsed
+  	@elapsed = Time.now - @start
+  	time=@accumulated+@elapsed
     h = sprintf('%02i', (time.to_i / 3600))
     m = sprintf('%02i', ((time.to_i % 3600) / 60))
     s = sprintf('%02i', (time.to_i % 60))
  
     newtime = "#{h}:#{m}:#{s}"
+  end
+
+  def getAccumulated
+    return @accumulated
   end
 end #Fin de la classe Timer
 

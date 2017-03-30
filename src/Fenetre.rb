@@ -65,8 +65,10 @@ class Fenetre < Gtk::Window
 	        # Sauvegarder
 	        sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
 	        sauvergarderMenuItem.signal_connect "activate" do
+	        	@partie.stopTemps
 	        	@sauvegarde.savePartie(@joueur,@partie,"partie1")
-	        	print("\n","Sauvegarde réussi")
+	        	puts(@partie.getTimer.tick)
+	        	print("Sauvegarde réussi","\n")
 	        end
 	        fileMenu.append(sauvergarderMenuItem)
 
@@ -74,8 +76,10 @@ class Fenetre < Gtk::Window
 	        chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
 	        chargerMenuItem.signal_connect "activate" do
 	        	@partie=@sauvegarde.loadPartie(@joueur,"partie1")
+	        	@partie.lanceTemps(@partie.getTimer.getAccumulated)
+	        	@timer.start(@partie.getTimer.getAccumulated)
 	        	@grille.setPartie(@partie)
-	        	print("\n","Chargement réussi")
+	        	print("Chargement réussi","\n")
 	        	@grille.rafraichirGrille
 	        end
 	        fileMenu.append(chargerMenuItem)
@@ -147,7 +151,7 @@ class Fenetre < Gtk::Window
 		    connecterMenuItem.signal_connect "activate" do
 		    @sauvegarde.loadProfil("profilTest")
 		    @joueur="profilTest"
-		    print("\n","Connexion réussi a profilTest")
+		    print("Connexion réussi a profilTest","\n")
 			end
 		    userMenu.append(connecterMenuItem)
 		    
@@ -194,14 +198,15 @@ class Fenetre < Gtk::Window
 		#==========#
 		@time = Gtk::Box.new(:vertical, 0)
 		@time.add(Gtk::Label.new("Temps : "))
-		temps=Timer.new
-		temps.start(0)
-		tempsLabel=Gtk::Label.new(temps.tick)
+		tempsLabel=Gtk::Label.new("00:00:00")
 		@time.add(tempsLabel)
+		@partie.lanceTemps(0)
+		@timer=Timer.new
+		@timer.start(@partie.getTimer.getAccumulated)
 
 		thr= Thread.new{
 			while (sleep 0.2) do
-				tempsLabel.set_markup(temps.tick)
+				tempsLabel.set_markup(@timer.tick)
 			end
 			}
 		tableMain.attach(@time, 0,9,0,1)
