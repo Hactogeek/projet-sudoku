@@ -98,6 +98,7 @@ class Fenetre < Gtk::Window
 		    undoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().undo
 			@grille.rafraichirGrille
+			@sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
@@ -106,6 +107,7 @@ class Fenetre < Gtk::Window
 		    redoMenuItem.signal_connect "activate" do
 			@partie.getUndoRedo().redo
 			@grille.rafraichirGrille
+		    @sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(redoMenuItem)
 
