@@ -205,7 +205,7 @@
 
           
           <div class="method-source-code" id="placerSymbole-source">
-            <pre><span class="ruby-comment"># File src/Symbole.rb, line 48</span>
+            <pre><span class="ruby-comment"># File src/Symbole.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">placerSymbole</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">symboleCase</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseJoueur</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">symboleCase</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -245,7 +245,7 @@ plateau @param position pos @param [Fixnum] symbole @return symbole</p>
 
           
           <div class="method-source-code" id="retirerSymbole-source">
-            <pre><span class="ruby-comment"># File src/Symbole.rb, line 63</span>
+            <pre><span class="ruby-comment"># File src/Symbole.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retirerSymbole</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">symboleCase</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseJoueur</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">symboleCase</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -285,13 +285,22 @@ plateau @param position pos @param [Fixnum] symbole @return symbole</p>
 
         <div class="method-description">
           
-          <p>Méthode pour ajouter un symbole @param [Fixnum] symbole @return : self</p>
+          <p>Méthode pour ajouter un symbole</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File src/Symbole.rb, line 20</span>
+            <pre><span class="ruby-comment"># File src/Symbole.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@symbole</span> = <span class="ruby-identifier">symbole</span>
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
@@ -326,7 +335,7 @@ symbole @return : vrai ou faux</p>
 
           
           <div class="method-source-code" id="getSymbole-source">
-            <pre><span class="ruby-comment"># File src/Symbole.rb, line 36</span>
+            <pre><span class="ruby-comment"># File src/Symbole.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getSymbole</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@symbole</span>
 <span class="ruby-keyword">end</span></pre>
@@ -359,7 +368,7 @@ symbole @return : vrai ou faux</p>
 
           
           <div class="method-source-code" id="remove-source">
-            <pre><span class="ruby-comment"># File src/Symbole.rb, line 28</span>
+            <pre><span class="ruby-comment"># File src/Symbole.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@symbole</span> = <span class="ruby-keyword">nil</span>
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>

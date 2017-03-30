@@ -15,8 +15,11 @@ class Symbole
 	end
 
 	# Méthode pour ajouter un symbole
-	# @param [Fixnum] symbole
-	# @return : self	
+	# * [Paramètre :]
+	# 				symbole
+	#
+	# * [Retourne :]
+	# 				self	
 	def add(symbole)
 		@symbole = symbole
 		return self

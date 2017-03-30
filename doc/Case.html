@@ -184,14 +184,18 @@
 
         <div class="method-description">
           
-          <p>OK Méthode qui retourne la liste des candidats de la case @return
-[Candidat]</p>
+          <p>OK Méthode qui retourne la liste des candidats de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Candidat</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getCandidat-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 68</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getCandidat</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@candidat</span>
 <span class="ruby-keyword">end</span></pre>
@@ -218,13 +222,18 @@
 
         <div class="method-description">
           
-          <p>Méthode qui retourne si une case est originale du puzzle @return boolean</p>
+          <p>Méthode qui retourne si une case est originale du puzzle</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getOriginaleGrille-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 49</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getOriginaleGrille</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@originale</span>
 <span class="ruby-keyword">end</span></pre>
@@ -251,14 +260,18 @@
 
         <div class="method-description">
           
-          <p>Méthode qui retourne la position de la case @return <a
-href="Position.html">Position</a></p>
+          <p>Méthode qui retourne la position de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p><a href="Position.html">Position</a></p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getPosition-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 74</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getPosition</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@position</span>
 <span class="ruby-keyword">end</span></pre>
@@ -285,13 +298,18 @@ href="Position.html">Position</a></p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne la solution du joueur pour la case @return (Integer)</p>
+          <p>Méthode qui retourne la solution du joueur pour la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Integer</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getSolutionJoueur-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 61</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getSolutionJoueur</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@solutionJoueur</span>
 <span class="ruby-keyword">end</span></pre>
@@ -318,13 +336,18 @@ href="Position.html">Position</a></p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne la solution originale de la case @return (Integer)</p>
+          <p>Méthode qui retourne la solution originale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Integer</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getSolutionOriginale-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 55</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getSolutionOriginale</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@solutionOriginale</span>
 <span class="ruby-keyword">end</span></pre>
@@ -357,7 +380,7 @@ href="Position.html">Position</a></p>
 
           
           <div class="method-source-code" id="printJoueur-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 89</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">printJoueur</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@solutionJoueur</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
                 <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;0&quot;</span>
@@ -393,7 +416,7 @@ href="Position.html">Position</a></p>
 
           
           <div class="method-source-code" id="printOri-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 85</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">printOri</span>
         <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{@solutionOriginale}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -420,19 +443,18 @@ href="Position.html">Position</a></p>
 
         <div class="method-description">
           
-          <p># OK # Méthode pour la MAJ de la liste des candidats de la case # @param
-[Fixnum] candidat Candiat pour la case def setListeCandidat(candidat)</p>
-
-<pre class="ruby"><span class="ruby-ivar">@candidat</span> = <span class="ruby-identifier">candidat</span>
-</pre>
-
-<p>end</p>
+          <p># OK # Méthode pour la MAJ de la liste des candidats de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]candidat Candiat pour la case</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="setOriginale-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 39</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setOriginale</span>(<span class="ruby-identifier">originale</span>)
         <span class="ruby-ivar">@originale</span> = <span class="ruby-identifier">originale</span>
 <span class="ruby-keyword">end</span></pre>
@@ -459,14 +481,18 @@ href="Position.html">Position</a></p>
 
         <div class="method-description">
           
-          <p>Méthode pour la MAJ de la solution du joueur de la case @param [Fixnum]
-solJoueur Solution du joueur pour la case</p>
+          <p>Méthode pour la MAJ de la solution du joueur de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]solJoueur Solution du joueur pour la case</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="setSolutionJoueur-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 25</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-identifier">solJoueur</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@originale</span> <span class="ruby-keyword">then</span>
                 <span class="ruby-ivar">@solutionJoueur</span> = <span class="ruby-identifier">solJoueur</span>
@@ -496,14 +522,18 @@ solJoueur Solution du joueur pour la case</p>
 
         <div class="method-description">
           
-          <p>Méthode pour la MAJ de la solution originale de la case @param [Fixnum]
-solOriginale Solution originale de la case</p>
+          <p>Méthode pour la MAJ de la solution originale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]solOriginale Solution originale de la case</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="setSolutionOriginale-source">
-            <pre><span class="ruby-comment"># File src/Case.rb, line 19</span>
+            <pre><span class="ruby-comment"># File src/Case.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-identifier">solOriginale</span>)
         <span class="ruby-ivar">@solutionOriginale</span> = <span class="ruby-identifier">solOriginale</span>
 <span class="ruby-keyword">end</span></pre>
