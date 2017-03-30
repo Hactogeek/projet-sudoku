@@ -28,13 +28,12 @@ class Partie
 	end
 
 	# Méthode qui fait le traitement de fin de partie si la grille est complete
- 	def finPartie
- 		if @plateau.complete?
- 			print("La grille est complete")
- 		end
- 		
- 		
- 	end
+	def finPartie
+		if @plateau.complete?
+			print("La grille est complete")
+		end
+
+	end
 
 	#Retourne le plateau
 	def getPlateau()
