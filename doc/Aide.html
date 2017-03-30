@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Aide - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-creer">::creer</a>
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-afficherLesMethodesDeResolution">#afficherLesMethodesDeResolution</a>
+    
+    <li ><a href="#method-i-candidatGrille">#candidatGrille</a>
+    
+    <li ><a href="#method-i-candidatPossible">#candidatPossible</a>
+    
+    <li ><a href="#method-i-candidatsUniques">#candidatsUniques</a>
+    
+    <li ><a href="#method-i-caseResolvable">#caseResolvable</a>
+    
+    <li ><a href="#method-i-coupSuivant">#coupSuivant</a>
+    
+    <li ><a href="#method-i-explicationChoix">#explicationChoix</a>
+    
+    <li ><a href="#method-i-resoudre">#resoudre</a>
+    
+    <li ><a href="#method-i-verificationGrille">#verificationGrille</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Aide">
+  <h1 id="class-Aide" class="class">
+    class Aide
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-creer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">creer</span><span
+            class="method-args">(partie)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="creer-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">partie</span>)
+        <span class="ruby-identifier">new</span>(<span class="ruby-identifier">partie</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(partie)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">partie</span>)
+        <span class="ruby-ivar">@partie</span>=<span class="ruby-identifier">partie</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-afficherLesMethodesDeResolution" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">afficherLesMethodesDeResolution</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Affiche les méthodes de résolution</p>
+          
+          
+
+          
+          <div class="method-source-code" id="afficherLesMethodesDeResolution-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherLesMethodesDeResolution</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-candidatGrille" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">candidatGrille</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Place tous les candidats de chaque case du plateau</p>
+          
+          
+
+          
+          <div class="method-source-code" id="candidatGrille-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatGrille</span>()
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-candidatPossible" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">candidatPossible</span><span
+            class="method-args">(position)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Place tous les candidats de la case</p>
+          
+          
+
+          
+          <div class="method-source-code" id="candidatPossible-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">position</span>)
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">setCaseListeCandidat</span>(<span class="ruby-identifier">position</span>, <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">position</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-candidatsUniques" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">candidatsUniques</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retourne la liste des cases qui ont un candidat unique</p>
+          
+          
+
+          
+          <div class="method-source-code" id="candidatsUniques-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatsUniques</span>()
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-caseResolvable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">caseResolvable</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne la position des cases avec un unique candidat</p>
+          
+          
+
+          
+          <div class="method-source-code" id="caseResolvable-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">caseResolvable</span>
+        <span class="ruby-identifier">tabCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
+
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span> 
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getCandidat</span>().<span class="ruby-identifier">getListeCandidat</span>().<span class="ruby-identifier">compact</span>().<span class="ruby-identifier">length</span>() <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                        <span class="ruby-identifier">tabCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">tabCase</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-coupSuivant" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">coupSuivant</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Indique la position du coup suivant à jouer</p>
+          
+          
+
+          
+          <div class="method-source-code" id="coupSuivant-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">coupSuivant</span>()
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-explicationChoix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">explicationChoix</span><span
+            class="method-args">(candidat, pos)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Le joueur indique en paramètre le symbole candidat de la position si
+c&#39;est possible, on retourne true. Sinon, on retourne la position du
+symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
+          
+          
+
+          
+          <div class="method-source-code" id="explicationChoix-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">explicationChoix</span>(<span class="ruby-identifier">candidat</span>, <span class="ruby-identifier">pos</span>)
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-resoudre" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">resoudre</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Resoud la grille</p>
+          
+          
+
+          
+          <div class="method-source-code" id="resoudre-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resoudre</span>()
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-verificationGrille" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">verificationGrille</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Indique si la case à cette position est valide</p>
+          
+          
+
+          
+          <div class="method-source-code" id="verificationGrille-source">
+            <pre><span class="ruby-comment"># File src/Aide.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verificationGrille</span>
+        <span class="ruby-identifier">listePos</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">caseIncorrect</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">empty?</span>
+                <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\nIl n&#39;y a pas d&#39;erreur dans la grille&quot;</span>)      
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\nVoici la ou les cases erronées :&quot;</span>)
+                <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\n\tcase x = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getX</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;, y = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">pos</span>.<span class="ruby-identifier">getY</span>.<span class="ruby-identifier">to_s</span>)
+                }
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

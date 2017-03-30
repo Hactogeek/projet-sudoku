@@ -6,8 +6,11 @@ class AvantApres
 	private_class_method :new
 
 	# Constucteur de la classe
-	# @param avant : l'etat precedant
-	# @param apres : l'etat suivant
+	# * [Paramètre avant:]
+	# 				l'etat precedant
+	#
+	# * [Paramètre apres :]
+	# 				l'etat suivant
 	def AvantApres.creer(avant, apres)
 		new(avant, apres)
 	end

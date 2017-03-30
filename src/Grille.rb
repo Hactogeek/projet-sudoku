@@ -4,14 +4,14 @@ require './Plateau.rb'
 require './Partie.rb'
 require './FinJeu.rb'
 
-COUL_BLEU   = Gdk::RGBA::new(0.4,0.7,1.0,1.0)
-COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
-COUL_VERT   = Gdk::RGBA::new(0.5,0.9,0.3,1.0)
-COUL_JAUNE  = Gdk::RGBA::new(1.0,0.9,0.3,1.0)
-COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0,0.9,0.3,0.4)
-COUL_VIOLET = Gdk::RGBA::new(0.7,0.4,0.8,1.0)
-COUL_ROSE = Gdk::RGBA::new(0.9,0.7,1.0,1.0)
-COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
+COUL_BLEU        = Gdk::RGBA::new(0.4, 0.7, 1.0, 1.0)
+COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
+COUL_VERT        = Gdk::RGBA::new(0.5, 0.9, 0.3, 1.0)
+COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
+COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
+COUL_VIOLET      = Gdk::RGBA::new(0.7, 0.4, 0.8, 1.0)
+COUL_ROSE        = Gdk::RGBA::new(0.9, 0.7, 1.0, 1.0)
+COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
 
 
 class Grille < Gtk::Table

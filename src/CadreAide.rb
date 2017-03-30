@@ -2,11 +2,12 @@ require 'gtk3'
 
 class CadreAide < Gtk::Table
 	@grille
+	@sousGrille
 
-	def initialize (grille)
+	def initialize (grille, sousGrille)
 		super(12,8,true)
 		@grille = grille
-
+		@sousGrille = sousGrille
 		#add( Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "help.png", :width => 432, :heigth => 432)))
 		methode1 = Gtk::Button.new(:label =>"Methode du poney", :use_underline => nil, :stock_id => nil)
 		methode2 = Gtk::Button.new(:label =>"Methode de dragibus", :use_underline => nil, :stock_id => nil)
@@ -24,6 +25,13 @@ class CadreAide < Gtk::Table
 		attach(methode5, 0,8, 4,5)
 
 		candidatSwitch = Gtk::Switch.new()
+		candidatSwitch.signal_connect('state-set') do
+			if candidatSwitch.active?
+				@sousGrille.setCandidatState(true)
+			else
+				@sousGrille.setCandidatState(false)
+			end
+		end
 		candidatLabel  = Gtk::Label.new("Activer/Desactiver Candidats :")
 		attach(candidatSwitch, 6,8, 11,12)
 		attach(candidatLabel , 3,6, 11,12)
