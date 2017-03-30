@@ -32,8 +32,8 @@ class Fenetre < Gtk::Window
 		@joueur = ""
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
-		@cadreAide = CadreAide.new(@grille)
 		@sousGrille = SousGrille.new(@grille)
+		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
 
 		#==========#
@@ -170,7 +170,7 @@ class Fenetre < Gtk::Window
 		    # verification grille
 		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
 		    verificationGrilleMenuItem.signal_connect "activate" do
-				@partie.getAide().verificationGrille
+				@grille.colorCaseIncorrect()
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
 		    
