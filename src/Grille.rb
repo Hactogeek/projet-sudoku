@@ -45,15 +45,21 @@ class Grille < Gtk::Table
 				@partie.getUndoRedo().addMemento
 
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
-				newValeur = @partie.getPlateau().getCaseJoueur(pos)
-				if (newValeur == valeur)
-					@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{newValeur}</span>")
-					setCouleurSurFocus(COUL_VERT)
-				else
-					setCouleurSurFocus(COUL_ROUGE)
-				end
+				valeur = @partie.getPlateau().getCaseJoueur(pos)
+				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
 
 				@partie.finPartie
+				return
+			end
+
+			if (@partie.getPlateau().getCaseJoueur(pos) == valeur) && (@partie.getPlateau().getCase(pos).getOriginaleGrille == false) # Supprime la valeur
+				#Sauvegarde du plateau dans le undoRedo
+				@partie.getUndoRedo().addMemento
+				
+				@partie.getPlateau().setCaseJoueur(pos,nil)
+				valeur = @partie.getPlateau().getCaseJoueur(pos)
+				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
+				return
 			end
 		end
 	end
@@ -120,6 +126,9 @@ class Grille < Gtk::Table
 	end
 
 	def getCoordFocus()
+		if (@focus == nil)
+			return
+		end
 		i = 80 - children().index(@focus)
 		return Position.new(i%9,i/9)
 	end
