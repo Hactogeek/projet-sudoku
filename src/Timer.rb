@@ -108,9 +108,9 @@ end #Fin de la classe Timer
 
 
 ######TEST#######
-watch = Timer.new
+# watch = Timer.new
 
-watch.start(0)
-while (sleep 0.2) do
-  puts watch.tick
-end
+# watch.start(0)
+# while (sleep 0.2) do
+#   puts watch.tick
+# end

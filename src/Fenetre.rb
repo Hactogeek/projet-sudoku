@@ -4,7 +4,7 @@ require './Boutons.rb'
 require './Grille.rb'
 require './SousGrille.rb'
 require './Index.rb'
-require './FinJeu.rb'
+require './Timer.rb'
 
 class Fenetre < Gtk::Window 
 	@cadreAide
@@ -34,7 +34,7 @@ class Fenetre < Gtk::Window
 		@grille = Grille.new(@partie)
 		@cadreAide = CadreAide.new
 		@sousGrille = SousGrille.new(@grille)
-		@boutons = Boutons.new(@grille, @sousGrille) 
+		@boutons = Boutons.new(@grille, @sousGrille)
 
 		#==========#
 		# Niveau 1 #
@@ -186,15 +186,28 @@ class Fenetre < Gtk::Window
 	    vboxMain.pack_start(menuBar,:expand => false, :fill => false, :padding => 0)
 	    tableMain = Gtk::Table.new(10, 10)
 	    vboxMain.pack_start(tableMain,:expand => true, :fill => true, :padding => 0)
+
 	   
 
 		#==========#
 		# Niveau 3 #
 		#==========#
+		@time = Gtk::Box.new(:vertical, 0)
+		@time.add(Gtk::Label.new("Temps : "))
+		temps=Timer.new
+		temps.start(0)
+		tempsLabel=Gtk::Label.new(temps.tick)
+		@time.add(tempsLabel)
 
-		tableMain.attach(@sousGrille, 0,5,0,8) # Support Grille (background + sous grille + grille)
-		tableMain.attach(@cadreAide , 5,9,0,8) # Aide
-		tableMain.attach(@boutons   , 0,9,8,9) # Boutons
+		thr= Thread.new{
+			while (sleep 0.2) do
+				tempsLabel.set_markup(temps.tick)
+			end
+			}
+		tableMain.attach(@time, 0,9,0,1)
+		tableMain.attach(@sousGrille, 0,5,1,9) # Support Grille (background + sous grille + grille)
+		tableMain.attach(@cadreAide , 5,9,1,9) # Aide
+		tableMain.attach(@boutons   , 0,9,9,10) # Boutons
 
 	    show_all
 	end
