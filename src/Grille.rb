@@ -4,18 +4,20 @@ require './Plateau.rb'
 require './Partie.rb'
 require './FinJeu.rb'
 
-COUL_BLEU   = Gdk::RGBA::new(0.4,0.7,1.0,1.0)
-COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
-COUL_VERT   = Gdk::RGBA::new(0.5,0.9,0.3,1.0)
-COUL_JAUNE  = Gdk::RGBA::new(1.0,0.9,0.3,1.0)
-COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0,0.9,0.3,0.4)
-COUL_VIOLET = Gdk::RGBA::new(0.7,0.4,0.8,1.0)
-COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
+COUL_BLEU        = Gdk::RGBA::new(0.4, 0.7, 1.0, 1.0)
+COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
+COUL_VERT        = Gdk::RGBA::new(0.5, 0.9, 0.3, 1.0)
+COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
+COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
+COUL_VIOLET      = Gdk::RGBA::new(0.7, 0.4, 0.8, 1.0)
+COUL_ROSE        = Gdk::RGBA::new(0.9, 0.7, 1.0, 1.0)
+COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
 
 
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 	@partie
+	@cadreAide
 
 	def initialize (partie)
 		super(9, 9, true)
@@ -48,6 +50,8 @@ class Grille < Gtk::Table
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
+
+				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placer la case machin")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
@@ -109,6 +113,26 @@ class Grille < Gtk::Table
 	    	css_provider.load :data=>css
 			self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 		end
+		setCouleurSurFocus(COUL_JAUNE)
+	end
+
+	def colorCaseResolvable()
+		casesResolvable = @partie.getAide().caseResolvable()
+		casesResolvable.each{ |pos|
+			setCouleurCase(pos.getX(), pos.getY(), COUL_ROSE)
+		}
+	end
+
+	def colorCaseIncorrect()
+		listePos = @partie.getAide().verificationGrille
+		if listePos.empty?
+			print("\nIl n'y a pas d'erreur dans la grille")	
+		else
+			listePos.each { |pos|
+				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+			}
+		end
+
 	end
 
 	def resetCouleurSurFocus() # change couleur du focus
@@ -125,7 +149,14 @@ class Grille < Gtk::Table
 	end
 
 	def setCouleurCase(x, y, couleur)
-		children()[81 - ((x)+((y-1)*9))].override_background_color(:normal, couleur)
+		css=<<-EOT
+		#cell{
+		background: #{couleur};
+     	}
+     	EOT
+     	css_provider = Gtk::CssProvider.new
+     	css_provider.load :data=>css
+     	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
 	end
 
 	def getCoordFocus()
@@ -173,5 +204,9 @@ class Grille < Gtk::Table
 
 	def setPartie(partie)
 		@partie=partie
+	end
+
+	def setCadreAide(cadreAide)
+		@cadreAide = cadreAide
 	end
 end

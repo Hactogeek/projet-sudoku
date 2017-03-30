@@ -1,17 +1,30 @@
 require './Plateau'
 
 class Aide
-	def Aide.creer(plateau)
-		new(plateau)
+	def Aide.creer(partie)
+		new(partie)
 	end
 
-	def initialize(plateau)
-		@plateau=plateau
+	def initialize(partie)
+		@partie=partie
 	end
 
 	#Place tous les candidats de la case
 	def candidatPossible(position)
-		@plateau.setCaseListeCandidat(position, @plateau.candidatPossible(position))
+		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
+	end
+
+	# Méthode qui retourne la position des cases avec un unique candidat
+	def caseResolvable
+		tabCase = Array.new()
+
+		@partie.getPlateau().each do |x,y,laCase| 
+			if laCase.getCandidat().getListeCandidat().compact().length() == 1
+				tabCase.push(Position.new(x,y))
+			end
+		end
+
+		return tabCase
 	end
 
 	#Place tous les candidats de chaque case du plateau
@@ -31,9 +44,18 @@ class Aide
 
 	end
 
-	#Indique si la case à cette position est valide
-	def validerCase(pos)
-
+	# Méthode qui retourne les cases incorrects
+	# @return tableau de case
+	def verificationGrille
+		listeCase = Array.new
+		@partie.getPlateau().each { |x,y,kase|
+			if kase.getSolutionJoueur != nil
+				if kase.getSolutionJoueur != kase.getSolutionOriginale
+					listeCase.push(Position.new(x,y))
+				end
+			end
+		}
+		return listeCase
 	end
 
 	#Indique la position du coup suivant à jouer

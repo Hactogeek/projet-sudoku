@@ -13,7 +13,7 @@ class Partie
 
 	def initialize(difficulte)
 		@plateau = Plateau.new()
-		@aide = Aide.creer(@plateau)
+		@aide = Aide.creer(self)
 		@undoRedo = GestionMemento.creer(self)
 		@checkPoint = GestionMemento.creer(self)
 		@difficulte=difficulte
@@ -28,11 +28,12 @@ class Partie
 	end
 
 	# Méthode qui fait le traitement de fin de partie si la grille est complete
- 	def finPartie
- 		if @plateau.complete?
- 			print("La grille est complete")
- 		end
- 	end
+	def finPartie
+		if @plateau.complete?
+			print("La grille est complete")
+		end
+
+	end
 
  	def lanceTemps(init)
  		@timer=Timer.new

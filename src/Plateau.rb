@@ -164,19 +164,18 @@ class Plateau
 		for i in (1..9)
 			if(absentLigne(i,position.getX) && absentColonne(i, position.getY) && absentRegion(i, position.getX, position.getY))
 				tabCandidatPossible.add(i)
-				if(!@grid[position.getX][position.getY].getListeCandidat().include?(i))
-					@grid[position.getX][position.getY].getListeCandidat().add(i)
+				if(!@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().add(i)
 				end
 			else
-				if (@grid[position.getX][position.getY].getListeCandidat().include?(i))
-					@grid[position.getX][position.getY].getListeCandidat().remove(i)
+				if (@grid[position.getX][position.getY].getCandidat().include?(i))
+					@grid[position.getX][position.getY].getCandidat().remove(i)
 				end
 			end
 		end
 
 		# print "\n Candidat en #{position.getX+1},#{position.getY+1}:", tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,"\n"
 		return tabCandidatPossible
-		# return tableauRetour
 	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
@@ -184,7 +183,6 @@ class Plateau
 	# @return [ListeCandidat]
 	def candidatImpossible(position)
 		tabCandidatImpossible = ListeCandidat.creer()
-		# tableauRetour = Array.new(9)
 
 		for i in (1...9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
@@ -192,8 +190,8 @@ class Plateau
 				# tableauRetour.insert(i,i)
 			end
 		end
+
 		return tabCandidatImpossible
-		# return tableauRetour
 	end
 
 	# Méthode pour générer une grille complete aléatoirement
