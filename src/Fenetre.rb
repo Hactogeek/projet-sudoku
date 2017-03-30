@@ -166,6 +166,13 @@ class Fenetre < Gtk::Window
 
 			end
 		    aideMenu.append(candidatPossibleMenuItem)
+
+		    # verification grille
+		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
+		    verificationGrilleMenuItem.signal_connect "activate" do
+				@partie.getAide().verificationGrille
+			end
+		    aideMenu.append(verificationGrilleMenuItem)
 		    
 		    #############################################################################
 		    ###############Rajouter la même chose chose qu'au dessus#####################

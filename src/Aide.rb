@@ -1,24 +1,24 @@
 require './Plateau'
 
 class Aide
-	def Aide.creer(plateau)
-		new(plateau)
+	def Aide.creer(partie)
+		new(partie)
 	end
 
-	def initialize(plateau)
-		@plateau=plateau
+	def initialize(partie)
+		@partie=partie
 	end
 
 	#Place tous les candidats de la case
 	def candidatPossible(position)
-		@plateau.setCaseListeCandidat(position, @plateau.candidatPossible(position))
+		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
 
 	# Méthode qui retourne la position des cases avec un unique candidat
 	def caseResolvable
 		tabCase = Array.new()
 
-		@plateau.each do |x,y,laCase| 
+		@partie.getPlateau().each do |x,y,laCase| 
 			if laCase.getCandidat().getListeCandidat().compact().length() == 1
 				tabCase.push(Position.new(x,y))
 			end
@@ -46,13 +46,13 @@ class Aide
 
 	#Indique si la case à cette position est valide
 	def verificationGrille
-		listePos = @plateau.caseIncorrect
+		listePos = @partie.getPlateau().caseIncorrect
 		if listePos.empty?
 			print("\nIl n'y a pas d'erreur dans la grille")	
 		else
 			print("\nVoici la ou les cases erronées :")
 			listePos.each { |pos|
-				print("\n\tcase x = "+pos.getX+", y = "+pos.getY)
+				print("\n\tcase x = "+pos.getX.to_s+", y = "+pos.getY.to_s)
 			}
 		end
 	end

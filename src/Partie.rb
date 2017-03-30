@@ -13,7 +13,7 @@ class Partie
 
 	def initialize(difficulte)
 		@plateau = Plateau.new()
-		@aide = Aide.creer(@plateau)
+		@aide = Aide.creer(self)
 		@undoRedo = GestionMemento.creer(self)
 		@checkPoint = GestionMemento.creer(self)
 		@difficulte=difficulte

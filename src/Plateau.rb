@@ -289,7 +289,8 @@ class Plateau
      	self.each { |x,y,kase|
      		if kase.getSolutionJoueur != nil
 			if kase.getSolutionJoueur != kase.getSolutionOriginale
-				listeCase.add(Position.new(x,y))
+				print("test")
+				listeCase.push(Position.new(x,y))
 			end
      		end
      	}
