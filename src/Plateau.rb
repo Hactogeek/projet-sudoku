@@ -176,7 +176,6 @@ class Plateau
 
 		# print "\n Candidat en #{position.getX+1},#{position.getY+1}:", tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,"\n"
 		return tabCandidatPossible
-		# return tableauRetour
 	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
@@ -184,7 +183,6 @@ class Plateau
 	# @return [ListeCandidat]
 	def candidatImpossible(position)
 		tabCandidatImpossible = ListeCandidat.creer()
-		# tableauRetour = Array.new(9)
 
 		for i in (1...9)
 			if(!absentLigne(i,position.getX) && !absentColonne(i, position.getY) && !absentRegion(i, position.getX, position.getY))
@@ -192,8 +190,8 @@ class Plateau
 				# tableauRetour.insert(i,i)
 			end
 		end
+
 		return tabCandidatImpossible
-		# return tableauRetour
 	end
 
 	# Méthode pour générer une grille complete aléatoirement
@@ -285,13 +283,13 @@ class Plateau
      # Méthode qui retourne les cases incorrects
      # @return tableau de case
      def caseIncorrect
-	listeCase = Array.new
+     	listeCase = Array.new
      	self.each { |x,y,kase|
      		if kase.getSolutionJoueur != nil
-			if kase.getSolutionJoueur != kase.getSolutionOriginale
-				print("test")
-				listeCase.push(Position.new(x,y))
-			end
+     			if kase.getSolutionJoueur != kase.getSolutionOriginale
+     				print("test")
+     				listeCase.push(Position.new(x,y))
+     			end
      		end
      	}
      	return listeCase
