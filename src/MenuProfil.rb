@@ -12,6 +12,7 @@ class MenuProfil < Gtk::Window
 		end
 
 		set_title "Menu"
+		set_window_position(Gtk::Window::POS_CENTER)
 		set_resizable(false)
 
 		#Taille de la fenêtre, correspondant à celle du jeu.

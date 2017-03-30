@@ -2,6 +2,7 @@ require 'gtk3'
 require './Position.rb'
 require './Plateau.rb'
 require './Partie.rb'
+require './FinJeu.rb'
 
 COUL_BLEU   = Gdk::RGBA::new(0.4,0.7,1.0,1.0)
 COUL_ROUGE  = Gdk::RGBA::new(1.0,0.4,0.4,1.0)
@@ -48,7 +49,9 @@ class Grille < Gtk::Table
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
 
-				@partie.finPartie
+				if(@partie.getPlateau.complete?)
+					newWindow=FinJeu.new
+				end
 				return
 			end
 
