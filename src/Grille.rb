@@ -147,7 +147,7 @@ class Grille < Gtk::Table
 				setColorOnValue(widget.children().first().text, COUL_JAUNE_PALE)
 				setCouleurSurFocus(COUL_JAUNE)
 			end
-			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,1)
+			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
 			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
 			btn.set_size_request(46,46)
 			btn.set_name "cell"

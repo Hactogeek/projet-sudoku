@@ -3,6 +3,7 @@ require './CadreAide.rb'
 require './Boutons.rb'
 require './Grille.rb'
 require './SousGrille.rb'
+require './Index.rb'
 
 class Fenetre < Gtk::Window 
 	@cadreAide
@@ -10,8 +11,8 @@ class Fenetre < Gtk::Window
 	@sousGrille
 	@grille
 
-	def initialize ()
-		super
+	def initialize (difficulte)
+		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do
 			Gtk.main_quit
 		end
@@ -25,7 +26,7 @@ class Fenetre < Gtk::Window
 		#=====================================#
 		# Initialisation des classe interface #
 		#=====================================#
-		@partie = Partie.nouvelle
+		@partie = Partie.nouvelle(difficulte)
 		@joueur = ""
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
@@ -175,7 +176,6 @@ class Fenetre < Gtk::Window
 		tableMain.attach(@boutons   , 0,9,8,9) # Boutons
 
 	    show_all	
-	    Gtk.main
 	end
 
 end
