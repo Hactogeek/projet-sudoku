@@ -20,13 +20,10 @@ class Joueur
 	@@identifiant=0
 	@tabScore
 	
-<<<<<<< HEAD
-	attr_accessor: @tabScore
-	attr_accessor: d
-=======
+
 	attr_accessor:tabScore
 	attr_accessor:d
->>>>>>> b66131a26405ba37caeb6f34f8d2976ad841d14d
+
 	attr_reader :pseudo
 	private_class_method :new
 
