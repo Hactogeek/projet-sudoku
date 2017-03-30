@@ -15,7 +15,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		@grilleCandidat = Gtk::Table.new(26, 26, true)
 		background = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "grille.png", :width => 432, :heigth => 432)))
 		attach(@grilleCandidat, 0, 1, 0, 1)
-		attach(grille    , 0, 1, 0, 1)
+		attach(@grille    , 0, 1, 0, 1)
 		attach(background, 0, 1, 0, 1)
 
 		for i in 0..26
