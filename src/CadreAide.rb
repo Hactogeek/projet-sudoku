@@ -1,11 +1,18 @@
 require 'gtk3'
 
 class CadreAide < Gtk::Table
-	def initialize ()
+	@grille
+
+	def initialize (grille)
 		super(12,8,true)
+		@grille = grille
+
 		#add( Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "help.png", :width => 432, :heigth => 432)))
 		methode1 = Gtk::Button.new(:label =>"Methode du poney", :use_underline => nil, :stock_id => nil)
 		methode2 = Gtk::Button.new(:label =>"Methode de dragibus", :use_underline => nil, :stock_id => nil)
+		methode2.signal_connect "clicked" do |widget|
+			@grille.colorCaseResolvable()
+		end
 		methode3 = Gtk::Button.new(:label =>"Methode du couscous", :use_underline => nil, :stock_id => nil)
 		methode4 = Gtk::Button.new(:label =>"Methode de caribou", :use_underline => nil, :stock_id => nil)
 		methode5 = Gtk::Button.new(:label =>"Methode de la methode", :use_underline => nil, :stock_id => nil)

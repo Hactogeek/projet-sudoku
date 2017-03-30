@@ -10,6 +10,7 @@ COUL_VERT   = Gdk::RGBA::new(0.5,0.9,0.3,1.0)
 COUL_JAUNE  = Gdk::RGBA::new(1.0,0.9,0.3,1.0)
 COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0,0.9,0.3,0.4)
 COUL_VIOLET = Gdk::RGBA::new(0.7,0.4,0.8,1.0)
+COUL_ROSE = Gdk::RGBA::new(0.9,0.7,1.0,1.0)
 COUL_BLANC  = Gdk::RGBA::new(1.0,1.0,1.0,1.0)
 
 
@@ -109,6 +110,14 @@ class Grille < Gtk::Table
 	    	css_provider.load :data=>css
 			self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 		end
+		setCouleurSurFocus(COUL_JAUNE)
+	end
+
+	def colorCaseResolvable()
+		casesResolvable = @partie.getAide().caseResolvable()
+		casesResolvable.each{ |pos|
+			setCouleurCase(pos.getX(), pos.getY(), COUL_ROSE)
+		}
 	end
 
 	def resetCouleurSurFocus() # change couleur du focus
@@ -125,7 +134,14 @@ class Grille < Gtk::Table
 	end
 
 	def setCouleurCase(x, y, couleur)
-		children()[81 - ((x)+((y-1)*9))].override_background_color(:normal, couleur)
+		css=<<-EOT
+		#cell{
+		background: #{couleur};
+     	}
+     	EOT
+     	css_provider = Gtk::CssProvider.new
+     	css_provider.load :data=>css
+     	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
 	end
 
 	def getCoordFocus()

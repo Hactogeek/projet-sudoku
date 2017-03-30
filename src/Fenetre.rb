@@ -21,7 +21,7 @@ class Fenetre < Gtk::Window
 
 		# Property
 		set_title "ku"
-		set_window_position(Gtk::Window::POS_CENTER)
+		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
 
@@ -32,7 +32,7 @@ class Fenetre < Gtk::Window
 		@joueur = ""
 		@sauvegarde = Sauvegarde.creer()
 		@grille = Grille.new(@partie)
-		@cadreAide = CadreAide.new
+		@cadreAide = CadreAide.new(@grille)
 		@sousGrille = SousGrille.new(@grille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
 
