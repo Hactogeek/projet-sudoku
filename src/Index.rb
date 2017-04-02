@@ -30,7 +30,7 @@ class Index < Gtk::Window
 		#Redirection des boutons
 		seConnecter.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir(currentPath+"/profil")
+			Dir.chdir(Dir.pwd+"/profil")
 			newWindow=Connexion.new
 		end
 		creerProfil.signal_connect "clicked" do |widget|
