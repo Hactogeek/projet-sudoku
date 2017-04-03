@@ -1,11 +1,12 @@
 require 'gtk3'
 require "./ChoixMode.rb"
 require "./Index.rb"
+require "./APropos.rb"
 
 class MenuProfil < Gtk::Window
 
 	def initialize
-		super
+		super()
 
 		signal_connect "destroy" do
 			Gtk.main_quit
@@ -37,11 +38,14 @@ class MenuProfil < Gtk::Window
 		#Redirection des boutons
 		nouvellePartie.signal_connect "clicked" do |widget|
 			hide
-			newWindow=ChoixMode.new
+			newWindow=ChoixDifficulte.new(0)
 		end
 		importerGrille.signal_connect "clicked" do |widget|
 		end
 		chargerPartie.signal_connect "clicked" do |widget|
+			hide
+			newWindow=Fenetre.new(Partie.nouvelle(3))
+			newWindow.chargement
 		end
 		statistique.signal_connect "clicked" do |widget|
 		end
@@ -51,9 +55,12 @@ class MenuProfil < Gtk::Window
 		end
 		deconnexion.signal_connect "clicked" do |widget|
 			hide
+			Dir.chdir("../..")
 			newWindow=Index.new
 		end
 		aPropos.signal_connect "clicked" do |widget|
+			hide
+			newWindow=APropos.new(0)
 		end
 
 		#Placement des boutons et ajout dans la table

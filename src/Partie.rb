@@ -20,7 +20,7 @@ class Partie
 	end
 
 	#Creer une partie jouable
-	def creerPartie()
+	def creerPartie
 		@plateau.completeGrille()
 		puts @plateau.printOri()
 		@plateau.reduireGrille(0,@difficulte) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
@@ -59,19 +59,19 @@ class Partie
 	end
 
 	#Affiche le plateau (thank's Captain Obvious)
-	def afficherPlateau()
+	def afficherPlateau
 		print @plateau
 	end
 
-	def getUndoRedo()
+	def getUndoRedo
 		return @undoRedo
 	end
 
-	def getCheckPoint()
+	def getCheckPoint
 		return @checkPoint
 	end
 
-	def getAide()
+	def getAide
 		return @aide
 	end
 
