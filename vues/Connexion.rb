@@ -1,22 +1,11 @@
 require 'gtk3'
-require "./MenuProfil.rb"
-require "./Index.rb"
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class Connexion < Gtk::Window
+class Connexion < WindowSudoku
 
 	def initialize
-		super
-
-		signal_connect "destroy" do
-			Gtk.main_quit
-		end
-
-		set_title "Connexion"
-		set_window_position(Gtk::WindowPosition::CENTER)
-		set_resizable(false)
-
-		#Taille de la fenêtre, correspondant à celle du jeu.
-		set_default_size(919, 602)
+		super("Connexion")
 
 		#Création du label
 		nomLabel = Gtk::Label.new("Choisissez un nom d'utilisateur")
@@ -45,9 +34,6 @@ class Connexion < Gtk::Window
 		valider = Gtk::Button.new(:label => "Valider")
 		retour = Gtk::Button.new(:label => "Retour")
 
-		#Création de la table contenant les boutons
-		tableMain = Gtk::Table.new(10, 10)
-
 		#Redirection des boutons
 		valider.signal_connect "clicked" do |widget|
 			hide
@@ -66,8 +52,6 @@ class Connexion < Gtk::Window
 		tableMain.attach(vbox, 2, 6, 4, 8, Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0,0)
 		tableMain.attach(valider, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(retour, 2, 4, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-
-		add(tableMain)
 
 		show_all
 	end

@@ -1,7 +1,6 @@
 require 'gtk3'
-require "./ChoixMode.rb"
-require "./Index.rb"
-require "./APropos.rb"
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class MenuProfil < Gtk::Window
 

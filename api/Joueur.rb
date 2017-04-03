@@ -1,5 +1,5 @@
-load "Dir.rb"
-
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../vues/*.rb'].each {|file| require file }
 #
 # Joueur, un joueur de sudoku
 # * *Variable*	:

@@ -1,10 +1,6 @@
 require 'gtk3'
-require './CadreAide.rb'
-require './Boutons.rb'
-require './Grille.rb'
-require './SousGrille.rb'
-require './Index.rb'
-require './Timer.rb'
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class Fenetre < Gtk::Window 
 	# @cadreAide
@@ -52,21 +48,12 @@ class Fenetre < Gtk::Window
 	    fileMenuItem = Gtk::MenuItem.new(:label => "Fichier", :use_underline => false) # Item Fichier
 	    fileMenu = Gtk::Menu.new() # Menu de Fichier
 	    fileMenuItem.set_submenu(fileMenu)
-
-	        # Nouveau
-	        nouveauMenuItem = Gtk::MenuItem.new(:label => "Nouveau", :use_underline => false)
-	        nouveauMenuItem.signal_connect "activate" do
-                #setAide("Bouton nouveau", [], "Permet de créer un nouveau fichier")
-            end
-	        fileMenu.append(nouveauMenuItem)
 	        
 	        # Sauvegarder
 	        sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
 	        sauvergarderMenuItem.signal_connect "activate" do
 	        	@partie.stopTemps
 	        	Sauvegarde.savePartie(@partie,"partie1")
-	        	puts(@partie.getTimer.tick)
-	        	print("Sauvegarde réussi","\n")
 	        end
 	        fileMenu.append(sauvergarderMenuItem)
 
@@ -77,12 +64,12 @@ class Fenetre < Gtk::Window
 	        end
 	        fileMenu.append(chargerMenuItem)
 
-	        # Fermer
-	        fermerMenuItem = Gtk::MenuItem.new(:label => "Fermer", :use_underline => false)
-            fermerMenuItem.signal_connect "activate" do
-                Gtk.main_quit
+	        # Quitter
+	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
+            quitterMenuItem.signal_connect "activate" do
+            	newWindow = ConfirmQuit.new(@partie)
             end
-            fileMenu.add(fermerMenuItem)
+            fileMenu.add(quitterMenuItem)
 
 
 		# Menu Checkpoint
@@ -131,26 +118,6 @@ class Fenetre < Gtk::Window
 			@grille.rafraichirGrille
 		    end
 		    checkpointMenu.append(redoCPMenuItem)
-
-
-
-		# # Menu User
-	 #    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false)
-	 #    userMenu = Gtk::Menu.new()
-	 #    userMenuItem.set_submenu(userMenu)
-
-		#     # se connecter user
-		#     connecterMenuItem = Gtk::MenuItem.new(:label => "Se connecter", :use_underline => false)
-		#     connecterMenuItem.signal_connect "activate" do
-		#     @sauvegarde.loadProfil("profilTest")
-		#     @joueur="profilTest"
-		#     print("Connexion réussi a profilTest","\n")
-		# 	end
-		#     userMenu.append(connecterMenuItem)
-		    
-		#     # creer compte
-		#     creerCompteMenuItem = Gtk::MenuItem.new(:label => "Créer compte", :use_underline => false)
-		#     userMenu.append(creerCompteMenuItem)
 
 		# Menu Aide
 	    aideMenuItem = Gtk::MenuItem.new(:label => "Aides", :use_underline => false)

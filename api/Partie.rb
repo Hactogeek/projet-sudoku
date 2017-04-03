@@ -1,7 +1,5 @@
-require './Plateau'
-require './Aide'
-require './GestionMemento'
-require './Sauvegarde'
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../vues/*.rb'].each {|file| require file }
 
 class Partie
 	#@plateau sur lequel on travaille

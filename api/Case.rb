@@ -1,4 +1,5 @@
-require './Position'
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../vues/*.rb'].each {|file| require file }
 
 class Case
 	# Initialisation de la position d'une case de la grille

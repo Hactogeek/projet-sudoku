@@ -1,6 +1,6 @@
 require 'gtk3'
-require './Invite.rb'
-require './MenuProfil.rb'
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class APropos < Gtk::Window
 

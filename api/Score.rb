@@ -7,7 +7,7 @@
 #
 class Score
 
-	 attr_accessor: @score
+	 attr_accessor :score
 	 private_class_method :new
 
 	 def Score.creer

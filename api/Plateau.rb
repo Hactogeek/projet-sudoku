@@ -1,5 +1,5 @@
-require './Case'
-require './ListeCandidat'
+Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/../vues/*.rb'].each {|file| require file }
 
 class Plateau
 	# Constructeur du plateau de jeu
