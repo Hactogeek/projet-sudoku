@@ -1,7 +1,7 @@
 require "./Fenetre.rb"
 require "./Index.rb"
 
-#index = Index.new
+# index = Index.new
 
 fenetre = Fenetre.new(2)
 
