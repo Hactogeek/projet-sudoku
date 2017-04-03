@@ -35,10 +35,11 @@ class Index < Gtk::Window
 		end
 		creerProfil.signal_connect "clicked" do |widget|
 			hide
-			newWindow=CreationProfil.new
+			newWindow=CreationProfil.new(0)
 		end
 		sessionInvite.signal_connect "clicked" do |widget|
 			hide
+			Dir.chdir(Dir.pwd+"/profil/Invite")
 			newWindow=Invite.new
 		end
 

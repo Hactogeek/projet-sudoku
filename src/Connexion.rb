@@ -1,5 +1,6 @@
 require 'gtk3'
 require "./MenuProfil.rb"
+require "./Index.rb"
 
 class Connexion < Gtk::Window
 
@@ -42,6 +43,7 @@ class Connexion < Gtk::Window
 
 		#Création des boutons
 		valider = Gtk::Button.new(:label => "Valider")
+		retour = Gtk::Button.new(:label => "Retour")
 
 		#Création de la table contenant les boutons
 		tableMain = Gtk::Table.new(10, 10)
@@ -53,10 +55,17 @@ class Connexion < Gtk::Window
 			newWindow=MenuProfil.new
 		end
 
+		retour.signal_connect "clicked" do |widget|
+			hide
+			Dir.chdir("../")
+			newWindow=Index.new
+		end
+
 		#Placement des boutons et ajout dans la table
 		tableMain.attach(nomLabel, 4, 6, 2, 3, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(vbox, 4, 6, 4, 8, Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0,0)
+		tableMain.attach(vbox, 2, 6, 4, 8, Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0,0)
 		tableMain.attach(valider, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(retour, 2, 4, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		add(tableMain)
 

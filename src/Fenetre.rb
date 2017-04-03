@@ -7,12 +7,12 @@ require './Index.rb'
 require './Timer.rb'
 
 class Fenetre < Gtk::Window 
-	@cadreAide
-	@boutons
-	@sousGrille
-	@grille
+	# @cadreAide
+	# @boutons
+	# @sousGrille
+	# @grille
 
-	def initialize (difficulte)
+	def initialize (partie)
 		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do
 			Gtk.main_quit
@@ -28,9 +28,7 @@ class Fenetre < Gtk::Window
 		#=====================================#
 		# Initialisation des classe interface #
 		#=====================================#
-		@partie = Partie.nouvelle(difficulte)
-		@joueur = ""
-		@sauvegarde = Sauvegarde.creer()
+		@partie = partie
 		@grille = Grille.new(@partie)
 		@sousGrille = SousGrille.new(@grille)
 		@cadreAide = CadreAide.new(@grille, @sousGrille)
@@ -66,7 +64,7 @@ class Fenetre < Gtk::Window
 	        sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
 	        sauvergarderMenuItem.signal_connect "activate" do
 	        	@partie.stopTemps
-	        	@sauvegarde.savePartie(@joueur,@partie,"partie1")
+	        	Sauvegarde.savePartie(@partie,"partie1")
 	        	puts(@partie.getTimer.tick)
 	        	print("Sauvegarde réussi","\n")
 	        end
@@ -75,12 +73,7 @@ class Fenetre < Gtk::Window
 	        # Charger
 	        chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
 	        chargerMenuItem.signal_connect "activate" do
-	        	@partie=@sauvegarde.loadPartie(@joueur,"partie1")
-	        	@partie.lanceTemps(@partie.getTimer.getAccumulated)
-	        	@timer.start(@partie.getTimer.getAccumulated)
-	        	@grille.setPartie(@partie)
-	        	print("Chargement réussi","\n")
-	        	@grille.rafraichirGrille
+	        	chargement
 	        end
 	        fileMenu.append(chargerMenuItem)
 
@@ -141,23 +134,23 @@ class Fenetre < Gtk::Window
 
 
 
-		# Menu User
-	    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false)
-	    userMenu = Gtk::Menu.new()
-	    userMenuItem.set_submenu(userMenu)
+		# # Menu User
+	 #    userMenuItem = Gtk::MenuItem.new(:label => "Utilisateur", :use_underline => false)
+	 #    userMenu = Gtk::Menu.new()
+	 #    userMenuItem.set_submenu(userMenu)
 
-		    # se connecter user
-		    connecterMenuItem = Gtk::MenuItem.new(:label => "Se connecter", :use_underline => false)
-		    connecterMenuItem.signal_connect "activate" do
-		    @sauvegarde.loadProfil("profilTest")
-		    @joueur="profilTest"
-		    print("Connexion réussi a profilTest","\n")
-			end
-		    userMenu.append(connecterMenuItem)
+		#     # se connecter user
+		#     connecterMenuItem = Gtk::MenuItem.new(:label => "Se connecter", :use_underline => false)
+		#     connecterMenuItem.signal_connect "activate" do
+		#     @sauvegarde.loadProfil("profilTest")
+		#     @joueur="profilTest"
+		#     print("Connexion réussi a profilTest","\n")
+		# 	end
+		#     userMenu.append(connecterMenuItem)
 		    
-		    # creer compte
-		    creerCompteMenuItem = Gtk::MenuItem.new(:label => "Créer compte", :use_underline => false)
-		    userMenu.append(creerCompteMenuItem)
+		#     # creer compte
+		#     creerCompteMenuItem = Gtk::MenuItem.new(:label => "Créer compte", :use_underline => false)
+		#     userMenu.append(creerCompteMenuItem)
 
 		# Menu Aide
 	    aideMenuItem = Gtk::MenuItem.new(:label => "Aides", :use_underline => false)
@@ -186,7 +179,7 @@ class Fenetre < Gtk::Window
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
-	    menuBar.append(userMenuItem)
+	    #menuBar.append(userMenuItem)
 	    menuBar.append(aideMenuItem)
 		
 
@@ -223,5 +216,13 @@ class Fenetre < Gtk::Window
 
 	    show_all
 	end
+
+	def chargement
+		@partie=Sauvegarde.loadPartie("partie1")
+		@partie.lanceTemps(@partie.getTimer.getAccumulated)
+        @timer.start(@partie.getTimer.getAccumulated)
+        @grille.setPartie(@partie)
+    	@grille.rafraichirGrille
+    end
 
 end

@@ -1,10 +1,11 @@
 require 'gtk3'
 require "./MenuProfil.rb"
 require "./Joueur.rb"
+require "./Index.rb"
 
 class CreationProfil < Gtk::Window
 
-	def initialize
+	def initialize(invite)
 		super
 
 		signal_connect "destroy" do
@@ -27,29 +28,44 @@ class CreationProfil < Gtk::Window
 
 		#Création du bouton
 		valider = Gtk::Button.new(:label => "Valider")
+		retour = Gtk::Button.new(:label => "Retour")
 
 		#Création de la table contenant les boutons
 		tableMain = Gtk::Table.new(10, 10)
 
 		#Redirection des boutons
 		valider.signal_connect "clicked" do |widget|
-			joueur=Joueur.creer(name.text)
-			if(joueur.creerProfil)
-				confirm.set_text("Ce profil a déjà été créé. Veuillez en choisir un autre.")
+			if(name.text=="")
+				confirm.set_text("Veuillez rentrer un nom d'utilisateur")
 			else
-				# Ca marche pas ça. C'est nul
-				# confirm.set_text("La création du profil est un succès")
-				# sleep(3)
-				hide
-				newWindow=MenuProfil.new
+				joueur=Joueur.creer(name.text)
+				if(joueur.creerProfil)
+				confirm.set_text("Ce profil a déjà été créé. Veuillez en choisir un autre.")
+				else
+					# Ca marche pas ça. C'est nul
+					# confirm.set_text("La création du profil est un succès")
+					# sleep(3)
+					hide
+					newWindow=MenuProfil.new
+				end
+			end
+		end
+
+		retour.signal_connect "clicked" do |widget|
+			hide
+			if(invite==1)
+				newWindow=Invite.new
+			else
+				newWindow=Index.new
 			end
 		end
 
 		#Placement des boutons et ajout dans la table
-		tableMain.attach(nomLabel, 4, 6, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(name, 4, 6, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(confirm, 4, 6, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(nomLabel, 2, 6, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(name, 2, 6, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(confirm, 2, 6, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(valider, 4, 6, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(retour, 2, 4, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		add(tableMain)
 
