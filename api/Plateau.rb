@@ -383,6 +383,17 @@ class Plateau
     	return self
     end
 
+    def importerGrille
+    	@size.times do |y|
+			@size.times do |x|
+				if @grid[position.getX][position.getY].getSolutionJoueur() != nil
+					@grid[position.getX][position.getY].setSolutionOriginale(@grid[position.getX][position.getY].getSolutionJoueur())
+					@grid[position.getX][position.getY].setOriginale(true)
+				end
+			end
+		end
+    end
+
 	# Méthode pour le parcours de la grille du plateau
 	# @yield [x, y, val] la position et la valeur courante
 	#
