@@ -18,15 +18,21 @@ class Aide
 
 	# Méthode qui retourne la position des cases avec un unique candidat
 	def caseResolvable
-		tabCase = Array.new()
+		listeCase = Array.new()
 
 		@partie.getPlateau().each do |x,y,laCase| 
 			if laCase.getCandidat().getListeCandidat().compact().length() == 1
-				tabCase.push(Position.new(x,y))
+				listeCase.push(Position.new(x,y))
 			end
 		end
 
-		return tabCase
+		# print "listeCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
+		return listeCase
 	end
 
 	#Place tous les candidats de chaque case du plateau
@@ -66,25 +72,23 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
-		solution = nil 
-		while solution == nil 
-			
-			solution = candidatUnique()
-			solutionText = "Candidat Unique"
+		solution = candidatUnique()
+		solutionText = "Candidat Unique"
 
-			break if solution != nil 
-
-			solution = caseResolvable()
-			solutionText = "Un seul candidat"
-
-			break if solution != nil 
-
-			solution = singleBox()
-			solutionText = "Jumeaux et triplés"
-
-			break
+		if solution != nil
+			# return solution
+			return [solutionText, solution[rand(solution.length)]]
 		end
 
+		solution = caseResolvable()
+		solutionText = "Un seul candidat"
+
+		if solution != nil
+			# return solution
+			return [solutionText, solution[rand(solution.length)]]
+		end
+
+		# return solution
 		return [solutionText, solution[rand(solution.length)]]
 	end
 
@@ -127,53 +131,67 @@ class Aide
 				end
 			end
 		end
+
+		# print "listeCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
 		return listeCase
 	end
 	
 		# Retourne une liste de case
-	def singleBox()
-		listeCase = Array.new
-		@partie.getPlateau().each do |x,y,laCase|
-			if (laCase.getSolutionJoueur() == nil)
-				for candidat in laCase.getCandidat().getListeCandidat
-					add = true
-					ligne = true
-					colonne = true
+		def singleBox()
+			listeCase = Array.new
+			@partie.getPlateau().each do |x,y,laCase|
+				if (laCase.getSolutionJoueur() == nil)
+					for candidat in laCase.getCandidat().getListeCandidat
+						add = true
+						ligne = true
+						colonne = true
 
-					posX = posX-(x%3)
-					posY = posY-(y%3)
+						posX = posX-(x%3)
+						posY = posY-(y%3)
 
-					for n in (posX...posX+3)
-						for m in (posY...posY+3)
-							if @partie.getPlateau.getCase(Position.new(n,m)).getSolutionJoueur() == nil
-								if n == x
-									if ligne 
-										ligne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+						for n in (posX...posX+3)
+							for m in (posY...posY+3)
+								if @partie.getPlateau.getCase(Position.new(n,m)).getSolutionJoueur() == nil
+									if n == x
+										if ligne 
+											ligne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+										end
+									elsif m == y
+										if colonne
+											colonne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+										end
+									else
+										add = !(@partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat))
 									end
-								elsif m == y
-									if colonne
-										colonne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
-									end
-								else
-									add = !(@partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat))
 								end
+								break if add == false || (ligne == false && colonne == false)
 							end
 							break if add == false || (ligne == false && colonne == false)
 						end
-						break if add == false || (ligne == false && colonne == false)
-					end
 
-					if add 
-						if ligne
+						if add 
+							if ligne
 
-						elsif colonne
+							elsif colonne
 
-						end
+							end
 						# Supprimer le candidat des autres cases de la ligne ou de la colonne
 					end
 				end
 			end
 		end
+
+		# print "listeCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
 		return listeCase
 	end
 end
