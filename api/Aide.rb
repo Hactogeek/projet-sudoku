@@ -66,7 +66,26 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
+		solution = nil 
+		while solution == nil 
+			
+			solution = candidatUnique()
+			solutionText = "Candidat Unique"
 
+			break if solution != nil 
+
+			solution = caseResolvable()
+			solutionText = "Un seul candidat"
+
+			break if solution != nil 
+
+			solution = singleBox()
+			solutionText = "Jumeaux et triplés"
+
+			break
+		end
+
+		return [solutionText, solution[rand(solution.length)]]
 	end
 
 	#Affiche les méthodes de résolution
