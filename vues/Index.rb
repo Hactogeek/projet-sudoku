@@ -15,7 +15,7 @@ class Index < WindowSudoku
 		#Redirection des boutons
 		seConnecter.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir(Dir.pwd+"./profil")
+			Dir.chdir(Dir.pwd+"/profil")
 			newWindow=Connexion.new
 		end
 		creerProfil.signal_connect "clicked" do |widget|
@@ -24,7 +24,7 @@ class Index < WindowSudoku
 		end
 		sessionInvite.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir(Dir.pwd+"./profil/Invite")
+			Dir.chdir(Dir.pwd+"/profil/Invite")
 			newWindow=Invite.new
 		end
 
