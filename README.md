@@ -6,9 +6,9 @@ Réalisation du projet aide à la résolution d'un sudoku réalisé par  Modira 
 
 Pour pouvoir utiliser Ku, vous devez avoir les programmes suivants installés :
 
-Ruby, en version 2.2.4 ou plus (https://www.ruby-lang.org/fr/downloads/).
+Ruby, en version 2.2.4 ou plus (https://www.ruby-lang.org/fr/downloads/)
 
-gtk3 (https://developer.gnome.org/gtk3/3.0/).
+gtk3 (https://developer.gnome.org/gtk3/3.0/)
 
 Pour lancer l’application, placez vous dans la racine du dossier, et exécutez le jeu avec la commande suivante :  
 
