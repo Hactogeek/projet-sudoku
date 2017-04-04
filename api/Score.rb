@@ -18,29 +18,18 @@ class Score
 		@score=0
 	end 
 
-	# * *Description*:
-	#
-	# méthode permettant de donner le score d'un joueur
-	# * *Paramètre*: Aucun
-	#
-	# * *Exemple*:
-	#
-	# unScore.getScore
-	#
+	# Méthode qui renvoie le score
+	# * [Retourne :]
+	# 				Le score
 	def getScore
 		return @score
 	end 
 
-	# * *Description*:
-	#
-	# méthode permettant de modifier le score d'un joueur
-	# * *Paramètre*: 
-	# - +time+ -> le temps d'une partie
-	# - +niveauDifficulte+ -> niveau de difficulté de la partie où a été réalisé le score
-	# * *Exemple*:
-	#
-	# unScore.setScore
-	#
+
+	# Méthode qui modifie le score d'un joueur
+	# * [Paramètre :]
+	# 				time -> La durée d'une partie
+	# 				niveauDifficulte -> la difficulté de la partie
 	def setScore(time,niveauDifficulte)
 		 @score=(1000*niveauDifficulte)/time
 	end 
