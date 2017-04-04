@@ -24,7 +24,7 @@ class Index < WindowSudoku
 		end
 		sessionInvite.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir(Dir.pwd+"./profil/Invite")
+			Dir.chdir(Dir.pwd+"/profil/Invite")
 			newWindow=Invite.new
 		end
 
