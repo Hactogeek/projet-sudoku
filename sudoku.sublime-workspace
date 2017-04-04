@@ -1,0 +1,1183 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"load",
+				"loadMenu"
+			],
+			[
+				"metod",
+				"methode2"
+			],
+			[
+				"label",
+				"labelAide"
+			],
+			[
+				"grille",
+				"grilleCandidat"
+			],
+			[
+				"set",
+				"setCandidatState"
+			],
+			[
+				"case",
+				"caseResolvable"
+			],
+			[
+				"Coul",
+				"COUL_JAUNE"
+			],
+			[
+				"colo",
+				"setCouleurSurFocus"
+			],
+			[
+				"me",
+				"methode1"
+			],
+			[
+				"COu",
+				"COUL_VIOLET"
+			],
+			[
+				"candi",
+				"candidatLabel"
+			],
+			[
+				"gtk",
+				"Gtk"
+			],
+			[
+				"pos",
+				"posFocus"
+			],
+			[
+				"get",
+				"getSolutionJoueur"
+			],
+			[
+				"setcouleur",
+				"setCouleurSurFocus"
+			],
+			[
+				"COUL",
+				"COUL_VERT"
+			],
+			[
+				"setcolor",
+				"setCouleurSurFocus"
+			],
+			[
+				"new",
+				"newValeur"
+			],
+			[
+				"sous",
+				"sousGrille"
+			],
+			[
+				"Gr",
+				"Graphics2D"
+			],
+			[
+				"Cell",
+				"CelluleEtat"
+			],
+			[
+				"Ce",
+				"CelluleEtatVivant"
+			],
+			[
+				"y",
+				"yMax"
+			],
+			[
+				"cel",
+				"CelluleEtat"
+			],
+			[
+				"et",
+				"CelluleEtat"
+			],
+			[
+				"is",
+				"isEmpty"
+			],
+			[
+				"color",
+				"colorPicker"
+			],
+			[
+				"textfield",
+				"textFieldName"
+			],
+			[
+				"chat",
+				"ChatController"
+			],
+			[
+				"user",
+				"usersInResearch"
+			],
+			[
+				"game",
+				"gamemode"
+			],
+			[
+				"nb",
+				"nb_players"
+			],
+			[
+				"gam",
+				"gamemode"
+			],
+			[
+				"send",
+				"sendButton"
+			],
+			[
+				"li",
+				"userList"
+			],
+			[
+				"sen",
+				"sendButton"
+			],
+			[
+				"U",
+				"USERDISCONNECTED"
+			],
+			[
+				"c",
+				"chatController"
+			],
+			[
+				"sele",
+				"selectedGameMode"
+			],
+			[
+				"gameModes",
+				"gameModesController"
+			],
+			[
+				"getG",
+				"getGamemode"
+			],
+			[
+				"games",
+				"gamesController"
+			],
+			[
+				"select",
+				"selectedGame"
+			],
+			[
+				"home_",
+				"home_getGameMode"
+			],
+			[
+				"d",
+				"dumps"
+			],
+			[
+				"table",
+				"tableGrille"
+			],
+			[
+				"set_",
+				"set_border_width"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
+				"cra",
+				"createUI"
+			],
+			[
+				"titre",
+				"titreFormat"
+			],
+			[
+				"desc",
+				"descFormat"
+			],
+			[
+				"ca",
+				"cadreAide"
+			],
+			[
+				"fil",
+				"fileMenu"
+			],
+			[
+				"Menu",
+				"MenuItem"
+			],
+			[
+				"gt",
+				"Gtk"
+			],
+			[
+				"S",
+				"STATE_NORMAL"
+			],
+			[
+				"tab",
+				"tableGrille"
+			],
+			[
+				"menu",
+				"menuBar"
+			],
+			[
+				"h",
+				"hboxPad"
+			],
+			[
+				"hb",
+				"hboxPad"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"po",
+				"propfx\tpropfx"
+			],
+			[
+				"sub",
+				"substring"
+			],
+			[
+				"ext",
+				"extImg"
+			],
+			[
+				"link",
+				"linkImg"
+			],
+			[
+				"to",
+				"to_r"
+			],
+			[
+				"Jaco",
+				"Jacoboni"
+			],
+			[
+				"bt",
+				"btnQuitter"
+			],
+			[
+				"btn",
+				"btnAnnule"
+			],
+			[
+				"Com",
+				"combo"
+			],
+			[
+				"tet",
+				"textProperty"
+			],
+			[
+				"inpu",
+				"inputChat"
+			],
+			[
+				"print",
+				"printStackTrace"
+			],
+			[
+				"L",
+				"Lsupprimer"
+			],
+			[
+				"i",
+				"if\tIf Condition"
+			],
+			[
+				"cha",
+				"ChatController"
+			],
+			[
+				"m",
+				"main\tmethod (main)"
+			],
+			[
+				"in",
+				"inputEmail"
+			],
+			[
+				"g",
+				"getElementsByName"
+			],
+			[
+				"va",
+				"validateOnChange"
+			],
+			[
+				"pays",
+				"paysSelected"
+			],
+			[
+				"node",
+				"nodeAScan"
+			],
+			[
+				"n",
+				"nLigne"
+			],
+			[
+				"inser",
+				"insertRow"
+			],
+			[
+				"f",
+				"for\tfor (…) {…}"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "\tDir[File.dirname(__FILE__) + '/api/*.rb'].each {|file| require file }\nDir[File.dirname(__FILE__) + '/vues/*.rb'].each {|file| require file }\n\nindex = Index.new\n\n# Dir.chdir(Dir.pwd+\"/profil/profilTest\")\n# fenetre = Fenetre.new(Partie.nouvelle(3))\n\nGtk.main",
+			"file": "Main.rb",
+			"file_size": 264,
+			"file_write_time": 131357797653883512,
+			"settings":
+			{
+				"buffer_size": 257,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Run",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Clear (class)",
+					""
+				],
+				[
+					"Compile",
+					""
+				],
+				[
+					"Compile/Run",
+					""
+				],
+				[
+					"Packages/Java/Ant.sublime-build",
+					""
+				],
+				[
+					"Packages/Java/JavaC.sublime-build",
+					""
+				]
+			],
+			[
+				"Compile/Run",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Clear (class)",
+					""
+				],
+				[
+					"Compile",
+					""
+				],
+				[
+					"Compile/Run",
+					""
+				],
+				[
+					"Packages/Ruby/Ruby.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Ruby/Ruby.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Java/Ant.sublime-build",
+					""
+				],
+				[
+					"Packages/Java/JavaC.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Java/JavaC.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Java/Ant.sublime-build",
+					""
+				],
+				[
+					"Packages/Java/JavaC.sublime-build",
+					""
+				],
+				[
+					"Packages/User/JavaC.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Java/JavaC.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Run",
+					""
+				],
+				[
+					"Packages/Ruby/Ruby.sublime-build",
+					""
+				]
+			],
+			[
+				"Run",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 360.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"open",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"pckageli",
+				"Package Control: List Packages"
+			],
+			[
+				"project",
+				"Project: Save As"
+			],
+			[
+				"project ",
+				"Project: Refresh Folders"
+			],
+			[
+				"projec",
+				"Project: Save As"
+			],
+			[
+				"",
+				"Color Picker"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pacakge",
+				"Package Control: Remove Package"
+			],
+			[
+				"picket",
+				"Color Picker: Insert Color"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"new",
+				"File: New File Relative to Current View"
+			],
+			[
+				"resource",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"prefenr",
+				"Preferences: Browse Packages"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"new ",
+				"File: New File Relative to Current View"
+			],
+			[
+				"toggle m",
+				"View: Toggle Menu"
+			],
+			[
+				"ressou",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"prefenre",
+				"Preferences: Browse Packages"
+			],
+			[
+				"hex",
+				"HexViewer: Toggle Hex View"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"preferences",
+				"Preferences: Settings"
+			],
+			[
+				"user",
+				"Preferences: HexViewer Settings – User"
+			],
+			[
+				"search",
+				"File: Search Files"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"dlete",
+				"File: Delete"
+			],
+			[
+				"n",
+				"File: New File Relative to Current View"
+			],
+			[
+				"new fil",
+				"File: New File Relative to Current View"
+			],
+			[
+				"delete ",
+				"File: Delete"
+			],
+			[
+				"view",
+				"View: Toggle Minimap"
+			],
+			[
+				"men",
+				"View: Toggle Menu"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"bind",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			]
+		],
+		"width": 458.0
+	},
+	"console":
+	{
+		"height": 120.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku"
+	],
+	"file_history":
+	[
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Boutons.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Joueur.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Main.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Fenetre.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/CadreAide.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Aide.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Grille.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/SousGrille.rb",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/app.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/apps.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/consumers.py",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/sudoku.sublime-project",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/sudoku.sublime-project",
+		"/C/Users/Hideki/AppData/Local/Temp/Rar$DIa0.566/component_inGame_menu.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/.gitignore",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Partie.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Plateau.rb",
+		"/C/Users/Hideki/Project/Chat Java/chat_java.sublime-project",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/.gitignore",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/sudoku.sublime-workspace",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Position.rb",
+		"/C/Users/Hideki/Project/Chat Java/Main.java",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Home.rb",
+		"/C/Users/Hideki/Project/Chat Java/Message.java",
+		"/C/Users/Hideki/Project/Chat Java 2/ChatListener.java",
+		"/C/Users/Hideki/Project/Chat Java/ChatServer.java",
+		"/C/Users/Hideki/Project/Chat Java/ChatListener.java",
+		"/C/Users/Hideki/Project/Chat Java 2/ChatController.java",
+		"/C/Users/Hideki/Project/hop/hophophop/commun/vue/dialogues/DialogueHistoriqueInterventionsEnseignant.java",
+		"/C/Users/Hideki/Project/Chat Java/User.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/Observable.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/Observateur.java",
+		"/C/Users/Hideki/Documents/DUT/MPA/gameOfLife/Grid.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/VisiteurClassique.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/JeuDeLaVie.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/CelluleEtatMort.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/CelluleEtatVivant.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/CommandeMeurt.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/CommandeVit.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/Commande.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/JeuDeLaVieUI.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/Cellule.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/Visiteur.java",
+		"/C/Users/Hideki/Project/Jeu de la vie/CelluleEtat.java",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/User/sclass.sublime-snippet",
+		"/C/Users/Hideki/Project/Chat Java/ChatView.fxml",
+		"/C/Users/Hideki/Project/Chat Java/ChatController.java",
+		"/C/Users/Hideki/Documents/DUT/SESSION DUT/TP/ProgRepartie/Cours 6/Client.java",
+		"/C/Users/Hideki/Documents/DUT/SESSION DUT/TP/ProgRepartie/Cours 7/Client.c",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/models.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/templates/home/index.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/pl3w/settings.py",
+		"/C/Users/Hideki/Project/Chat Java/chatjava.sublime-project",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/templates/home/signup.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/style.css",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/bootstrap.min.css",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/udgmr2s0.yz4.txt",
+		"/C/Users/Hideki/Desktop/index.html",
+		"/C/Users/Hideki/Desktop/app.js",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/plateau.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/main.rb",
+		"/C/Users/Hideki/AppData/Local/GitHub/PortableGit_f02737a78695063deace08e96d5042710d3e32db/mingw32/share/doc/git-doc/git-config.html",
+		"/C/Users/Hideki/AppData/Local/GitHub/PoshGit_73b8bf9c588df6d17c193e270da0ed4cf890d868/.vscode/settings.json",
+		"/C/Users/Hideki/AppData/Local/GitHub/Profiling.txt",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/Java/JavaC.sublime-build",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/Default/exec.py",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/User/JavaC.sublime-build",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/main.rb",
+		"/C/Users/Hideki/Documents/GitHub/projet-sudoku/src/Generateur.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Fenetre.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Grille.rb",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/login.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/templates/home/utils/menu.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/urls.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/routing.py",
+		"/C/Users/Hideki/Downloads/LienPrezi.txt",
+		"/C/Users/Hideki/Documents/DUT/SESSION DUT/site/index.html",
+		"/C/Users/Hideki/Documents/DUT/SESSION DUT/TP/S3/PremiÃ¨re annÃ©e/cdin/tp2/index.html",
+		"/C/Users/Hideki/Documents/DUT/SESSION DUT/TP/S3/PremiÃ¨re annÃ©e/cdin/tp1/index.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/pl3w/urls.py",
+		"/C/Users/Hideki/AppData/Local/GitHub/PortableGit_f02737a78695063deace08e96d5042710d3e32db/mingw32/share/doc/git-doc/git-push.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/02zf1bii.gwa.txt",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/show.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/w23k5rcg.zfp.txt",
+		"/C/Users/Hideki/Desktop/Bordel/chatbot/ressource/client.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w - Copie/home/static/home/app.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/admin.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/migrations/0003_game.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/migrations/0005_mode_name.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/migrations/0004_mode.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/pl3w/routing.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/db.sqlite3",
+		"/C/Users/Hideki/Documents/GitHub/pl3w - Copie/home/templates/home/index.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/views.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/ReconnectingWebSocket.js",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/templates/home/utils/footer.html",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/menu.css",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/login.css",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/home/static/home/footer.css",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/dngosugt.qsk.txt",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/2qjlpp5w.psw.txt",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/manage.py",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/3dp3mcsk.kmq.txt",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/ykvrjhei.i2z.txt",
+		"/C/Users/Hideki/Documents/GitHub/pl3w/jdcf4h4g.f0n.txt",
+		"/C/Users/Hideki/AppData/Local/GitHub/PortableGit_f02737a78695063deace08e96d5042710d3e32db/mingw32/share/doc/git-doc/giteveryday.html",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/User/Monokai Soda.tmTheme",
+		"/C/Users/Hideki/Desktop/multichat/templates/index.html",
+		"/C/Users/Hideki/AppData/Roaming/Sublime Text 3/Packages/User/hex_viewer.sublime-settings",
+		"/C/Users/Hideki/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/pip/compat/__init__.py",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/SousGrille.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/sudoku.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Boutons.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/CadreAide.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Fenetre2.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Aide.rb",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/SousGrille",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Aide",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/Grille",
+		"/C/Users/Hideki/Documents/GitHub/sudoku-interface/IC83658.gif",
+		"/C/Users/Hideki/Desktop/Test chatbox/Hideki Chat/ChatBoxHideki.html",
+		"/C/Users/Hideki/Documents/GitHub/testsite/home/templates/home/index.html",
+		"/C/Users/Hideki/Documents/Licence/Prolog/Rep.txt",
+		"/C/Users/Hideki/Documents/Licence/Prolog/ex7.pl",
+		"/C/Users/Hideki/Desktop/Bordel/chatbot/node_modules/socket.io/lib/client.js",
+		"/C/Users/Hideki/Documents/Licence/Prolog/ex8.pl",
+		"/C/Users/Hideki/Desktop/pl3w/pl3w/settings.py",
+		"/C/Users/Hideki/Documents/Licence/Prolog/bc2.pl"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"<current file>",
+			"<selection>",
+			"Selection",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"backbutton",
+			"candidates_sw",
+			"switch",
+			"cadreaide",
+			"8",
+			"cadreaide",
+			"print",
+			"stylo",
+			"tab",
+			"plein",
+			"optional",
+			";\n",
+			"Cellule",
+			"CommandeVit",
+			") ",
+			"this.ground",
+			"textfieldName",
+			"isActive",
+			"chatFlow",
+			"messageField",
+			"sendButton",
+			"connectButton",
+			"userList",
+			"nameField",
+			"ipField",
+			"portField",
+			".row",
+			"path",
+			"Generateur",
+			"document.get",
+			"eval",
+			"ig",
+			"java",
+			"send",
+			"leave",
+			"join",
+			"send",
+			"ReconnectingWeb",
+			"socket",
+			"host",
+			"io",
+			"receive",
+			"@cadre",
+			"labelTest",
+			"span",
+			"utf",
+			"shade",
+			"pad",
+			"irc",
+			"html",
+			"query",
+			"maj()",
+			"btn",
+			"require 'gtk2'\n\nGtk.init\n\nwindow = Gtk::Window.new('TP Exercice 2-1')\nwindow.signal_connect('destroy') {\n   Gtk.main_quit\n}\n\ni = 0\nvbox = Gtk::VBox.new\nlabel  = Gtk::Label.new(\"Nombre de click sur le bouton : #{i})\n\nbtnCp\"t = Gtk::Button.new('Cliquez-moi !')\nbtnCpt.signal_connect('clicked') {\n\ti += 1\n\tlabel.set_text(\"Nombre de click sur le bouton : #{i}\")\n}\n\n\n\nvbox.add(btnCpt)\nvbox.add(label)\n\nwindow.add(vbox)\n\nwindow.show_all\n\nGtk.main",
+			"Metier",
+			"main",
+			"Clavier",
+			"them",
+			"selectElementBy",
+			"test",
+			"deg",
+			"degree",
+			"inputMail",
+			"enregis",
+			"pdf"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"CommandeMeurt",
+			"this.grille",
+			"textFlowChat",
+			"textAreaMessage",
+			"buttonSend",
+			"buttonConnect",
+			"listViewUsers",
+			"textFieldName",
+			"textFieldIp",
+			"textFieldPort",
+			"2A2A2",
+			"genre",
+			"genre\ngenre\ngenre",
+			"maj(combo, score, personne)",
+			"score",
+			"getElementBy",
+			"inputEmail"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Main.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 257,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 100.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 309.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 126.0
+	},
+	"pinned_build_system": "",
+	"project": "sudoku.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"sougr",
+				"src\\SousGrille.rb"
+			],
+			[
+				"cadre",
+				"src\\CadreAide.rb"
+			],
+			[
+				"grille",
+				"src\\Grille.rb"
+			],
+			[
+				"cade",
+				"src\\CadreAide.rb"
+			],
+			[
+				"ca",
+				"src\\CadreAide.rb"
+			],
+			[
+				"project",
+				"C:\\Users\\Hideki\\Documents\\GitHub\\projet-sudoku\\src\\CadreAide.rb"
+			],
+			[
+				"joueur",
+				"Joueur.rb"
+			],
+			[
+				"sou",
+				"SousGrille.rb"
+			],
+			[
+				"sous",
+				"SousGrille.rb"
+			],
+			[
+				"fentre",
+				"Fenetre.rb"
+			],
+			[
+				"cadrea",
+				"CadreAide.rb"
+			],
+			[
+				"grile",
+				"Grille.rb"
+			],
+			[
+				"aide",
+				"Aide.rb"
+			],
+			[
+				"fenetre",
+				"Fenetre.rb"
+			],
+			[
+				"grill",
+				"Grille.rb"
+			],
+			[
+				"gril",
+				"Grille.rb"
+			],
+			[
+				"bout",
+				"Boutons.rb"
+			],
+			[
+				"fenet",
+				"Fenetre.rb"
+			],
+			[
+				"partie",
+				"Partie.rb"
+			],
+			[
+				"plateau",
+				"Plateau.rb"
+			],
+			[
+				"fenre",
+				"Fenetre.rb"
+			],
+			[
+				"bouton",
+				"Boutons.rb"
+			],
+			[
+				"sougril",
+				"projet-sudoku\\src\\SousGrille.rb"
+			],
+			[
+				"main",
+				"projet-sudoku\\src\\Main.rb"
+			],
+			[
+				"fent",
+				"projet-sudoku\\src\\Fenetre.rb"
+			],
+			[
+				"sousgri",
+				"projet-sudoku\\src\\SousGrille.rb"
+			],
+			[
+				"message",
+				"Chat Java\\Message.java"
+			],
+			[
+				"listen",
+				"Chat Java\\ChatListener.java"
+			],
+			[
+				"client",
+				"Project\\hop\\hophophop\\commun\\vue\\dialogues\\DialogueHistoriqueInterventionsEnseignant.java"
+			],
+			[
+				"user",
+				"Chat Java\\User.java"
+			],
+			[
+				"ue",
+				"Chat Java\\User.java"
+			],
+			[
+				"chatserver",
+				"Project\\Chat Java\\ChatServer.java"
+			],
+			[
+				"chtalis",
+				"Project\\Chat Java\\ChatListener.java"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 375.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 378.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 188.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

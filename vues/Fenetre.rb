@@ -142,12 +142,24 @@ class Fenetre < Gtk::Window
 		    ###############Rajouter la même chose chose qu'au dessus#####################
 		    #############################################################################
 
+	    # Menu Fichier
+	    optionMenuItem = Gtk::MenuItem.new(:label => "Options", :use_underline => false) # Item Fichier
+	    optionMenu = Gtk::Menu.new() # Menu de Fichier
+	    optionMenuItem.set_submenu(optionMenu)
+
+	        # Préférences
+	        preferencesMenuItem = Gtk::MenuItem.new(:label => "Préférences", :use_underline => false)
+            preferencesMenuItem.signal_connect "activate" do
+            	newWindow = nil # Créer nouvelle classe
+            end
+            optionMenu.add(preferencesMenuItem)
 
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
 	    #menuBar.append(userMenuItem)
 	    menuBar.append(aideMenuItem)
+	    menuBar.append(optionMenuItem)
 		
 
 		#==========#

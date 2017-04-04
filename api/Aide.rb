@@ -92,7 +92,7 @@ class Aide
 						add = (@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x+2).include?(n))
 					end
 
-					break if add = false
+					break if add == false
 
 					if x%3 == 2
 						add = (@partie.getPlateau().getColonne(x-1).include?(n)) || (@partie.getPlateau().getColonne(x-2).include?(n))
