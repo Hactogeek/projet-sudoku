@@ -38,7 +38,7 @@ class Fenetre < Gtk::Window
 	    add(vboxMain)
 
 		#=========================#  Note: Menu = Groupe de MenuItem une fois définie un submenu d'un autres MenuItem qui sert de titre
-		# Creation Menu (à finir) #  Exemple:  Fichier [Menu: (Nouveau, Sauvegarder, ...)]
+		# Creation Menu 		  #  Exemple:  Fichier [Menu: (Nouveau, Sauvegarder, ...)]
 		#=========================#  Voir si on nomme les MenuItem "MI" pour faire plus propre
 
 	    menuBar = Gtk::MenuBar.new # Barre du menu

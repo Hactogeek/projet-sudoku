@@ -17,7 +17,7 @@ class FinJeu < Gtk::Window
 		set_default_size(919, 602)
 
 		#Création du label
-		msgLabel = Gtk::Label.new("FIN DU JEU!!!!!!!! BRAVO MORRAY!!!!!")
+		msgLabel = Gtk::Label.new("Félicitation !")
 
 
 		#Création de la table contenant les boutons

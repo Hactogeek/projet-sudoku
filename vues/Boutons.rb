@@ -59,21 +59,26 @@ class Boutons < Gtk::Box
 		add(btn)
 	end
 	
-	# change couleur du focus
+	# Méthode qui change la couleur du focus	
+	# * [Paramètre :]
+	# 				couleur => la couleur qu'on met sur le focus
 	def setCouleurSurFocus(couleur) 
 		if (@focus)
 			@focus.override_background_color(:normal, couleur)
 		end
 	end
 	
-	# change couleur du focus
+	# Méthode qui reset la couleur du focus	
 	def resetCouleurSurFocus() 
 		if (@focus)
 			@focus.override_background_color(:normal, COUL_BLANC)
 		end
 	end
 
-	# change couleur du focus
+
+	# Méthode qui change la couleur du bouton
+	# * [Paramètre :]
+	# 				couleur => la couleur qu'on met sur le bouton
 	def setCouleurBoutons(couleur) 
 		for i in 2..10
 			text = children()[children().size()-i].label

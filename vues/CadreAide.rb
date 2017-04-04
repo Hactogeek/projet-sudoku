@@ -108,6 +108,7 @@ class CadreAide < Gtk::Table
 		@hintButton.show()
 		@labelAide.set_text("")
 	end
+
 =begin
 	def loadMethode(n)
 		case n
@@ -146,6 +147,12 @@ class CadreAide < Gtk::Table
 		end
 	end
 =end
+
+	# Méthode qui set l'aide	
+	# * [Paramètre :]
+	# 				titre => le titre de l'aide
+	# 				listeCase => la liste des cases
+	# 				desc =>  la description de l'aide
 	def setAide(titre, listeCase, desc)
 		titreFormat = "<span font-weight=\"bold\" size=\"x-large\" foreground=\"#200020\">"+titre+"</span>\n"
 		listeCaseFormat = "<span font-style=\"italic\" size=\"large\" >Case:"+ (listeCase.empty? ? "Aucune" : listeCase.to_s) +"</span>\n"
@@ -153,6 +160,9 @@ class CadreAide < Gtk::Table
 		@labelAide.set_markup(titreFormat + listeCaseFormat + descFormat )
 	end
 
+	# Méthode qui défini un texte dans l'aide	
+	# * [Paramètre :]
+	# 				text => texte de l'aide
 	def setAideText(text)
 		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text+"</span>\n"
 		@labelAide.set_markup(textFormat)
