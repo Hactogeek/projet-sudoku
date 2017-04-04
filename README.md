@@ -11,11 +11,17 @@ Pour jouer à l'application il faut exécuter la commande :
 ### Partage des taches au sein du groupe
 
 Modira : chef de groupe / développeur
+
 Alexandre : documentaliste / développeur
+
 Tony : développeur
+
 Rémi : développeur
+
 Kilian : développeur
+
 Léo : développeur
+
 Yassin : développeur
 
 
