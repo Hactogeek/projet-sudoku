@@ -28,10 +28,10 @@ class Index < WindowSudoku
 			newWindow=Invite.new
 		end
 
-		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 919, :heigth => 200)))
+		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 919, :heigth => 200)))
 
 		#Placement des boutons et ajout dans la table
-		attach(header, 0, 9, 0, 3)
+		tableMain.attach(header, 0, 9, 0, 3)
 		tableMain.attach(seConnecter, 4, 6, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(creerProfil, 4, 6, 5, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(sessionInvite, 4, 6, 7, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
