@@ -438,35 +438,4 @@ end
 
 
 
-#puts plateau
-
-=begin
-plateau.setCaseJoueur(Position.new(0,1), 4)
-plateau.setCaseJoueur(Position.new(0,3), 1)
-plateau.setCaseJoueur(Position.new(1,2), 3)
-plateau.setCaseJoueur(Position.new(1,3), 5)
-plateau.setCaseJoueur(Position.new(1,7), 1)
-plateau.setCaseJoueur(Position.new(1,8), 9)
-plateau.setCaseJoueur(Position.new(2,5), 6)
-plateau.setCaseJoueur(Position.new(2,8), 3)
-plateau.setCaseJoueur(Position.new(3,2), 7)
-plateau.setCaseJoueur(Position.new(3,5), 5)
-plateau.setCaseJoueur(Position.new(3,7), 8)
-plateau.setCaseJoueur(Position.new(4,1), 8)
-plateau.setCaseJoueur(Position.new(4,2), 1)
-plateau.setCaseJoueur(Position.new(4,6), 9)
-plateau.setCaseJoueur(Position.new(4,7), 6)
-plateau.setCaseJoueur(Position.new(5,0), 9)
-plateau.setCaseJoueur(Position.new(5,3), 2)
-plateau.setCaseJoueur(Position.new(5,6), 7)
-plateau.setCaseJoueur(Position.new(6,0), 6)
-plateau.setCaseJoueur(Position.new(6,3), 9)
-plateau.setCaseJoueur(Position.new(7,0), 8)
-plateau.setCaseJoueur(Position.new(7,1), 1)
-plateau.setCaseJoueur(Position.new(7,5), 2)
-plateau.setCaseJoueur(Position.new(7,6), 4)
-plateau.setCaseJoueur(Position.new(8,5), 4)
-plateau.setCaseJoueur(Position.new(8,7), 9)
-=end
-
 #plateau.reduireGrille(0)
