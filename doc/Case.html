@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Case - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-getCandidat">#getCandidat</a>
+    
+    <li ><a href="#method-i-getOriginaleGrille">#getOriginaleGrille</a>
+    
+    <li ><a href="#method-i-getPosition">#getPosition</a>
+    
+    <li ><a href="#method-i-getSolutionJoueur">#getSolutionJoueur</a>
+    
+    <li ><a href="#method-i-getSolutionOriginale">#getSolutionOriginale</a>
+    
+    <li ><a href="#method-i-printJoueur">#printJoueur</a>
+    
+    <li ><a href="#method-i-printOri">#printOri</a>
+    
+    <li ><a href="#method-i-setOriginale">#setOriginale</a>
+    
+    <li ><a href="#method-i-setSolutionJoueur">#setSolutionJoueur</a>
+    
+    <li ><a href="#method-i-setSolutionOriginale">#setSolutionOriginale</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Case">
+  <h1 id="class-Case" class="class">
+    class Case
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(position)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initialisation de la position d&#39;une case de la grille</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">position</span>)
+        <span class="ruby-ivar">@position</span> = <span class="ruby-identifier">position</span>
+        <span class="ruby-ivar">@solutionOriginale</span> = <span class="ruby-string">&quot;.&quot;</span>
+        <span class="ruby-ivar">@solutionJoueur</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-ivar">@candidat</span> = <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>()
+        <span class="ruby-ivar">@originale</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-getCandidat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getCandidat</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>OK Méthode qui retourne la liste des candidats de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Candidat</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="getCandidat-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getCandidat</span>()
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@candidat</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getOriginaleGrille" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getOriginaleGrille</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne si une case est originale du puzzle</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="getOriginaleGrille-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getOriginaleGrille</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@originale</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getPosition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getPosition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne la position de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p><a href="Position.html">Position</a></p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="getPosition-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getPosition</span>()
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@position</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getSolutionJoueur" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getSolutionJoueur</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne la solution du joueur pour la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Integer</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="getSolutionJoueur-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getSolutionJoueur</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@solutionJoueur</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getSolutionOriginale" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getSolutionOriginale</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne la solution originale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Integer</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="getSolutionOriginale-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getSolutionOriginale</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@solutionOriginale</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-printJoueur" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">printJoueur</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="printJoueur-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">printJoueur</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@solutionJoueur</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+                <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;0&quot;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{@solutionJoueur}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-printOri" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">printOri</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Affichage d&#39;une solution de la <a href="Case.html">Case</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="printOri-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">printOri</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{@solutionOriginale}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setOriginale" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setOriginale</span><span
+            class="method-args">(originale)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p># OK # Méthode pour la MAJ de la liste des candidats de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]candidat Candiat pour la case</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="setOriginale-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setOriginale</span>(<span class="ruby-identifier">originale</span>)
+        <span class="ruby-ivar">@originale</span> = <span class="ruby-identifier">originale</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setSolutionJoueur" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setSolutionJoueur</span><span
+            class="method-args">(solJoueur)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode pour la MAJ de la solution du joueur de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]solJoueur Solution du joueur pour la case</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="setSolutionJoueur-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-identifier">solJoueur</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@originale</span> <span class="ruby-keyword">then</span>
+                <span class="ruby-ivar">@solutionJoueur</span> = <span class="ruby-identifier">solJoueur</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-ivar">@candidat</span> = <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setSolutionOriginale" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setSolutionOriginale</span><span
+            class="method-args">(solOriginale)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode pour la MAJ de la solution originale de la case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>[Fixnum]solOriginale Solution originale de la case</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="setSolutionOriginale-source">
+            <pre><span class="ruby-comment"># File api/Case.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-identifier">solOriginale</span>)
+        <span class="ruby-ivar">@solutionOriginale</span> = <span class="ruby-identifier">solOriginale</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

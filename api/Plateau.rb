@@ -259,87 +259,87 @@ class Plateau
 	#
 	# * [Retourne :]
 	# 				booleen
-    def valideGrille(position)
-    	if (position == @size * @size)
-    		return true
-    	end
+	def valideGrille(position)
+		if (position == @size * @size)
+			return true
+		end
 
-    	x = position/9
-    	y = position%9
+		x = position/9
+		y = position%9
 
-    	if (@grid[x][y].getSolutionJoueur !=  nil)
-    		return valideGrille(position+1)
-    	end
+		if (@grid[x][y].getSolutionJoueur !=  nil)
+			return valideGrille(position+1)
+		end
 
-    	@size.times do |k|
-    		if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-    			setCaseJoueur(Position.new(x,y), k+1)
+		@size.times do |k|
+			if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
+				setCaseJoueur(Position.new(x,y), k+1)
 
-    			if valideGrille(position+1)
-    				setCaseJoueur(Position.new(x,y), nil)
-    				return true
-    			end
-    		end
-    	end
-    	setCaseJoueur(Position.new(x,y), nil)
+				if valideGrille(position+1)
+					setCaseJoueur(Position.new(x,y), nil)
+					return true
+				end
+			end
+		end
+		setCaseJoueur(Position.new(x,y), nil)
 
-    	return false
-    end
+		return false
+	end
 
     # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
 	# * [Retourne :]
 	# 				booleen
-     def deuxOccurenceTab?(tab)
-     	occurence = false
-     	for i in (0...9)
-     		if tab[i] != nil
-     			kase1 = tab[i]
-     		else
-     			kase1 = nil
-     		end
-     		for j in (0...9)
-     			if tab[j] != nil
-     				kase2= tab[j]
-     			else
-     				kase2 = nil
-     			end
-     			if (i != j) && kase1 == kase2 && kase1 != nil
-     				return true
-     			end	
-     		end
+	def deuxOccurenceTab?(tab)
+		occurence = false
+		for i in (0...9)
+			if tab[i] != nil
+				kase1 = tab[i]
+			else
+				kase1 = nil
+			end
+			for j in (0...9)
+				if tab[j] != nil
+					kase2= tab[j]
+				else
+					kase2 = nil
+				end
+				if (i != j) && kase1 == kase2 && kase1 != nil
+					return true
+				end	
+			end
 
-     	end
+		end
 
-     	return false
-     end
+		return false
+	end
 
      # Méthode qui vérifie si la grille est correct
 	# * [Retourne :]
 	# 				booleen	
-     def correctGrille?
-     	self.each { |x,y,kase|
-     		ligne = getLigne(y)
-     		colonne = getColonne(x)
-     		region = getRegion(x/3, y/3)
-     		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
-     			return false
-     		end
-     	}
-     	return true
-     end
+	def correctGrille?
+		self.each { |x,y,kase|
+			ligne = getLigne(y)
+			colonne = getColonne(x)
+			region = getRegion(x/3, y/3)
+			if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+				return false
+			end
+		}
+		return true
+	end
 
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
 	# * [Retourne :]
 	# 				booleen	
-     def plein?
-     	pleine = true
-     	self.each { |x,y,kase|
-     		if  kase.getSolutionJoueur == nil
-     			pleine = false
-     		end
-     	}
-     	return pleine
-     end
+	def plein?
+		pleine = true
+		self.each { |x,y,kase|
+			if  kase.getSolutionJoueur == nil
+				pleine = false
+			end
+		}
+		return pleine
+	end
 
     # Méthode qui vérifie si la grille est complète et correct
 	# * [Paramètre :]
@@ -347,41 +347,84 @@ class Plateau
 	#
 	# * [Retourne :]
 	# 				booleen	
-     def complete?
-     	complete = false
-     	if self.plein? && self.correctGrille?
-     		complete = true
-     	end
-     	return complete
-     end
+	def complete?
+		complete = false
+		if self.plein? && self.correctGrille?
+			complete = true
+		end
+		return complete
+	end
 
     # Méthode pour réduire une grille en la gardant jouable
 	# * [Retourne :]
 	# 				self	
-    def reduireGrille (position, niveauDifficulte)
+	def reduireGrille (position, niveauDifficulte)
 
-    	listeCase = Array.new()
+		listeCase = Array.new()
 
-    	@size.times do |y|
-    		@size.times do |x|
-    			listeCase.insert(y*9+x, @grid[x][y])
-    		end
-    	end
+		@size.times do |y|
+			@size.times do |x|
+				listeCase.insert(y*9+x, @grid[x][y])
+			end
+		end
 
-    	listeCase.shuffle!
+		listeCase.shuffle!
 
-    	for uneCase in listeCase
-    		setCaseJoueur(uneCase.getPosition, nil)
-    		setCaseOriginale(uneCase.getPosition, false)
+		for uneCase in listeCase
+			setCaseJoueur(uneCase.getPosition, nil)
+			setCaseOriginale(uneCase.getPosition, false)
 
-    		if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
-    			setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
-    			setCaseOriginale(uneCase.getPosition, true)
-    		end
-    	end
+			if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
+				setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
+				setCaseOriginale(uneCase.getPosition, true)
+			end
+		end
 
-    	return self
-    end
+		return self
+	end
+
+	# Importe et résout la grille passé en paramètre
+	def importerGrille
+		@size.times do |y|
+			@size.times do |x|
+				if @grid[position.getX][position.getY].getSolutionJoueur() != nil
+					@grid[position.getX][position.getY].setSolutionOriginale(@grid[position.getX][position.getY].getSolutionJoueur())
+					@grid[position.getX][position.getY].setOriginale(true)
+				end
+			end
+		end
+		return resoudreGrilleImporter && correctGrille?
+	end
+
+	def resoudreGrilleImporter
+		if (!correctGrille?) 
+			return false
+		end
+
+		# On cherhce la première case vide
+		c = nil
+		@size.times do |y|
+			@size.times do |x|
+				c = @grid[position.getX][position.getY].getSolutionJoueur()
+				break if c != nil
+			end
+			break if c != nil
+		end
+
+		# Si la grille est complete
+		if c == nil 
+			return true
+		end
+
+		# On essaye tous les candidats
+		for n in (0...9)
+			@grid[position.getX][position.getY].setSolutionOriginale(n)
+			if resoudreGrilleImporter
+				return true
+			end
+		end
+		return false
+	end
 
 	# Méthode pour le parcours de la grille du plateau
 	# @yield [x, y, val] la position et la valeur courante

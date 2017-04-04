@@ -10,11 +10,12 @@ class Preferences < Gtk::Window
 			Gtk.main_quit
 		end
 
-		table = Gtk::Box.new(5, 5, true)
-		add(table)
+		hbox = Gtk::Box.new(:horizontal, 0)
 
-		table.attach(Gtk::Label.new("Couleur:"),)
+		table.add(Gtk::Label.new("Couleur:"))
 		colorPicker = Gnome::colorPicker.new()
+
+		add(hbox)
 		show_all
 	end
 end

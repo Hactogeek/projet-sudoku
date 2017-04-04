@@ -16,7 +16,7 @@ class Fenetre < Gtk::Window
 
 
 		# Property
-		set_title "ku"
+		set_title "Ku"
 		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
