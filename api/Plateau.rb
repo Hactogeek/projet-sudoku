@@ -154,6 +154,60 @@ class Plateau
 		return tableauRetour
 	end
 
+
+
+	# Méthode qui retourne un tableau les cases d'une ligne dans une région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getLigneRegion(x, y)
+		listeCase = Array.new
+		if x < 3
+			deb = 0
+			fin = 3	
+		elsif x < 6
+			deb = 3
+			fin = 6
+		else
+			deb = 6
+			fin = 9
+		end
+		for n in (deb...fin)
+			listeCase.push(@grid[n][y])
+		end
+		
+		return listeCase
+	end
+
+	# Méthode qui retourne un tableau des cases d'une colonne dans une région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getColonneRegion(x, y)
+		tableauCase = Array.new
+		if y < 3
+			deb = 0
+			fin = 3	
+		elsif y < 6
+			deb = 3
+			fin = 6
+		else
+			deb = 6
+			fin = 9
+		end
+		for n in (deb...fin)
+			tableauCase.push(@grid[x][n])
+		end
+		
+		return tableauCase
+	end	
+
 	# Méthode qui vérifie si un chiffre est sur une ligne
 	# * [Paramètre :]
 	# 				chiffre Le chiffre

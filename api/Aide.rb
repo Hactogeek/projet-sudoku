@@ -110,4 +110,47 @@ class Aide
 		end
 		return listeCase
 	end
+	
+	
+	# Méthode qui applique la technique Interactions entre régions
+	# @return listePosistion
+	def interactionsEntreRegions
+		listePos = Array.new
+		@partie.getPlateau
+		x = 0
+		y = 0
+		symbole = 0
+		
+		# Pour chaque ligne
+		for y in (0...9)
+			
+			# On récupère la ligne en trois partie
+			ligne1 = getLigneRegion(0, y)
+			ligne2 = getLigneRegion(3, y)
+			ligne2 = getLigneRegion(6, y)
+			
+			# Pour chaque symbole	
+			for symbole in (0...9)
+				if(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == false		
+			end
+		end
+
+		position = Position.new(x,y)
+		@partie.getPlateau.getCase(position)
+		return nil
+	end
+
+
+	# Méthode qui indique si la liste de case contient le candidat
+	# @param candidat
+	# @return boolean
+	def self.listeContientCandidat(listeCase, candidat)
+		listeCase.each { |kase|
+			if ((kase.getSolutionJoueur() == nil && kase.getCandidat().include?(candidat) == true) || (kase.getSolutionJoueur() == candidat - 1))
+				return true
+			end
+		}
+
+		return false
+	end
 end
