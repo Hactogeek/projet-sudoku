@@ -9,6 +9,7 @@ COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
 COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
 COUL_VIOLET      = Gdk::RGBA::new(0.7, 0.4, 0.8, 1.0)
 COUL_ROSE        = Gdk::RGBA::new(0.9, 0.7, 1.0, 1.0)
+COUL_ORANGE		 = Gdk::RGBA::new(1.0, 0.6, 0.5, 1.0)
 COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
 
 
@@ -21,12 +22,7 @@ class Grille < Gtk::Table
 		super(9, 9, true)
 		set_margin_left(1)
 
-		#==========================#
-		# Remplissage de la grille #
-		#==========================#
 	    @partie = partie
-	    @partie.creerPartie()
-	    remplirGrille()
 	end
 
 	def setCaseValeur(x, y, valeur)
@@ -49,7 +45,7 @@ class Grille < Gtk::Table
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
 
-				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placer la case machin")
+				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placé la case machin")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
@@ -133,6 +129,19 @@ class Grille < Gtk::Table
 
 	end
 
+	def colorCaseSuivant
+		resetCouleurSurFocus()
+		pos=@partie.getAide.coupSuivant
+		a=80-(9*pos[1].getY+pos[1].getX)
+		@focus=children[a]
+		if(pos[1]==nil)
+			print("\nIl n'y a pas de coup suivant.")
+		else
+			setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
+		end
+		return pos
+	end	
+
 	def resetCouleurSurFocus() # change couleur du focus
 		if (@focus)
 			css=<<-EOT
@@ -163,6 +172,10 @@ class Grille < Gtk::Table
 		end
 		i = 80 - children().index(@focus)
 		return Position.new(i%9,i/9)
+	end
+
+	def setCoordFocus(position)
+		@focus
 	end
 
 	def rafraichirGrille()
@@ -206,5 +219,9 @@ class Grille < Gtk::Table
 
 	def setCadreAide(cadreAide)
 		@cadreAide = cadreAide
+	end
+
+	def setCadreImportation(cadreImportation)
+		@cadreImportation = cadreImportation
 	end
 end

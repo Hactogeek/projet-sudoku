@@ -6,4 +6,6 @@ index = Index.new
 # Dir.chdir(Dir.pwd+"/profil/profilTest")
 # fenetre = Fenetre.new(Partie.nouvelle(3))
 
+#fenetre = FenetreImportee.new
+
 Gtk.main

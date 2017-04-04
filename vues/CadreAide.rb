@@ -69,6 +69,7 @@ class CadreAide < Gtk::Table
 	end
 
 	def startHint()
+		pos=@grille.colorCaseSuivant
 		if(@backButton == nil)
 			@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
 			@backButton.signal_connect "clicked" do |widget|
@@ -84,6 +85,7 @@ class CadreAide < Gtk::Table
 
 			@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
 			@finishButton.signal_connect "clicked" do |widget|
+				@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_BLANC)
 				cancelHint()
 			end
 			attach(@finishButton, 6,8 ,0,1)
@@ -94,7 +96,7 @@ class CadreAide < Gtk::Table
 		@moreButton.show()
 		@finishButton.show()
 		@hintButton.hide()
-		setAideText("Bla bla bla")
+		setAideText(pos[0])
 	end
 
 	def moreHint()
