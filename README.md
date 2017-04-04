@@ -4,7 +4,7 @@ Réalisation du projet aide à la résolution d'un sudoku réalisé par  Modira 
 
 ### Lancer le jeu
 
-Pour jouer à l'application il faut executer la commande :
+Pour jouer à l'application il faut exécuter la commande :
 
     ruby Main.rb
 
