@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class FinJeu - RDoc Documentation</title>
+<title>class Preferences - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -78,9 +78,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-FinJeu">
-  <h1 id="class-FinJeu" class="class">
-    class FinJeu
+<main role="main" aria-labelledby="class-Preferences">
+  <h1 id="class-Preferences" class="class">
+    class Preferences
   </h1>
 
   <section class="description">
@@ -130,34 +130,19 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vues/FinJeu.rb, line 5</span>
+            <pre><span class="ruby-comment"># File vues/Preferences.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-        <span class="ruby-keyword">super</span>
+        <span class="ruby-keyword">super</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">WindowType</span><span class="ruby-operator">::</span><span class="ruby-constant">TOPLEVEL</span>)
+        <span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;destroy&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_quit</span>
+        <span class="ruby-keyword">end</span>
 
-        <span class="ruby-comment"># signal_connect &quot;destroy&quot; do</span>
-        <span class="ruby-comment">#     Gtk.main_quit</span>
-        <span class="ruby-comment"># end</span>
+        <span class="ruby-identifier">hbox</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:horizontal</span>, <span class="ruby-value">0</span>)
 
-        <span class="ruby-identifier">set_title</span> <span class="ruby-string">&quot;Fin du jeu&quot;</span>
-        <span class="ruby-identifier">set_window_position</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Window</span><span class="ruby-operator">::</span><span class="ruby-constant">POS_CENTER</span>)
-        <span class="ruby-identifier">set_resizable</span>(<span class="ruby-keyword">false</span>)
+        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Couleur:&quot;</span>))
+        <span class="ruby-identifier">colorPicker</span> = <span class="ruby-constant">Gnome</span><span class="ruby-operator">::</span><span class="ruby-identifier">colorPicker</span>.<span class="ruby-identifier">new</span>()
 
-        <span class="ruby-comment">#Taille de la fenêtre, correspondant à celle du jeu.</span>
-        <span class="ruby-identifier">set_default_size</span>(<span class="ruby-value">919</span>, <span class="ruby-value">602</span>)
-
-        <span class="ruby-comment">#Création du label</span>
-        <span class="ruby-identifier">msgLabel</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Félicitation !&quot;</span>)
-
-
-        <span class="ruby-comment">#Création de la table contenant les boutons</span>
-        <span class="ruby-identifier">tableMain</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">10</span>, <span class="ruby-value">10</span>)
-
-
-        <span class="ruby-comment">#Placement des boutons et ajout dans la table</span>
-        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">msgLabel</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
-
-        <span class="ruby-identifier">add</span>(<span class="ruby-identifier">tableMain</span>)
-
+        <span class="ruby-identifier">add</span>(<span class="ruby-identifier">hbox</span>)
         <span class="ruby-identifier">show_all</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

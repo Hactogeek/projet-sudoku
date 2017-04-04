@@ -49,7 +49,7 @@ class Connexion < WindowSudoku
 
 		#Placement des boutons et ajout dans la table
 		tableMain.attach(nomLabel, 4, 6, 2, 3, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(vbox, 2, 6, 4, 8, Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0,0)
+		tableMain.attach(vbox, 2, 6, 4, 8, Gtk::AttachOptions::EXPAND | Gtk::AttachOptions::FILL, Gtk::AttachOptions::EXPAND | Gtk::AttachOptions::FILL, 0,0)
 		tableMain.attach(valider, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(retour, 2, 4, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 

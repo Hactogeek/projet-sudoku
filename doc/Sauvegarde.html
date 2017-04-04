@@ -72,13 +72,13 @@
     
     <li ><a href="#method-c-creer">::creer</a>
     
+    <li ><a href="#method-c-loadPartie">::loadPartie</a>
+    
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-loadPartie">#loadPartie</a>
+    <li ><a href="#method-c-savePartie">::savePartie</a>
     
     <li ><a href="#method-i-loadProfil">#loadProfil</a>
-    
-    <li ><a href="#method-i-savePartie">#savePartie</a>
     
     <li ><a href="#method-i-saveProfil">#saveProfil</a>
     
@@ -135,9 +135,52 @@
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 7</span>
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Sauvegarde</span>.<span class="ruby-identifier">creer</span>()
         <span class="ruby-identifier">new</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-loadPartie" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">loadPartie</span><span
+            class="method-args">(nomPartie)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui charge une partie</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>Le nom de la partie</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>La partie</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="loadPartie-source">
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Sauvegarde</span>.<span class="ruby-identifier">loadPartie</span>(<span class="ruby-identifier">nomPartie</span>)
+        <span class="ruby-ivar">@jeu</span>=<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;.txt&#39;</span>, <span class="ruby-string">&#39;rb&#39;</span>).<span class="ruby-identifier">read</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@jeu</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -168,8 +211,48 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 11</span>
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-savePartie" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">savePartie</span><span
+            class="method-args">(partie, nomPartie)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui sauvegarde une partie</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>La partie Le nom de la partie</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="savePartie-source">
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Sauvegarde</span>.<span class="ruby-identifier">savePartie</span>(<span class="ruby-identifier">partie</span>, <span class="ruby-identifier">nomPartie</span>)
+        <span class="ruby-ivar">@jeu</span>=<span class="ruby-identifier">partie</span>
+        <span class="ruby-identifier">serialized_array</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@jeu</span>)
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.txt&quot;</span>, <span class="ruby-string">&#39;wb&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">serialized_array</span>) }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -189,41 +272,6 @@
        </header>
 
     
-      <div id="method-i-loadPartie" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">loadPartie</span><span
-            class="method-args">(nomJoueur, nomPartie)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="loadPartie-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">loadPartie</span>(<span class="ruby-identifier">nomJoueur</span>, <span class="ruby-identifier">nomPartie</span>)
-        <span class="ruby-comment">#loadProfil(nomJoueur)</span>
-        <span class="ruby-ivar">@jeu</span>=<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&#39;.txt&#39;</span>, <span class="ruby-string">&#39;rb&#39;</span>).<span class="ruby-identifier">read</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@jeu</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-loadProfil" class="method-detail ">
         
         <div class="method-heading">
@@ -237,53 +285,20 @@
 
         <div class="method-description">
           
-          <p>Permet de rentrer dans le répertoire du profil</p>
+          <p>Méthode qui charge un profil de joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>Le nom du joueur</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="loadProfil-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 30</span>
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">loadProfil</span>(<span class="ruby-identifier">nomJoueur</span>)
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">nomJoueur</span>).<span class="ruby-identifier">semettreDansProfil</span>(<span class="ruby-identifier">nomJoueur</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-savePartie" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">savePartie</span><span
-            class="method-args">(nomJoueur, partie, nomPartie)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p><a href="Sauvegarde.html">Sauvegarde</a> dans le dossier du profil
-correspondant.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="savePartie-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">savePartie</span>(<span class="ruby-identifier">nomJoueur</span>, <span class="ruby-identifier">partie</span>, <span class="ruby-identifier">nomPartie</span>)
-        <span class="ruby-comment">#loadProfil(nomJoueur)</span>
-        <span class="ruby-ivar">@jeu</span>=<span class="ruby-identifier">partie</span>
-        <span class="ruby-identifier">serialized_array</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@jeu</span>)
-        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.txt&quot;</span>, <span class="ruby-string">&#39;wb&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">serialized_array</span>) }
-        <span class="ruby-comment">#partie.setSave(nomPartie)</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -308,13 +323,13 @@ correspondant.</p>
 
         <div class="method-description">
           
-          <p>Permet d&#39;enregistrer un profil</p>
+          <p>Méthode qui sauvegarde un profil</p>
           
           
 
           
           <div class="method-source-code" id="saveProfil-source">
-            <pre><span class="ruby-comment"># File src/Sauvegarde.rb, line 35</span>
+            <pre><span class="ruby-comment"># File api/Sauvegarde.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">saveProfil</span>()
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">nomJoueur</span>).<span class="ruby-identifier">semettreDansProfil</span>(<span class="ruby-identifier">nomJoueur</span>)
 <span class="ruby-keyword">end</span></pre>

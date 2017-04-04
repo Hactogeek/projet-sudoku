@@ -70,6 +70,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-getAccumulated">#getAccumulated</a>
+    
     <li ><a href="#method-i-penalite">#penalite</a>
     
     <li ><a href="#method-i-reset">#reset</a>
@@ -151,6 +153,39 @@
        </header>
 
     
+      <div id="method-i-getAccumulated" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getAccumulated</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui renvoie accumulated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="getAccumulated-source">
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getAccumulated</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@accumulated</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-penalite" class="method-detail ">
         
         <div class="method-heading">
@@ -164,29 +199,15 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<pre>Méthode qui permet d&#39;ajouter un nombre de seconde de &quot;pénalité&quot;</pre>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>s</code> -&gt; temps en seconde que l&#39;on souhaite ajouter au <a
-href="Timer.html">Timer</a></p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Timer.html#method-i-penalite">#penalite</a>(10)</p>
+          <p>Méthode qui permet d&#39;ajouter un nombre de seconde de “pénalité”</p>
           
           
 
           
           <div class="method-source-code" id="penalite-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 79</span>
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">penalite</span> (<span class="ruby-identifier">s</span>)
-  <span class="ruby-ivar">@accumulated</span> = <span class="ruby-ivar">@accumulated</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>
+        <span class="ruby-ivar">@accumulated</span> = <span class="ruby-ivar">@accumulated</span><span class="ruby-operator">+</span><span class="ruby-identifier">s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -211,28 +232,17 @@ href="Timer.html">Timer</a></p>
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<pre class="ruby"><span class="ruby-constant">Méthode</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">remise</span> <span class="ruby-identifier">à</span> <span class="ruby-identifier">zero</span> <span class="ruby-identifier">du</span> <span class="ruby-constant">Timer</span>
-</pre>
-<ul><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Timer.html#method-i-reset">#reset</a></p>
+          <p>Méthode de remise à zero du <a href="Timer.html">Timer</a></p>
           
           
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 60</span>
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>
-
-  <span class="ruby-ivar">@accumulated</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@elapsed</span> = <span class="ruby-value">0</span>
-      <span class="ruby-ivar">@start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+        <span class="ruby-ivar">@accumulated</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@elapsed</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -257,33 +267,23 @@ href="Timer.html">Timer</a></p>
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>Méthode  d&#39;initialisation et de lancement du timer</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>secStart -&gt; le temps de l&#39;initialisation que l&#39;on souhaite pour
+l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
+</dd></dl>
 </li></ul>
-
-<pre class="ruby"><span class="ruby-constant">Méthode</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">lancement</span> <span class="ruby-identifier">du</span> <span class="ruby-constant">Timer</span> <span class="ruby-identifier">et</span> <span class="ruby-identifier">initialisation</span>
-</pre>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>secStart</code> -&gt; Le temps de l&#39;initialisation que l&#39;on
-souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Timer.html#method-i-start">#start</a>(0)</p>
           
           
 
           
           <div class="method-source-code" id="start-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 33</span>
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span> (<span class="ruby-identifier">secStart</span>)
-  <span class="ruby-ivar">@accumulated</span> = <span class="ruby-identifier">secStart</span>
-  <span class="ruby-ivar">@elapsed</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-      
+        <span class="ruby-ivar">@accumulated</span> = <span class="ruby-identifier">secStart</span>
+        <span class="ruby-ivar">@elapsed</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -308,25 +308,16 @@ souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<pre class="ruby"><span class="ruby-constant">Méthode</span> <span class="ruby-identifier">de</span> <span class="ruby-identifier">pause</span> <span class="ruby-identifier">du</span> <span class="ruby-constant">Timer</span>
-</pre>
-<ul><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Timer.html#method-i-stop">#stop</a></p>
+          <p>Méthode de pause du timer</p>
           
           
 
           
           <div class="method-source-code" id="stop-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 48</span>
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stop</span>
-  <span class="ruby-ivar">@accumulated</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@elapsed</span>
+        <span class="ruby-ivar">@elapsed</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start</span>
+        <span class="ruby-ivar">@accumulated</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@elapsed</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -351,26 +342,20 @@ souhaite pour l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<pre class="ruby"><span class="ruby-constant">Méthode</span> <span class="ruby-identifier">qui</span> <span class="ruby-identifier">calcule</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">temps</span> <span class="ruby-identifier">passé</span> <span class="ruby-identifier">et</span> <span class="ruby-identifier">le</span> <span class="ruby-identifier">renvoie</span>
-</pre>
+          <p>Méthode qui calcule le temps passé et le renvoie</p>
           
           
 
           
           <div class="method-source-code" id="tick-source">
-            <pre><span class="ruby-comment"># File src/Timer.rb, line 88</span>
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tick</span>
-  <span class="ruby-ivar">@elapsed</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start</span>
-  <span class="ruby-identifier">time</span> = <span class="ruby-ivar">@accumulated</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@elapsed</span>
-  <span class="ruby-identifier">h</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, (<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600</span>))
-  <span class="ruby-identifier">m</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, ((<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">%</span> <span class="ruby-value">3600</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span>))
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, (<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>))
- 
-  <span class="ruby-identifier">newtime</span> = <span class="ruby-node">&quot;#{h}:#{m}:#{s}&quot;</span>
+        <span class="ruby-ivar">@elapsed</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start</span>
+        <span class="ruby-identifier">time</span>=<span class="ruby-ivar">@accumulated</span><span class="ruby-operator">+</span><span class="ruby-ivar">@elapsed</span>
+        <span class="ruby-identifier">h</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, (<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600</span>))
+        <span class="ruby-identifier">m</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, ((<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">%</span> <span class="ruby-value">3600</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span>))
+        <span class="ruby-identifier">s</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%02i&#39;</span>, (<span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>))
+        <span class="ruby-identifier">newtime</span> = <span class="ruby-node">&quot;#{h}:#{m}:#{s}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

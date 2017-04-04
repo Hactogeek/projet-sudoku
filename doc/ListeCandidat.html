@@ -139,7 +139,7 @@
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 8</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>
         <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -172,7 +172,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 12</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-ivar">@tableauCandidat</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">9</span>)       
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
@@ -207,7 +207,7 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
           
           <div class="method-source-code" id="placerCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 56</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">placerCandidat</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">listeCandidat</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseListeCandidat</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCandidat</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -247,7 +247,7 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
           
           <div class="method-source-code" id="retirerCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 71</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retirerCandidat</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">listeCandidat</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseListeCandidat</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCandidat</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -293,7 +293,7 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 20</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-comment"># @tableauCandidat.uniq</span>
@@ -328,7 +328,7 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
           
           <div class="method-source-code" id="getListeCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getListeCandidat</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tableauCandidat</span>
 <span class="ruby-keyword">end</span></pre>
@@ -362,7 +362,7 @@ symbole @return : vrai ou faux</p>
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 38</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">symbole</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -395,7 +395,7 @@ symbole @return : vrai ou faux</p>
 
           
           <div class="method-source-code" id="remove-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 29</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-keyword">nil</span>)
