@@ -155,6 +155,29 @@ class Plateau
 	end
 
 
+	# Méthode qui retourne un tableau des cases d'une region spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getCaseRegion(posX, posY)
+		listeCase = Array.new()
+
+		posX = posX-(posX%3)
+		posY = posY-(posY%3)
+
+		for n in (posX...posX+3)
+			for m in (posY...posY+3)
+						listeCase.push(@grid[n][m])
+			end
+		end
+
+		return listeCase
+	end
+
+
 
 	# Méthode qui retourne un tableau les cases d'une ligne dans une région spécifié
 	# * [Paramètre :]

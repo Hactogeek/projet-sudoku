@@ -117,9 +117,8 @@ class Aide
 	def interactionsEntreRegions
 		listePos = Array.new
 		@partie.getPlateau
-		x = 0
-		y = 0
 		symbole = 0
+		region = nil
 		
 		# Pour chaque ligne
 		for y in (0...9)
@@ -131,13 +130,41 @@ class Aide
 			
 			# Pour chaque symbole	
 			for symbole in (0...9)
-				if(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == false		
+
+				# On test pour les 3 configurations possibles sur la ligne
+				if(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == false	&& Aide.listeContientCandidat(ligne3, symbole) == true)
+					#symbole => symbole a enlever
+					#ligne3 => ligne ou ce trouve forcement le symbole
+					
+					region = getCaseRegion(x/3,y/3)
+					#enlever la ligne3 dans la region
+					ligne3.each { |kase|
+						region.delete(kase)
+					}
+					#region où il faut enlever les candidats
+					
+					
+
+				elsif(Aide.listeContientCandidat(ligne1, symbole) == true && Aide.listeContientCandidat(ligne2, symbole) == false && Aide.listeContientCandidat(ligne3, symbole) == false)
+
+				elsif(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == true && Aide.listeContientCandidat(ligne3, symbole) == false)
+
+				end
 			end
 		end
 
-		position = Position.new(x,y)
-		@partie.getPlateau.getCase(position)
-		return nil
+		# Pour chaque colonne
+		# TODO faire la même chose que au dessus
+
+
+
+		# On recupere les postions
+		if region != nil
+			region.each { |kase|
+				listePos.push(kase.getPosition())
+			}
+		end
+		return listePos
 	end
 
 
