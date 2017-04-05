@@ -22,26 +22,33 @@ class Aide
 		@partie.getPlateau().each do |x,y,laCase|
 			if (laCase.getSolutionJoueur() == nil)
 				for n in (0...9)
+					# Verification de la region
 					add = !(@partie.getPlateau.getRegion(x,y).include?(n))
 
 					break if add == false
 
+					# absentColonne(chiffre, colonne)
+					# 
+					# Attention ca ne renvoie plus les mêmes valeurs !
+
+					# Verification de la ligne
 					if x%3 == 2
-						add = !(@partie.getPlateau().getLigne(x-1).include?(n)) || (@partie.getPlateau().getLigne(x-2).include?(n))
+						add = (@partie.getPlateau().getLigne(x-1).include?(n)) && (@partie.getPlateau().getLigne(x-2).include?(n))
 					elsif x%3 == 1
-						add = !(@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x-1).include?(n))
+						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x-1).include?(n))
 					else
-						add = !(@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x+2).include?(n))
+						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x+2).include?(n))
 					end
 
 					break if add == false
 
-					if x%3 == 2
-						add = !(@partie.getPlateau().getColonne(x-1).include?(n)) || (@partie.getPlateau().getColonne(x-2).include?(n))
-					elsif x%3 == 1
-						add = !(@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x-1).include?(n))
+					# Verification de la colonne
+					if y%3 == 2
+						add = (@partie.getPlateau().getColonne(y-1).include?(n)) && (@partie.getPlateau().getColonne(y-2).include?(n))
+					elsif y%3 == 1
+						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y-1).include?(n))
 					else
-						add = !(@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x+2).include?(n))
+						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y+2).include?(n))
 					end
 
 					if add 
@@ -54,6 +61,7 @@ class Aide
 		# print "\n\tlisteCase", listeCase
 
 		if listeCase.empty?
+			print "NIL"
 			return nil 
 		end
 
@@ -65,14 +73,17 @@ class Aide
 		listeCase = Array.new()
 
 		@partie.getPlateau().each do |x,y,laCase| 
-			if laCase.getCandidat().getListeCandidat().compact().length() == 1
-				listeCase.push(Position.new(x,y))
+			if (laCase.getSolutionJoueur() == nil)
+				if laCase.getCandidat().getListeCandidat().compact().length() == 1
+					listeCase.push(Position.new(x,y))
+				end
 			end
 		end
 
 		# print "listeCase", listeCase
 
 		if listeCase.empty?
+			print "NIL2"
 			return nil 
 		end
 
@@ -244,12 +255,12 @@ class Aide
 	end
 
 	def testInteractionsEntreRegions(symbole, listePresent, listeAbsent, region, regionEnlever)
-			
+
 		return ((Aide.listeContientCandidatSymbole(listeAbsent, symbole) == false) &&
 			(Aide.listeContientSymbole(region, symbole) == false) &&
 			(Aide.listeContientCandidat(listePresent, symbole) == true) &&
 			(Aide.listeContientCandidat(regionEnlever, symbole) == true))
-			
+
 	end
 
 	# Méthode qui retourne les donnees necessaire à la methode interactionsEntreRegions
