@@ -106,11 +106,15 @@
     
     <li ><a href="#method-i-getRegion">#getRegion</a>
     
+    <li ><a href="#method-i-importerGrille">#importerGrille</a>
+    
     <li ><a href="#method-i-plein-3F">#plein?</a>
     
     <li ><a href="#method-i-printOri">#printOri</a>
     
     <li ><a href="#method-i-reduireGrille">#reduireGrille</a>
+    
+    <li ><a href="#method-i-resoudreGrilleImporter">#resoudreGrilleImporter</a>
     
     <li ><a href="#method-i-setCaseJoueur">#setCaseJoueur</a>
     
@@ -482,11 +486,11 @@
           <div class="method-source-code" id="complete-3F-source">
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 350</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
-   <span class="ruby-identifier">complete</span> = <span class="ruby-keyword">false</span>
-   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">plein?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">correctGrille?</span>
-           <span class="ruby-identifier">complete</span> = <span class="ruby-keyword">true</span>
-   <span class="ruby-keyword">end</span>
-   <span class="ruby-keyword">return</span> <span class="ruby-identifier">complete</span>
+        <span class="ruby-identifier">complete</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">plein?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">correctGrille?</span>
+                <span class="ruby-identifier">complete</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">complete</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -572,15 +576,15 @@
           <div class="method-source-code" id="correctGrille-3F-source">
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">correctGrille?</span>
-   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
-           <span class="ruby-identifier">ligne</span> = <span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">y</span>)
-           <span class="ruby-identifier">colonne</span> = <span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span>)
-           <span class="ruby-identifier">region</span> = <span class="ruby-identifier">getRegion</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
-           <span class="ruby-keyword">if</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">ligne</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">colonne</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">region</span>)
-                   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-           <span class="ruby-keyword">end</span>
-   }
-   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">ligne</span> = <span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">y</span>)
+                <span class="ruby-identifier">colonne</span> = <span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span>)
+                <span class="ruby-identifier">region</span> = <span class="ruby-identifier">getRegion</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">ligne</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">colonne</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">region</span>)
+                        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+                <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -619,27 +623,27 @@ un tableau</p>
           <div class="method-source-code" id="deuxOccurenceTab-3F-source">
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 292</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deuxOccurenceTab?</span>(<span class="ruby-identifier">tab</span>)
-   <span class="ruby-identifier">occurence</span> = <span class="ruby-keyword">false</span>
-   <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
-           <span class="ruby-keyword">if</span> <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-                   <span class="ruby-identifier">kase1</span> = <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">i</span>]
-           <span class="ruby-keyword">else</span>
-                   <span class="ruby-identifier">kase1</span> = <span class="ruby-keyword">nil</span>
-           <span class="ruby-keyword">end</span>
-           <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
-                   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">j</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-                           <span class="ruby-identifier">kase2</span>= <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">j</span>]
-                   <span class="ruby-keyword">else</span>
-                           <span class="ruby-identifier">kase2</span> = <span class="ruby-keyword">nil</span>
-                   <span class="ruby-keyword">end</span>
-                   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">j</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">kase2</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase1</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-                           <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-                   <span class="ruby-keyword">end</span>     
-           <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">occurence</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                        <span class="ruby-identifier">kase1</span> = <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">i</span>]
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">kase1</span> = <span class="ruby-keyword">nil</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">j</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                                <span class="ruby-identifier">kase2</span>= <span class="ruby-identifier">tab</span>[<span class="ruby-identifier">j</span>]
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">kase2</span> = <span class="ruby-keyword">nil</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">j</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">kase2</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase1</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                                <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">end</span> 
+                <span class="ruby-keyword">end</span>
 
-   <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
 
-   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -676,7 +680,7 @@ position et la valeur courante</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File api/Plateau.rb, line 391</span>
+            <pre><span class="ruby-comment"># File api/Plateau.rb, line 435</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
                 <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1001,6 +1005,48 @@ position et la valeur courante</p>
       </div>
 
     
+      <div id="method-i-importerGrille" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">importerGrille</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Importe et résout la grille passé en paramètre</p>
+          
+          
+
+          
+          <div class="method-source-code" id="importerGrille-source">
+            <pre><span class="ruby-comment"># File api/Plateau.rb, line 387</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">importerGrille</span>
+        <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;importeGrille&quot;</span>
+        <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+                <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                                <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getSolutionJoueur</span>())
+                                <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setOriginale</span>(<span class="ruby-keyword">true</span>)
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">correctGrille?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">resoudreGrilleImporter</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-plein-3F" class="method-detail ">
         
         <div class="method-heading">
@@ -1027,13 +1073,13 @@ position et la valeur courante</p>
           <div class="method-source-code" id="plein-3F-source">
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 334</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">plein?</span>
-   <span class="ruby-identifier">pleine</span> = <span class="ruby-keyword">true</span>
-   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
-           <span class="ruby-keyword">if</span>  <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-                   <span class="ruby-identifier">pleine</span> = <span class="ruby-keyword">false</span>
-           <span class="ruby-keyword">end</span>
-   }
-   <span class="ruby-keyword">return</span> <span class="ruby-identifier">pleine</span>
+        <span class="ruby-identifier">pleine</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span>  <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+                        <span class="ruby-identifier">pleine</span> = <span class="ruby-keyword">false</span>
+                <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">pleine</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1070,7 +1116,7 @@ href="Plateau.html">Plateau</a></p>
 
           
           <div class="method-source-code" id="printOri-source">
-            <pre><span class="ruby-comment"># File api/Plateau.rb, line 420</span>
+            <pre><span class="ruby-comment"># File api/Plateau.rb, line 464</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">printOri</span>
         <span class="ruby-identifier">res</span>  = <span class="ruby-string">&quot;&quot;</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1120,27 +1166,86 @@ href="Plateau.html">Plateau</a></p>
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 361</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reduireGrille</span> (<span class="ruby-identifier">position</span>, <span class="ruby-identifier">niveauDifficulte</span>)
 
-    <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
+        <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
 
-    <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-            <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-                    <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">y</span><span class="ruby-operator">*</span><span class="ruby-value">9</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>, <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">x</span>][<span class="ruby-identifier">y</span>])
-            <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
+        <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+                <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">y</span><span class="ruby-operator">*</span><span class="ruby-value">9</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>, <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">x</span>][<span class="ruby-identifier">y</span>])
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">shuffle!</span>
+        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">shuffle!</span>
 
-    <span class="ruby-keyword">for</span> <span class="ruby-identifier">uneCase</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">listeCase</span>
-            <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">nil</span>)
-            <span class="ruby-identifier">setCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">false</span>)
+        <span class="ruby-keyword">for</span> <span class="ruby-identifier">uneCase</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">listeCase</span>
+                <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">nil</span>)
+                <span class="ruby-identifier">setCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">false</span>)
 
-            <span class="ruby-keyword">if</span>(<span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>).<span class="ruby-identifier">getListeCandidat</span>().<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">niveauDifficulte</span>)
-                    <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-identifier">getCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>))
-                    <span class="ruby-identifier">setCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">true</span>)
-            <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span>(<span class="ruby-identifier">candidatPossible</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>).<span class="ruby-identifier">getListeCandidat</span>().<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">niveauDifficulte</span>)
+                        <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-identifier">getCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>))
+                        <span class="ruby-identifier">setCaseOriginale</span>(<span class="ruby-identifier">uneCase</span>.<span class="ruby-identifier">getPosition</span>, <span class="ruby-keyword">true</span>)
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-resoudreGrilleImporter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">resoudreGrilleImporter</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="resoudreGrilleImporter-source">
+            <pre><span class="ruby-comment"># File api/Plateau.rb, line 400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resoudreGrilleImporter</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">correctGrille?</span>) 
+                <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># On cherhce la première case vide</span>
+        <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+                <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">c</span> = <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">getSolutionJoueur</span>()
+                        <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># Si la grille est complete</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> 
+                <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># On essaye tous les candidats</span>
+        <span class="ruby-keyword">for</span> <span class="ruby-identifier">n</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
+                <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-identifier">n</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">resoudreGrilleImporter</span>
+                        <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getX</span>][<span class="ruby-identifier">position</span>.<span class="ruby-identifier">getY</span>].<span class="ruby-identifier">setSolutionOriginale</span>(<span class="ruby-keyword">nil</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1296,7 +1401,7 @@ href="Plateau.html">Plateau</a></p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File api/Plateau.rb, line 403</span>
+            <pre><span class="ruby-comment"># File api/Plateau.rb, line 447</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-identifier">res</span>  = <span class="ruby-string">&quot;&quot;</span>
         <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1350,30 +1455,30 @@ href="Plateau.html">Plateau</a></p>
           <div class="method-source-code" id="valideGrille-source">
             <pre><span class="ruby-comment"># File api/Plateau.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span>)
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@size</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@size</span>)
-            <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@size</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@size</span>)
+                <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">position</span><span class="ruby-operator">/</span><span class="ruby-value">9</span>
-    <span class="ruby-identifier">y</span> = <span class="ruby-identifier">position</span><span class="ruby-operator">%</span><span class="ruby-value">9</span>
+        <span class="ruby-identifier">x</span> = <span class="ruby-identifier">position</span><span class="ruby-operator">/</span><span class="ruby-value">9</span>
+        <span class="ruby-identifier">y</span> = <span class="ruby-identifier">position</span><span class="ruby-operator">%</span><span class="ruby-value">9</span>
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">x</span>][<span class="ruby-identifier">y</span>].<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span>  <span class="ruby-keyword">nil</span>)
-            <span class="ruby-keyword">return</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
-    <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@grid</span>[<span class="ruby-identifier">x</span>][<span class="ruby-identifier">y</span>].<span class="ruby-identifier">getSolutionJoueur</span> <span class="ruby-operator">!=</span>  <span class="ruby-keyword">nil</span>)
+                <span class="ruby-keyword">return</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+        <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-            <span class="ruby-keyword">if</span>(<span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">x</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">y</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">absentRegion</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>))
-                    <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+        <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span>(<span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">x</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">y</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">absentRegion</span>(<span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>))
+                        <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-identifier">k</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
 
-                    <span class="ruby-keyword">if</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
-                            <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-keyword">nil</span>)
-                            <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-                    <span class="ruby-keyword">end</span>
-            <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-keyword">nil</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">valideGrille</span>(<span class="ruby-identifier">position</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
+                                <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-keyword">nil</span>)
+                                <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">setCaseJoueur</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>), <span class="ruby-keyword">nil</span>)
 
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

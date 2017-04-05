@@ -4,7 +4,8 @@ class ListeCandidat
 	private_class_method :new
 
 	# Constructeur de la classe
-	# @return : self
+	# * [Retourne :]
+	# 				self	
 	def ListeCandidat.creer
 		new
 	end
@@ -15,8 +16,10 @@ class ListeCandidat
 	end
 
 	# Méthode pour ajouter un candidat
-	# @param [Fixnum] symbole
-	# @return : self	
+	# * [Paramètre :]
+	# 				symbole	
+	# * [Retourne :]
+	# 				self		
 	def add(symbole)
 		@tableauCandidat.insert(symbole, symbole)
 		# @tableauCandidat.uniq
@@ -24,8 +27,10 @@ class ListeCandidat
 	end
 
 	# Méthode pour supprimer un candidat
-	# @param [Fixnum] symbole
-	# @return : self
+	# * [Paramètre :]
+	# 				symbole	
+	# * [Retourne :]
+	# 				self
 	def remove(symbole)
 		@tableauCandidat.delete(symbole)
 		@tableauCandidat.insert(symbole, nil)
@@ -33,14 +38,17 @@ class ListeCandidat
 	end
 
 	# Méthode qui retourne vrai si le candidat est présent
-	# @param [Fixnum] symbole
-	# @return : vrai ou faux
+	# * [Paramètre :]
+	# 				symbole	
+	# * [Retourne :]
+	# 				booleen
 	def include?(symbole)
 		return @tableauCandidat.include?(symbole)
 	end
 
 	# Méthode qui retourne le tableau des candidats
-	# @return : [Fixnum] Array
+	# * [Retourne :]
+	# 				Array
 	def getListeCandidat
 		return @tableauCandidat
 	end
@@ -49,10 +57,12 @@ class ListeCandidat
 	class << self
 		
 		# Méthode qui permet de placer un candidat sur une case
-		# @param plateau plateau
-		# @param position pos
-		# @param [Fixnum] symbole
-		# @return listeCandidat
+		# * [Paramètre :]
+		# 				plateau plateau
+		# 				position pos
+		# 				symbole	
+		# * [Retourne :]
+		# 				listeCandidat
 		def placerCandidat(plateau, pos, symbole)
 			listeCandidat = plateau.getCaseListeCandidat(pos)
 			if listeCandidat == nil then
@@ -64,10 +74,12 @@ class ListeCandidat
 		end 
 
 		# Méthode qui permet d'enlever un candidat d'une case
-		# @param plateau plateau
-		# @param position pos
-		# @param [Fixnum] symbole
-		# @return listeCandidat
+		# * [Paramètre :]
+		# 				plateau plateau
+		# 				position pos
+		# 				symbole	
+		# * [Retourne :]
+		# 				listeCandidat
 		def retirerCandidat(plateau, pos, symbole)
 			listeCandidat = plateau.getCaseListeCandidat(pos)
 			if listeCandidat != nil then

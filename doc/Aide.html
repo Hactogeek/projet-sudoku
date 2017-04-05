@@ -221,7 +221,7 @@
 
           
           <div class="method-source-code" id="afficherLesMethodesDeResolution-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 96</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherLesMethodesDeResolution</span>
 
 <span class="ruby-keyword">end</span></pre>
@@ -254,7 +254,7 @@
 
           
           <div class="method-source-code" id="candidatGrille-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 39</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatGrille</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -324,7 +324,7 @@ unique</p>
 
           
           <div class="method-source-code" id="candidatUnique-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 101</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatUnique</span>()
         <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
@@ -335,21 +335,21 @@ unique</p>
                                 <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
 
                                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">end</span>
 
                                 <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
 
                                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">add</span> = (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
+                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
                                 <span class="ruby-keyword">end</span>
 
                                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> 
@@ -359,7 +359,7 @@ unique</p>
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 
-        <span class="ruby-comment"># print &quot;listeCase&quot;, listeCase</span>
+        <span class="ruby-comment"># print &quot;\n\tlisteCase&quot;, listeCase</span>
 
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span>
                 <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> 
@@ -396,7 +396,7 @@ unique</p>
 
           
           <div class="method-source-code" id="caseResolvable-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 20</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">caseResolvable</span>
         <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
 
@@ -443,7 +443,7 @@ unique</p>
 
           
           <div class="method-source-code" id="coupSuivant-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 74</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coupSuivant</span>()
         <span class="ruby-identifier">solution</span> = <span class="ruby-identifier">candidatUnique</span>()
         <span class="ruby-identifier">solutionText</span> = <span class="ruby-string">&quot;Candidat Unique&quot;</span>
@@ -462,7 +462,7 @@ unique</p>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-comment"># return solution</span>
-        <span class="ruby-keyword">return</span> [<span class="ruby-identifier">solutionText</span>, <span class="ruby-identifier">solution</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">solution</span>.<span class="ruby-identifier">length</span>)]]
+        <span class="ruby-keyword">return</span> [<span class="ruby-string">&quot;Pas de méthode pour t&#39;aider !&quot;</span>, <span class="ruby-keyword">nil</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -499,7 +499,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="explicationChoix-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 54</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">explicationChoix</span>(<span class="ruby-identifier">candidat</span>, <span class="ruby-identifier">pos</span>)
 
 <span class="ruby-keyword">end</span></pre>
@@ -532,7 +532,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="resoudre-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resoudre</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -652,7 +652,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="verificationGrille-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 61</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verificationGrille</span>
         <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>

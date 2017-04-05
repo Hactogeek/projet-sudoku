@@ -300,7 +300,7 @@
             <pre><span class="ruby-comment"># File api/Partie.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">creerPartie</span>
         <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">completeGrille</span>()
-        <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">printOri</span>()
+        <span class="ruby-comment">#puts @plateau.printOri()</span>
         <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">reduireGrille</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@difficulte</span>) <span class="ruby-comment"># A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile</span>
         <span class="ruby-ivar">@checkPoint</span>.<span class="ruby-identifier">addMemento</span>
 <span class="ruby-keyword">end</span></pre>

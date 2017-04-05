@@ -232,7 +232,7 @@
 
           
           <div class="method-source-code" id="cancelHint-source">
-            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 104</span>
+            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cancelHint</span>()
         <span class="ruby-ivar">@backButton</span>.<span class="ruby-identifier">hide</span>()
         <span class="ruby-ivar">@moreButton</span>.<span class="ruby-identifier">hide</span>()
@@ -269,7 +269,7 @@
 
           
           <div class="method-source-code" id="moreHint-source">
-            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 100</span>
+            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">moreHint</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -345,7 +345,7 @@ l&#39;aide</p>
 
           
           <div class="method-source-code" id="setAide-source">
-            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 156</span>
+            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setAide</span>(<span class="ruby-identifier">titre</span>, <span class="ruby-identifier">listeCase</span>, <span class="ruby-identifier">desc</span>)
         <span class="ruby-identifier">titreFormat</span> = <span class="ruby-node">&quot;&lt;span font-weight=\&quot;bold\&quot; size=\&quot;x-large\&quot; foreground=\&quot;#200020\&quot;&gt;&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">titre</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;&lt;/span&gt;\n&quot;</span>
         <span class="ruby-identifier">listeCaseFormat</span> = <span class="ruby-string">&quot;&lt;span font-style=\&quot;italic\&quot; size=\&quot;large\&quot; &gt;Case:&quot;</span><span class="ruby-operator">+</span> (<span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;Aucune&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">+</span><span class="ruby-string">&quot;&lt;/span&gt;\n&quot;</span>
@@ -386,7 +386,7 @@ l&#39;aide</p>
 
           
           <div class="method-source-code" id="setAideText-source">
-            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 166</span>
+            <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setAideText</span>(<span class="ruby-identifier">text</span>)
         <span class="ruby-identifier">textFormat</span> = <span class="ruby-node">&quot;&lt;span size=\&quot;large\&quot; foreground=\&quot;#200020\&quot;&gt;&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">text</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;&lt;/span&gt;\n&quot;</span>
         <span class="ruby-ivar">@labelAide</span>.<span class="ruby-identifier">set_markup</span>(<span class="ruby-identifier">textFormat</span>)
@@ -422,6 +422,7 @@ l&#39;aide</p>
           <div class="method-source-code" id="startHint-source">
             <pre><span class="ruby-comment"># File vues/CadreAide.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">startHint</span>()
+        <span class="ruby-identifier">pos</span>=<span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">colorCaseSuivant</span>
         <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@backButton</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
                 <span class="ruby-ivar">@backButton</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Retour&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
                 <span class="ruby-ivar">@backButton</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
@@ -437,6 +438,7 @@ l&#39;aide</p>
 
                 <span class="ruby-ivar">@finishButton</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Finir&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
                 <span class="ruby-ivar">@finishButton</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
+                        <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">setCouleurCase</span>(<span class="ruby-identifier">pos</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">getX</span>(), <span class="ruby-identifier">pos</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">getY</span>(), <span class="ruby-constant">COUL_BLANC</span>)
                         <span class="ruby-identifier">cancelHint</span>()
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-identifier">attach</span>(<span class="ruby-ivar">@finishButton</span>, <span class="ruby-value">6</span>,<span class="ruby-value">8</span> ,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>)
@@ -447,7 +449,7 @@ l&#39;aide</p>
         <span class="ruby-ivar">@moreButton</span>.<span class="ruby-identifier">show</span>()
         <span class="ruby-ivar">@finishButton</span>.<span class="ruby-identifier">show</span>()
         <span class="ruby-ivar">@hintButton</span>.<span class="ruby-identifier">hide</span>()
-        <span class="ruby-identifier">setAideText</span>(<span class="ruby-string">&quot;Bla bla bla&quot;</span>)
+        <span class="ruby-identifier">setAideText</span>(<span class="ruby-identifier">pos</span>[<span class="ruby-value">0</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
