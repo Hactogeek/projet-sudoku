@@ -178,7 +178,7 @@
         <span class="ruby-comment"># Quitter</span>
         <span class="ruby-identifier">quitterMenuItem</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">MenuItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Quitter&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
     <span class="ruby-identifier">quitterMenuItem</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;activate&quot;</span> <span class="ruby-keyword">do</span>
-        <span class="ruby-identifier">newWindow</span> = <span class="ruby-constant">ConfirmQuit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@partie</span>, <span class="ruby-keyword">self</span>, <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">newWindow</span> = <span class="ruby-constant">MenuProfil</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">fileMenu</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">quitterMenuItem</span>)
 
@@ -215,6 +215,15 @@
         <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-ivar">@sousGrille</span>, <span class="ruby-value">0</span>,<span class="ruby-value">5</span>,<span class="ruby-value">1</span>,<span class="ruby-value">9</span>) <span class="ruby-comment"># Support Grille (background + sous grille + grille)</span>
         <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-ivar">@cadreImportation</span> , <span class="ruby-value">5</span>,<span class="ruby-value">9</span>,<span class="ruby-value">1</span>,<span class="ruby-value">9</span>) <span class="ruby-comment"># Aide</span>
         <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-ivar">@boutons</span>   , <span class="ruby-value">0</span>,<span class="ruby-value">9</span>,<span class="ruby-value">9</span>,<span class="ruby-value">10</span>) <span class="ruby-comment"># Boutons</span>
+
+        <span class="ruby-ivar">@cadreImportation</span>.<span class="ruby-identifier">getHintButton</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">getPartie</span>().<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">importerGrille</span>
+                        <span class="ruby-identifier">hide</span>
+                        <span class="ruby-identifier">newWindow</span>=<span class="ruby-constant">Fenetre</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">getPartie</span>)
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@cadreImportation</span>.<span class="ruby-identifier">setAideText</span>(<span class="ruby-string">&quot;Erreur&quot;</span>)
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">show_all</span>
 <span class="ruby-keyword">end</span></pre>

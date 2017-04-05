@@ -70,6 +70,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-donnerDate">#donnerDate</a>
+    
     <li ><a href="#method-i-getAccumulated">#getAccumulated</a>
     
     <li ><a href="#method-i-penalite">#penalite</a>
@@ -151,6 +153,40 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-donnerDate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">donnerDate</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui donne la date du jour</p>
+          
+          
+
+          
+          <div class="method-source-code" id="donnerDate-source">
+            <pre><span class="ruby-comment"># File api/Timer.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">donnerDate</span>
+        <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+        <span class="ruby-identifier">time</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%d %B %Y&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-getAccumulated" class="method-detail ">
@@ -270,7 +306,7 @@
           <p>Méthode  d&#39;initialisation et de lancement du timer</p>
 <ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
 <dd>
-<p>secStart -&gt; le temps de l&#39;initialisation que l&#39;on souhaite pour
+<p>secStart le temps de l&#39;initialisation que l&#39;on souhaite pour
 l&#39;amorçage du <a href="Timer.html">Timer</a> en seconde</p>
 </dd></dl>
 </li></ul>

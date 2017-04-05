@@ -22,7 +22,7 @@ class Timer
 
 	# Méthode  d'initialisation et de lancement du timer
 	# * [Paramètre :]
-	# 				secStart -> le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
+	# 				secStart le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
 	def start (secStart)
 		@accumulated = secStart
 		@elapsed = 0
