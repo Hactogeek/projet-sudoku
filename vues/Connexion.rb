@@ -5,6 +5,7 @@ Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 class Connexion < WindowSudoku
 
 	def initialize
+
 		super("Connexion")
 
 		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../vues/header.png", :width => 205, :heigth => 200)))

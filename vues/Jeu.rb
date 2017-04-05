@@ -185,7 +185,7 @@ class Jeu < Gtk::Window
 	        # Préférences
 	        preferencesMenuItem = Gtk::MenuItem.new(:label => "Préférences", :use_underline => false)
             preferencesMenuItem.signal_connect "activate" do
-            	newWindow = Preferences.new(@grille)
+            	newWindow = Preferences.new(@grille, @sousGrille)
             end
             optionMenu.add(preferencesMenuItem)
 
