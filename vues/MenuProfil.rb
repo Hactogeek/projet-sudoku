@@ -2,21 +2,10 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class MenuProfil < Gtk::Window
+class MenuProfil < WindowSudoku
 
 	def initialize
-		super()
-
-		signal_connect "destroy" do
-			Gtk.main_quit
-		end
-
-		set_title "Menu"
-		set_window_position(Gtk::WindowPosition::CENTER)
-		set_resizable(false)
-
-		#Taille de la fenêtre, correspondant à celle du jeu.
-		set_default_size(919, 602)
+		super("Menu")
 
 		#Création du label
 		nomJoueur = Gtk::Label.new(File.split(Dir.getwd)[-1])
@@ -31,13 +20,10 @@ class MenuProfil < Gtk::Window
 		deconnexion = Gtk::Button.new(:label => "Deconnexion")
 		aPropos = Gtk::Button.new(:label => "A propos")
 
-		#Création de la table contenant les boutons
-		tableMain = Gtk::Table.new(10, 10)
-
 		#Redirection des boutons
 		nouvellePartie.signal_connect "clicked" do |widget|
 			hide
-			newWindow=ChoixDifficulte.new(0)
+			newWindow=ChoixMode.new
 		end
 		importerGrille.signal_connect "clicked" do |widget|
 			hide
@@ -53,6 +39,8 @@ class MenuProfil < Gtk::Window
 		parametres.signal_connect "clicked" do |widget|
 		end
 		methodeRes.signal_connect "clicked" do |widget|
+			hide
+			newWindow=MethodeRes.new(0)
 		end
 		deconnexion.signal_connect "clicked" do |widget|
 			hide
@@ -74,8 +62,6 @@ class MenuProfil < Gtk::Window
 		tableMain.attach(methodeRes, 4, 6, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(deconnexion, 4, 6, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(aPropos, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-
-		add(tableMain)
 
 		show_all
 	end

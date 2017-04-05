@@ -2,21 +2,10 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class Invite < Gtk::Window
+class Invite < WindowSudoku
 
 	def initialize
-		super
-
-		signal_connect "destroy" do
-			Gtk.main_quit
-		end
-
-		set_title "Invité"
-		set_window_position(Gtk::WindowPosition::CENTER)
-		set_resizable(false)
-
-		#Taille de la fenêtre, correspondant à celle du jeu.
-		set_default_size(919, 602)
+		super("Invité")
 
 		#Création des boutons
 		nouvellePartie = Gtk::Button.new(:label => "Nouvelle partie")
@@ -25,9 +14,6 @@ class Invite < Gtk::Window
 		methodeRes = Gtk::Button.new(:label => "Méthode de résolutions")
 		deconnexion = Gtk::Button.new(:label => "Déconnexion")
 		aPropos = Gtk::Button.new(:label => "A propos")
-
-		#Création de la table contenant les boutons
-		tableMain = Gtk::Table.new(10, 10)
 
 		#Redirection des boutons
 		nouvellePartie.signal_connect "clicked" do |widget|
@@ -43,6 +29,8 @@ class Invite < Gtk::Window
 			newWindow=CreationProfil.new(1)
 		end
 		methodeRes.signal_connect "clicked" do |widget|
+			hide
+			newWindow=MethodeRes.new(0)
 		end
 		deconnexion.signal_connect "clicked" do |widget|
 			hide
@@ -61,9 +49,6 @@ class Invite < Gtk::Window
 		tableMain.attach(methodeRes, 4, 6, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(deconnexion, 4, 6, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(aPropos, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-
-
-		add(tableMain)
 
 		show_all
 	end

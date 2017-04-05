@@ -2,21 +2,10 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class APropos < Gtk::Window
+class APropos < WindowSudoku
 
 	def initialize(invite)
-		super()
-
-		signal_connect "destroy" do
-			Gtk.main_quit
-		end
-
-		set_title "A Propos"
-		set_window_position(Gtk::WindowPosition::CENTER)
-		set_resizable(false)
-
-		#Taille de la fenêtre, correspondant à celle du jeu.
-		set_default_size(919, 602)
+		super("A Propos")
 
 		#Création du label
 		app = Gtk::Label.new("Application créée par le groupe D dans le cadre du deuxième semestre de la licence 3 Sciences pour Ingénieur.")
@@ -31,9 +20,6 @@ class APropos < Gtk::Window
 
 		#Création des boutons
 		retour = Gtk::Button.new(:label => "Retour")
-
-		#Création de la table contenant les boutons
-		tableMain = Gtk::Table.new(10, 10)
 
 		#Redirection des boutons
 		retour.signal_connect "clicked" do |widget|
@@ -56,8 +42,6 @@ class APropos < Gtk::Window
 		tableMain.attach(remi, 4, 6, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(modira, 4, 6, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(retour, 4, 6, 9, 10, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-
-		add(tableMain)
 		
 		show_all
 	end

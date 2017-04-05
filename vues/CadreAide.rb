@@ -40,35 +40,6 @@ class CadreAide < Gtk::Table
 			startHint()
 		end
 		attach(@hintButton, 3,5 ,0,1)
-
-=begin
-		@methode1 = Gtk::Button.new(:label =>"Methode du poney", :use_underline => nil, :stock_id => nil)
-		@methode1.signal_connect "clicked" do |widget|
-			loadMethode(1)
-		end
-		@methode2 = Gtk::Button.new(:label =>"Methode de dragibus", :use_underline => nil, :stock_id => nil)
-		@methode2.signal_connect "clicked" do |widget|
-			loadMethode(2)
-		end
-		@methode3 = Gtk::Button.new(:label =>"Methode du couscous", :use_underline => nil, :stock_id => nil)
-		@methode3.signal_connect "clicked" do |widget|
-			loadMethode(3)
-		end
-		@methode4 = Gtk::Button.new(:label =>"Methode de caribou", :use_underline => nil, :stock_id => nil)
-		@methode4.signal_connect "clicked" do |widget|
-			loadMethode(4)
-		end
-		@methode5 = Gtk::Button.new(:label =>"Methode de la methode", :use_underline => nil, :stock_id => nil)
-		@methode5.signal_connect "clicked" do |widget|
-			loadMethode(5)
-		end
-
-		attach(@methode1, 0,8, 0,1)
-		attach(@methode2, 0,8, 1,2)
-		attach(@methode3, 0,8, 2,3)
-		attach(@methode4, 0,8, 3,4)
-		attach(@methode5, 0,8, 4,5)
-=end
 	end
 
 	def startHint()
@@ -144,45 +115,6 @@ class CadreAide < Gtk::Table
 			remove(@learnButton)
 		end
 	end
-
-=begin
-	def loadMethode(n)
-		case n
-		when 1
-			# load la première méthode
-		when 2
-			# deuxième méthode
-		when 3
-			# etc
-		when 4
-			# etc
-		when 5
-			# etc
-		else
-			return
-		end
-		@methodeActive = n
-
-		setAideTitre(("Bienvenue dans la méthode "+n.to_s))
-
-		@methode1.hide()
-		@methode2.hide()
-		@methode3.hide()
-		@methode4.hide()
-		@methode5.hide()
-		@labelAide.show()
-		if (@backButton == nil)
-			@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
-			@backButton.signal_connect "clicked" do |widget|
-				loadMenu()
-			end
-			attach(@backButton, 0,8 ,0,1)
-			@backButton.show()
-		else
-			@backButton.show()
-		end
-	end
-=end
 
 	# Méthode qui set l'aide	
 	# * [Paramètre :]
