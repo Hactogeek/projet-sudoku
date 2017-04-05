@@ -22,6 +22,7 @@ class Grille < Gtk::Table
 	@colorError
 	@colorNext
 	@colorNeutral
+	@colorText
 
 	def initialize (partie)
 		super(9, 9, true)
@@ -31,6 +32,7 @@ class Grille < Gtk::Table
 		@colorError = COUL_ROUGE
 		@colorNext = COUL_VERT
 		@colorNeutral = COUL_BLANC
+		@colorText = "#FFFFFF"
 
 		#==========================#
 		# Remplissage de la grille #
@@ -57,8 +59,6 @@ class Grille < Gtk::Table
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
-
-				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placé la case machin")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new

@@ -37,6 +37,14 @@ class Preferences < Gtk::Window
 			destroy()
 		}
 		vbox.add(button)
+
+		button = Gtk::ColorButton.new(Gdk::Color.parse("#ffffff"))
+		button.signal_connect("clicked"){
+			@grille.setColorStyle()
+			@grille.remplirGrille()
+			destroy()
+		}
+		vbox.add(button)
 		#colorPicker = Gtk::ColorChooserWidget.new()
 		#hbox.add(colorPicker)
 		
