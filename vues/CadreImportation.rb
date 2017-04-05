@@ -23,6 +23,11 @@ class CadreImportation < Gtk::Table
 
 		@hintButton = Gtk::Button.new(:label =>"Valider", :use_underline => nil, :stock_id => nil)
 		@hintButton.signal_connect "clicked" do |widget|
+			if @grille.getPartie().getPlateau().importerGrille
+				setAideText("Grille Importer")
+			else
+				setAideText("Erreur")
+			end
 		end
 		attach(@hintButton, 3,5 ,0,1)
 
