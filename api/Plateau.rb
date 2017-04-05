@@ -352,6 +352,27 @@ class Plateau
 		return tabCandidatPossible
 	end
 
+	# Méthode qui enleve pour la region, colonne, ligne de la position
+	# * [Paramètre :]
+	# 				position La position de la case
+	#				symbole le symbole à retirer des candidats
+	#
+	# * [Retourne :]
+	def enleverCandidat(position, symbole)
+		ligne = getLigne(position.getX())	
+		colonne = getColonne(position.getY())
+		region = getCaseRegion(position.getX(),position.getY())
+		ligne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		colonne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		region.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+	end
+
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# * [Paramètre :]
 	# 				position La position de la case
@@ -448,7 +469,7 @@ class Plateau
 		return false
 	end
 
-     # Méthode qui vérifie si la grille est correct
+        # Méthode qui vérifie si la grille est correct
 	# * [Retourne :]
 	# 				booleen	
 	def correctGrille?
@@ -457,6 +478,18 @@ class Plateau
 			colonne = getColonne(x).compact.map(&:getSolutionJoueur)
 			region = getRegion(x/3, y/3).compact.map(&:getSolutionJoueur)
 			if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+				return false
+			end
+		}
+		return true
+	end
+
+	# Méthode qui vérifie si les candidats sont corrects
+	# * [Retourne :]
+	# 				booleen	
+	def correctCandidat?
+		self.each { |x,y,kase|
+			if kase.getCandidat().include?(kase.getSolutionOriginale) == false
 				return false
 			end
 		}
@@ -474,6 +507,18 @@ class Plateau
 			end
 		}
 		return pleine
+	end
+
+	# Méthode qui vérifie si il y a des candidats dans la grille
+	# * [Retourne :]
+	# 				booleen	
+	def aucunCandidat?
+		self.each { |x,y,kase|
+			if  kase.getCandidat().empty? == false
+				return false
+			end
+		}
+		return true
 	end
 
     # Méthode qui vérifie si la grille est complète et correct
