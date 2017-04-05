@@ -34,6 +34,45 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		loadAllCandidats()
 	end
 
+	def refreshAllCandidats()
+		if(!@candidat)
+			return
+		end
+
+		for x in 0..8
+			for y in 0..8
+				refreshCandidatsCase(x,y)
+			end
+		end
+	end
+
+	def refreshCandidatsCase(x, y)
+		if (!@candidat)
+			return
+		end
+
+		position = Position.new(x,y)
+		if (@grille.getPartie().getPlateau().getCaseJoueur(position) != nil)
+			pos = (x*81 + y*3) + 1
+			for i in 0..2
+				for u in 0..2
+					@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
+				end
+			end			
+			return
+		end
+		
+		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
+		
+		pos = (x*81 + y*3) + 1
+		for i in 0..2
+			for u in 0..2
+				@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat[(u+i*3)+1]}</span>")
+			end
+		end
+	end
+
+
 	def loadAllCandidats()
 		if(!@candidat)
 			return
@@ -43,7 +82,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 
 		for x in 0..8
 			for y in 0..8
-				loadCandidatsCase(x,y)
+				refreshCandidatsCase(x,y)
 			end
 		end
 	end
