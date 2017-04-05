@@ -20,13 +20,13 @@ class Aide
 		listeCase = Array.new
 		@partie.getPlateau().each do |x,y,laCase|
 			laCase.getCandidat.getListeCandidat.compact.each do |val|
-
-				if @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
-					listeCase.add([Position.new(x,y), val])
-				elsif @partie.getPlateau().getColonne(y).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
-					listeCase.add([Position.new(x,y), val])
-				elsif @partie.getPlateau().getRegion(x,y).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
-					listeCase.add([Position.new(x,y), val])
+				# print @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten,"\n"
+				if @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
+				elsif @partie.getPlateau().getColonne(y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
+				elsif @partie.getPlateau().getRegion(x,y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
 				end
 			end
 		end
@@ -163,7 +163,7 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
-		# solution = hiddenSingle()
+		solution = hiddenSingle()
 
 		if solution != nil
 			# return solution
