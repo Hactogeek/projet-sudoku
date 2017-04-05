@@ -352,6 +352,27 @@ class Plateau
 		return tabCandidatPossible
 	end
 
+	# Méthode qui enleve pour la region, colonne, ligne de la position
+	# * [Paramètre :]
+	# 				position La position de la case
+	#				symbole le symbole à retirer des candidats
+	#
+	# * [Retourne :]
+	def enleverCandidat(position, symbole)
+		ligne = getLigne(position.getX())	
+		colonne = getColonne(position.getY())
+		region = getCaseRegion(position.getX(),position.getY())
+		ligne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		colonne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		region.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+	end
+
 	# Méthode qui retourne les listes des candidats impossibles pour une case
 	# * [Paramètre :]
 	# 				position La position de la case
@@ -448,7 +469,7 @@ class Plateau
 		return false
 	end
 
-     # Méthode qui vérifie si la grille est correct
+        # Méthode qui vérifie si la grille est correct
 	# * [Retourne :]
 	# 				booleen	
 	def correctGrille?
