@@ -356,8 +356,6 @@ class Plateau
 	# * [Paramètre :]
 	# 				position La position de la case
 	#				symbole le symbole à retirer des candidats
-	#
-	# * [Retourne :]
 	def enleverCandidat(position, symbole)
 		ligne = getLigne(position.getX())	
 		colonne = getColonne(position.getY())

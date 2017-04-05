@@ -110,7 +110,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">()</span>
+            class="method-args">(grille)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -130,19 +130,51 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vues/Preferences.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+            <pre><span class="ruby-comment"># File vues/Preferences.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">grille</span>)
         <span class="ruby-keyword">super</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">WindowType</span><span class="ruby-operator">::</span><span class="ruby-constant">TOPLEVEL</span>)
         <span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;destroy&quot;</span> <span class="ruby-keyword">do</span>
                 <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_quit</span>
         <span class="ruby-keyword">end</span>
 
+        <span class="ruby-ivar">@grille</span> = <span class="ruby-identifier">grille</span>
+
+        <span class="ruby-comment"># Property</span>
+        <span class="ruby-identifier">set_title</span> <span class="ruby-string">&quot;ku&quot;</span>
+        <span class="ruby-identifier">set_window_position</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">WindowPosition</span><span class="ruby-operator">::</span><span class="ruby-constant">CENTER</span>)
+        <span class="ruby-identifier">set_resizable</span>(<span class="ruby-keyword">false</span>)
+        <span class="ruby-identifier">vbox</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vertical</span>, <span class="ruby-value">0</span>)
         <span class="ruby-identifier">hbox</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:horizontal</span>, <span class="ruby-value">0</span>)
+        
+        <span class="ruby-identifier">vbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Choisissez votre thème:&quot;</span>))
+        <span class="ruby-identifier">vbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">hbox</span>)
+        
+        <span class="ruby-identifier">rbDefault</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">RadioButton</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Default&quot;</span>)
+        <span class="ruby-identifier">rbMonokai</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">RadioButton</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Monokai&quot;</span>, <span class="ruby-value">:member</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rbDefault</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
+        <span class="ruby-identifier">rbDefault</span>.<span class="ruby-identifier">set_group</span>([<span class="ruby-identifier">rbDefault</span>, <span class="ruby-identifier">rbMonokai</span>])
 
-        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Couleur:&quot;</span>))
-        <span class="ruby-identifier">colorPicker</span> = <span class="ruby-constant">Gnome</span><span class="ruby-operator">::</span><span class="ruby-identifier">colorPicker</span>.<span class="ruby-identifier">new</span>()
+        <span class="ruby-identifier">hbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">rbDefault</span>)
+        <span class="ruby-identifier">hbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">rbMonokai</span>)
 
-        <span class="ruby-identifier">add</span>(<span class="ruby-identifier">hbox</span>)
+        <span class="ruby-identifier">button</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;Sauvergarder&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">:stock_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>)
+        <span class="ruby-identifier">button</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;clicked&quot;</span>){
+                <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">setColorStyle</span>()
+                <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">remplirGrille</span>()
+                <span class="ruby-identifier">destroy</span>()
+        }
+        <span class="ruby-identifier">vbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">button</span>)
+
+        <span class="ruby-identifier">button</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">ColorButton</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Gdk</span><span class="ruby-operator">::</span><span class="ruby-constant">Color</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#ffffff&quot;</span>))
+        <span class="ruby-identifier">button</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;clicked&quot;</span>){
+                <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">setColorStyle</span>()
+                <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">remplirGrille</span>()
+                <span class="ruby-identifier">destroy</span>()
+        }
+        <span class="ruby-identifier">vbox</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">button</span>)
+        <span class="ruby-comment">#colorPicker = Gtk::ColorChooserWidget.new()</span>
+        <span class="ruby-comment">#hbox.add(colorPicker)</span>
+        
+        <span class="ruby-identifier">add</span>(<span class="ruby-identifier">vbox</span>)
         <span class="ruby-identifier">show_all</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

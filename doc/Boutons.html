@@ -156,7 +156,11 @@
                                 <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">setValeurSurFocus</span>(<span class="ruby-identifier">widget</span>.<span class="ruby-identifier">label</span>.<span class="ruby-identifier">to_i</span>)
                                 <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">resetColorOnAll</span>()
                                 <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">setColorOnValue</span>(<span class="ruby-identifier">widget</span>.<span class="ruby-identifier">label</span>, <span class="ruby-constant">COUL_VERT</span>)
-                                <span class="ruby-ivar">@sousGrille</span>.<span class="ruby-identifier">loadAllCandidats</span>()
+                                <span class="ruby-identifier">pos</span>=<span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">getCoordFocus</span>
+                                <span class="ruby-keyword">if</span>(<span class="ruby-identifier">pos!</span>=<span class="ruby-keyword">nil</span>)
+                                        <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">getPartie</span>.<span class="ruby-identifier">getPlateau</span>.<span class="ruby-identifier">enleverCandidat</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-identifier">widget</span>.<span class="ruby-identifier">label</span>.<span class="ruby-identifier">to_i</span>)
+                                        <span class="ruby-ivar">@sousGrille</span>.<span class="ruby-identifier">refreshAllCandidats</span>
+                                <span class="ruby-keyword">end</span>
                         <span class="ruby-keyword">else</span>
                                 <span class="ruby-ivar">@sousGrille</span>.<span class="ruby-identifier">setCandidatSurFocus</span>(<span class="ruby-identifier">widget</span>.<span class="ruby-identifier">label</span>.<span class="ruby-identifier">to_i</span>)
                         <span class="ruby-keyword">end</span>
@@ -255,7 +259,7 @@
 
           
           <div class="method-source-code" id="resetCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 72</span>
+            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resetCouleurSurFocus</span>() 
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-ivar">@focus</span>.<span class="ruby-identifier">override_background_color</span>(<span class="ruby-value">:normal</span>, <span class="ruby-constant">COUL_BLANC</span>)
@@ -295,7 +299,7 @@
 
           
           <div class="method-source-code" id="setCouleurBoutons-source">
-            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 82</span>
+            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurBoutons</span>(<span class="ruby-identifier">couleur</span>) 
         <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">10</span>
                 <span class="ruby-identifier">text</span> = <span class="ruby-identifier">children</span>()[<span class="ruby-identifier">children</span>().<span class="ruby-identifier">size</span>()<span class="ruby-operator">-</span><span class="ruby-identifier">i</span>].<span class="ruby-identifier">label</span>
@@ -336,7 +340,7 @@
 
           
           <div class="method-source-code" id="setCouleurSurFocus-source">
-            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 65</span>
+            <pre><span class="ruby-comment"># File vues/Boutons.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setCouleurSurFocus</span>(<span class="ruby-identifier">couleur</span>) 
         <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@focus</span>)
                 <span class="ruby-ivar">@focus</span>.<span class="ruby-identifier">override_background_color</span>(<span class="ruby-value">:normal</span>, <span class="ruby-identifier">couleur</span>)
