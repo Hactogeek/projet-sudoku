@@ -116,64 +116,117 @@ class Aide
 	# @return listePosistion
 	def interactionsEntreRegions
 		listePos = Array.new
-		@partie.getPlateau
-		symbole = 0
-		region = nil
 		
-		# Pour chaque ligne
-		for y in (0...9)
-			
-			# On récupère la ligne en trois partie
-			ligne1 = getLigneRegion(0, y)
-			ligne2 = getLigneRegion(3, y)
-			ligne2 = getLigneRegion(6, y)
-			
-			# Pour chaque symbole	
-			for symbole in (0...9)
+		# Pour chaque case
+		for x in (0...9)
+			for y in (0...9)
+				# Pour chaque symbole	
+				for symbole in (0...9)	
+					# On test pour la ligne	
+					lignePresent, ligneAbsent, region, regionEnlever = getLigneInteractionsEntreRegions(x, y)
+					if testInteractionsEntreRegions(symbole, lignePresent, ligneAbsent, region, regionEnlever)
+						print("\n Symbole :"+symbole.to_s)
 
-				# On test pour les 3 configurations possibles sur la ligne
-				if(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == false	&& Aide.listeContientCandidat(ligne3, symbole) == true)
-					#symbole => symbole a enlever
-					#ligne3 => ligne ou ce trouve forcement le symbole
-					
-					region = getCaseRegion(x/3,y/3)
-					#enlever la ligne3 dans la region
-					ligne3.each { |kase|
-						region.delete(kase)
-					}
-					#region où il faut enlever les candidats
-					
-					
+						lignePresent.each { |kase|
+							pos = kase.getPosition()
+							print("\n x="+pos.getX.to_s+", y="+pos.getY.to_s)
+							listePos.push(pos)
+						}
+						return listePos
+					end
+					# On test pour la colonne
+					colonnePresent, colonneAbsent, region, regionEnlever = getColonneInteractionsEntreRegions(x, y)
+					if testInteractionsEntreRegions(symbole, colonnePresent, colonneAbsent, region, regionEnlever)
+						print("\n Symbole :"+symbole.to_s)
 
-				elsif(Aide.listeContientCandidat(ligne1, symbole) == true && Aide.listeContientCandidat(ligne2, symbole) == false && Aide.listeContientCandidat(ligne3, symbole) == false)
-
-				elsif(Aide.listeContientCandidat(ligne1, symbole) == false && Aide.listeContientCandidat(ligne2, symbole) == true && Aide.listeContientCandidat(ligne3, symbole) == false)
-
+						colonnePresent.each { |kase|
+							pos = kase.getPosition()
+							print("\n x="+pos.getX.to_s+", y="+pos.getY.to_s)
+							listePos.push(pos)
+						}
+						return listePos
+					end
 				end
 			end
-		end
-
-		# Pour chaque colonne
-		# TODO faire la même chose que au dessus
-
-
-
-		# On recupere les postions
-		if region != nil
-			region.each { |kase|
-				listePos.push(kase.getPosition())
-			}
-		end
+		end	
+		
 		return listePos
 	end
 
+	def testInteractionsEntreRegions(symbole, listePresent, listeAbsent, region, regionEnlever)
+			
+		return ((Aide.listeContientCandidatSymbole(listeAbsent, symbole) == false) &&
+			(Aide.listeContientSymbole(region, symbole) == false) &&
+			(Aide.listeContientCandidat(listePresent, symbole) == true) &&
+			(Aide.listeContientCandidat(regionEnlever, symbole) == true))
+			
+	end
+
+	# Méthode qui retourne les donnees necessaire à la methode interactionsEntreRegions
+	# @return lignePresent, ligneAbsent, region, regionEnlever
+	def getColonneInteractionsEntreRegions(x, y)
+		colonnePresent = @partie.getPlateau().getColonneRegion(x,y)
+		colonneAbsent = @partie.getPlateau().getColonneAutreRegion(x,y)
+		region = @partie.getPlateau().getCaseRegion(x,y)
+		
+		regionEnlever = Array.new
+		
+		region.each { |kase|
+			regionEnlever.push(kase)
+		}
+		colonnePresent.each { |kase|
+			regionEnlever.delete(kase)
+		}
+		return colonnePresent, colonneAbsent, region, regionEnlever
+	end
+
+	# Méthode qui retourne les donnees necessaire à la methode interactionsEntreRegions
+	# @return lignePresent, ligneAbsent, region, regionEnlever
+	def getLigneInteractionsEntreRegions(x, y)
+		lignePresent = @partie.getPlateau().getLigneRegion(x,y)
+		ligneAbsent = @partie.getPlateau().getLigneAutreRegion(x,y)
+		region = @partie.getPlateau().getCaseRegion(x,y)
+		
+		regionEnlever = Array.new
+		
+		region.each { |kase|
+			regionEnlever.push(kase)
+		}
+		lignePresent.each { |kase|
+			regionEnlever.delete(kase)
+		}
+		return lignePresent, ligneAbsent, region, regionEnlever
+	end
 
 	# Méthode qui indique si la liste de case contient le candidat
 	# @param candidat
 	# @return boolean
 	def self.listeContientCandidat(listeCase, candidat)
 		listeCase.each { |kase|
-			if ((kase.getSolutionJoueur() == nil && kase.getCandidat().include?(candidat) == true) || (kase.getSolutionJoueur() == candidat - 1))
+			if ((kase.getSolutionJoueur() == nil && kase.getCandidat().include?(candidat) == true) )
+				return true
+			end
+		}
+
+		return false
+	end
+
+	def self.listeContientCandidatSymbole(listeCase, candidat)
+		listeCase.each { |kase|
+			if ((kase.getSolutionJoueur() == nil && kase.getCandidat().include?(candidat) == true) || (kase.getSolutionJoueur() == candidat ))
+				return true
+			end
+		}
+
+		return false
+	end
+
+	# Méthode qui indique si la liste de case contient le symbole
+	# @param symbole
+	# @return boolean
+	def self.listeContientSymbole(listeCase, symbole)
+		listeCase.each { |kase|
+			if (kase.getSolutionJoueur() == symbole )
 				return true
 			end
 		}
