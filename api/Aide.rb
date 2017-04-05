@@ -128,23 +128,28 @@ class Aide
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
 		solution = candidatUnique()
-		solutionText = "Candidat Unique"
 
 		if solution != nil
 			# return solution
-			return [solutionText, solution[rand(solution.length)]]
+			return 1, solution[rand(solution.length)]
 		end
 
 		solution = caseResolvable()
-		solutionText = "Un seul candidat"
 
 		if solution != nil
 			# return solution
-			return [solutionText, solution[rand(solution.length)]]
+			return 2, solution[rand(solution.length)]
+		end
+
+		solution = interactionsEntreRegions
+
+		if solution != nil
+			# return solution
+			return 3, solution
 		end
 
 		# return solution
-		return ["Pas de méthode pour t'aider !", nil]
+		return [0]
 	end
 
 	#Affiche les méthodes de résolution
@@ -210,7 +215,10 @@ class Aide
 	# Méthode qui applique la technique Interactions entre régions
 	# @return listePosistion
 	def interactionsEntreRegions
-		listePos = Array.new
+		posListePresent = Array.new
+		posListeAbsent = Array.new
+		posRegion = Array.new
+		posRegionEnlever = Array.new
 		
 		# Pour chaque case
 		for x in (0...9)
@@ -218,34 +226,32 @@ class Aide
 				# Pour chaque symbole	
 				for symbole in (0...9)	
 					# On test pour la ligne	
-					lignePresent, ligneAbsent, region, regionEnlever = getLigneInteractionsEntreRegions(x, y)
-					if testInteractionsEntreRegions(symbole, lignePresent, ligneAbsent, region, regionEnlever)
+					listePresent, listeAbsent, region, regionEnlever = getLigneInteractionsEntreRegions(x, y)
+					if testInteractionsEntreRegions(symbole, listePresent, listeAbsent, region, regionEnlever)
 						print("\n Symbole :"+symbole.to_s)
-
-						lignePresent.each { |kase|
-							pos = kase.getPosition()
-							print("\n x="+pos.getX.to_s+", y="+pos.getY.to_s)
-							listePos.push(pos)
-						}
-						return listePos
+						posListePresent = Aide.listeCaseToListePosition(listePresent)
+						posListeAbsent = Aide.listeCaseToListePosition(listeAbsent)
+						posRegion = Aide.listeCaseToListePosition(region)
+						posRegionEnlever = Aide.listeCaseToListePosition(regionEnlever)
+							
+						return symbole, posListePresent, posListeAbsent, posRegion, posRegionEnlever
 					end
 					# On test pour la colonne
-					colonnePresent, colonneAbsent, region, regionEnlever = getColonneInteractionsEntreRegions(x, y)
-					if testInteractionsEntreRegions(symbole, colonnePresent, colonneAbsent, region, regionEnlever)
+					listePresent, listeAbsent, region, regionEnlever = getColonneInteractionsEntreRegions(x, y)
+					if testInteractionsEntreRegions(symbole, listePresent, listeAbsent, region, regionEnlever)
 						print("\n Symbole :"+symbole.to_s)
+						posListePresent = Aide.listeCaseToListePosition(listePresent)
+						posListeAbsent = Aide.listeCaseToListePosition(listeAbsent)
+						posRegion = Aide.listeCaseToListePosition(region)
+						posRegionEnlever = Aide.listeCaseToListePosition(regionEnlever)
 
-						colonnePresent.each { |kase|
-							pos = kase.getPosition()
-							print("\n x="+pos.getX.to_s+", y="+pos.getY.to_s)
-							listePos.push(pos)
-						}
-						return listePos
+						return symbole, posListePresent, posListeAbsent, posRegion, posRegionEnlever
 					end
 				end
 			end
 		end	
 		
-		return listePos
+		return nil
 	end
 
 	def testInteractionsEntreRegions(symbole, listePresent, listeAbsent, region, regionEnlever)
@@ -327,5 +333,18 @@ class Aide
 		}
 
 		return false
+	end
+
+	# Méthode qui retourne la liste des position de la liste des cases
+	# @param listeCase
+	# @return boolean
+	def self.listeCaseToListePosition(listeCase)
+		listePos = Array.new
+		listeCase.each { |kase|
+			pos = kase.getPosition()
+			listePos.push(pos)
+		}
+
+		return listePos
 	end
 end
