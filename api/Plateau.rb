@@ -523,46 +523,54 @@ class Plateau
 
 	# Importe et résout la grille passé en paramètre
 	def importerGrille
-		print "importeGrille"
-		@size.times do |y|
-			@size.times do |x|
-				if @grid[position.getX][position.getY].getSolutionJoueur() != nil
-					@grid[position.getX][position.getY].setSolutionOriginale(@grid[position.getX][position.getY].getSolutionJoueur())
-					@grid[position.getX][position.getY].setOriginale(true)
+		@size.times do |x|
+			@size.times do |y|
+				if @grid[x][y].getSolutionJoueur() != nil
+					@grid[x][y].setSolutionOriginale(@grid[x][y].getSolutionJoueur())
+					@grid[x][y].setOriginale(true)
 				end
 			end
 		end
-		return correctGrille? && resoudreGrilleImporter
+
+		print "\n", self
+		print self.printOri
+		# print self.correctGrille?
+		return self.correctGrille? && resoudreGrilleImporter()
 	end
 
 	def resoudreGrilleImporter
-		if (!correctGrille?) 
-			return false
-		end
-
-		# On cherhce la première case vide
-		@size.times do |y|
-			@size.times do |x|
-				c = @grid[position.getX][position.getY].getSolutionJoueur()
-				break if c == nil
-			end
-			break if c == nil
-		end
-
-		# Si la grille est complete
-		if c != nil 
-			return true
-		end
-
-		# On essaye tous les candidats
-		for n in (0...9)
-			@grid[position.getX][position.getY].setSolutionOriginale(n)
-			if resoudreGrilleImporter
-				return true
+		grille = Array.new()
+		# Convertir la grille en chaine de caractère
+		@size.times do |x|
+			@size.times do |y|
+				if @grid[x][y].getSolutionJoueur() == nil
+					grille << 0
+				else 
+					grille << @grid[x][y].getSolutionJoueur()
+				end
 			end
 		end
-		@grid[position.getX][position.getY].setSolutionOriginale(nil)
-		return false
+
+		grille = [grille.join]
+
+		# grille = ["000050000007604500090070080020010090805907401040080030050040060009503800000020000"]
+		
+		grille.map{|a|(i=a=~/0/)?(v=*?1..?9).fill{|j|v-=[a[j+i-k=i%9],a[k+j*=9],a[j%26+i-i%3-i%27+k]]}+v.map{|k|grille.<<$`<<k<<$'}:p(a)}
+
+		grille = grille.pop
+
+		print grille
+		
+		grille.split("").map(&:to_i)
+
+		@size.times do |x|
+			@size.times do |y|
+				@grid[x][y].setSolutionOriginale(grille[x*9+y])
+			end
+		end
+		print "\n", self
+		print self.printOri
+		return true
 	end
 
 	# Méthode pour le parcours de la grille du plateau
