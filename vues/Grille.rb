@@ -129,6 +129,18 @@ class Grille < Gtk::Table
 
 	end
 
+	# Méthode qui color les cases pour la technique interactions entre régions
+	def colorInteractionsRegions
+		listePos = @partie.getAide().interactionsEntreRegions
+		if listePos.empty?
+			print("\nLa technique n'est pas possible ici")	
+		else
+			listePos.each { |pos|
+				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+			}
+		end
+	end
+
 	def colorCaseSuivant
 		resetCouleurSurFocus()
 		pos=@partie.getAide.coupSuivant
