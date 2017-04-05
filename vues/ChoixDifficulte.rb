@@ -7,14 +7,28 @@ class ChoixDifficulte < WindowSudoku
 	def initialize(invite)
 		super("Choix de difficulté")
 
+		@colorRed   = "#FFc8c8"
+		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
+
+		#Placement des images et ajout dans la table
+		tableMain.attach(header, 0, 10, 0, 3)
+
 		#Création du label
 		diffLabel = Gtk::Label.new("Difficulté : ")
 
 		#Création des boutons
 		facile = Gtk::Button.new(:label => "Facile")
+		facile.override_background_color(:normal, @colorNeutral)
+		facile.set_size_request(205,50)
 		moyen = Gtk::Button.new(:label => "Moyen")
+		moyen.override_background_color(:normal, @colorNeutral)
+		moyen.set_size_request(205,50)
 		difficile = Gtk::Button.new(:label => "Difficile")
+		difficile.override_background_color(:normal, @colorNeutral)
+		difficile.set_size_request(205,50)
 		retour = Gtk::Button.new(:label => "Retour")
+		retour.override_background_color(:normal, @colorNeutral)
+		retour.set_size_request(205,50)
 
 		#Redirection des boutons
 		facile.signal_connect "clicked" do |widget|
@@ -40,11 +54,11 @@ class ChoixDifficulte < WindowSudoku
 		end
 
 		#Placement des boutons et ajout dans la table
-		tableMain.attach(diffLabel, 4, 6, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(facile, 4, 6, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(moyen, 4, 6, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(difficile, 4, 6, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(retour, 4, 6, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(diffLabel, 0, 10, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(facile, 0, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(moyen, 0, 10, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(difficile, 0, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(retour, 0, 10, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		show_all
 	end

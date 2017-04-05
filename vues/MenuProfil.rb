@@ -2,11 +2,12 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
+
 
 class MenuProfil < WindowSudoku
 
 	def initialize
+
 		super("Menu")
 
 		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
@@ -38,6 +39,9 @@ class MenuProfil < WindowSudoku
 		methodeRes.set_size_request(102,50)
 		deconnexion = Gtk::Button.new(:label => "Deconnexion")
 		deconnexion.set_size_request(102,50)
+		deconnexion.set_name "deconnexion"
+
+
 		aPropos = Gtk::Button.new(:label => "A propos")
 		aPropos.set_size_request(102,50)
 
@@ -76,8 +80,8 @@ class MenuProfil < WindowSudoku
 		#Placement des boutons et ajout dans la table
 		tableMain.attach(nomJoueur, 0, 10, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(nouvellePartie, 0, 5, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(importerGrille, 5, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(chargerPartie, 0, 5, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(importerGrille, 0, 5, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(chargerPartie, 5, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(statistique, 5, 10, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(parametres, 0, 5, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(methodeRes, 5, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
