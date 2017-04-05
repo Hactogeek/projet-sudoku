@@ -145,12 +145,6 @@ class Fenetre < Gtk::Window
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
 
-		    # interaction entre region
-		    interactionsRegionsMenuItem = Gtk::MenuItem.new(:label => "Technique Interacions entre régions", :use_underline => false)
-		    interactionsRegionsMenuItem.signal_connect "activate" do
-				@grille.colorInteractionsRegions
-			end
-		    aideMenu.append(interactionsRegionsMenuItem)
 		    
 		    #############################################################################
 		    ###############Rajouter la même chose chose qu'au dessus#####################
