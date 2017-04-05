@@ -132,11 +132,11 @@ class Grille < Gtk::Table
 	def colorCaseSuivant
 		resetCouleurSurFocus()
 		pos=@partie.getAide.coupSuivant
-		a=80-(9*pos[1].getY+pos[1].getX)
-		@focus=children[a]
 		if(pos[1]==nil)
 			print("\nIl n'y a pas de coup suivant.")
 		else
+			a=80-(9*pos[1].getY+pos[1].getX)
+			@focus=children[a]
 			setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
 		end
 		return pos
