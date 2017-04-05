@@ -385,6 +385,7 @@ class Plateau
 
 	# Importe et résout la grille passé en paramètre
 	def importerGrille
+		print "importeGrille"
 		@size.times do |y|
 			@size.times do |x|
 				if @grid[position.getX][position.getY].getSolutionJoueur() != nil
@@ -393,7 +394,7 @@ class Plateau
 				end
 			end
 		end
-		return resoudreGrilleImporter && correctGrille?
+		return correctGrille? && resoudreGrilleImporter
 	end
 
 	def resoudreGrilleImporter
@@ -402,17 +403,16 @@ class Plateau
 		end
 
 		# On cherhce la première case vide
-		c = nil
 		@size.times do |y|
 			@size.times do |x|
 				c = @grid[position.getX][position.getY].getSolutionJoueur()
-				break if c != nil
+				break if c == nil
 			end
-			break if c != nil
+			break if c == nil
 		end
 
 		# Si la grille est complete
-		if c == nil 
+		if c != nil 
 			return true
 		end
 
@@ -423,6 +423,7 @@ class Plateau
 				return true
 			end
 		end
+		@grid[position.getX][position.getY].setSolutionOriginale(nil)
 		return false
 	end
 
