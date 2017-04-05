@@ -484,6 +484,18 @@ class Plateau
 		return true
 	end
 
+	# Méthode qui vérifie si les candidats sont corrects
+	# * [Retourne :]
+	# 				booleen	
+	def correctCandidat?
+		self.each { |x,y,kase|
+			if kase.getCandidat().include?(kase.getSolutionOriginale) == false
+				return false
+			end
+		}
+		return true
+	end
+
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
 	# * [Retourne :]
 	# 				booleen	
