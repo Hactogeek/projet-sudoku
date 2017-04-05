@@ -17,42 +17,43 @@ class Aide
 	end
 
 	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
-	def candidatUnique()
+	def hiddenSingle()
 		listeCase = Array.new
 		@partie.getPlateau().each do |x,y,laCase|
 			if (laCase.getSolutionJoueur() == nil)
-				for n in (0...9)
-					# Verification de la region
-					add = !(@partie.getPlateau.getRegion(x,y).include?(n))
+				
+				if x%3 == 2
+					lig1 = x-1
+					lig2 = x-2
+				elsif x%3 == 1
+					lig1 = x-1
+					lig2 = x+1
+				else
+					lig1 = x+1
+					lig2 = x+2
+				end
 
-					break if add == false
+				if y%3 == 2
+					col1 = y-1
+					col2 = y-2
+				elsif y%3 == 1
+					col1 = y-1
+					col2 = y+1
+				else
+					col1 = y+1
+					col2 = y+2
+				end
 
-					# absentColonne(chiffre, colonne)
-					# 
-					# Attention ca ne renvoie plus les mêmes valeurs !
+				for n in (1..9)
 
-					# Verification de la ligne
-					if x%3 == 2
-						add = (@partie.getPlateau().getLigne(x-1).include?(n)) && (@partie.getPlateau().getLigne(x-2).include?(n))
-					elsif x%3 == 1
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x-1).include?(n))
-					else
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x+2).include?(n))
-					end
-
-					break if add == false
-
-					# Verification de la colonne
-					if y%3 == 2
-						add = (@partie.getPlateau().getColonne(y-1).include?(n)) && (@partie.getPlateau().getColonne(y-2).include?(n))
-					elsif y%3 == 1
-						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y-1).include?(n))
-					else
-						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y+2).include?(n))
-					end
-
-					if add 
-						listeCase.push(Position.new(x,y))
+					if (@partie.getPlateau.absentRegion(n,x,y) && !@partie.getPlateau().absentLigne(n, lig1) && !@partie.getPlateau().absentLigne(n, lig2) && !@partie.getPlateau().absentColonne(n, col1) && !@partie.getPlateau().absentColonne(n, col2))
+						if n == @partie.getPlateau.getCase(Position.new(x,y)).getSolutionOriginale
+							print "AJOUTER", x,"-",y,"\n"
+							print "\t", lig1,"/",lig2,"-",col1,"/",col2,"\n"
+							listeCase.push(Position.new(x,y))
+						else
+							print "Problème !"
+						end
 					end
 				end
 			end
@@ -127,7 +128,8 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
-		solution = candidatUnique()
+		solution = hiddenSingle()
+
 
 		if solution != nil
 			# return solution
@@ -233,7 +235,7 @@ class Aide
 						posListeAbsent = Aide.listeCaseToListePosition(listeAbsent)
 						posRegion = Aide.listeCaseToListePosition(region)
 						posRegionEnlever = Aide.listeCaseToListePosition(regionEnlever)
-							
+
 						return symbole, posListePresent, posListeAbsent, posRegion, posRegionEnlever
 					end
 					# On test pour la colonne
