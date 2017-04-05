@@ -32,8 +32,10 @@ class Timer
 
 	# Méthode de pause du timer
 	def stop
-		@elapsed = Time.now - @start
-		@accumulated += @elapsed
+		if(@elapsed!=nil)
+			@elapsed = Time.now - @start
+			@accumulated += @elapsed
+		end
 	end
 
 

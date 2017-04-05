@@ -163,13 +163,18 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
-		# solution = hiddenSingle()
+		solution = hiddenSingle()
+		if(@partie.getPlateau.aucunCandidat?)
+			puts("WSH")
+			return [2]
+		end
 
 		if solution != nil
 			# return solution
 			return 1, solution[rand(solution.length)]
 		end
 
+		
 		solution = candidatUnique()
 
 		if solution != nil

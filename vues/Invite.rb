@@ -26,7 +26,7 @@ class Invite < WindowSudoku
 		end
 		creerProfil.signal_connect "clicked" do |widget|
 			hide
-			newWindow=CreationProfil.new(1)
+			newWindow=CreationProfil.new(1, nil)
 		end
 		methodeRes.signal_connect "clicked" do |widget|
 			hide

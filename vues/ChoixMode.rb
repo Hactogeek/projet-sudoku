@@ -17,12 +17,12 @@ class ChoixMode < WindowSudoku
 		#Redirection des boutons
 		apprentissage.signal_connect "clicked" do |widget|
 			hide
-			newWindow=ChoixDifficulte.new(0)
+			newWindow=ChoixDifficulte.new(0, 0)
 		end
 
 		examen.signal_connect "clicked" do |widget|
 			hide
-			newWindow=ChoixDifficulte.new(0)
+			newWindow=ChoixDifficulte.new(0, 1)
 		end
 
 		retour.signal_connect "clicked" do |widget|

@@ -4,7 +4,7 @@ Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class CreationProfil < WindowSudoku
 
-	def initialize(invite)
+	def initialize(invite, fenetre)
 		super("Création du profil")
 
 		#Création du label
@@ -31,7 +31,11 @@ class CreationProfil < WindowSudoku
 					# confirm.set_text("La création du profil est un succès")
 					# sleep(3)
 					hide
-					newWindow=MenuProfil.new
+					if(invite!=1 && invite!=0)
+						newWindow=Fenetre.new(invite)
+					else
+						newWindow=MenuProfil.new
+					end
 				end
 			end
 		end
@@ -40,8 +44,10 @@ class CreationProfil < WindowSudoku
 			hide
 			if(invite==1)
 				newWindow=Invite.new
-			else
+			elsif(invite==0)
 				newWindow=Index.new
+			else
+				fenetre.show_all
 			end
 		end
 

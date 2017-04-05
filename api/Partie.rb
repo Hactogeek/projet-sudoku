@@ -15,6 +15,7 @@ class Partie
 		@undoRedo = GestionMemento.creer(self)
 		@checkPoint = GestionMemento.creer(self)
 		@difficulte=difficulte
+		@timer=Timer.new
 	end
 
 	#Creer une partie jouable
@@ -43,7 +44,6 @@ class Partie
 	end
 
  	def lanceTemps(init)
- 		@timer=Timer.new
 		@timer.start(init)
 	end
 

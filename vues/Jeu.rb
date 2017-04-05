@@ -2,18 +2,16 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class Fenetre < Gtk::Window 
+#Je ne sais absolument pas pourquoi, mais quand je renomme JeuApprenti par FenetreApprentissage, ça ne marche pas du tout
+class Jeu < Gtk::Window 
 	# @cadreAide
 	# @boutons
 	# @sousGrille
 	# @grille
+	attr_reader :tableMain, :partie, :fileMenu, :sauvergarderMenuItem, :chargerMenuItem, :quitterMenuItem
 
 	def initialize (partie)
 		super(Gtk::WindowType::TOPLEVEL)
-		signal_connect "delete_event" do
-			newWindow = ConfirmQuit.new(@partie, self, 1)
-		end
-
 
 		# Property
 		set_title "Ku"
@@ -54,30 +52,30 @@ class Fenetre < Gtk::Window
 
 	    # Menu Fichier
 	    fileMenuItem = Gtk::MenuItem.new(:label => "Fichier", :use_underline => false) # Item Fichier
-	    fileMenu = Gtk::Menu.new() # Menu de Fichier
-	    fileMenuItem.set_submenu(fileMenu)
+	    @fileMenu = Gtk::Menu.new() # Menu de Fichier
+	    fileMenuItem.set_submenu(@fileMenu)
 	        
 	        # Sauvegarder
-	        sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
-	        sauvergarderMenuItem.signal_connect "activate" do
+	        @sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
+	        @sauvergarderMenuItem.signal_connect "activate" do
 	        	@partie.stopTemps
 	        	Sauvegarde.savePartie(@partie,"partie1")
 	        end
-	        fileMenu.append(sauvergarderMenuItem)
+	        @fileMenu.append(sauvergarderMenuItem)
 
 	        # Charger
-	        chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
-	        chargerMenuItem.signal_connect "activate" do
+	        @chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
+	        @chargerMenuItem.signal_connect "activate" do
 	        	chargement
 	        end
-	        fileMenu.append(chargerMenuItem)
+	        @fileMenu.append(chargerMenuItem)
 
 	        # Quitter
-	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
-            quitterMenuItem.signal_connect "activate" do
-            	newWindow = ConfirmQuit.new(@partie, self, 0)
+	        @quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
+            @quitterMenuItem.signal_connect "activate" do
+            	newWindow = ConfirmQuitProfil.new(@partie, self, 0)
             end
-            fileMenu.add(quitterMenuItem)
+            @fileMenu.add(quitterMenuItem)
 
 
 		# Menu Checkpoint
@@ -88,18 +86,18 @@ class Fenetre < Gtk::Window
 		    # Undo
 		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
 		    undoMenuItem.signal_connect "activate" do
-			@partie.getUndoRedo().undo
-			@grille.rafraichirGrille
-			@sousGrille.loadAllCandidats
+				@partie.getUndoRedo().undo
+				@grille.rafraichirGrille
+				@sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
 		    # Redo
 		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
 		    redoMenuItem.signal_connect "activate" do
-			@partie.getUndoRedo().redo
-			@grille.rafraichirGrille
-		    @sousGrille.loadAllCandidats
+				@partie.getUndoRedo().redo
+				@grille.rafraichirGrille
+			    @sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(redoMenuItem)
 
@@ -194,7 +192,6 @@ class Fenetre < Gtk::Window
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
-	    #menuBar.append(userMenuItem)
 	    menuBar.append(aideMenuItem)
 	    menuBar.append(optionMenuItem)
 		
@@ -204,31 +201,18 @@ class Fenetre < Gtk::Window
 		#==========#
 
 	    vboxMain.pack_start(menuBar,:expand => false, :fill => false, :padding => 0)
-	    tableMain = Gtk::Table.new(10, 10)
-	    vboxMain.pack_start(tableMain,:expand => true, :fill => true, :padding => 0)
+	    @tableMain = Gtk::Table.new(10, 10)
+	    vboxMain.pack_start(@tableMain,:expand => true, :fill => true, :padding => 0)
 
 	   
 
 		#==========#
 		# Niveau 3 #
 		#==========#
-		@time = Gtk::Box.new(:vertical, 0)
-		@time.add(Gtk::Label.new("Temps : "))
-		tempsLabel=Gtk::Label.new("00:00:00")
-		@time.add(tempsLabel)
-		@partie.lanceTemps(0)
-		@timer=Timer.new
-		@timer.start(@partie.getTimer.getAccumulated)
 
-		thr= Thread.new{
-			while (sleep 0.2) do
-				tempsLabel.set_markup(@timer.tick)
-			end
-			}
-		tableMain.attach(@time, 0,9,0,1)
-		tableMain.attach(@sousGrille, 0,5,1,9) # Support Grille (background + sous grille + grille)
-		tableMain.attach(@cadreAide , 5,9,1,9) # Aide
-		tableMain.attach(@boutons   , 0,9,9,10) # Boutons
+		@tableMain.attach(@sousGrille, 0,5,1,9) # Support Grille (background + sous grille + grille)
+		@tableMain.attach(@cadreAide , 5,9,1,9) # Aide
+		@tableMain.attach(@boutons   , 0,9,9,10) # Boutons
 
 	    show_all
 	end
@@ -236,7 +220,9 @@ class Fenetre < Gtk::Window
 	def chargement
 		@partie=Sauvegarde.loadPartie("partie1")
 		@partie.lanceTemps(@partie.getTimer.getAccumulated)
-        @timer.start(@partie.getTimer.getAccumulated)
+		if(@timer!=nil)
+        	@timer.start(@partie.getTimer.getAccumulated)
+        end
         @grille.setPartie(@partie)
     	@grille.rafraichirGrille
     end

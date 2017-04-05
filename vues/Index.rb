@@ -33,7 +33,7 @@ class Index < WindowSudoku
 		end
 		creerProfil.signal_connect "clicked" do |widget|
 			hide
-			newWindow=CreationProfil.new(0)
+			newWindow=CreationProfil.new(0,nil)
 		end
 		sessionInvite.signal_connect "clicked" do |widget|
 			hide

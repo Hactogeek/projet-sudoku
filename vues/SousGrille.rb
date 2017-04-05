@@ -31,7 +31,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			end
 		end
 
-		loadAllCandidats()
+		#loadAllCandidats()
 	end
 
 	def refreshAllCandidats()

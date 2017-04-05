@@ -3,7 +3,7 @@ Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 COUL_BLEU        = Gdk::RGBA::new(0.4, 0.7, 1.0, 1.0)
-COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
+# COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
 COUL_VERT        = Gdk::RGBA::new(0.5, 0.9, 0.3, 1.0)
 COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
 COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
@@ -33,10 +33,6 @@ class Grille < Gtk::Table
 		@colorNext = COUL_VERT
 		@colorNeutral = COUL_BLANC
 		@colorText = "#FFFFFF"
-
-		#==========================#
-		# Remplissage de la grille #
-		#==========================#
 	    @partie = partie
 	end
 
@@ -47,11 +43,9 @@ class Grille < Gtk::Table
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
 		if (@focus)
-
 			i = 80 - children().index(@focus)
 			pos = Position.new(i%9,i/9)
-			print("\n", i, " : x=",i/9, " y=", i%9)
-
+			#print("\n", i, " : x=",i/9, " y=", i%9)
 			if (@partie.getPlateau().getCaseJoueur(pos) != valeur) && (@partie.getPlateau().getCase(pos).getOriginaleGrille == false)
 				#Sauvegarde du plateau dans le undoRedo
 				@partie.getUndoRedo().addMemento
@@ -263,5 +257,9 @@ class Grille < Gtk::Table
 
 	def setCadreImportation(cadreImportation)
 		@cadreImportation = cadreImportation
+	end
+
+	def setFocus(focus)
+		@focus=focus
 	end
 end

@@ -84,6 +84,10 @@ class MenuProfil < WindowSudoku
 		tableMain.attach(deconnexion, 0, 5, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(aPropos, 5, 10, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
+		if(!File.exist?("partie1.txt"))
+			chargerPartie.sensitive = false
+		end
+
 		show_all
 	end
 end

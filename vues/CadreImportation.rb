@@ -9,15 +9,6 @@ class CadreImportation < Gtk::Table
 		@sousGrille = sousGrille
 		@grille.setCadreImportation(self)
 
-		candidatSwitch = Gtk::Switch.new()
-		candidatSwitch.signal_connect('state-set') do
-			if candidatSwitch.active?
-				@sousGrille.setCandidatState(true)
-			else
-				@sousGrille.setCandidatState(false)
-			end
-		end
-
 		@labelAide = Gtk::Label.new("")
 		attach(@labelAide, 0,8, 1,6)
 

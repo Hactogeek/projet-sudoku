@@ -17,17 +17,17 @@ class CadreAide < Gtk::Table
 		@sousGrille = sousGrille
 		@grille.setCadreAide(self)
 
-		candidatSwitch = Gtk::Switch.new()
-		candidatSwitch.signal_connect('state-set') do
-			if candidatSwitch.active?
-				@sousGrille.setCandidatState(true)
-			else
-				@sousGrille.setCandidatState(false)
-			end
-		end
-		candidatLabel  = Gtk::Label.new("Activer/Desactiver Candidats : ")
-		attach(candidatSwitch, 6,8, 11,12)
-		attach(candidatLabel , 3,6, 11,12)
+		# candidatSwitch = Gtk::Switch.new()
+		# candidatSwitch.signal_connect('state-set') do
+		# 	if candidatSwitch.active?
+		# 		@sousGrille.setCandidatState(true)
+		# 	else
+		# 		@sousGrille.setCandidatState(false)
+		# 	end
+		# end
+		# candidatLabel  = Gtk::Label.new("Activer/Desactiver Candidats : ")
+		# attach(candidatSwitch, 6,8, 11,12)
+		# attach(candidatLabel , 3,6, 11,12)
 
 		@labelAide = Gtk::Label.new("")
 		attach(@labelAide, 0,8, 1,3)
@@ -44,13 +44,17 @@ class CadreAide < Gtk::Table
 
 	def startHint()
 		pos=@grille.getPartie.getAide.coupSuivant
+		puts("CANDIDAT? : " + @grille.getPartie.getPlateau.getCase(Position.new(4,5)).getCandidat.getListeCandidat.to_s)
+
 		if(pos[0]!=0)
-			if(pos[0]==1 || pos[0]==2)
+			if(pos[0]==1 || pos[0]==3)
 				setAideText("Regardez ce que vous pouvez faire dans cette région.")
 				region=@grille.getPartie.getPlateau.getCaseRegion(pos[1].getX,pos[1].getY)
 				region.each do |x|
 					@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, COUL_ORANGE)
 				end
+			elsif(pos[0]==2)
+				setAideText("Il serait utile d'écrire les candidats pour chaque case.")
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
@@ -62,7 +66,7 @@ class CadreAide < Gtk::Table
 
 				@moreButton = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 				@moreButton.signal_connect "clicked" do |widget|
-					moreHint(pos,1)
+					moreHint(pos)
 				end
 				attach(@moreButton, 3,5 ,0,1)
 
@@ -81,39 +85,65 @@ class CadreAide < Gtk::Table
 		end
 	end
 
-	def moreHint(pos, etape)
-		if((pos[0]==1 || pos[1]==2) && etape==1)
+	def moreHint(pos)
+		if(pos[0]==1 || pos[0]==3)
 			setAideText("Regardez cette case.")
-		#elsif((pos[0]==1 || pos[1]==2) && etape==1)
-		end
-		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
-		@grille.resetColorOnAll()
-		@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
-
-
-		@moreButton.sensitive = false
-		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
-		remove(@backButton)
-		@learnButton.sensitive = true
-		attach(@learnButton, 0,2 ,0,1)
-		@learnButton.show
-		@learnButton.signal_connect "clicked" do |widget|
-			setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
-			if(@img!=nil)
-				@imgEvent.remove(@img)
+			@grille.resetColorOnAll
+			@grille.setFocus(@grille.children[80-(9*pos[1].getY+pos[1].getX)])
+			@grille.setCouleurCase(pos[1].getX, pos[1].getY, COUL_ORANGE)
+			remove(@moreButton)
+			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
+			attach(@moreButton2, 3,5 ,0,1)
+			@moreButton2.signal_connect "clicked" do |widget|
+				moreHint2(pos)
 			end
-			@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
-			@imgEvent.add(@img)
-			@imgEvent.show_all
-			@learnButton.sensitive = false
+			@moreButton2.show
 		end
 	end
 
-	def previousHint
-		puts("WSH")
+	def moreHint2(pos)
+		if(pos[0]==1 || pos[1]==3)
+			setAideText("Voici la solution")
+			@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
+			@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
+
+
+			@moreButton.sensitive = false
+			@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
+			remove(@backButton)
+			@learnButton.sensitive = true
+			attach(@learnButton, 0,2 ,0,1)
+			@learnButton.show
+			@learnButton.signal_connect "clicked" do |widget|
+				setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
+				if(@img!=nil)
+					@imgEvent.remove(@img)
+				end
+				if(pos[0]==1)
+					begin
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/hiddenSingle.png", :width => 100, :heigth => 100))
+					rescue
+						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/hiddenSingle.png", :width => 100, :heigth => 100))
+					end
+				elsif(pos[0]==3)
+					begin
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
+					rescue
+						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/unSeulCandidat.png", :width => 100, :heigth => 100))
+					end
+				end
+				@imgEvent.add(@img)
+				@imgEvent.show_all
+				@learnButton.sensitive = false
+			end
+		end
+		remove(@moreButton2)
+		attach(@moreButton, 3,5 ,0,1)
+		@moreButton.show
 	end
 
 	def cancelHint()
+		@grille.resetColorOnAll()
 		@imgEvent.hide
 		@backButton.hide()
 		@moreButton.hide()

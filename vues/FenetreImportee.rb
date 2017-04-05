@@ -53,27 +53,15 @@ class FenetreImportee < Gtk::Window
 	    fileMenuItem.set_submenu(fileMenu)
 
 	        # Quitter
-	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
+	        quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
             quitterMenuItem.signal_connect "activate" do
             	newWindow = MenuProfil.new
             end
             fileMenu.add(quitterMenuItem)
 
-	    # Menu Fichier
-	    optionMenuItem = Gtk::MenuItem.new(:label => "Options", :use_underline => false) # Item Fichier
-	    optionMenu = Gtk::Menu.new() # Menu de Fichier
-	    optionMenuItem.set_submenu(optionMenu)
-
-	        # Préférences
-	        preferencesMenuItem = Gtk::MenuItem.new(:label => "Préférences", :use_underline => false)
-            preferencesMenuItem.signal_connect "activate" do
-            	newWindow = nil # Créer nouvelle classe
-            end
-            optionMenu.add(preferencesMenuItem)
 
         # Barre des menus 
-	    menuBar.append(fileMenuItem)	
-	    menuBar.append(optionMenuItem)
+	    menuBar.append(fileMenuItem)
 		
 
 		#==========#
