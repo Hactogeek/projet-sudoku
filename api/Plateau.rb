@@ -497,6 +497,18 @@ class Plateau
 		return pleine
 	end
 
+	# Méthode qui vérifie si il y a des candidats dans la grille
+	# * [Retourne :]
+	# 				booleen	
+	def aucunCandidat?
+		self.each { |x,y,kase|
+			if  kase.getCandidat().empty? == false
+				return false
+			end
+		}
+		return true
+	end
+
     # Méthode qui vérifie si la grille est complète et correct
 	# * [Paramètre :]
 	# 				symbole
