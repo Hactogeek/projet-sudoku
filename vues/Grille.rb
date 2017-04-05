@@ -16,10 +16,21 @@ class Grille < Gtk::Table
 	@focus # case actuellement selectionné
 	@partie
 	@cadreAide
+	@colorFocus
+	@colorEquals
+	@colorError
+	@colorNext
+	@colorNeutral
 
 	def initialize (partie)
 		super(9, 9, true)
 		set_margin_left(1)
+
+		@colorFocus = COUL_JAUNE
+		@colorEquals = COUL_JAUNE_PALE
+		@colorError = COUL_ROUGE
+		@colorNext = COUL_VERT
+		@colorNeutral = COUL_BLANC
 
 		#==========================#
 		# Remplissage de la grille #
@@ -73,7 +84,7 @@ class Grille < Gtk::Table
 		if (@focus)
 			css=<<-EOT
 	   		#cell{
-	      	background: #{COUL_JAUNE};
+	      	background: #{@colorFocus};
 	    	}
 	    	EOT
 	    	css_provider = Gtk::CssProvider.new
@@ -90,7 +101,7 @@ class Grille < Gtk::Table
 			if (self.children()[i].children().first().text == value)
 				css=<<-EOT
 		   		#cell{
-		      	background: #{COUL_JAUNE_PALE};
+		      	background: #{@colorEquals};
 		    	}
 		    	EOT
 		    	css_provider = Gtk::CssProvider.new
@@ -104,14 +115,14 @@ class Grille < Gtk::Table
 		for i in 0..self.children().size()-1
 			css=<<-EOT
 	   		#cell{
-	      	background: #{COUL_BLANC};
+	      	background: #{@colorNeutral};
 	    	}
 	    	EOT
 	    	css_provider = Gtk::CssProvider.new
 	    	css_provider.load :data=>css
 			self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 		end
-		setCouleurSurFocus(COUL_JAUNE)
+		setCouleurSurFocus(@colorFocus)
 	end
 
 	def colorCaseResolvable()
@@ -127,7 +138,7 @@ class Grille < Gtk::Table
 			print("\nIl n'y a pas d'erreur dans la grille")	
 		else
 			listePos.each { |pos|
-				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+				setCouleurCase(pos.getX(), pos.getY(), @colorError)
 			}
 		end
 
@@ -137,7 +148,7 @@ class Grille < Gtk::Table
 		if (@focus)
 			css=<<-EOT
 	   		#cell{
-	      	background: #{COUL_BLANC};
+	      	background: #{@colorNeutral};
 	    	}
 	    	EOT
 	    	css_provider = Gtk::CssProvider.new
@@ -178,15 +189,16 @@ class Grille < Gtk::Table
 	end
 
 	def remplirGrille()
+		children().clear()
 		@partie.getPlateau().each { |x,y,val|
 			btn = Gtk::Button.new()
-			btn.override_background_color(:normal, COUL_BLANC)
+			btn.override_background_color(:normal, @colorNeutral)
 			btn.signal_connect "clicked" do |widget|
 				resetCouleurSurFocus()
 				@focus = widget
 				resetColorOnAll()
-				setColorOnValue(widget.children().first().text, COUL_JAUNE_PALE)
-				setCouleurSurFocus(COUL_JAUNE)
+				setColorOnValue(widget.children().first().text, @colorEquals)
+				setCouleurSurFocus(@colorFocus)
 			end
 			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
 			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
@@ -206,5 +218,17 @@ class Grille < Gtk::Table
 
 	def setCadreAide(cadreAide)
 		@cadreAide = cadreAide
+	end
+
+	def setColorStyle() # on définira après pour dissocier les thèmes
+		@colorFocus = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
+		@colorEquals = COUL_JAUNE_PALE
+		@colorError = COUL_ROUGE
+		@colorNext = COUL_VERT
+		@colorNeutral = Gdk::RGBA::new(0.02, 0.00, 0.15, 1.0)
+
+		children.each { |widget|
+			widget.destroy
+		}
 	end
 end

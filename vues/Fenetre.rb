@@ -150,7 +150,7 @@ class Fenetre < Gtk::Window
 	        # Préférences
 	        preferencesMenuItem = Gtk::MenuItem.new(:label => "Préférences", :use_underline => false)
             preferencesMenuItem.signal_connect "activate" do
-            	newWindow = nil # Créer nouvelle classe
+            	newWindow = Preferences.new(@grille)
             end
             optionMenu.add(preferencesMenuItem)
 
