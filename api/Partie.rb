@@ -25,6 +25,15 @@ class Partie
 		@checkPoint.addMemento
 	end
 
+	# Vérifie si le plateau est vide ou non
+	def estVide?
+		if @plateau.getCase(Position.new(0,0)).getSolutionOriginale()== "."
+			return true
+		else
+			return false
+		end
+	end
+
 	# Méthode qui fait le traitement de fin de partie si la grille est complete
 	def finPartie
 		if @plateau.complete?

@@ -55,7 +55,7 @@ class FenetreImportee < Gtk::Window
 	        # Quitter
 	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
             quitterMenuItem.signal_connect "activate" do
-            	newWindow = ConfirmQuit.new(@partie, self, 0)
+            	newWindow = MenuProfil.new
             end
             fileMenu.add(quitterMenuItem)
 
@@ -92,6 +92,15 @@ class FenetreImportee < Gtk::Window
 		tableMain.attach(@sousGrille, 0,5,1,9) # Support Grille (background + sous grille + grille)
 		tableMain.attach(@cadreImportation , 5,9,1,9) # Aide
 		tableMain.attach(@boutons   , 0,9,9,10) # Boutons
+
+		@cadreImportation.getHintButton.signal_connect "clicked" do |widget|
+			if @grille.getPartie().getPlateau().importerGrille
+				hide
+				newWindow=Fenetre.new(@grille.getPartie)
+			else
+				@cadreImportation.setAideText("Erreur")
+			end
+		end
 
 	    show_all
 	end

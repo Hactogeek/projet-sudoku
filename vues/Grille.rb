@@ -49,6 +49,8 @@ class Grille < Gtk::Table
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
+					# @cadreAide.setAide("Félicitations! Vous avez résolu le sudoku.")
+					# @cadreAide 
 				end
 				return
 			end
@@ -152,7 +154,7 @@ class Grille < Gtk::Table
 			setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
 		end
 		return pos
-	end	
+	end		
 
 	def resetCouleurSurFocus() # change couleur du focus
 		if (@focus)
