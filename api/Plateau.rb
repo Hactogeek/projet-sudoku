@@ -487,7 +487,7 @@ class Plateau
 	# 				booleen	
 	def correctCandidat?
 		self.each { |x,y,kase|
-			if kase.getCandidat().include?(kase.getSolutionOriginale) == false
+			if (kase.getCandidat().include?(kase.getSolutionOriginale) == false) && kase.getSolutionJoueur == nil
 				return false
 			end
 		}
