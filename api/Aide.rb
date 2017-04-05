@@ -98,7 +98,9 @@ class Aide
 
 	#Resoud la grille
 	def resoudre()
-
+		@partie.getPlateau().each do |x,y,laCase|
+			laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+		end
 	end
 
 	#Le joueur indique en paramètre le symbole candidat de la position
