@@ -89,7 +89,7 @@ class Aide
 		end
 
 		# return solution
-		return [solutionText, solution[rand(solution.length)]]
+		return ["Pas de méthode pour t'aider !", nil]
 	end
 
 	#Affiche les méthodes de résolution

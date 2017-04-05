@@ -385,6 +385,7 @@ class Plateau
 
 	# Importe et résout la grille passé en paramètre
 	def importerGrille
+		print "importeGrille"
 		@size.times do |y|
 			@size.times do |x|
 				if @grid[position.getX][position.getY].getSolutionJoueur() != nil
