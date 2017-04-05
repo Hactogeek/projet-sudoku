@@ -106,6 +106,9 @@ class CadreAide < Gtk::Table
 
 	def moreHint(pos)
 		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
+		@grille.resetColorOnAll()
+		# @grille.setColorOnValue(widget.label, COUL_VERT)
+		@sousGrille.loadAllCandidats()
 		@moreButton.sensitive = false
 		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
 		remove(@backButton)
