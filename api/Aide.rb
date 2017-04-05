@@ -16,43 +16,66 @@ class Aide
 		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
 
-	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
 	def candidatUnique()
 		listeCase = Array.new
 		@partie.getPlateau().each do |x,y,laCase|
+			laCase.getCandidat.getListeCandidat.compact.each do |val|
+
+				if @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
+					listeCase.add([Position.new(x,y), val])
+				elsif @partie.getPlateau().getColonne(y).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
+					listeCase.add([Position.new(x,y), val])
+				elsif @partie.getPlateau().getRegion(x,y).compact.map(&:getCandidat).map(&:getListeCandidat).compact.count(val) == 1
+					listeCase.add([Position.new(x,y), val])
+				end
+			end
+		end
+
+		if listeCase.empty?
+			return nil 
+		end
+
+		return listeCase
+	end
+
+	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
+	def hiddenSingle()
+		listeCase = Array.new
+		@partie.getPlateau().each do |x,y,laCase|
 			if (laCase.getSolutionJoueur() == nil)
-				for n in (0...9)
-					# Verification de la region
-					add = !(@partie.getPlateau.getRegion(x,y).include?(n))
+				
+				if x%3 == 2
+					lig1 = x-1
+					lig2 = x-2
+				elsif x%3 == 1
+					lig1 = x-1
+					lig2 = x+1
+				else
+					lig1 = x+1
+					lig2 = x+2
+				end
 
-					break if add == false
+				if y%3 == 2
+					col1 = y-1
+					col2 = y-2
+				elsif y%3 == 1
+					col1 = y-1
+					col2 = y+1
+				else
+					col1 = y+1
+					col2 = y+2
+				end
 
-					# absentColonne(chiffre, colonne)
-					# 
-					# Attention ca ne renvoie plus les mêmes valeurs !
+				for n in (1..9)
 
-					# Verification de la ligne
-					if x%3 == 2
-						add = (@partie.getPlateau().getLigne(x-1).include?(n)) && (@partie.getPlateau().getLigne(x-2).include?(n))
-					elsif x%3 == 1
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x-1).include?(n))
-					else
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) && (@partie.getPlateau().getLigne(x+2).include?(n))
-					end
-
-					break if add == false
-
-					# Verification de la colonne
-					if y%3 == 2
-						add = (@partie.getPlateau().getColonne(y-1).include?(n)) && (@partie.getPlateau().getColonne(y-2).include?(n))
-					elsif y%3 == 1
-						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y-1).include?(n))
-					else
-						add = (@partie.getPlateau().getColonne(y+1).include?(n)) && (@partie.getPlateau().getColonne(y+2).include?(n))
-					end
-
-					if add 
-						listeCase.push(Position.new(x,y))
+					if (@partie.getPlateau.absentRegion(n,x,y) && !@partie.getPlateau().absentLigne(n, lig1) && !@partie.getPlateau().absentLigne(n, lig2) && !@partie.getPlateau().absentColonne(n, col1) && !@partie.getPlateau().absentColonne(n, col2))
+						if n == @partie.getPlateau.getCase(Position.new(x,y)).getSolutionOriginale
+							print "AJOUTER", x,"-",y,"\n"
+							print "\t", lig1,"/",lig2,"-",col1,"/",col2,"\n"
+							listeCase.push(Position.new(x,y))
+						else
+							print "Problème !"
+						end
 					end
 				end
 			end
@@ -83,7 +106,6 @@ class Aide
 		# print "listeCase", listeCase
 
 		if listeCase.empty?
-			print "NIL2"
 			return nil 
 		end
 
@@ -97,7 +119,21 @@ class Aide
 
 	#Resoud la grille
 	def resoudre()
+		@partie.getPlateau().each do |x,y,laCase|
+			laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+		end
+	end
 
+	# Méthode qui remet la grille à l'état initial
+	def etatInitial
+		@partie.getPlateau().each do |x,y,laCase|
+			if(laCase.getOriginaleGrille == true)
+				laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+			else
+				laCase.setSolutionJoueur(nil)
+
+			end
+		end
 	end
 
 	#Le joueur indique en paramètre le symbole candidat de la position
@@ -127,25 +163,32 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
-		solution = candidatUnique()
+		# solution = hiddenSingle()
 
 		if solution != nil
 			# return solution
 			return 1, solution[rand(solution.length)]
 		end
 
+		solution = candidatUnique()
+
+		if solution != nil
+			# return solution
+			return 3, solution[rand(solution.length)]
+		end
+
 		solution = caseResolvable()
 
 		if solution != nil
 			# return solution
-			return 2, solution[rand(solution.length)]
+			return 4, solution[rand(solution.length)]
 		end
 
 		solution = interactionsEntreRegions
 
 		if solution != nil
 			# return solution
-			return 3, solution
+			return 5, solution
 		end
 
 		# return solution
@@ -233,7 +276,7 @@ class Aide
 						posListeAbsent = Aide.listeCaseToListePosition(listeAbsent)
 						posRegion = Aide.listeCaseToListePosition(region)
 						posRegionEnlever = Aide.listeCaseToListePosition(regionEnlever)
-							
+
 						return symbole, posListePresent, posListeAbsent, posRegion, posRegionEnlever
 					end
 					# On test pour la colonne

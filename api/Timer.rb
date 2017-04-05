@@ -22,7 +22,7 @@ class Timer
 
 	# Méthode  d'initialisation et de lancement du timer
 	# * [Paramètre :]
-	# 				secStart -> le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
+	# 				secStart le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
 	def start (secStart)
 		@accumulated = secStart
 		@elapsed = 0
@@ -65,6 +65,12 @@ class Timer
 	def getAccumulated
 		return @accumulated
 	end
+
+	# Méthode qui donne la date du jour 
+	def donnerDate
+		time = Time.now
+		time.strftime("%d %B %Y")
+	end 
 
 end #Fin de la classe Timer
 
