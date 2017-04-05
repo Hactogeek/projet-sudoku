@@ -103,6 +103,18 @@ class Aide
 		end
 	end
 
+	# Méthode qui remet la grille à l'état initial
+	def etatInitial
+		@partie.getPlateau().each do |x,y,laCase|
+			if(laCase.getOriginaleGrille == true)
+				laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+			else
+				laCase.setSolutionJoueur(nil)
+
+			end
+		end
+	end
+
 	#Le joueur indique en paramètre le symbole candidat de la position
 	#si c'est possible, on retourne true. Sinon, on retourne
 	#la position du symbole qui indique l'impossibilité de placer le symbole candidat
