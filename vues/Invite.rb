@@ -30,7 +30,7 @@ class Invite < WindowSudoku
 		end
 		methodeRes.signal_connect "clicked" do |widget|
 			hide
-			newWindow=MethodeRes.new(0)
+			newWindow=MethodeRes.new(1)
 		end
 		deconnexion.signal_connect "clicked" do |widget|
 			hide

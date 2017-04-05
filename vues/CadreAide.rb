@@ -45,9 +45,14 @@ class CadreAide < Gtk::Table
 	def startHint()
 		pos=@grille.getPartie.getAide.coupSuivant
 		if(pos[0]!=0)
-			a=80-(9*pos[1].getY+pos[1].getX)
-			@focus=children[a]
-			@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
+			if(pos[0]==1 || pos[0]==2)
+				setAideText("Regardez ce que vous pouvez faire dans cette région.")
+				region=@grille.getPartie.getPlateau.getCaseRegion(pos[1].getX,pos[1].getY)
+				region.each do |x|
+					@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, COUL_ORANGE)
+				end
+			end
+
 			if(@backButton == nil || !@backButton.no_show_all?)
 				@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
 				@backButton.signal_connect "clicked" do |widget|
@@ -57,7 +62,7 @@ class CadreAide < Gtk::Table
 
 				@moreButton = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 				@moreButton.signal_connect "clicked" do |widget|
-					moreHint(pos)
+					moreHint(pos,1)
 				end
 				attach(@moreButton, 3,5 ,0,1)
 
@@ -73,15 +78,19 @@ class CadreAide < Gtk::Table
 			@moreButton.show
 			@finishButton.show
 			@hintButton.hide
-			setAideText(pos[0])
 		end
 	end
 
-	def moreHint(pos)
+	def moreHint(pos, etape)
+		if((pos[0]==1 || pos[1]==2) && etape==1)
+			setAideText("Regardez cette case.")
+		#elsif((pos[0]==1 || pos[1]==2) && etape==1)
+		end
 		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
 		@grille.resetColorOnAll()
-		# @grille.setColorOnValue(widget.label, COUL_VERT)
 		@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
+
+
 		@moreButton.sensitive = false
 		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
 		remove(@backButton)

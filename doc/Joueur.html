@@ -76,6 +76,8 @@
     
     <li ><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
     
+    <li ><a href="#method-i-afficherStat">#afficherStat</a>
+    
     <li ><a href="#method-i-ajoutScore">#ajoutScore</a>
     
     <li ><a href="#method-i-creerProfil">#creerProfil</a>
@@ -85,6 +87,8 @@
     <li ><a href="#method-i-getPseudo">#getPseudo</a>
     
     <li ><a href="#method-i-getScoreJoueur">#getScoreJoueur</a>
+    
+    <li ><a href="#method-i-modifierStat">#modifierStat</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -290,9 +294,45 @@
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File api/Joueur.rb, line 91</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">unJoueur</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pseudo</span><span class="ruby-operator">==</span><span class="ruby-identifier">unJoueur</span>.<span class="ruby-identifier">pseudo</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-afficherStat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">afficherStat</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>methode qui permet d&#39;afficher les statistiques du joueur</p>
+          
+          
+
+          
+          <div class="method-source-code" id="afficherStat-source">
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherStat</span>
+         <span class="ruby-ivar">@stat</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">valeur</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">print</span> <span class="ruby-identifier">key</span> ,<span class="ruby-string">&quot; =&gt; &quot;</span> ,<span class="ruby-identifier">valeur</span>,<span class="ruby-string">&quot; points \n&quot;</span>
+
+        }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -494,6 +534,51 @@ existe déjà. False sinon, et le créé.</p>
       </div>
 
     
+      <div id="method-i-modifierStat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">modifierStat</span><span
+            class="method-args">(oldStat, date, score)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>methode qui permet de modifier les statistiques du joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>oldStat les anciennes statistiques qui sont sauvegardées dans un fichier</p>
+
+<p>date date du jour  score score du joueur</p>
+</dd></dl>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="modifierStat-source">
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">modifierStat</span>(<span class="ruby-identifier">oldStat</span>, <span class="ruby-identifier">date</span>, <span class="ruby-identifier">score</span>)
+        <span class="ruby-ivar">@stat</span>= <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>() 
+        <span class="ruby-ivar">@stat</span>=<span class="ruby-identifier">oldStat</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-ivar">@stat</span>.<span class="ruby-identifier">value?</span>(<span class="ruby-identifier">score</span>))
+                <span class="ruby-ivar">@stat</span>[<span class="ruby-identifier">date</span>]=<span class="ruby-identifier">score</span>
+        <span class="ruby-keyword">end</span> 
+        
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
@@ -513,7 +598,7 @@ existe déjà. False sinon, et le créé.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File api/Joueur.rb, line 84</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-node">&quot;Joueur : #{@pseudo} &quot;</span>
 <span class="ruby-keyword">end</span></pre>

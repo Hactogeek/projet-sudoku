@@ -16,6 +16,28 @@ class Aide
 		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
 
+	def candidatUnique()
+		listeCase = Array.new
+		@partie.getPlateau().each do |x,y,laCase|
+			laCase.getCandidat.getListeCandidat.compact.each do |val|
+				# print @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten,"\n"
+				if @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
+				elsif @partie.getPlateau().getColonne(y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
+				elsif @partie.getPlateau().getRegion(x,y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
+					listeCase.push([Position.new(x,y), val])
+				end
+			end
+		end
+
+		if listeCase.empty?
+			return nil 
+		end
+
+		return listeCase
+	end
+
 	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
 	def hiddenSingle()
 		listeCase = Array.new
@@ -84,7 +106,6 @@ class Aide
 		# print "listeCase", listeCase
 
 		if listeCase.empty?
-			print "NIL2"
 			return nil 
 		end
 
@@ -100,6 +121,18 @@ class Aide
 	def resoudre()
 		@partie.getPlateau().each do |x,y,laCase|
 			laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+		end
+	end
+
+	# Méthode qui remet la grille à l'état initial
+	def etatInitial
+		@partie.getPlateau().each do |x,y,laCase|
+			if(laCase.getOriginaleGrille == true)
+				laCase.setSolutionJoueur(laCase.getSolutionOriginale)
+			else
+				laCase.setSolutionJoueur(nil)
+
+			end
 		end
 	end
 
@@ -132,24 +165,30 @@ class Aide
 	def coupSuivant()
 		solution = hiddenSingle()
 
-
 		if solution != nil
 			# return solution
 			return 1, solution[rand(solution.length)]
+		end
+
+		solution = candidatUnique()
+
+		if solution != nil
+			# return solution
+			return 3, solution[rand(solution.length)]
 		end
 
 		solution = caseResolvable()
 
 		if solution != nil
 			# return solution
-			return 2, solution[rand(solution.length)]
+			return 4, solution[rand(solution.length)]
 		end
 
 		solution = interactionsEntreRegions
 
 		if solution != nil
 			# return solution
-			return 3, solution
+			return 5, solution
 		end
 
 		# return solution

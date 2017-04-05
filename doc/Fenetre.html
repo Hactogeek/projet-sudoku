@@ -158,8 +158,9 @@
         <span class="ruby-comment">#==========================#</span>
         <span class="ruby-comment"># Remplissage de la grille #</span>
         <span class="ruby-comment">#==========================#</span>
-
-        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">creerPartie</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">estVide?</span>)
+                <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">creerPartie</span>
+        <span class="ruby-keyword">end</span>
     <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">remplirGrille</span>
 
         <span class="ruby-comment">#==========#</span>
@@ -269,6 +270,24 @@
                         <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">colorCaseIncorrect</span>()
                 <span class="ruby-keyword">end</span>
             <span class="ruby-identifier">aideMenu</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">verificationGrilleMenuItem</span>)
+
+            <span class="ruby-comment"># resoudre</span>
+            <span class="ruby-identifier">resoudreGrilleMenuItem</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">MenuItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Resoudre la grille&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
+            <span class="ruby-identifier">resoudreGrilleMenuItem</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;activate&quot;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getAide</span>().<span class="ruby-identifier">resoudre</span>()
+                        <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">rafraichirGrille</span>
+                <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">aideMenu</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">resoudreGrilleMenuItem</span>)
+
+            <span class="ruby-comment"># etatInitial</span>
+            <span class="ruby-identifier">initialGrilleMenuItem</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">MenuItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Grille initiale&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
+            <span class="ruby-identifier">initialGrilleMenuItem</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;activate&quot;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getAide</span>().<span class="ruby-identifier">etatInitial</span>
+                        <span class="ruby-ivar">@grille</span>.<span class="ruby-identifier">rafraichirGrille</span>                    
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">aideMenu</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">initialGrilleMenuItem</span>)
+
+
             
             <span class="ruby-comment">#############################################################################</span>
             <span class="ruby-comment">###############Rajouter la même chose chose qu&#39;au dessus#####################</span>
@@ -282,7 +301,7 @@
         <span class="ruby-comment"># Préférences</span>
         <span class="ruby-identifier">preferencesMenuItem</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">MenuItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Préférences&quot;</span>, <span class="ruby-value">:use_underline</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
     <span class="ruby-identifier">preferencesMenuItem</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;activate&quot;</span> <span class="ruby-keyword">do</span>
-        <span class="ruby-identifier">newWindow</span> = <span class="ruby-keyword">nil</span> <span class="ruby-comment"># Créer nouvelle classe</span>
+        <span class="ruby-identifier">newWindow</span> = <span class="ruby-constant">Preferences</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@grille</span>)
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">optionMenu</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">preferencesMenuItem</span>)
 
@@ -364,7 +383,7 @@
 
           
           <div class="method-source-code" id="chargement-source">
-            <pre><span class="ruby-comment"># File vues/Fenetre.rb, line 206</span>
+            <pre><span class="ruby-comment"># File vues/Fenetre.rb, line 225</span>
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">chargement</span>
             <span class="ruby-ivar">@partie</span>=<span class="ruby-constant">Sauvegarde</span>.<span class="ruby-identifier">loadPartie</span>(<span class="ruby-string">&quot;partie1&quot;</span>)
             <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">lanceTemps</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getTimer</span>.<span class="ruby-identifier">getAccumulated</span>)

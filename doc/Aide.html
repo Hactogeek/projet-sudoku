@@ -72,6 +72,14 @@
     
     <li ><a href="#method-c-creer">::creer</a>
     
+    <li ><a href="#method-c-listeCaseToListePosition">::listeCaseToListePosition</a>
+    
+    <li ><a href="#method-c-listeContientCandidat">::listeContientCandidat</a>
+    
+    <li ><a href="#method-c-listeContientCandidatSymbole">::listeContientCandidatSymbole</a>
+    
+    <li ><a href="#method-c-listeContientSymbole">::listeContientSymbole</a>
+    
     <li ><a href="#method-c-new">::new</a>
     
     <li ><a href="#method-i-afficherLesMethodesDeResolution">#afficherLesMethodesDeResolution</a>
@@ -80,17 +88,27 @@
     
     <li ><a href="#method-i-candidatPossible">#candidatPossible</a>
     
-    <li ><a href="#method-i-candidatUnique">#candidatUnique</a>
-    
     <li ><a href="#method-i-caseResolvable">#caseResolvable</a>
     
     <li ><a href="#method-i-coupSuivant">#coupSuivant</a>
     
+    <li ><a href="#method-i-etatInitial">#etatInitial</a>
+    
     <li ><a href="#method-i-explicationChoix">#explicationChoix</a>
+    
+    <li ><a href="#method-i-getColonneInteractionsEntreRegions">#getColonneInteractionsEntreRegions</a>
+    
+    <li ><a href="#method-i-getLigneInteractionsEntreRegions">#getLigneInteractionsEntreRegions</a>
+    
+    <li ><a href="#method-i-hiddenSingle">#hiddenSingle</a>
+    
+    <li ><a href="#method-i-interactionsEntreRegions">#interactionsEntreRegions</a>
     
     <li ><a href="#method-i-resoudre">#resoudre</a>
     
     <li ><a href="#method-i-singleBox">#singleBox</a>
+    
+    <li ><a href="#method-i-testInteractionsEntreRegions">#testInteractionsEntreRegions</a>
     
     <li ><a href="#method-i-verificationGrille">#verificationGrille</a>
     
@@ -150,6 +168,165 @@
             <pre><span class="ruby-comment"># File api/Aide.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">partie</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">partie</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-listeCaseToListePosition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">listeCaseToListePosition</span><span
+            class="method-args">(listeCase)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne la liste des position de la liste des cases @param
+listeCase @return boolean</p>
+          
+          
+
+          
+          <div class="method-source-code" id="listeCaseToListePosition-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 357</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">listeCase</span>)
+        <span class="ruby-identifier">listePos</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getPosition</span>()
+                <span class="ruby-identifier">listePos</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">pos</span>)
+        }
+
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">listePos</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-listeContientCandidat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">listeContientCandidat</span><span
+            class="method-args">(listeCase, candidat)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui indique si la liste de case contient le candidat @param
+candidat @return boolean</p>
+          
+          
+
+          
+          <div class="method-source-code" id="listeContientCandidat-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listeContientCandidat</span>(<span class="ruby-identifier">listeCase</span>, <span class="ruby-identifier">candidat</span>)
+        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> ((<span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getCandidat</span>().<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">candidat</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>) )
+                        <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                <span class="ruby-keyword">end</span>
+        }
+
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-listeContientCandidatSymbole" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">listeContientCandidatSymbole</span><span
+            class="method-args">(listeCase, candidat)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="listeContientCandidatSymbole-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 331</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listeContientCandidatSymbole</span>(<span class="ruby-identifier">listeCase</span>, <span class="ruby-identifier">candidat</span>)
+        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> ((<span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getCandidat</span>().<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">candidat</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-identifier">candidat</span> ))
+                        <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                <span class="ruby-keyword">end</span>
+        }
+
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-listeContientSymbole" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">listeContientSymbole</span><span
+            class="method-args">(listeCase, symbole)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui indique si la liste de case contient le symbole @param symbole
+@return boolean</p>
+          
+          
+
+          
+          <div class="method-source-code" id="listeContientSymbole-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 344</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listeContientSymbole</span>(<span class="ruby-identifier">listeCase</span>, <span class="ruby-identifier">symbole</span>)
+        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">kase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-identifier">symbole</span> )
+                        <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+                <span class="ruby-keyword">end</span>
+        }
+
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -221,7 +398,7 @@
 
           
           <div class="method-source-code" id="afficherLesMethodesDeResolution-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 140</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherLesMethodesDeResolution</span>
 
 <span class="ruby-keyword">end</span></pre>
@@ -254,7 +431,7 @@
 
           
           <div class="method-source-code" id="candidatGrille-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 83</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatGrille</span>()
 
 <span class="ruby-keyword">end</span></pre>
@@ -304,79 +481,6 @@
       </div>
 
     
-      <div id="method-i-candidatUnique" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">candidatUnique</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Retourne la liste des cases qui ont plusieurs candidats mais une solution
-unique</p>
-          
-          
-
-          
-          <div class="method-source-code" id="candidatUnique-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">candidatUnique</span>()
-        <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-                        <span class="ruby-keyword">for</span> <span class="ruby-identifier">n</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
-                                <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>.<span class="ruby-identifier">getRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-
-                                <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
-
-                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">end</span>
-
-                                <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
-
-                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">add</span> = <span class="ruby-operator">!</span>(<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>)) <span class="ruby-operator">||</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonne</span>(<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">n</span>))
-                                <span class="ruby-keyword">end</span>
-
-                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> 
-                                        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
-                                <span class="ruby-keyword">end</span>
-                        <span class="ruby-keyword">end</span>
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-
-        <span class="ruby-comment"># print &quot;\n\tlisteCase&quot;, listeCase</span>
-
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span>
-                <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> 
-        <span class="ruby-keyword">end</span>
-
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">listeCase</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-caseResolvable" class="method-detail ">
         
         <div class="method-heading">
@@ -396,19 +500,22 @@ unique</p>
 
           
           <div class="method-source-code" id="caseResolvable-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 64</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">caseResolvable</span>
         <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
 
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span> 
-                <span class="ruby-keyword">if</span> <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getCandidat</span>().<span class="ruby-identifier">getListeCandidat</span>().<span class="ruby-identifier">compact</span>().<span class="ruby-identifier">length</span>() <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-                        <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getCandidat</span>().<span class="ruby-identifier">getListeCandidat</span>().<span class="ruby-identifier">compact</span>().<span class="ruby-identifier">length</span>() <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                        <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-comment"># print &quot;listeCase&quot;, listeCase</span>
 
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span>
+                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;NIL2&quot;</span>
                 <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> 
         <span class="ruby-keyword">end</span>
 
@@ -443,26 +550,72 @@ unique</p>
 
           
           <div class="method-source-code" id="coupSuivant-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 118</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">coupSuivant</span>()
-        <span class="ruby-identifier">solution</span> = <span class="ruby-identifier">candidatUnique</span>()
-        <span class="ruby-identifier">solutionText</span> = <span class="ruby-string">&quot;Candidat Unique&quot;</span>
+        <span class="ruby-identifier">solution</span> = <span class="ruby-identifier">hiddenSingle</span>()
+
 
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">solution</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
                 <span class="ruby-comment"># return solution</span>
-                <span class="ruby-keyword">return</span> [<span class="ruby-identifier">solutionText</span>, <span class="ruby-identifier">solution</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">solution</span>.<span class="ruby-identifier">length</span>)]]
+                <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">solution</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">solution</span>.<span class="ruby-identifier">length</span>)]
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">solution</span> = <span class="ruby-identifier">caseResolvable</span>()
-        <span class="ruby-identifier">solutionText</span> = <span class="ruby-string">&quot;Un seul candidat&quot;</span>
 
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">solution</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
                 <span class="ruby-comment"># return solution</span>
-                <span class="ruby-keyword">return</span> [<span class="ruby-identifier">solutionText</span>, <span class="ruby-identifier">solution</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">solution</span>.<span class="ruby-identifier">length</span>)]]
+                <span class="ruby-keyword">return</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">solution</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">solution</span>.<span class="ruby-identifier">length</span>)]
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">solution</span> = <span class="ruby-identifier">interactionsEntreRegions</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">solution</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+                <span class="ruby-comment"># return solution</span>
+                <span class="ruby-keyword">return</span> <span class="ruby-value">3</span>, <span class="ruby-identifier">solution</span>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-comment"># return solution</span>
-        <span class="ruby-keyword">return</span> [<span class="ruby-string">&quot;Pas de méthode pour t&#39;aider !&quot;</span>, <span class="ruby-keyword">nil</span>]
+        <span class="ruby-keyword">return</span> [<span class="ruby-value">0</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-etatInitial" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">etatInitial</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui remet la grille à l&#39;état initial</p>
+          
+          
+
+          
+          <div class="method-source-code" id="etatInitial-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">etatInitial</span>
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span>(<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getOriginaleGrille</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>)
+                        <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getSolutionOriginale</span>)
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-keyword">nil</span>)
+
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -499,9 +652,255 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="explicationChoix-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 98</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">explicationChoix</span>(<span class="ruby-identifier">candidat</span>, <span class="ruby-identifier">pos</span>)
 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getColonneInteractionsEntreRegions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getColonneInteractionsEntreRegions</span><span
+            class="method-args">(x, y)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne les donnees necessaire à la methode
+interactionsEntreRegions @return lignePresent, ligneAbsent, region,
+regionEnlever</p>
+          
+          
+
+          
+          <div class="method-source-code" id="getColonneInteractionsEntreRegions-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getColonneInteractionsEntreRegions</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">colonnePresent</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonneRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">colonneAbsent</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getColonneAutreRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">region</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getCaseRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        
+        <span class="ruby-identifier">regionEnlever</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">region</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">regionEnlever</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">kase</span>)
+        }
+        <span class="ruby-identifier">colonnePresent</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">regionEnlever</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">kase</span>)
+        }
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">colonnePresent</span>, <span class="ruby-identifier">colonneAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getLigneInteractionsEntreRegions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getLigneInteractionsEntreRegions</span><span
+            class="method-args">(x, y)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui retourne les donnees necessaire à la methode
+interactionsEntreRegions @return lignePresent, ligneAbsent, region,
+regionEnlever</p>
+          
+          
+
+          
+          <div class="method-source-code" id="getLigneInteractionsEntreRegions-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getLigneInteractionsEntreRegions</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">lignePresent</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigneRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">ligneAbsent</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getLigneAutreRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        <span class="ruby-identifier">region</span> = <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">getCaseRegion</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+        
+        <span class="ruby-identifier">regionEnlever</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">region</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">regionEnlever</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">kase</span>)
+        }
+        <span class="ruby-identifier">lignePresent</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">regionEnlever</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">kase</span>)
+        }
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">lignePresent</span>, <span class="ruby-identifier">ligneAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hiddenSingle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hiddenSingle</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retourne la liste des cases qui ont plusieurs candidats mais une solution
+unique</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hiddenSingle-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hiddenSingle</span>()
+        <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getSolutionJoueur</span>() <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+                        
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+                                <span class="ruby-identifier">lig1</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">lig2</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>
+                        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                <span class="ruby-identifier">lig1</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">lig2</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">lig1</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">lig2</span> = <span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>
+                        <span class="ruby-keyword">end</span>
+
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">y</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+                                <span class="ruby-identifier">col1</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">col2</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>
+                        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">y</span><span class="ruby-operator">%</span><span class="ruby-value">3</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                                <span class="ruby-identifier">col1</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">col2</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">col1</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+                                <span class="ruby-identifier">col2</span> = <span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>
+                        <span class="ruby-keyword">end</span>
+
+                        <span class="ruby-keyword">for</span> <span class="ruby-identifier">n</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>)
+
+                                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>.<span class="ruby-identifier">absentRegion</span>(<span class="ruby-identifier">n</span>,<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">lig1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">absentLigne</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">lig2</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">col1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">absentColonne</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">col2</span>))
+                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>.<span class="ruby-identifier">getCase</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)).<span class="ruby-identifier">getSolutionOriginale</span>
+                                                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;AJOUTER&quot;</span>, <span class="ruby-identifier">x</span>,<span class="ruby-string">&quot;-&quot;</span>,<span class="ruby-identifier">y</span>,<span class="ruby-string">&quot;\n&quot;</span>
+                                                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;\t&quot;</span>, <span class="ruby-identifier">lig1</span>,<span class="ruby-string">&quot;/&quot;</span>,<span class="ruby-identifier">lig2</span>,<span class="ruby-string">&quot;-&quot;</span>,<span class="ruby-identifier">col1</span>,<span class="ruby-string">&quot;/&quot;</span>,<span class="ruby-identifier">col2</span>,<span class="ruby-string">&quot;\n&quot;</span>
+                                                <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Position</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+                                        <span class="ruby-keyword">else</span>
+                                                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;Problème !&quot;</span>
+                                        <span class="ruby-keyword">end</span>
+                                <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># print &quot;\n\tlisteCase&quot;, listeCase</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCase</span>.<span class="ruby-identifier">empty?</span>
+                <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;NIL&quot;</span>
+                <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> 
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">listeCase</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-interactionsEntreRegions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">interactionsEntreRegions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Méthode qui applique la technique Interactions entre régions @return
+listePosistion</p>
+          
+          
+
+          
+          <div class="method-source-code" id="interactionsEntreRegions-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">interactionsEntreRegions</span>
+        <span class="ruby-identifier">posListePresent</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">posListeAbsent</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">posRegion</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">posRegionEnlever</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-comment"># Pour chaque case</span>
+        <span class="ruby-keyword">for</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
+                <span class="ruby-keyword">for</span> <span class="ruby-identifier">y</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)
+                        <span class="ruby-comment"># Pour chaque symbole       </span>
+                        <span class="ruby-keyword">for</span> <span class="ruby-identifier">symbole</span> <span class="ruby-keyword">in</span> (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">9</span>)      
+                                <span class="ruby-comment"># On test pour la ligne    </span>
+                                <span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span> = <span class="ruby-identifier">getLigneInteractionsEntreRegions</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>)
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">testInteractionsEntreRegions</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span>)
+                                        <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\n Symbole :&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">symbole</span>.<span class="ruby-identifier">to_s</span>)
+                                        <span class="ruby-identifier">posListePresent</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">listePresent</span>)
+                                        <span class="ruby-identifier">posListeAbsent</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">listeAbsent</span>)
+                                        <span class="ruby-identifier">posRegion</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">region</span>)
+                                        <span class="ruby-identifier">posRegionEnlever</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">regionEnlever</span>)
+
+                                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">posListePresent</span>, <span class="ruby-identifier">posListeAbsent</span>, <span class="ruby-identifier">posRegion</span>, <span class="ruby-identifier">posRegionEnlever</span>
+                                <span class="ruby-keyword">end</span>
+                                <span class="ruby-comment"># On test pour la colonne</span>
+                                <span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span> = <span class="ruby-identifier">getColonneInteractionsEntreRegions</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>)
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">testInteractionsEntreRegions</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span>)
+                                        <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;\n Symbole :&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">symbole</span>.<span class="ruby-identifier">to_s</span>)
+                                        <span class="ruby-identifier">posListePresent</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">listePresent</span>)
+                                        <span class="ruby-identifier">posListeAbsent</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">listeAbsent</span>)
+                                        <span class="ruby-identifier">posRegion</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">region</span>)
+                                        <span class="ruby-identifier">posRegionEnlever</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeCaseToListePosition</span>(<span class="ruby-identifier">regionEnlever</span>)
+
+                                        <span class="ruby-keyword">return</span> <span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">posListePresent</span>, <span class="ruby-identifier">posListeAbsent</span>, <span class="ruby-identifier">posRegion</span>, <span class="ruby-identifier">posRegionEnlever</span>
+                                <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>   
+        
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -532,9 +931,11 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="resoudre-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 88</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resoudre</span>()
-
+        <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">setSolutionJoueur</span>(<span class="ruby-identifier">laCase</span>.<span class="ruby-identifier">getSolutionOriginale</span>)
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -565,7 +966,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="singleBox-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 145</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 177</span>
         <span class="ruby-keyword">def</span> <span class="ruby-identifier">singleBox</span>()
                 <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
                 <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">laCase</span><span class="ruby-operator">|</span>
@@ -628,6 +1029,44 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
       </div>
 
     
+      <div id="method-i-testInteractionsEntreRegions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">testInteractionsEntreRegions</span><span
+            class="method-args">(symbole, listePresent, listeAbsent, region, regionEnlever)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="testInteractionsEntreRegions-source">
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">testInteractionsEntreRegions</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">region</span>, <span class="ruby-identifier">regionEnlever</span>)
+
+        <span class="ruby-keyword">return</span> ((<span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeContientCandidatSymbole</span>(<span class="ruby-identifier">listeAbsent</span>, <span class="ruby-identifier">symbole</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>) <span class="ruby-operator">&amp;&amp;</span>
+                (<span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeContientSymbole</span>(<span class="ruby-identifier">region</span>, <span class="ruby-identifier">symbole</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>) <span class="ruby-operator">&amp;&amp;</span>
+                (<span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeContientCandidat</span>(<span class="ruby-identifier">listePresent</span>, <span class="ruby-identifier">symbole</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>) <span class="ruby-operator">&amp;&amp;</span>
+                (<span class="ruby-constant">Aide</span>.<span class="ruby-identifier">listeContientCandidat</span>(<span class="ruby-identifier">regionEnlever</span>, <span class="ruby-identifier">symbole</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>))
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-verificationGrille" class="method-detail ">
         
         <div class="method-heading">
@@ -652,7 +1091,7 @@ symbole qui indique l&#39;impossibilité de placer le symbole candidat</p>
 
           
           <div class="method-source-code" id="verificationGrille-source">
-            <pre><span class="ruby-comment"># File api/Aide.rb, line 105</span>
+            <pre><span class="ruby-comment"># File api/Aide.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verificationGrille</span>
         <span class="ruby-identifier">listeCase</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-ivar">@partie</span>.<span class="ruby-identifier">getPlateau</span>().<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kase</span><span class="ruby-operator">|</span>

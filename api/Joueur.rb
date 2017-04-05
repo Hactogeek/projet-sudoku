@@ -80,6 +80,28 @@ class Joueur
 		return @tabScore[niveauDifficulte]
 	end 
 
+	# methode qui permet de modifier les statistiques du joueur
+	# * [Paramètre :]
+	# 				oldStat les anciennes statistiques qui sont sauvegardées dans un fichier  
+	# 				date date du jour 
+	# 				score score du joueur
+	def modifierStat(oldStat, date, score)
+		@stat= Hash.new() 
+		@stat=oldStat
+		if(!@stat.value?(score))
+			@stat[date]=score
+		end 
+		
+	end 
+	
+	# methode qui permet d'afficher les statistiques du joueur
+	def afficherStat
+		 @stat.each{ |key,valeur|
+			print key ," => " ,valeur," points \n"
+
+		}
+	end 
+	
 	# méthode d'affichage d'un joueur
 	def to_s
 		"Joueur : #{@pseudo} "

@@ -356,8 +356,6 @@ class Plateau
 	# * [Paramètre :]
 	# 				position La position de la case
 	#				symbole le symbole à retirer des candidats
-	#
-	# * [Retourne :]
 	def enleverCandidat(position, symbole)
 		ligne = getLigne(position.getX())	
 		colonne = getColonne(position.getY())
@@ -489,7 +487,7 @@ class Plateau
 	# 				booleen	
 	def correctCandidat?
 		self.each { |x,y,kase|
-			if kase.getCandidat().include?(kase.getSolutionOriginale) == false
+			if (kase.getCandidat().include?(kase.getSolutionOriginale) == false) && kase.getSolutionJoueur == nil
 				return false
 			end
 		}

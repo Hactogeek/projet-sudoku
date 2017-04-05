@@ -7,10 +7,23 @@ class Index < WindowSudoku
 	def initialize
 		super("Index")
 
+
+		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 205, :heigth => 200)))
+
+		#Placement des images et ajout dans la table
+		tableMain.attach(header, 0, 10, 0, 3)
+
+
 		#Création des boutons
 		seConnecter = Gtk::Button.new(:label => "Se connecter")
+		seConnecter.override_background_color(:normal, @colorNeutral)
+		seConnecter.set_size_request(205,50)
 		creerProfil = Gtk::Button.new(:label => "Créer un profil")
-		sessionInvite = Gtk::Button.new(:label => "Session Invité")
+		creerProfil.override_background_color(:normal, @colorNeutral)
+		creerProfil.set_size_request(205,50)
+		sessionInvite = Gtk::Button.new(:label => "Session invité")
+		sessionInvite.override_background_color(:normal, @colorNeutral)
+		sessionInvite.set_size_request(205,50)
 
 		#Redirection des boutons
 		seConnecter.signal_connect "clicked" do |widget|
@@ -28,13 +41,9 @@ class Index < WindowSudoku
 			newWindow=Invite.new
 		end
 
-		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 919, :heigth => 200)))
-
-		#Placement des boutons et ajout dans la table
-		tableMain.attach(header, 0, 9, 0, 3)
-		tableMain.attach(seConnecter, 4, 6, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(creerProfil, 4, 6, 5, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(sessionInvite, 4, 6, 7, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(seConnecter, 0, 10, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
+		tableMain.attach(creerProfil, 0, 10, 5, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
+		tableMain.attach(sessionInvite, 0, 10, 7, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
 
 		show_all
 	end

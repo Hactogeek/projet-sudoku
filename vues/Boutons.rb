@@ -31,9 +31,9 @@ class Boutons < Gtk::Box
 					@grille.setColorOnValue(widget.label, COUL_VERT)
 					pos=@grille.getCoordFocus
 					if(pos!=nil)
-						@sousGrille.loadCandidatsCase(pos.getX,pos.getY)
+						@grille.getPartie.getPlateau.enleverCandidat(pos, widget.label.to_i)
+						@sousGrille.refreshAllCandidats
 					end
-					#@sousGrille.loadAllCandidats()
 				else
 					@sousGrille.setCandidatSurFocus(widget.label.to_i)
 				end
