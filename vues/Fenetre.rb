@@ -33,8 +33,9 @@ class Fenetre < Gtk::Window
 		#==========================#
 		# Remplissage de la grille #
 		#==========================#
-
-		@partie.creerPartie
+		if(@partie.estVide?)
+			@partie.creerPartie
+		end
 	    @grille.remplirGrille
 
 		#==========#

@@ -30,10 +30,10 @@ class CadreAide < Gtk::Table
 		attach(candidatLabel , 3,6, 11,12)
 
 		@labelAide = Gtk::Label.new("")
-		attach(@labelAide, 0,8, 1,6)
+		attach(@labelAide, 0,8, 1,3)
 
 		@imgEvent=Gtk::EventBox.new
-		attach(@imgEvent, 0,8, 2,6)
+		attach(@imgEvent, 0,8, 3,10)
 
 		@hintButton = Gtk::Button.new(:label =>"Indice", :use_underline => nil, :stock_id => nil)
 		@hintButton.signal_connect "clicked" do |widget|
@@ -72,8 +72,11 @@ class CadreAide < Gtk::Table
 	end
 
 	def startHint()
-		pos=@grille.colorCaseSuivant
-		if(pos[1]!=nil)
+		pos=@grille.getPartie.getAide.coupSuivant
+		if(pos[0]!=0)
+			a=80-(9*pos[1].getY+pos[1].getX)
+			@focus=children[a]
+			@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
 			if(@backButton == nil || !@backButton.no_show_all?)
 				@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
 				@backButton.signal_connect "clicked" do |widget|
@@ -89,7 +92,6 @@ class CadreAide < Gtk::Table
 
 				@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
 				@finishButton.signal_connect "clicked" do |widget|
-					@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_BLANC)
 					cancelHint()
 				end
 				attach(@finishButton, 6,8 ,0,1)
@@ -108,7 +110,7 @@ class CadreAide < Gtk::Table
 		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
 		@grille.resetColorOnAll()
 		# @grille.setColorOnValue(widget.label, COUL_VERT)
-		@sousGrille.loadAllCandidats()
+		@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
 		@moreButton.sensitive = false
 		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
 		remove(@backButton)
@@ -198,7 +200,7 @@ class CadreAide < Gtk::Table
 	# * [Paramètre :]
 	# 				text => texte de l'aide
 	def setAideText(text)
-		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text+"</span>\n"
+		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text.to_s+"</span>\n"
 		@labelAide.set_markup(textFormat)
 	end
 end
