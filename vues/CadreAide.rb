@@ -30,50 +30,24 @@ class CadreAide < Gtk::Table
 		attach(candidatLabel , 3,6, 11,12)
 
 		@labelAide = Gtk::Label.new("")
-		attach(@labelAide, 0,8, 1,6)
+		attach(@labelAide, 0,8, 1,3)
 
 		@imgEvent=Gtk::EventBox.new
-		attach(@imgEvent, 0,8, 2,6)
+		attach(@imgEvent, 0,8, 3,10)
 
 		@hintButton = Gtk::Button.new(:label =>"Indice", :use_underline => nil, :stock_id => nil)
 		@hintButton.signal_connect "clicked" do |widget|
 			startHint()
 		end
 		attach(@hintButton, 3,5 ,0,1)
-
-=begin
-		@methode1 = Gtk::Button.new(:label =>"Methode du poney", :use_underline => nil, :stock_id => nil)
-		@methode1.signal_connect "clicked" do |widget|
-			loadMethode(1)
-		end
-		@methode2 = Gtk::Button.new(:label =>"Methode de dragibus", :use_underline => nil, :stock_id => nil)
-		@methode2.signal_connect "clicked" do |widget|
-			loadMethode(2)
-		end
-		@methode3 = Gtk::Button.new(:label =>"Methode du couscous", :use_underline => nil, :stock_id => nil)
-		@methode3.signal_connect "clicked" do |widget|
-			loadMethode(3)
-		end
-		@methode4 = Gtk::Button.new(:label =>"Methode de caribou", :use_underline => nil, :stock_id => nil)
-		@methode4.signal_connect "clicked" do |widget|
-			loadMethode(4)
-		end
-		@methode5 = Gtk::Button.new(:label =>"Methode de la methode", :use_underline => nil, :stock_id => nil)
-		@methode5.signal_connect "clicked" do |widget|
-			loadMethode(5)
-		end
-
-		attach(@methode1, 0,8, 0,1)
-		attach(@methode2, 0,8, 1,2)
-		attach(@methode3, 0,8, 2,3)
-		attach(@methode4, 0,8, 3,4)
-		attach(@methode5, 0,8, 4,5)
-=end
 	end
 
 	def startHint()
-		pos=@grille.colorCaseSuivant
-		if(pos[1]!=nil)
+		pos=@grille.getPartie.getAide.coupSuivant
+		if(pos[0]!=0)
+			a=80-(9*pos[1].getY+pos[1].getX)
+			@focus=children[a]
+			@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
 			if(@backButton == nil || !@backButton.no_show_all?)
 				@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
 				@backButton.signal_connect "clicked" do |widget|
@@ -89,7 +63,6 @@ class CadreAide < Gtk::Table
 
 				@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
 				@finishButton.signal_connect "clicked" do |widget|
-					@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_BLANC)
 					cancelHint()
 				end
 				attach(@finishButton, 6,8 ,0,1)
@@ -106,6 +79,9 @@ class CadreAide < Gtk::Table
 
 	def moreHint(pos)
 		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
+		@grille.resetColorOnAll()
+		# @grille.setColorOnValue(widget.label, COUL_VERT)
+		@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
 		@moreButton.sensitive = false
 		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
 		remove(@backButton)
@@ -140,45 +116,6 @@ class CadreAide < Gtk::Table
 		end
 	end
 
-=begin
-	def loadMethode(n)
-		case n
-		when 1
-			# load la première méthode
-		when 2
-			# deuxième méthode
-		when 3
-			# etc
-		when 4
-			# etc
-		when 5
-			# etc
-		else
-			return
-		end
-		@methodeActive = n
-
-		setAideTitre(("Bienvenue dans la méthode "+n.to_s))
-
-		@methode1.hide()
-		@methode2.hide()
-		@methode3.hide()
-		@methode4.hide()
-		@methode5.hide()
-		@labelAide.show()
-		if (@backButton == nil)
-			@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
-			@backButton.signal_connect "clicked" do |widget|
-				loadMenu()
-			end
-			attach(@backButton, 0,8 ,0,1)
-			@backButton.show()
-		else
-			@backButton.show()
-		end
-	end
-=end
-
 	# Méthode qui set l'aide	
 	# * [Paramètre :]
 	# 				titre => le titre de l'aide
@@ -195,7 +132,7 @@ class CadreAide < Gtk::Table
 	# * [Paramètre :]
 	# 				text => texte de l'aide
 	def setAideText(text)
-		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text+"</span>\n"
+		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text.to_s+"</span>\n"
 		@labelAide.set_markup(textFormat)
 	end
 end

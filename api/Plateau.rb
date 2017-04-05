@@ -112,10 +112,9 @@ class Plateau
 	def getLigne(ligne)
 		tableauRetour = Array.new()
 		for n in (0...9)
-			tableauRetour.insert(n, @grid[ligne][n].getSolutionJoueur)
+			tableauRetour.insert(n, @grid[ligne][n])
 		end
-		# print "Ligne : ", tableauRetour
-		return tableauRetour
+		return tableauRetour#.map(&:getSolutionJoueur)
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une colonne spécifié
@@ -127,10 +126,9 @@ class Plateau
 	def getColonne(colonne)
 		tableauRetour = Array.new()
 		for n in (0...9)
-			tableauRetour.insert(n, @grid[n][colonne].getSolutionJoueur)
+			tableauRetour.insert(n, @grid[n][colonne])
 		end
-		# print "Colonne : ", tableauRetour
-		return tableauRetour
+		return tableauRetour#.map(&:getSolutionJoueur)
 	end
 
 	# Méthode qui retourne un tableau des valeurs d'une region spécifié
@@ -147,11 +145,10 @@ class Plateau
 
 		for n in (posX...posX+3)
 			for m in (posY...posY+3)
-				tableauRetour.insert(n, @grid[n][m].getSolutionJoueur)
+				tableauRetour.insert(n, @grid[n][m])
 			end
 		end
-		# print "Region : ", tableauRetour
-		return tableauRetour
+		return tableauRetour#.map(&:getSolutionJoueur)
 	end
 
 
@@ -301,7 +298,7 @@ class Plateau
 	# 				booleen	
 	def absentLigne(chiffre, ligne)
 		tableauLigne = self.getLigne(ligne)
-		return !tableauLigne.include?(chiffre)
+		return !tableauLigne.compact.map(&:getSolutionJoueur).include?(chiffre)
 	end
 
 	# Méthode qui vérifie si un chiffre est dans une colonne
@@ -313,7 +310,7 @@ class Plateau
 	# 				booleen
 	def absentColonne(chiffre, colonne)
 		tableauColonne = self.getColonne(colonne)
-		return !tableauColonne.include?(chiffre)
+		return !tableauColonne.compact.map(&:getSolutionJoueur).include?(chiffre)
 	end
 
 	# Méthode qui vérifie si un chiffre est dans une région
@@ -325,7 +322,7 @@ class Plateau
 	# 				booleen	
 	def absentRegion(chiffre, posX, posY)
 		tableauRegion = self.getRegion(posX,posY)
-		return !tableauRegion.include?(chiffre)
+		return !tableauRegion.compact.map(&:getSolutionJoueur).include?(chiffre)
 	end
 
 	# Méthode qui retourne les listes des candidats pour une case
@@ -353,6 +350,27 @@ class Plateau
 
 		# print "\n Candidat en #{position.getX+1},#{position.getY+1}:", tabCandidatPossible.getListeCandidat, @grid[position.getX][position.getY].getListeCandidat().getListeCandidat,"\n"
 		return tabCandidatPossible
+	end
+
+	# Méthode qui enleve pour la region, colonne, ligne de la position
+	# * [Paramètre :]
+	# 				position La position de la case
+	#				symbole le symbole à retirer des candidats
+	#
+	# * [Retourne :]
+	def enleverCandidat(position, symbole)
+		ligne = getLigne(position.getX())	
+		colonne = getColonne(position.getY())
+		region = getCaseRegion(position.getX(),position.getY())
+		ligne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		colonne.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
+		region.each{ |kase|
+			kase.getCandidat().remove(symbole)
+		}
 	end
 
 	# Méthode qui retourne les listes des candidats impossibles pour une case
@@ -451,15 +469,27 @@ class Plateau
 		return false
 	end
 
-     # Méthode qui vérifie si la grille est correct
+        # Méthode qui vérifie si la grille est correct
 	# * [Retourne :]
 	# 				booleen	
 	def correctGrille?
 		self.each { |x,y,kase|
-			ligne = getLigne(y)
-			colonne = getColonne(x)
-			region = getRegion(x/3, y/3)
+			ligne = getLigne(y).compact.map(&:getSolutionJoueur)
+			colonne = getColonne(x).compact.map(&:getSolutionJoueur)
+			region = getRegion(x/3, y/3).compact.map(&:getSolutionJoueur)
 			if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+				return false
+			end
+		}
+		return true
+	end
+
+	# Méthode qui vérifie si les candidats sont corrects
+	# * [Retourne :]
+	# 				booleen	
+	def correctCandidat?
+		self.each { |x,y,kase|
+			if kase.getCandidat().include?(kase.getSolutionOriginale) == false
 				return false
 			end
 		}
@@ -477,6 +507,18 @@ class Plateau
 			end
 		}
 		return pleine
+	end
+
+	# Méthode qui vérifie si il y a des candidats dans la grille
+	# * [Retourne :]
+	# 				booleen	
+	def aucunCandidat?
+		self.each { |x,y,kase|
+			if  kase.getCandidat().empty? == false
+				return false
+			end
+		}
+		return true
 	end
 
     # Méthode qui vérifie si la grille est complète et correct
@@ -523,6 +565,9 @@ class Plateau
 
 	# Importe et résout la grille passé en paramètre
 	def importerGrille
+		if !self.correctGrille?
+			return false
+		end
 		@size.times do |x|
 			@size.times do |y|
 				if @grid[x][y].getSolutionJoueur() != nil
@@ -535,7 +580,7 @@ class Plateau
 		print "\n", self
 		print self.printOri
 		# print self.correctGrille?
-		return self.correctGrille? && resoudreGrilleImporter()
+		return resoudreGrilleImporter()
 	end
 
 	def resoudreGrilleImporter

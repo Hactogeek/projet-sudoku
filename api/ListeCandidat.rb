@@ -53,6 +53,13 @@ class ListeCandidat
 		return @tableauCandidat
 	end
 
+	# Méthode qui retourne vrai si il n'y a pas de candidat dans la liste
+	# * [Retourne :]
+	#				boolean
+	def empty?
+		return @tableauCandidat.compact.empty?
+	end
+
 	# Les méthodes de classe
 	class << self
 		

@@ -10,7 +10,7 @@ class FinJeu < Gtk::Window
 		# end
 
 		set_title "Fin du jeu"
-		set_window_position(Gtk::Window::POS_CENTER)
+		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
 		#Taille de la fenêtre, correspondant à celle du jeu.
