@@ -11,24 +11,35 @@ class Sauvegarde
 	def initialize
 	end
 
+	# Méthode qui charge une partie
+	# * [Paramètre :]
+	# 				Le nom de la partie
+	#
+	# * [Retourne :]
+	# 				La partie
 	def Sauvegarde.loadPartie(nomPartie)
 		@jeu=Marshal.load  File.open(nomPartie + '.txt', 'rb').read
 		return @jeu
 	end
 
-	#Sauvegarde dans le dossier du profil correspondant.
+	# Méthode qui sauvegarde une partie
+	# * [Paramètre :]
+	# 				La partie
+	# 				Le nom de la partie 
 	def Sauvegarde.savePartie(partie, nomPartie)
 		@jeu=partie
 		serialized_array = Marshal.dump(@jeu)
 		File.open(nomPartie+".txt", 'wb') {|f| f.write(serialized_array) }
 	end
 
-	#Permet de rentrer dans le répertoire du profil
+	# Méthode qui charge un profil de joueur
+	# * [Paramètre :]
+	# 				Le nom du joueur
 	def loadProfil(nomJoueur)
 		Dir.creer(nomJoueur).semettreDansProfil(nomJoueur)
 	end
 
-	#Permet d'enregistrer un profil
+	# Méthode qui sauvegarde un profil
 	def saveProfil()
 		Dir.creer(nomJoueur).semettreDansProfil(nomJoueur)
 	end

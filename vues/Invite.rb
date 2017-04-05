@@ -35,6 +35,8 @@ class Invite < Gtk::Window
 			newWindow=ChoixDifficulte.new(1)
 		end
 		importerGrille.signal_connect "clicked" do |widget|
+			hide
+			newWindow=FenetreImportee.new
 		end
 		creerProfil.signal_connect "clicked" do |widget|
 			hide
@@ -44,7 +46,7 @@ class Invite < Gtk::Window
 		end
 		deconnexion.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir("../..")
+			#Dir.chdir("../..")
 			newWindow=Index.new
 		end
 		aPropos.signal_connect "clicked" do |widget|

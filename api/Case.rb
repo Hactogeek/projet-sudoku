@@ -91,7 +91,7 @@ class Case
 	#def getPosition
 	#	return @position
 	#end
-	#--
+	#++
 
 	# Affichage d'une solution de la Case
 	def printOri

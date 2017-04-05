@@ -133,13 +133,18 @@
 
         <div class="method-description">
           
-          <p>Constructeur de la classe @return : self</p>
+          <p>Constructeur de la classe</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 8</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">ListeCandidat</span>.<span class="ruby-identifier">creer</span>
         <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -172,7 +177,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 12</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
         <span class="ruby-ivar">@tableauCandidat</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">9</span>)       
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
@@ -200,14 +205,22 @@
 
         <div class="method-description">
           
-          <p>Méthode qui permet de placer un candidat sur une case @param plateau
-plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
+          <p>Méthode qui permet de placer un candidat sur une case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>plateau plateau position pos symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>listeCandidat</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="placerCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 56</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">placerCandidat</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">listeCandidat</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseListeCandidat</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCandidat</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -240,14 +253,22 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
         <div class="method-description">
           
-          <p>Méthode qui permet d&#39;enlever un candidat d&#39;une case @param plateau
-plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
+          <p>Méthode qui permet d&#39;enlever un candidat d&#39;une case</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>plateau plateau position pos symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>listeCandidat</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="retirerCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 71</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retirerCandidat</span>(<span class="ruby-identifier">plateau</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-identifier">listeCandidat</span> = <span class="ruby-identifier">plateau</span>.<span class="ruby-identifier">getCaseListeCandidat</span>(<span class="ruby-identifier">pos</span>)
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">listeCandidat</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
@@ -287,13 +308,22 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
         <div class="method-description">
           
-          <p>Méthode pour ajouter un candidat @param [Fixnum] symbole @return : self</p>
+          <p>Méthode pour ajouter un candidat</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 20</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-identifier">symbole</span>)
         <span class="ruby-comment"># @tableauCandidat.uniq</span>
@@ -322,13 +352,18 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne le tableau des candidats @return : [Fixnum] Array</p>
+          <p>Méthode qui retourne le tableau des candidats</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Array</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="getListeCandidat-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getListeCandidat</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tableauCandidat</span>
 <span class="ruby-keyword">end</span></pre>
@@ -355,14 +390,22 @@ plateau @param position pos @param [Fixnum] symbole @return listeCandidat</p>
 
         <div class="method-description">
           
-          <p>Méthode qui retourne vrai si le candidat est présent @param [Fixnum]
-symbole @return : vrai ou faux</p>
+          <p>Méthode qui retourne vrai si le candidat est présent</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>booleen</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 38</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">symbole</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -389,13 +432,22 @@ symbole @return : vrai ou faux</p>
 
         <div class="method-description">
           
-          <p>Méthode pour supprimer un candidat @param [Fixnum] symbole @return : self</p>
+          <p>Méthode pour supprimer un candidat</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>symbole</p>
+</dd></dl>
+</li><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>self</p>
+</dd></dl>
+</li></ul>
           
           
 
           
           <div class="method-source-code" id="remove-source">
-            <pre><span class="ruby-comment"># File src/ListeCandidat.rb, line 29</span>
+            <pre><span class="ruby-comment"># File api/ListeCandidat.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">symbole</span>)
         <span class="ruby-ivar">@tableauCandidat</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">symbole</span>, <span class="ruby-keyword">nil</span>)

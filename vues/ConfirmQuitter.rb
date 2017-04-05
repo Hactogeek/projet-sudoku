@@ -4,8 +4,8 @@ Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class ConfirmQuit < Gtk::Window
 
-	def initialize(partie)
-		super
+	def initialize(partie, fenetre, destroy)
+		super()
 
 		signal_connect "destroy" do
 			hide
@@ -33,13 +33,23 @@ class ConfirmQuit < Gtk::Window
 		oui.signal_connect "clicked" do |widget|
 			partie.stopTemps
 			Sauvegarde.savePartie(partie,"partie1")
-			hide
-			newWindow = MenuProfil.new
+			if(destroy==1)
+				Gtk.main_quit
+			else
+				hide
+				fenetre.hide
+				newWindow = MenuProfil.new
+			end
 		end
 
 		non.signal_connect "clicked" do |widget|
-			hide
-			newWindow = MenuProfil.new
+			if(destroy==1)
+				Gtk.main_quit
+			else
+				hide
+				fenetre.hide
+				newWindow = MenuProfil.new
+			end
 		end
 
 		retour.signal_connect "clicked" do |widget|

@@ -88,11 +88,17 @@
     
     <li ><a href="#method-i-getPlateau">#getPlateau</a>
     
+    <li ><a href="#method-i-getTimer">#getTimer</a>
+    
     <li ><a href="#method-i-getUndoRedo">#getUndoRedo</a>
+    
+    <li ><a href="#method-i-lanceTemps">#lanceTemps</a>
     
     <li ><a href="#method-i-setPlateau">#setPlateau</a>
     
     <li ><a href="#method-i-setSave">#setSave</a>
+    
+    <li ><a href="#method-i-stopTemps">#stopTemps</a>
     
   </ul>
 </div>
@@ -147,7 +153,7 @@
 
           
           <div class="method-source-code" id="loadSave-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 75</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Partie</span>.<span class="ruby-identifier">loadSave</span>(<span class="ruby-identifier">nomPartie</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&#39;.txt&#39;</span>, <span class="ruby-string">&#39;rb&#39;</span>).<span class="ruby-identifier">read</span>
 <span class="ruby-keyword">end</span></pre>
@@ -180,7 +186,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 14</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">difficulte</span>)
         <span class="ruby-ivar">@plateau</span> = <span class="ruby-constant">Plateau</span>.<span class="ruby-identifier">new</span>()
         <span class="ruby-ivar">@aide</span> = <span class="ruby-constant">Aide</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-keyword">self</span>)
@@ -217,7 +223,7 @@
 
           
           <div class="method-source-code" id="nouvelle-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 10</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Partie</span>.<span class="ruby-identifier">nouvelle</span>(<span class="ruby-identifier">difficulte</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">difficulte</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -258,8 +264,8 @@
 
           
           <div class="method-source-code" id="afficherPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 49</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherPlateau</span>()
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">afficherPlateau</span>
         <span class="ruby-identifier">print</span> <span class="ruby-ivar">@plateau</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -291,10 +297,10 @@
 
           
           <div class="method-source-code" id="creerPartie-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">creerPartie</span>()
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">creerPartie</span>
         <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">completeGrille</span>()
-        <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">printOri</span>()
+        <span class="ruby-comment">#puts @plateau.printOri()</span>
         <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">reduireGrille</span>(<span class="ruby-value">0</span>,<span class="ruby-ivar">@difficulte</span>) <span class="ruby-comment"># A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile</span>
         <span class="ruby-ivar">@checkPoint</span>.<span class="ruby-identifier">addMemento</span>
 <span class="ruby-keyword">end</span></pre>
@@ -327,7 +333,7 @@
 
           
           <div class="method-source-code" id="finPartie-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 31</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">finPartie</span>
         <span class="ruby-keyword">if</span> <span class="ruby-ivar">@plateau</span>.<span class="ruby-identifier">complete?</span>
                 <span class="ruby-identifier">print</span>(<span class="ruby-string">&quot;La grille est complete&quot;</span>)
@@ -363,8 +369,8 @@
 
           
           <div class="method-source-code" id="getAide-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">getAide</span>()
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getAide</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@aide</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -396,8 +402,8 @@
 
           
           <div class="method-source-code" id="getCheckPoint-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">getCheckPoint</span>()
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getCheckPoint</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@checkPoint</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -429,9 +435,42 @@
 
           
           <div class="method-source-code" id="getPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 39</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getPlateau</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@plateau</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-getTimer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getTimer</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getTimer-source">
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getTimer</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-ivar">@timer</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -462,9 +501,43 @@
 
           
           <div class="method-source-code" id="getUndoRedo-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">getUndoRedo</span>()
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getUndoRedo</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@undoRedo</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lanceTemps" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lanceTemps</span><span
+            class="method-args">(init)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="lanceTemps-source">
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lanceTemps</span>(<span class="ruby-identifier">init</span>)
+        <span class="ruby-ivar">@timer</span>=<span class="ruby-constant">Timer</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@timer</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">init</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -495,7 +568,7 @@
 
           
           <div class="method-source-code" id="setPlateau-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setPlateau</span>(<span class="ruby-identifier">plateau</span>)
         <span class="ruby-ivar">@plateau</span> = <span class="ruby-identifier">plateau</span>
 <span class="ruby-keyword">end</span></pre>
@@ -536,10 +609,43 @@ txt dont le nom sera nomPartie</p>
 
           
           <div class="method-source-code" id="setSave-source">
-            <pre><span class="ruby-comment"># File src/Partie.rb, line 69</span>
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setSave</span>(<span class="ruby-identifier">nomPartie</span>)
         <span class="ruby-identifier">serialized_array</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-keyword">self</span>)
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">nomPartie</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.txt&quot;</span>, <span class="ruby-string">&#39;wb&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">serialized_array</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-stopTemps" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stopTemps</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stopTemps-source">
+            <pre><span class="ruby-comment"># File api/Partie.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stopTemps</span>
+        <span class="ruby-ivar">@timer</span>.<span class="ruby-identifier">stop</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

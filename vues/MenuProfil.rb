@@ -40,6 +40,8 @@ class MenuProfil < Gtk::Window
 			newWindow=ChoixDifficulte.new(0)
 		end
 		importerGrille.signal_connect "clicked" do |widget|
+			hide
+			newWindow=FenetreImportee.new
 		end
 		chargerPartie.signal_connect "clicked" do |widget|
 			hide

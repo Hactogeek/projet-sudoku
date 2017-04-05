@@ -10,13 +10,13 @@ class Fenetre < Gtk::Window
 
 	def initialize (partie)
 		super(Gtk::WindowType::TOPLEVEL)
-		signal_connect "destroy" do
-			Gtk.main_quit
+		signal_connect "delete_event" do
+			newWindow = ConfirmQuit.new(@partie, self, 1)
 		end
 
 
 		# Property
-		set_title "ku"
+		set_title "Ku"
 		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
@@ -30,6 +30,13 @@ class Fenetre < Gtk::Window
 		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
 
+		#==========================#
+		# Remplissage de la grille #
+		#==========================#
+
+		@partie.creerPartie
+	    @grille.remplirGrille
+
 		#==========#
 		# Niveau 1 #
 		#==========#
@@ -38,7 +45,7 @@ class Fenetre < Gtk::Window
 	    add(vboxMain)
 
 		#=========================#  Note: Menu = Groupe de MenuItem une fois définie un submenu d'un autres MenuItem qui sert de titre
-		# Creation Menu (à finir) #  Exemple:  Fichier [Menu: (Nouveau, Sauvegarder, ...)]
+		# Creation Menu 		  #  Exemple:  Fichier [Menu: (Nouveau, Sauvegarder, ...)]
 		#=========================#  Voir si on nomme les MenuItem "MI" pour faire plus propre
 
 	    menuBar = Gtk::MenuBar.new # Barre du menu
@@ -67,7 +74,7 @@ class Fenetre < Gtk::Window
 	        # Quitter
 	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
             quitterMenuItem.signal_connect "activate" do
-            	newWindow = ConfirmQuit.new(@partie)
+            	newWindow = ConfirmQuit.new(@partie, self, 0)
             end
             fileMenu.add(quitterMenuItem)
 
@@ -149,12 +156,24 @@ class Fenetre < Gtk::Window
 		    ###############Rajouter la même chose chose qu'au dessus#####################
 		    #############################################################################
 
+	    # Menu Fichier
+	    optionMenuItem = Gtk::MenuItem.new(:label => "Options", :use_underline => false) # Item Fichier
+	    optionMenu = Gtk::Menu.new() # Menu de Fichier
+	    optionMenuItem.set_submenu(optionMenu)
+
+	        # Préférences
+	        preferencesMenuItem = Gtk::MenuItem.new(:label => "Préférences", :use_underline => false)
+            preferencesMenuItem.signal_connect "activate" do
+            	newWindow = nil # Créer nouvelle classe
+            end
+            optionMenu.add(preferencesMenuItem)
 
         # Barre des menus 
 	    menuBar.append(fileMenuItem)	
 	    menuBar.append(checkpointMenuItem)
 	    #menuBar.append(userMenuItem)
 	    menuBar.append(aideMenuItem)
+	    menuBar.append(optionMenuItem)
 		
 
 		#==========#

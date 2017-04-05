@@ -9,106 +9,71 @@
 
 class Timer
 
-  #Le temps accumulé  (seconde)
-  @accumulated
-  #Le temps écoulé entre t0 et t1
-  @elapsed
-  #Variable du temps
-  @start
-  #Temps du timer
-  @time
+	#Le temps accumulé  (seconde)
+	@accumulated
+	#Le temps écoulé entre t0 et t1
+	@elapsed
+	#Variable du temps
+	@start
+	#Temps du timer
+	@time
 
-  attr_reader :accumulated, :elapsed
+	attr_reader :accumulated, :elapsed
 
-  # * *Description*:
-	#
-	#  Méthode de lancement du Timer et initialisation
-	#
-	# * *Paramètre*:
-	#
-	# - +secStart+ -> Le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
-	#
-	# * *Exemple*:
-	#
-	# unTimer.start(0)
-	#
-  def start (secStart)
-    @accumulated = secStart
-    @elapsed = 0
-    @start = Time.now
-	
-  end
+	# Méthode  d'initialisation et de lancement du timer
+	# * [Paramètre :]
+	# 				secStart -> le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
+	def start (secStart)
+		@accumulated = secStart
+		@elapsed = 0
+		@start = Time.now
+	end
 
-  # * *Description*:
-	#
-	#  Méthode de pause du Timer
-	#
-	# * *Exemple*:
-	#
-	# unTimer.stop
-	#
-  def stop
-  	@elapsed = Time.now - @start
-    @accumulated += @elapsed
-  end
 
-   # * *Description*:
-	#
-	#  Méthode de remise à zero du Timer
-	#
-	# * *Exemple*:
-	#
-	# unTimer.reset
-	#
-  def reset
+	# Méthode de pause du timer
+	def stop
+		@elapsed = Time.now - @start
+		@accumulated += @elapsed
+	end
 
-    @accumulated = 0
-    @elapsed = 0
-	@start = Time.now
-  end
 
-    # * *Description*:
-	#
+	# Méthode de remise à zero du Timer
+	def reset
+		@accumulated = 0
+		@elapsed = 0
+		@start = Time.now
+	end
+
+
 	#  Méthode qui permet d'ajouter un nombre de seconde de "pénalité"
-	#
-	# * *Paramètre*:
-	#
-	# - +s+ -> temps en seconde que l'on souhaite ajouter au Timer
-	#
-	# * *Exemple*:
-	#
-	# unTimer.penalite(10)
-	#
-  def penalite (s)
-    @accumulated = @accumulated+s
-  end
+	def penalite (s)
+		@accumulated = @accumulated+s
+	end
 
-   # * *Description*:
-	#
+
 	#  Méthode qui calcule le temps passé et le renvoie
-	#
+	def tick
+		@elapsed = Time.now - @start
+		time=@accumulated+@elapsed
+		h = sprintf('%02i', (time.to_i / 3600))
+		m = sprintf('%02i', ((time.to_i % 3600) / 60))
+		s = sprintf('%02i', (time.to_i % 60))
+		newtime = "#{h}:#{m}:#{s}"
+	end
 
-  def tick
-  	@elapsed = Time.now - @start
-  	time=@accumulated+@elapsed
-    h = sprintf('%02i', (time.to_i / 3600))
-    m = sprintf('%02i', ((time.to_i % 3600) / 60))
-    s = sprintf('%02i', (time.to_i % 60))
- 
-    newtime = "#{h}:#{m}:#{s}"
-  end
+	#  Méthode qui renvoie accumulated
+	def getAccumulated
+		return @accumulated
+	end
 
-  def getAccumulated
-    return @accumulated
-  end
 end #Fin de la classe Timer
 
 
 
-######TEST#######
-# watch = Timer.new
+	######TEST#######
+	# watch = Timer.new
 
-# watch.start(0)
-# while (sleep 0.2) do
-#   puts watch.tick
-# end
+	# watch.start(0)
+	# while (sleep 0.2) do
+	#   puts watch.tick
+	# end

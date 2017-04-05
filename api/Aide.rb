@@ -16,17 +16,67 @@ class Aide
 		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
 
-	# Méthode qui retourne la position des cases avec un unique candidat
-	def caseResolvable
-		tabCase = Array.new()
+	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
+	def candidatUnique()
+		listeCase = Array.new
+		@partie.getPlateau().each do |x,y,laCase|
+			if (laCase.getSolutionJoueur() == nil)
+				for n in (0...9)
+					add = !(@partie.getPlateau.getRegion(x,y).include?(n))
 
-		@partie.getPlateau().each do |x,y,laCase| 
-			if laCase.getCandidat().getListeCandidat().compact().length() == 1
-				tabCase.push(Position.new(x,y))
+					break if add == false
+
+					if x%3 == 2
+						add = !(@partie.getPlateau().getLigne(x-1).include?(n)) || (@partie.getPlateau().getLigne(x-2).include?(n))
+					elsif x%3 == 1
+						add = !(@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x-1).include?(n))
+					else
+						add = !(@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x+2).include?(n))
+					end
+
+					break if add == false
+
+					if x%3 == 2
+						add = !(@partie.getPlateau().getColonne(x-1).include?(n)) || (@partie.getPlateau().getColonne(x-2).include?(n))
+					elsif x%3 == 1
+						add = !(@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x-1).include?(n))
+					else
+						add = !(@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x+2).include?(n))
+					end
+
+					if add 
+						listeCase.push(Position.new(x,y))
+					end
+				end
 			end
 		end
 
-		return tabCase
+		# print "\n\tlisteCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
+		return listeCase
+	end
+
+	# Méthode qui retourne la position des cases avec un unique candidat
+	def caseResolvable
+		listeCase = Array.new()
+
+		@partie.getPlateau().each do |x,y,laCase| 
+			if laCase.getCandidat().getListeCandidat().compact().length() == 1
+				listeCase.push(Position.new(x,y))
+			end
+		end
+
+		# print "listeCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
+		return listeCase
 	end
 
 	#Place tous les candidats de chaque case du plateau
@@ -66,48 +116,82 @@ class Aide
 
 	#Indique la position du coup suivant à jouer
 	def coupSuivant()
+		solution = candidatUnique()
+		solutionText = "Candidat Unique"
 
+		if solution != nil
+			# return solution
+			return [solutionText, solution[rand(solution.length)]]
+		end
+
+		solution = caseResolvable()
+		solutionText = "Un seul candidat"
+
+		if solution != nil
+			# return solution
+			return [solutionText, solution[rand(solution.length)]]
+		end
+
+		# return solution
+		return ["Pas de méthode pour t'aider !", nil]
 	end
 
 	#Affiche les méthodes de résolution
 	def afficherLesMethodesDeResolution
 
 	end
+	
+		# Retourne une liste de case
+		def singleBox()
+			listeCase = Array.new
+			@partie.getPlateau().each do |x,y,laCase|
+				if (laCase.getSolutionJoueur() == nil)
+					for candidat in laCase.getCandidat().getListeCandidat
+						add = true
+						ligne = true
+						colonne = true
 
-	#Retourne la liste des cases qui ont plusieurs candidats mais une solution unique
-	def candidatUnique()
-		listeCase = Array.new
-		@partie.getPlateau().each do |x,y,laCase|
-			if (laCase.getSolutionJoueur() == nil)
-				for n in (0...9)
-					add = !(@partie.getPlateau.getRegion(x,y).include?(n))
+						posX = posX-(x%3)
+						posY = posY-(y%3)
 
-					break if add == false
+						for n in (posX...posX+3)
+							for m in (posY...posY+3)
+								if @partie.getPlateau.getCase(Position.new(n,m)).getSolutionJoueur() == nil
+									if n == x
+										if ligne 
+											ligne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+										end
+									elsif m == y
+										if colonne
+											colonne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+										end
+									else
+										add = !(@partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat))
+									end
+								end
+								break if add == false || (ligne == false && colonne == false)
+							end
+							break if add == false || (ligne == false && colonne == false)
+						end
 
-					if x%3 == 2
-						add = (@partie.getPlateau().getLigne(x-1).include?(n)) || (@partie.getPlateau().getLigne(x-2).include?(n))
-					elsif x%3 == 1
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x-1).include?(n))
-					else
-						add = (@partie.getPlateau().getLigne(x+1).include?(n)) || (@partie.getPlateau().getLigne(x+2).include?(n))
-					end
+						if add 
+							if ligne
 
-					break if add = false
+							elsif colonne
 
-					if x%3 == 2
-						add = (@partie.getPlateau().getColonne(x-1).include?(n)) || (@partie.getPlateau().getColonne(x-2).include?(n))
-					elsif x%3 == 1
-						add = (@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x-1).include?(n))
-					else
-						add = (@partie.getPlateau().getColonne(x+1).include?(n)) || (@partie.getPlateau().getColonne(x+2).include?(n))
-					end
-
-					if add 
-						listeCase.push(Position.new(x,y))
+							end
+						# Supprimer le candidat des autres cases de la ligne ou de la colonne
 					end
 				end
 			end
 		end
+
+		# print "listeCase", listeCase
+
+		if listeCase.empty?
+			return nil 
+		end
+
 		return listeCase
 	end
 	

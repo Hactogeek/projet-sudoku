@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">Gtk::Window
+  <p class="link"><a href="WindowSudoku.html">WindowSudoku</a>
   
 </div>
 
@@ -124,47 +124,61 @@
           
             <div class="method-calls-super">
               Calls superclass method
-              
+              <a href="WindowSudoku.html#method-c-new">WindowSudoku.new</a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Connexion.rb, line 6</span>
+            <pre><span class="ruby-comment"># File vues/Connexion.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-        <span class="ruby-keyword">super</span>
-
-        <span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;destroy&quot;</span> <span class="ruby-keyword">do</span>
-                <span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main_quit</span>
-        <span class="ruby-keyword">end</span>
-
-        <span class="ruby-identifier">set_title</span> <span class="ruby-string">&quot;Connexion&quot;</span>
-        <span class="ruby-identifier">set_window_position</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Window</span><span class="ruby-operator">::</span><span class="ruby-constant">POS_CENTER</span>)
-        <span class="ruby-identifier">set_resizable</span>(<span class="ruby-keyword">false</span>)
-
-        <span class="ruby-comment">#Taille de la fenêtre, correspondant à celle du jeu.</span>
-        <span class="ruby-identifier">set_default_size</span>(<span class="ruby-value">919</span>, <span class="ruby-value">602</span>)
+        <span class="ruby-keyword">super</span>(<span class="ruby-string">&quot;Connexion&quot;</span>)
 
         <span class="ruby-comment">#Création du label</span>
-        <span class="ruby-identifier">nomLabel</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Nom d&#39;utilisateur&quot;</span>)
+        <span class="ruby-identifier">nomLabel</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Choisissez un nom d&#39;utilisateur&quot;</span>)
+
+        <span class="ruby-comment">#Création de la zone de choix de nom</span>
+        <span class="ruby-identifier">vbox</span>=<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vertical</span>, <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">scrolled_win</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">ScrolledWindow</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">scrolled_win</span>.<span class="ruby-identifier">set_policy</span>(<span class="ruby-value">:automatic</span>,<span class="ruby-value">:automatic</span>)
+        <span class="ruby-identifier">listeNom</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">ListStore</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">String</span>)
+        <span class="ruby-identifier">column</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeViewColumn</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Nom d&#39;utilisateur&quot;</span>,
+                         <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">CellRendererText</span>.<span class="ruby-identifier">new</span>, {<span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>})
+        <span class="ruby-identifier">nomTree</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeView</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">listeNom</span>)
+        <span class="ruby-identifier">nomTree</span>.<span class="ruby-identifier">append_column</span>(<span class="ruby-identifier">column</span>)
+        <span class="ruby-identifier">nomTree</span>.<span class="ruby-identifier">selection</span>.<span class="ruby-identifier">set_mode</span>(<span class="ruby-value">:single</span>)
+
+        <span class="ruby-constant">Dir</span>[<span class="ruby-string">&quot;./*&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">iter</span> = <span class="ruby-identifier">listeNom</span>.<span class="ruby-identifier">append</span>
+                <span class="ruby-identifier">iter</span>[<span class="ruby-value">0</span>]=<span class="ruby-identifier">x</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">scrolled_win</span>.<span class="ruby-identifier">add_with_viewport</span>(<span class="ruby-identifier">nomTree</span>)
+
+        <span class="ruby-identifier">vbox</span>.<span class="ruby-identifier">pack_start</span>(<span class="ruby-identifier">scrolled_win</span>,<span class="ruby-value">:expand</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:fill</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:padding</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
 
         <span class="ruby-comment">#Création des boutons</span>
-        <span class="ruby-identifier">choixNom</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Se connecter&quot;</span>)
-
-        <span class="ruby-comment">#Création de la table contenant les boutons</span>
-        <span class="ruby-identifier">tableMain</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">10</span>, <span class="ruby-value">10</span>)
+        <span class="ruby-identifier">valider</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Valider&quot;</span>)
+        <span class="ruby-identifier">retour</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Button</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Retour&quot;</span>)
 
         <span class="ruby-comment">#Redirection des boutons</span>
-        <span class="ruby-identifier">choixNom</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">valider</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
                 <span class="ruby-identifier">hide</span>
+                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;./&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nomTree</span>.<span class="ruby-identifier">selection</span>.<span class="ruby-identifier">selected</span>[<span class="ruby-value">0</span>])
                 <span class="ruby-identifier">newWindow</span>=<span class="ruby-constant">MenuProfil</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-keyword">end</span>
 
-        <span class="ruby-comment">#Placement des boutons et ajout dans la table</span>
-        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">nomLabel</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">3</span>, <span class="ruby-value">5</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
-        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">choixNom</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">5</span>, <span class="ruby-value">7</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">retour</span>.<span class="ruby-identifier">signal_connect</span> <span class="ruby-string">&quot;clicked&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">widget</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">hide</span>
+                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;../&quot;</span>)
+                <span class="ruby-identifier">newWindow</span>=<span class="ruby-constant">Index</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-keyword">end</span>
 
-        <span class="ruby-identifier">add</span>(<span class="ruby-identifier">tableMain</span>)
+        <span class="ruby-comment">#Placement des boutons et ajout dans la table</span>
+        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">nomLabel</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">vbox</span>, <span class="ruby-value">2</span>, <span class="ruby-value">6</span>, <span class="ruby-value">4</span>, <span class="ruby-value">8</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span> <span class="ruby-operator">|</span> <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">FILL</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span> <span class="ruby-operator">|</span> <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">FILL</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">valider</span>, <span class="ruby-value">4</span>, <span class="ruby-value">6</span>, <span class="ruby-value">8</span>, <span class="ruby-value">9</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">tableMain</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">retour</span>, <span class="ruby-value">2</span>, <span class="ruby-value">4</span>, <span class="ruby-value">8</span>, <span class="ruby-value">9</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">AttachOptions</span><span class="ruby-operator">::</span><span class="ruby-constant">EXPAND</span>, <span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
 
         <span class="ruby-identifier">show_all</span>
 <span class="ruby-keyword">end</span></pre>
