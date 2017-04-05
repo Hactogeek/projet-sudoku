@@ -24,14 +24,17 @@ class Index < WindowSudoku
 		end
 		sessionInvite.signal_connect "clicked" do |widget|
 			hide
-			Dir.chdir(Dir.pwd+"/profil/Invite")
+			#Dir.chdir(Dir.pwd+"/profil/Invite")
 			newWindow=Invite.new
 		end
 
+		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 919, :heigth => 200)))
+
 		#Placement des boutons et ajout dans la table
-		tableMain.attach(seConnecter, 4, 6, 2, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(creerProfil, 4, 6, 4, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(sessionInvite, 4, 6, 6, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(header, 0, 9, 0, 3)
+		tableMain.attach(seConnecter, 4, 6, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(creerProfil, 4, 6, 5, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(sessionInvite, 4, 6, 7, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		show_all
 	end

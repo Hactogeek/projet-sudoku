@@ -78,6 +78,8 @@
     
     <li ><a href="#method-i-ajoutScore">#ajoutScore</a>
     
+    <li ><a href="#method-i-creerProfil">#creerProfil</a>
+    
     <li ><a href="#method-i-getIdentifiant">#getIdentifiant</a>
     
     <li ><a href="#method-i-getPseudo">#getPseudo</a>
@@ -190,26 +192,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode de création d&#39;un joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>pseudo</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode de création d&#39;un joueur</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>unJoueur=Joueur.creer(“Yassine”)</p>
           
           
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 35</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Joueur</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">unPseudo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -242,14 +236,15 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 38</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-ivar">@pseudo</span>=<span class="ruby-identifier">unPseudo</span>
         <span class="ruby-identifier">@@identifiant</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
         <span class="ruby-ivar">@tabScore</span>=<span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">3</span>){ <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
                 <span class="ruby-identifier">i</span>=<span class="ruby-value">0</span>
         }     
-        <span class="ruby-ivar">@d</span>=<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">unPseudo</span>)
+        <span class="ruby-comment">#@d=Dir.creer(unPseudo)</span>
+
         <span class="ruby-comment">#@d.semettreDansProfil(unPseudo)</span>
         <span class="ruby-comment">#@d.supprimerProfil(unPseudo) </span>
 <span class="ruby-keyword">end</span></pre>
@@ -284,27 +279,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode de comparaison d&#39;un joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>unJoueur joueur à comparer</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode de comparaison d&#39;un joueur</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unJoueur</code> -&gt; joueur à comparer</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>unJoueur &gt; unAutreJoueur unJoueur == unAutreJoueur unJoueur &lt;=
-unAutreJoueur</p>
           
           
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 133</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">unJoueur</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pseudo</span><span class="ruby-operator">==</span><span class="ruby-identifier">unJoueur</span>.<span class="ruby-identifier">pseudo</span>
 <span class="ruby-keyword">end</span></pre>
@@ -331,35 +317,67 @@ unAutreJoueur</p>
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<p>méthode permettant d&#39;ajouter un score dans les stats du joueur, ajout
+          <p>méthode permettant d&#39;ajouter un score dans les stats du joueur, ajout
 seulement si le score est passé en paramètre est meilleur que celui contenu
 dans le tableau, renvoie true si le score a bien été ajouté dans le tableau</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unScore</code> -&gt; score à ajouter</p>
-</li><li>
-<p><code>niveauDifficulte</code> -&gt; niveau de difficulté de la partie où a
-été réalisé le score</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>unScore score à ajouter niveauDifficulte niveau de difficulté de la partie
+où a été réalisé le score</p>
+</dd></dl>
 </li></ul>
-
-<p>unJoueur.ajoutScrore(score,2)</p>
           
           
 
           
           <div class="method-source-code" id="ajoutScore-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 85</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ajoutScore</span>(<span class="ruby-identifier">unScore</span>, <span class="ruby-identifier">niveauDifficulte</span>)
         <span class="ruby-identifier">indice</span>=<span class="ruby-identifier">niveauDifficulte</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>
         <span class="ruby-keyword">if</span>(<span class="ruby-ivar">@tabScore</span>[<span class="ruby-identifier">indice</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">unScore</span>)
                 <span class="ruby-ivar">@tabScore</span>[<span class="ruby-identifier">indice</span>]=<span class="ruby-identifier">unScore</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-creerProfil" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">creerProfil</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Créer un dossier ayant comme nom @pseudo. Retourne true si le dossier
+existe déjà. False sinon, et le créé.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="creerProfil-source">
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">creerProfil</span>()
+        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;/profil&quot;</span>)
+        <span class="ruby-keyword">if</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@pseudo</span>))
+                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;../&quot;</span>)
+              <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-ivar">@pseudo</span>)
+                <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-ivar">@pseudo</span>)
+                <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -385,22 +403,13 @@ dans le tableau, renvoie true si le score a bien été ajouté dans le tableau</
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<p>méthode qui permet de donner l’identifiant du joueur.</p>
-<ul><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Joueur.html#method-i-getIdentifiant">#getIdentifiant</a></p>
+          <p>méthode qui permet de donner l’identifiant du joueur.</p>
           
           
 
           
           <div class="method-source-code" id="getIdentifiant-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 68</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getIdentifiant</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-identifier">@@identifiant</span>
 <span class="ruby-keyword">end</span></pre>
@@ -427,22 +436,13 @@ dans le tableau, renvoie true si le score a bien été ajouté dans le tableau</
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<p>méthode qui permet de donner le pseudo du joueur.</p>
-<ul><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Joueur.html#method-i-getPseudo">#getPseudo</a></p>
+          <p>méthode qui permet de donner le pseudo du joueur.</p>
           
           
 
           
           <div class="method-source-code" id="getPseudo-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 56</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getPseudo</span>()
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@pseudo</span>
 <span class="ruby-keyword">end</span></pre>
@@ -469,27 +469,18 @@ dans le tableau, renvoie true si le score a bien été ajouté dans le tableau</
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode permettant de donner un score du joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>niveauDifficulte niveau de difficulté de a partie où a été réalisé le score</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode permettant de donner un score du joueur</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>niveauDifficulte</code> -&gt; niveau de difficulté de la partie où a
-été réalisé le score</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Joueur.html#method-i-getScoreJoueur">#getScoreJoueur</a>(2)</p>
           
           
 
           
           <div class="method-source-code" id="getScoreJoueur-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 102</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getScoreJoueur</span>(<span class="ruby-identifier">niveauDifficulte</span>)
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tabScore</span>[<span class="ruby-identifier">niveauDifficulte</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -516,22 +507,13 @@ dans le tableau, renvoie true si le score a bien été ajouté dans le tableau</
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
-</li></ul>
-
-<p>méthode d&#39;affichage d&#39;un joueur</p>
-<ul><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Joueur.html#method-i-to_s">#to_s</a> puts unJoueur</p>
+          <p>méthode d&#39;affichage d&#39;un joueur</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File src/Joueur.rb, line 115</span>
+            <pre><span class="ruby-comment"># File api/Joueur.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-node">&quot;Joueur : #{@pseudo} &quot;</span>
 <span class="ruby-keyword">end</span></pre>

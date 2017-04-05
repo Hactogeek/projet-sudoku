@@ -9,6 +9,7 @@ COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
 COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
 COUL_VIOLET      = Gdk::RGBA::new(0.7, 0.4, 0.8, 1.0)
 COUL_ROSE        = Gdk::RGBA::new(0.9, 0.7, 1.0, 1.0)
+COUL_ORANGE		 = Gdk::RGBA::new(1.0, 0.6, 0.5, 1.0)
 COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
 
 
@@ -25,7 +26,6 @@ class Grille < Gtk::Table
 	def initialize (partie)
 		super(9, 9, true)
 		set_margin_left(1)
-
 		@colorFocus = COUL_JAUNE
 		@colorEquals = COUL_JAUNE_PALE
 		@colorError = COUL_ROUGE
@@ -36,8 +36,6 @@ class Grille < Gtk::Table
 		# Remplissage de la grille #
 		#==========================#
 	    @partie = partie
-	    @partie.creerPartie()
-	    remplirGrille()
 	end
 
 	def setCaseValeur(x, y, valeur)
@@ -60,7 +58,7 @@ class Grille < Gtk::Table
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
 
-				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placer la case machin")
+				@cadreAide.setAide("Placement Numero", [valeur], "Vous avez placé la case machin")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
@@ -144,6 +142,31 @@ class Grille < Gtk::Table
 
 	end
 
+	# Méthode qui color les cases pour la technique interactions entre régions
+	def colorInteractionsRegions
+		listePos = @partie.getAide().interactionsEntreRegions
+		if listePos.empty?
+			print("\nLa technique n'est pas possible ici")	
+		else
+			listePos.each { |pos|
+				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+			}
+		end
+	end
+
+	def colorCaseSuivant
+		resetCouleurSurFocus()
+		pos=@partie.getAide.coupSuivant
+		if(pos[1]==nil)
+			print("\nIl n'y a pas de coup suivant.")
+		else
+			a=80-(9*pos[1].getY+pos[1].getX)
+			@focus=children[a]
+			setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
+		end
+		return pos
+	end	
+
 	def resetCouleurSurFocus() # change couleur du focus
 		if (@focus)
 			css=<<-EOT
@@ -174,6 +197,10 @@ class Grille < Gtk::Table
 		end
 		i = 80 - children().index(@focus)
 		return Position.new(i%9,i/9)
+	end
+
+	def setCoordFocus(position)
+		@focus
 	end
 
 	def rafraichirGrille()
@@ -230,5 +257,9 @@ class Grille < Gtk::Table
 		children.each { |widget|
 			widget.destroy
 		}
+	end
+
+	def setCadreImportation(cadreImportation)
+		@cadreImportation = cadreImportation
 	end
 end

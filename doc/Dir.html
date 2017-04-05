@@ -134,26 +134,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode de création d&#39;un repertoire(profil)</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>un pseudo</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode de création d&#39;un repertoire(profil)</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>unDossier=Dir.creer(“Yassine”)</p>
           
           
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 21</span>
+            <pre><span class="ruby-comment"># File api/Dir.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">creer</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">unPseudo</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -186,7 +178,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 24</span>
+            <pre><span class="ruby-comment"># File api/Dir.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-comment">#Dir.chdir(&quot;/Users/mac/Documents/projet-sudoku/projet-sudoku/src/profil&quot;)</span>
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;profil&quot;</span>)
@@ -226,26 +218,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode qui permet de se mettre dans un repertoire(profil)</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>pseudo</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode qui permet de se mettre dans un repertoire(profil)</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>dossier.semettreDansProfil(“Yassine”)</p>
           
           
 
           
           <div class="method-source-code" id="semettreDansProfil-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/Dir.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">semettreDansProfil</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-node">&quot;profil/#{unPseudo}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -272,26 +256,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>méthode qui permet de supprimer un repertoire (profil)</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>pseudo</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode qui permet de supprimer un repertoire (profil)</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>unPseudo</code> -&gt; pseudo du joueur</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p>profil.supprimerProfil(“Yassine”)</p>
           
           
 
           
           <div class="method-source-code" id="supprimerProfil-source">
-            <pre><span class="ruby-comment"># File src/Dir.rb, line 59</span>
+            <pre><span class="ruby-comment"># File api/Dir.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">supprimerProfil</span>(<span class="ruby-identifier">unPseudo</span>)
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&quot;profil&quot;</span>)
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">unPseudo</span>)

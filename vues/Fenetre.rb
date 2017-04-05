@@ -10,13 +10,13 @@ class Fenetre < Gtk::Window
 
 	def initialize (partie)
 		super(Gtk::WindowType::TOPLEVEL)
-		signal_connect "destroy" do
-			Gtk.main_quit
+		signal_connect "delete_event" do
+			newWindow = ConfirmQuit.new(@partie, self, 1)
 		end
 
 
 		# Property
-		set_title "ku"
+		set_title "Ku"
 		set_window_position(Gtk::WindowPosition::CENTER)
 		set_resizable(false)
 
@@ -29,6 +29,13 @@ class Fenetre < Gtk::Window
 		@sousGrille = SousGrille.new(@grille)
 		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@boutons = Boutons.new(@grille, @sousGrille) 
+
+		#==========================#
+		# Remplissage de la grille #
+		#==========================#
+
+		@partie.creerPartie
+	    @grille.remplirGrille
 
 		#==========#
 		# Niveau 1 #
@@ -67,7 +74,7 @@ class Fenetre < Gtk::Window
 	        # Quitter
 	        quitterMenuItem = Gtk::MenuItem.new(:label => "Quitter", :use_underline => false)
             quitterMenuItem.signal_connect "activate" do
-            	newWindow = ConfirmQuit.new(@partie)
+            	newWindow = ConfirmQuit.new(@partie, self, 0)
             end
             fileMenu.add(quitterMenuItem)
 
@@ -137,6 +144,7 @@ class Fenetre < Gtk::Window
 				@grille.colorCaseIncorrect()
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
+
 		    
 		    #############################################################################
 		    ###############Rajouter la même chose chose qu'au dessus#####################

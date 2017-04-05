@@ -32,6 +32,9 @@ class CadreAide < Gtk::Table
 		@labelAide = Gtk::Label.new("")
 		attach(@labelAide, 0,8, 1,6)
 
+		@imgEvent=Gtk::EventBox.new
+		attach(@imgEvent, 0,8, 2,6)
+
 		@hintButton = Gtk::Button.new(:label =>"Indice", :use_underline => nil, :stock_id => nil)
 		@hintButton.signal_connect "clicked" do |widget|
 			startHint()
@@ -69,44 +72,72 @@ class CadreAide < Gtk::Table
 	end
 
 	def startHint()
-		if(@backButton == nil)
-			@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
-			@backButton.signal_connect "clicked" do |widget|
-				previousHint()
-			end
-			attach(@backButton, 0,2 ,0,1)
+		pos=@grille.colorCaseSuivant
+		if(pos[1]!=nil)
+			if(@backButton == nil || !@backButton.no_show_all?)
+				@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
+				@backButton.signal_connect "clicked" do |widget|
+					previousHint()
+				end
+				attach(@backButton, 0,2 ,0,1)
 
-			@moreButton = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
-			@moreButton.signal_connect "clicked" do |widget|
-				moreHint()
-			end
-			attach(@moreButton, 3,5 ,0,1)
+				@moreButton = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
+				@moreButton.signal_connect "clicked" do |widget|
+					moreHint(pos)
+				end
+				attach(@moreButton, 3,5 ,0,1)
 
-			@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
-			@finishButton.signal_connect "clicked" do |widget|
-				cancelHint()
+				@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
+				@finishButton.signal_connect "clicked" do |widget|
+					@grille.setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_BLANC)
+					cancelHint()
+				end
+				attach(@finishButton, 6,8 ,0,1)
 			end
-			attach(@finishButton, 6,8 ,0,1)
+
+			@backButton.show
+			@backButton.sensitive = false
+			@moreButton.show
+			@finishButton.show
+			@hintButton.hide
+			setAideText(pos[0])
 		end
-
-		@backButton.show()
-		@backButton.sensitive = false
-		@moreButton.show()
-		@finishButton.show()
-		@hintButton.hide()
-		setAideText("Bla bla bla")
 	end
 
-	def moreHint()
+	def moreHint(pos)
+		@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
+		@moreButton.sensitive = false
+		@learnButton=Gtk::Button.new(:label =>"Apprendre", :use_underline => nil, :stock_id => nil)
+		remove(@backButton)
+		@learnButton.sensitive = true
+		attach(@learnButton, 0,2 ,0,1)
+		@learnButton.show
+		@learnButton.signal_connect "clicked" do |widget|
+			setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
+			if(@img!=nil)
+				@imgEvent.remove(@img)
+			end
+			@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
+			@imgEvent.add(@img)
+			@imgEvent.show_all
+			@learnButton.sensitive = false
+		end
+	end
 
+	def previousHint
+		puts("WSH")
 	end
 
 	def cancelHint()
+		@imgEvent.hide
 		@backButton.hide()
 		@moreButton.hide()
 		@finishButton.hide()
 		@hintButton.show()
 		@labelAide.set_text("")
+		if(@learnButton != nil)
+			remove(@learnButton)
+		end
 	end
 
 =begin

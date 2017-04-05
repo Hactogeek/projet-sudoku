@@ -141,7 +141,7 @@ class Plateau
 	# 				ArrayFixnum	
 	def getRegion(posX, posY)
 		tableauRetour = Array.new()
-
+	
 		posX = posX-(posX%3)
 		posY = posY-(posY%3)
 
@@ -153,6 +153,144 @@ class Plateau
 		# print "Region : ", tableauRetour
 		return tableauRetour
 	end
+
+
+	# Méthode qui retourne un tableau des cases d'une region spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getCaseRegion(posX, posY)
+		listeCase = Array.new()
+		posX++
+		posY++
+
+		posX = posX-(posX%3)
+		posY = posY-(posY%3)
+
+		for n in (posX...posX+3)
+			for m in (posY...posY+3)
+						listeCase.push(@grid[n][m])
+			end
+		end
+
+		return listeCase
+	end
+
+
+
+	# Méthode qui retourne un tableau les cases d'une ligne dans une région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getLigneRegion(x, y)
+		listeCase = Array.new
+		if y < 3
+			deb = 0
+			fin = 3	
+		elsif y < 6
+			deb = 3
+			fin = 6
+		else
+			deb = 6
+			fin = 9
+		end
+		for n in (deb...fin)
+			listeCase.push(@grid[x][n])
+		end
+		
+		return listeCase
+	end
+	
+	# Méthode qui retourne un tableau les cases d'une ligne sauf les cases de la région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getLigneAutreRegion(x, y)
+		listeCase = Array.new
+		if y < 3
+			ligne1 = getLigneRegion(x, 3)
+			ligne2 = getLigneRegion(x, 6)
+		elsif y < 6
+			ligne1 = getLigneRegion(x, 0)
+			ligne2 = getLigneRegion(x, 6)
+		else
+			ligne1 = getLigneRegion(x, 0)
+			ligne2 = getLigneRegion(x, 3)
+		end
+		ligne1.each { |kase|
+			listeCase.push(kase)
+		}
+		ligne2.each { |kase|
+			listeCase.push(kase)
+		}
+		
+		return listeCase
+	end
+
+	# Méthode qui retourne un tableau des cases d'une colonne dans une région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getColonneRegion(x, y)
+		listeCase = Array.new
+		if x < 3
+			deb = 0
+			fin = 3	
+		elsif x < 6
+			deb = 3
+			fin = 6
+		else
+			deb = 6
+			fin = 9
+		end
+		for n in (deb...fin)
+			listeCase.push(@grid[n][y])
+		end
+		
+		return listeCase
+	end	
+
+	# Méthode qui retourne un tableau des cases d'une colonne dans une région spécifié
+	# * [Paramètre :]
+	# 				x La colonne (0-8)
+	#				y La ligne  (0-8)
+	#
+	# * [Retourne :]
+	# 				listeCase	
+	def getColonneAutreRegion(x, y)
+		listeCase = Array.new
+		if x < 3
+			colonne1 = getColonneRegion(3, y)
+			colonne2 = getColonneRegion(6, y)
+		elsif x < 6
+			colonne1 = getColonneRegion(0, y)
+			colonne2 = getColonneRegion(6, y)
+		else
+			colonne1 = getColonneRegion(0, y)
+			colonne2 = getColonneRegion(3, y)
+
+		end
+		colonne1.each { |kase|
+			listeCase.push(kase)
+		}
+		colonne2.each { |kase|
+			listeCase.push(kase)
+		}
+		
+		return listeCase
+	end	
 
 	# Méthode qui vérifie si un chiffre est sur une ligne
 	# * [Paramètre :]
@@ -259,87 +397,87 @@ class Plateau
 	#
 	# * [Retourne :]
 	# 				booleen
-    def valideGrille(position)
-    	if (position == @size * @size)
-    		return true
-    	end
+	def valideGrille(position)
+		if (position == @size * @size)
+			return true
+		end
 
-    	x = position/9
-    	y = position%9
+		x = position/9
+		y = position%9
 
-    	if (@grid[x][y].getSolutionJoueur !=  nil)
-    		return valideGrille(position+1)
-    	end
+		if (@grid[x][y].getSolutionJoueur !=  nil)
+			return valideGrille(position+1)
+		end
 
-    	@size.times do |k|
-    		if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
-    			setCaseJoueur(Position.new(x,y), k+1)
+		@size.times do |k|
+			if(absentLigne(k+1, x) && absentColonne(k+1, y) && absentRegion(k+1, x, y))
+				setCaseJoueur(Position.new(x,y), k+1)
 
-    			if valideGrille(position+1)
-    				setCaseJoueur(Position.new(x,y), nil)
-    				return true
-    			end
-    		end
-    	end
-    	setCaseJoueur(Position.new(x,y), nil)
+				if valideGrille(position+1)
+					setCaseJoueur(Position.new(x,y), nil)
+					return true
+				end
+			end
+		end
+		setCaseJoueur(Position.new(x,y), nil)
 
-    	return false
-    end
+		return false
+	end
 
     # Méthode qui vérifie si il y a au moins deux occurence d'un symbole dans un tableau
 	# * [Retourne :]
 	# 				booleen
-     def deuxOccurenceTab?(tab)
-     	occurence = false
-     	for i in (0...9)
-     		if tab[i] != nil
-     			kase1 = tab[i]
-     		else
-     			kase1 = nil
-     		end
-     		for j in (0...9)
-     			if tab[j] != nil
-     				kase2= tab[j]
-     			else
-     				kase2 = nil
-     			end
-     			if (i != j) && kase1 == kase2 && kase1 != nil
-     				return true
-     			end	
-     		end
+	def deuxOccurenceTab?(tab)
+		occurence = false
+		for i in (0...9)
+			if tab[i] != nil
+				kase1 = tab[i]
+			else
+				kase1 = nil
+			end
+			for j in (0...9)
+				if tab[j] != nil
+					kase2= tab[j]
+				else
+					kase2 = nil
+				end
+				if (i != j) && kase1 == kase2 && kase1 != nil
+					return true
+				end	
+			end
 
-     	end
+		end
 
-     	return false
-     end
+		return false
+	end
 
      # Méthode qui vérifie si la grille est correct
 	# * [Retourne :]
 	# 				booleen	
-     def correctGrille?
-     	self.each { |x,y,kase|
-     		ligne = getLigne(y)
-     		colonne = getColonne(x)
-     		region = getRegion(x/3, y/3)
-     		if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
-     			return false
-     		end
-     	}
-     	return true
-     end
+	def correctGrille?
+		self.each { |x,y,kase|
+			ligne = getLigne(y)
+			colonne = getColonne(x)
+			region = getRegion(x/3, y/3)
+			if deuxOccurenceTab?(ligne) || deuxOccurenceTab?(colonne) || deuxOccurenceTab?(region)
+				return false
+			end
+		}
+		return true
+	end
 
      # Méthode qui vérifie si toutes les cases de la grilles sont remplies
 	# * [Retourne :]
 	# 				booleen	
-     def plein?
-     	pleine = true
-     	self.each { |x,y,kase|
-     		if  kase.getSolutionJoueur == nil
-     			pleine = false
-     		end
-     	}
-     	return pleine
-     end
+	def plein?
+		pleine = true
+		self.each { |x,y,kase|
+			if  kase.getSolutionJoueur == nil
+				pleine = false
+			end
+		}
+		return pleine
+	end
 
     # Méthode qui vérifie si la grille est complète et correct
 	# * [Paramètre :]
@@ -347,41 +485,93 @@ class Plateau
 	#
 	# * [Retourne :]
 	# 				booleen	
-     def complete?
-     	complete = false
-     	if self.plein? && self.correctGrille?
-     		complete = true
-     	end
-     	return complete
-     end
+	def complete?
+		complete = false
+		if self.plein? && self.correctGrille?
+			complete = true
+		end
+		return complete
+	end
 
     # Méthode pour réduire une grille en la gardant jouable
 	# * [Retourne :]
 	# 				self	
-    def reduireGrille (position, niveauDifficulte)
+	def reduireGrille (position, niveauDifficulte)
 
-    	listeCase = Array.new()
+		listeCase = Array.new()
 
-    	@size.times do |y|
-    		@size.times do |x|
-    			listeCase.insert(y*9+x, @grid[x][y])
-    		end
-    	end
+		@size.times do |y|
+			@size.times do |x|
+				listeCase.insert(y*9+x, @grid[x][y])
+			end
+		end
 
-    	listeCase.shuffle!
+		listeCase.shuffle!
 
-    	for uneCase in listeCase
-    		setCaseJoueur(uneCase.getPosition, nil)
-    		setCaseOriginale(uneCase.getPosition, false)
+		for uneCase in listeCase
+			setCaseJoueur(uneCase.getPosition, nil)
+			setCaseOriginale(uneCase.getPosition, false)
 
-    		if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
-    			setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
-    			setCaseOriginale(uneCase.getPosition, true)
-    		end
-    	end
+			if(candidatPossible(uneCase.getPosition).getListeCandidat().compact.count > niveauDifficulte)
+				setCaseJoueur(uneCase.getPosition, getCaseOriginale(uneCase.getPosition))
+				setCaseOriginale(uneCase.getPosition, true)
+			end
+		end
 
-    	return self
-    end
+		return self
+	end
+
+	# Importe et résout la grille passé en paramètre
+	def importerGrille
+		@size.times do |x|
+			@size.times do |y|
+				if @grid[x][y].getSolutionJoueur() != nil
+					@grid[x][y].setSolutionOriginale(@grid[x][y].getSolutionJoueur())
+					@grid[x][y].setOriginale(true)
+				end
+			end
+		end
+
+		print "\n", self
+		print self.printOri
+		# print self.correctGrille?
+		return self.correctGrille? && resoudreGrilleImporter()
+	end
+
+	def resoudreGrilleImporter
+		grille = Array.new()
+		# Convertir la grille en chaine de caractère
+		@size.times do |x|
+			@size.times do |y|
+				if @grid[x][y].getSolutionJoueur() == nil
+					grille << 0
+				else 
+					grille << @grid[x][y].getSolutionJoueur()
+				end
+			end
+		end
+
+		grille = [grille.join]
+
+		# grille = ["000050000007604500090070080020010090805907401040080030050040060009503800000020000"]
+		
+		grille.map{|a|(i=a=~/0/)?(v=*?1..?9).fill{|j|v-=[a[j+i-k=i%9],a[k+j*=9],a[j%26+i-i%3-i%27+k]]}+v.map{|k|grille.<<$`<<k<<$'}:p(a)}
+
+		grille = grille.pop
+
+		print grille
+		
+		grille.split("").map(&:to_i)
+
+		@size.times do |x|
+			@size.times do |y|
+				@grid[x][y].setSolutionOriginale(grille[x*9+y])
+			end
+		end
+		print "\n", self
+		print self.printOri
+		return true
+	end
 
 	# Méthode pour le parcours de la grille du plateau
 	# @yield [x, y, val] la position et la valeur courante

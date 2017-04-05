@@ -20,7 +20,7 @@ class Partie
 	#Creer une partie jouable
 	def creerPartie
 		@plateau.completeGrille()
-		puts @plateau.printOri()
+		#puts @plateau.printOri()
 		@plateau.reduireGrille(0,@difficulte) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
 		@checkPoint.addMemento
 	end

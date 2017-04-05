@@ -107,6 +107,27 @@
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-score" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">score</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
 
     
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
@@ -134,7 +155,7 @@
 
           
           <div class="method-source-code" id="creer-source">
-            <pre><span class="ruby-comment"># File src/Score.rb, line 13</span>
+            <pre><span class="ruby-comment"># File api/Score.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">Score</span>.<span class="ruby-identifier">creer</span>
       <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -167,7 +188,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File src/Score.rb, line 17</span>
+            <pre><span class="ruby-comment"># File api/Score.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> 
         <span class="ruby-ivar">@score</span>=<span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -202,24 +223,18 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>Méthode qui renvoie le score</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Retourne :
+<dd>
+<p>Le score</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode permettant de donner le score d&#39;un joueur</p>
-<ul><li>
-<p>*Paramètre*: Aucun</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Score.html#method-i-getScore">#getScore</a></p>
           
           
 
           
           <div class="method-source-code" id="getScore-source">
-            <pre><span class="ruby-comment"># File src/Score.rb, line 30</span>
+            <pre><span class="ruby-comment"># File api/Score.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getScore</span>
         <span class="ruby-keyword">return</span> <span class="ruby-ivar">@score</span>
 <span class="ruby-keyword">end</span></pre>
@@ -246,29 +261,19 @@
 
         <div class="method-description">
           
-          <ul><li>
-<p><strong>Description</strong>:</p>
+          <p>Méthode qui modifie le score d&#39;un joueur</p>
+<ul><li><dl class="rdoc-list label-list"><dt>Paramètre :
+<dd>
+<p>time -&gt; La durée d&#39;une partie niveauDifficulte -&gt; la difficulté
+de la partie</p>
+</dd></dl>
 </li></ul>
-
-<p>méthode permettant de modifier le score d&#39;un joueur</p>
-<ul><li>
-<p>*Paramètre*:</p>
-</li><li>
-<p><code>time</code> -&gt; le temps d&#39;une partie</p>
-</li><li>
-<p><code>niveauDifficulte</code> -&gt; niveau de difficulté de la partie où a
-été réalisé le score</p>
-</li><li>
-<p><strong>Exemple</strong>:</p>
-</li></ul>
-
-<p><a href="Score.html#method-i-setScore">#setScore</a></p>
           
           
 
           
           <div class="method-source-code" id="setScore-source">
-            <pre><span class="ruby-comment"># File src/Score.rb, line 44</span>
+            <pre><span class="ruby-comment"># File api/Score.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setScore</span>(<span class="ruby-identifier">time</span>,<span class="ruby-identifier">niveauDifficulte</span>)
          <span class="ruby-ivar">@score</span>=(<span class="ruby-value">1000</span><span class="ruby-operator">*</span><span class="ruby-identifier">niveauDifficulte</span>)<span class="ruby-operator">/</span><span class="ruby-identifier">time</span>
 <span class="ruby-keyword">end</span></pre>
