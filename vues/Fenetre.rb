@@ -146,6 +146,23 @@ class Fenetre < Gtk::Window
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
 
+		    # resoudre
+		    resoudreGrilleMenuItem = Gtk::MenuItem.new(:label => "Resoudre la grille", :use_underline => false)
+		    resoudreGrilleMenuItem.signal_connect "activate" do
+				@partie.getAide().resoudre()
+				@grille.rafraichirGrille
+			end
+		    aideMenu.append(resoudreGrilleMenuItem)
+
+		    # etatInitial
+		    initialGrilleMenuItem = Gtk::MenuItem.new(:label => "Grille initiale", :use_underline => false)
+		    initialGrilleMenuItem.signal_connect "activate" do
+				@partie.getAide().etatInitial
+				@grille.rafraichirGrille			
+		    end
+		    aideMenu.append(initialGrilleMenuItem)
+
+
 		    
 		    #############################################################################
 		    ###############Rajouter la même chose chose qu'au dessus#####################

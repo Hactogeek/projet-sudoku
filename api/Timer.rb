@@ -66,6 +66,12 @@ class Timer
 		return @accumulated
 	end
 
+	# Méthode qui donne la date du jour 
+	def donnerDate
+		time = Time.now
+		time.strftime("%d %B %Y")
+	end 
+
 end #Fin de la classe Timer
 
 
