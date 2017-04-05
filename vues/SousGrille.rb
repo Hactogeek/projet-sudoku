@@ -6,6 +6,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	@grilleCandidat
 	@candidat
 	@grille
+	@colorCandidat
+
+	attr_reader :colorCandidat
 
 	def new(grille)
 		initialize(grille)
@@ -16,6 +19,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		@grille = grille
 		@grilleCandidat = Gtk::Table.new(26, 26, true)
 		@candidat = false;
+		@colorCandidat = "#900090"
 		begin
 			background = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/grille.png", :width => 432, :heigth => 432)))
 		rescue
@@ -67,7 +71,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		pos = (x*81 + y*3) + 1
 		for i in 0..2
 			for u in 0..2
-				@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat[(u+i*3)+1]}</span>")
+				@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat[(u+i*3)+1]}</span>")
 			end
 		end
 	end
@@ -111,7 +115,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		pos = (x*81 + y*3) + 1
 	    for i in 0..2
 		    for u in 0..2
-		      	@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat[(u+i*3)+1]}</span>")
+		      	@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat[(u+i*3)+1]}</span>")
 		    end
 		end
 	end
@@ -152,7 +156,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			return
 		    		else
-		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#900090\">#{candidat}</span>")
+		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat}</span>")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.add(candidat)
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			return
@@ -169,6 +173,11 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		else
 			resetAllCandidats()
 		end
+	end
+
+	def setColorCandidat(colorCandidat)
+		@colorCandidat = colorCandidat
+		refreshAllCandidats
 	end
 end
 

@@ -20,19 +20,21 @@ class Grille < Gtk::Table
 	@colorFocus
 	@colorEquals
 	@colorError
-	@colorNext
 	@colorNeutral
-	@colorText
+	@colorTextOriginal
+	@colorTextPlayer
+
+	attr_reader :colorFocus  , :colorEquals, :colorError, :colorNeutral, :colorTextOriginal, :colorTextPlayer
 
 	def initialize (partie)
 		super(9, 9, true)
 		set_margin_left(1)
-		@colorFocus = COUL_JAUNE
-		@colorEquals = COUL_JAUNE_PALE
-		@colorError = COUL_ROUGE
-		@colorNext = COUL_VERT
-		@colorNeutral = COUL_BLANC
-		@colorText = "#FFFFFF"
+		@colorFocus = "#EFC42E"
+		@colorEquals = "#FFEC81"
+		@colorError = "#FF6060"
+		@colorNeutral = "#FFFFFF"
+		@colorTextOriginal = "#000000"
+		@colorTextPlayer = "#4169E1"
 
 		#==========================#
 		# Remplissage de la grille #
@@ -47,7 +49,6 @@ class Grille < Gtk::Table
 
 	def setValeurSurFocus(valeur) # Mettre en place systeme focus quand click sur Case
 		if (@focus)
-
 			i = 80 - children().index(@focus)
 			pos = Position.new(i%9,i/9)
 			print("\n", i, " : x=",i/9, " y=", i%9)
@@ -58,7 +59,7 @@ class Grille < Gtk::Table
 
 				@partie.getPlateau().setCaseJoueur(pos,valeur)
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
-				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
+				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{valeur}</span>")
 
 				if(@partie.getPlateau.complete?)
 					newWindow=FinJeu.new
@@ -74,7 +75,7 @@ class Grille < Gtk::Table
 				
 				@partie.getPlateau().setCaseJoueur(pos,nil)
 				valeur = @partie.getPlateau().getCaseJoueur(pos)
-				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{valeur}</span>")
+				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{valeur}</span>")
 				return
 			end
 		end
@@ -151,7 +152,7 @@ class Grille < Gtk::Table
 			print("\nLa technique n'est pas possible ici")	
 		else
 			listePos.each { |pos|
-				setCouleurCase(pos.getX(), pos.getY(), COUL_ROUGE)
+				setCouleurCase(pos.getX(), pos.getY(), @colorError)
 			}
 		end
 	end
@@ -210,9 +211,9 @@ class Grille < Gtk::Table
 			print(x , " " , y)  
 			
 			if(@partie.getPlateau().getCase(Position.new(x,y)).getOriginaleGrille == false)
-				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#4169E1\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
 	    	else
-	    		children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+	    		children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextOriginal}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
 	    	end
 	    }
 	end
@@ -221,7 +222,6 @@ class Grille < Gtk::Table
 		children().clear()
 		@partie.getPlateau().each { |x,y,val|
 			btn = Gtk::Button.new()
-			btn.override_background_color(:normal, @colorNeutral)
 			btn.signal_connect "clicked" do |widget|
 				resetCouleurSurFocus()
 				@focus = widget
@@ -230,7 +230,7 @@ class Grille < Gtk::Table
 				setCouleurSurFocus(@colorFocus)
 			end
 			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
-			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
+			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextOriginal}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
 			btn.set_size_request(46,46)
 			btn.set_name "cell"
 	    }
@@ -249,16 +249,15 @@ class Grille < Gtk::Table
 		@cadreAide = cadreAide
 	end
 
-	def setColorStyle() # on définira après pour dissocier les thèmes
-		@colorFocus = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
-		@colorEquals = COUL_JAUNE_PALE
-		@colorError = COUL_ROUGE
-		@colorNext = COUL_VERT
-		@colorNeutral = Gdk::RGBA::new(0.02, 0.00, 0.15, 1.0)
-
-		children.each { |widget|
-			widget.destroy
-		}
+	def setColorStyle(colorFocus, colorEquals, colorError, colorNeutral, colorTextOriginal, colorTextPlayer) # on définira après pour dissocier les thèmes
+		@colorFocus = colorFocus
+		@colorEquals = colorEquals
+		@colorError = colorError
+		@colorNeutral = colorNeutral
+		@colorTextOriginal = colorTextOriginal
+		@colorTextPlayer = colorTextPlayer
+		resetColorOnAll
+		rafraichirGrille
 	end
 
 	def setCadreImportation(cadreImportation)
