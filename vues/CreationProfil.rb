@@ -41,7 +41,7 @@ class CreationProfil < WindowSudoku
 					# sleep(3)
 					hide
 					if(invite!=1 && invite!=0)
-						newWindow=Fenetre.new(invite)
+						newWindow=FenetreApprentissage.new(invite)
 					else
 						newWindow=MenuProfil.new
 					end
