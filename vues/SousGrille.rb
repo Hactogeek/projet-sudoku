@@ -43,9 +43,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def refreshAllCandidats()
-		if(!@candidat)
-			return
-		end
+		# if(!@candidat)
+		# 	return
+		# end
 
 		for x in 0..8
 			for y in 0..8
@@ -55,9 +55,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def refreshCandidatsCase(x, y)
-		if (!@candidat)
-			return
-		end
+		# if (!@candidat)
+		# 	return
+		# end
 
 		position = Position.new(x,y)
 		if (@grille.getPartie().getPlateau().getCaseJoueur(position) != nil)
@@ -71,6 +71,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 		
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
+		print "\n\tCandidat : ", x, "-", y, candidat
 		pos = (x*81 + y*3) + 1
 		for i in 0..2
 			for u in 0..2
@@ -152,6 +153,9 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			return
 		end
 
+		print "Undo ajouté lors du setCandidat"
+		@grille.getPartie.getUndoRedo.addMemento
+
 		pos = (posFocus.getX()*81 + posFocus.getY()*3) + 1
 	    for i in 0..2
 		    for u in 0..2
@@ -160,14 +164,15 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.remove(candidat)
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
-		    			@grille.getPartie.getUndoRedo.addMemento
+		    			# @grille.getPartie.getUndoRedo.addMemento
+
 						rafraichirGrille
 		    			return
 		    		else
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat}</span>")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.add(candidat)
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
-		    			@grille.getPartie.getUndoRedo.addMemento
+		    			# @grille.getPartie.getUndoRedo.addMemento
 						rafraichirGrille
 		    			return
 		    		end

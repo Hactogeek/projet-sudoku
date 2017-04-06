@@ -88,9 +88,10 @@ class Fenetre < Gtk::Window
 		    # Undo
 		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
 		    undoMenuItem.signal_connect "activate" do
-			@partie.getUndoRedo().undo
-			@grille.rafraichirGrille
-			@sousGrille.loadAllCandidats
+				@partie.getUndoRedo().undo
+				@grille.rafraichirGrille
+				@sousGrille.refreshAllCandidats()
+				# @sousGrille.loadAllCandidats
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
