@@ -18,7 +18,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		super(1,1,true)
 		@grille = grille
 		@grilleCandidat = Gtk::Table.new(26, 26, true)
-		@candidat = false;
+		@candidat = true;
 		@colorCandidat = "#900090"
 		begin
 			background = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/grille.png", :width => 432, :heigth => 432)))
@@ -71,7 +71,6 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 		
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
-		
 		pos = (x*81 + y*3) + 1
 		for i in 0..2
 			for u in 0..2
@@ -161,11 +160,15 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.remove(candidat)
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
+		    			@grille.getPartie.getUndoRedo.addMemento
+						rafraichirGrille
 		    			return
 		    		else
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat}</span>")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.add(candidat)
 		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
+		    			@grille.getPartie.getUndoRedo.addMemento
+						rafraichirGrille
 		    			return
 		    		end
 		    	end
@@ -184,6 +187,16 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 
 	def setColorCandidat(colorCandidat)
 		@colorCandidat = colorCandidat
+		refreshAllCandidats
+	end
+
+	def rafraichirGrille
+		@grille.rafraichirGrille
+		refreshAllCandidats
+	end
+
+	def remplirGrille
+		@grille.remplirGrille
 		refreshAllCandidats
 	end
 end

@@ -40,6 +40,7 @@ class GestionMemento
 		plateau = Marshal.dump(@partie.getPlateau())
 		@undos.push(plateau)
 		@redos.clear
+		puts("ajoutMemento")
 		return self
 	end
 

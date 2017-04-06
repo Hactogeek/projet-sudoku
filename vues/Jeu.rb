@@ -34,7 +34,7 @@ class Jeu < Gtk::Window
 		if(@partie.estVide?)
 			@partie.creerPartie
 		end
-	    @grille.remplirGrille
+	    @sousGrille.remplirGrille
 
 		#==========#
 		# Niveau 1 #
@@ -87,8 +87,7 @@ class Jeu < Gtk::Window
 		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
 		    undoMenuItem.signal_connect "activate" do
 				@partie.getUndoRedo().undo
-				@grille.rafraichirGrille
-				@sousGrille.loadAllCandidats
+				@sousGrille.rafraichirGrille
 		    end
 		    checkpointMenu.append(undoMenuItem)
 		    
@@ -96,8 +95,7 @@ class Jeu < Gtk::Window
 		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
 		    redoMenuItem.signal_connect "activate" do
 				@partie.getUndoRedo().redo
-				@grille.rafraichirGrille
-			    @sousGrille.loadAllCandidats
+				@sousGrille.rafraichirGrille
 		    end
 		    checkpointMenu.append(redoMenuItem)
 
@@ -112,16 +110,16 @@ class Jeu < Gtk::Window
 		    # undo checkpoint
 		    undoCPMenuItem = Gtk::MenuItem.new(:label => "Undo Checkpoint", :use_underline => false)
 		    undoCPMenuItem.signal_connect "activate" do
-			@partie.getCheckPoint().undo
-			@grille.rafraichirGrille
+				@partie.getCheckPoint().undo
+				@sousGrille.rafraichirGrille
 		    end
 		    checkpointMenu.append(undoCPMenuItem)
 
 		    # redo checkpoint
 		    redoCPMenuItem = Gtk::MenuItem.new(:label => "Redo Checkpoint", :use_underline => false)
 		    redoCPMenuItem.signal_connect "activate" do
-			@partie.getCheckPoint().redo
-			@grille.rafraichirGrille
+				@partie.getCheckPoint().redo
+				@sousGrille.rafraichirGrille
 		    end
 		    checkpointMenu.append(redoCPMenuItem)
 
@@ -133,7 +131,7 @@ class Jeu < Gtk::Window
 		    # Candidat possible
 		    candidatPossibleMenuItem = Gtk::MenuItem.new(:label => "Candidat possible", :use_underline => false)
 		    candidatPossibleMenuItem.signal_connect "activate" do
-
+		    	@sousGrille.loadAllCandidats
 			end
 		    aideMenu.append(candidatPossibleMenuItem)
 
@@ -224,7 +222,7 @@ class Jeu < Gtk::Window
         	@timer.start(@partie.getTimer.getAccumulated)
         end
         @grille.setPartie(@partie)
-    	@grille.rafraichirGrille
+    	@sousGrille.rafraichirGrille
     end
 
 end

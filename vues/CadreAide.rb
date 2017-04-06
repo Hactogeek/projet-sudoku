@@ -102,6 +102,8 @@ class CadreAide < Gtk::Table
 			print "ok1"
 			@sousGrille.setTest(true)
 			@sousGrille.loadAllCandidats
+			@grille.getPartie.getUndoRedo.addMemento
+			@grille.rafraichirGrille
 			print "ok2"
 			@moreButton.sensitive = false
 		end

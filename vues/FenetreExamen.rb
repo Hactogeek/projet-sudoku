@@ -32,4 +32,7 @@ class FenetreExamen < Jeu
 	    show_all
 	end
 
+	def examen?
+		return !(@partie.getTimer.elapsed==0)
+	end
 end
