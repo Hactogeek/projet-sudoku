@@ -31,12 +31,11 @@ class Boutons < Gtk::Box
 					pos=@grille.getCoordFocus
 					if(pos!=nil)
 						@grille.getPartie.getPlateau.enleverCandidat(pos, widget.label.to_i)
-						@sousGrille.refreshAllCandidats
 					end
 				else
 					@sousGrille.setCandidatSurFocus(widget.label.to_i)
 				end
-
+				@sousGrille.rafraichirGrille
 			end
 			add(btn)
 		end

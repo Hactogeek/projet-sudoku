@@ -56,8 +56,13 @@ class MenuProfil < WindowSudoku
 		end
 		chargerPartie.signal_connect "clicked" do |widget|
 			hide
-			newWindow=Fenetre.new(Partie.nouvelle(3))
+			newWindow=FenetreExamen.new(Partie.nouvelle(3))
 			newWindow.chargement
+			if(!newWindow.examen?)
+				newWindow.hide
+				newWindow2=FenetreApprentissage.new(Partie.nouvelle(3))
+				newWindow2.chargement
+			end
 		end
 		statistique.signal_connect "clicked" do |widget|
 		end
