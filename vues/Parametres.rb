@@ -3,18 +3,20 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-class Preferences < Gtk::Window
+class Parametres < Gtk::Window
 	@grille
 	@sousGrille
+	@partie
 
-	def initialize(grille, sousGrille)
+	def initialize(grille, sousGrille, partie)
 		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do
-			Gtk.main_quit
+			hide()
 		end
 
 		@grille = grille
 		@sousGrille = sousGrille
+		@partie = partie
 
 		# Property
 		set_title "ku"
@@ -26,17 +28,19 @@ class Preferences < Gtk::Window
 		vbox.add(Gtk::Label.new("Choisissez votre thème:"))
 		vbox.add(hbox)
 		
-		colorFocus = @grille.colorFocus
-		colorEquals =  @grille.colorEquals
-		colorError = @grille.colorError
-		colorNeutral = @grille.colorNeutral
-		colorTextOriginal = @grille.colorTextOriginal
-		colorTextPlayer = @grille.colorTextPlayer
+		colorFocus = @partie.getPreferences().colorFocus
+		colorEquals =  @partie.getPreferences().colorEquals
+		colorError = @partie.getPreferences().colorError
+		colorAide = @partie.getPreferences().colorAide
+		colorNeutral = @partie.getPreferences().colorNeutral
+		colorTextOriginal = @partie.getPreferences().colorTextOriginal
+		colorTextPlayer = @partie.getPreferences().colorTextPlayer
 		colorTextCandidat = @sousGrille.colorCandidat
 
 		labelFocus = Gtk::Label.new("Case Focus :")
 		labelEquals = Gtk::Label.new("Case Equivalente:")
 		labelError = Gtk::Label.new("Case Erroné:")
+		labelAide = Gtk::Label.new("Case d'aide")
 		labelNeutral = Gtk::Label.new("Fond de la grille:")
 		labelTextOriginal = Gtk::Label.new("Case Original:")
 		labelTextPlayer = Gtk::Label.new("Case du Joueur:")
@@ -53,6 +57,12 @@ class Preferences < Gtk::Window
 			colorEquals = colorButtonEquals.color.to_s[0..2] + colorButtonEquals.color.to_s[5..6] + colorButtonEquals.color.to_s[9..10]
 		}
 		vbox.add(Gtk::Box.new(:horizontal, 0).add(labelEquals).add(colorButtonEquals))
+
+		colorButtonAide = Gtk::ColorButton.new(Gdk::Color.parse(colorAide))
+		colorButtonAide.signal_connect("color-set"){
+			colorAide = colorButtonAide.color.to_s[0..2] + colorButtonAide.color.to_s[5..6] + colorButtonAide.color.to_s[9..10]
+		}
+		vbox.add(Gtk::Box.new(:horizontal, 0).add(labelAide).add(colorButtonAide))
 
 		colorButtonError = Gtk::ColorButton.new(Gdk::Color.parse(colorError))
 		colorButtonError.signal_connect("color-set"){
@@ -87,7 +97,11 @@ class Preferences < Gtk::Window
 
 		buttonSave = Gtk::Button.new(:label =>"Sauvergarder", :use_underline => nil, :stock_id => nil)
 		buttonSave.signal_connect("clicked"){
-			@grille.setColorStyle(colorFocus, colorEquals, colorError, colorNeutral, colorTextOriginal, colorTextPlayer)
+			#@grille.setColorStyle(colorFocus, colorEquals, colorError, colorNeutral, colorTextOriginal, colorTextPlayer)
+			@partie.getPreferences().setColorStyle(colorFocus, colorEquals, colorError, colorAide, colorNeutral, colorTextOriginal, colorTextPlayer)
+			@grille.loadStyle()
+			@grille.resetColorOnAll()
+			@grille.rafraichirGrille()
 			@sousGrille.setColorCandidat(colorTextCandidat)
 			hide()
 		}

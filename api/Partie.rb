@@ -16,6 +16,7 @@ class Partie
 		@checkPoint = GestionMemento.creer(self)
 		@difficulte=difficulte
 		@timer=Timer.new
+		@preferences = Preferences.new
 	end
 
 	#Creer une partie jouable
@@ -80,6 +81,10 @@ class Partie
 
 	def getAide
 		return @aide
+	end
+
+	def getPreferences
+		return @preferences
 	end
 
 	# --

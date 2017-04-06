@@ -51,7 +51,7 @@ class CadreAide < Gtk::Table
 				setAideText("Regardez ce que vous pouvez faire dans cette région.")
 				region=@grille.getPartie.getPlateau.getCaseRegion(pos[1].getX,pos[1].getY)
 				region.each do |x|
-					@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, COUL_ORANGE)
+					@grille.setCouleurAideCase(x.getPosition.getX, x.getPosition.getY)
 				end
 			elsif(pos[0]==2)
 				setAideText("Il serait utile d'écrire les candidats pour chaque case.")
@@ -90,7 +90,7 @@ class CadreAide < Gtk::Table
 			setAideText("Regardez cette case.")
 			@grille.resetColorOnAll
 			@grille.setFocus(@grille.children[80-(9*pos[1].getY+pos[1].getX)])
-			@grille.setCouleurCase(pos[1].getX, pos[1].getY, COUL_ORANGE)
+			@grille.setCouleurAideCase(pos[1].getX, pos[1].getY)
 			remove(@moreButton)
 			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 			attach(@moreButton2, 3,5 ,0,1)

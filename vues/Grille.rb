@@ -2,16 +2,6 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-COUL_BLEU        = Gdk::RGBA::new(0.4, 0.7, 1.0, 1.0)
-# COUL_ROUGE       = Gdk::RGBA::new(1.0, 0.4, 0.4, 1.0)
-COUL_VERT        = Gdk::RGBA::new(0.5, 0.9, 0.3, 1.0)
-COUL_JAUNE       = Gdk::RGBA::new(1.0, 0.9, 0.3, 1.0)
-COUL_JAUNE_PALE  = Gdk::RGBA::new(1.0, 0.9, 0.3, 0.4)
-COUL_VIOLET      = Gdk::RGBA::new(0.7, 0.4, 0.8, 1.0)
-COUL_ROSE        = Gdk::RGBA::new(0.9, 0.7, 1.0, 1.0)
-COUL_ORANGE		 = Gdk::RGBA::new(1.0, 0.6, 0.5, 1.0)
-COUL_BLANC       = Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0)
-
 
 class Grille < Gtk::Table
 	@focus # case actuellement selectionné
@@ -20,6 +10,7 @@ class Grille < Gtk::Table
 	@colorFocus
 	@colorEquals
 	@colorError
+	@colorAide
 	@colorNeutral
 	@colorTextOriginal
 	@colorTextPlayer
@@ -29,13 +20,9 @@ class Grille < Gtk::Table
 	def initialize (partie)
 		super(9, 9, true)
 		set_margin_left(1)
-		@colorFocus = "#EFC42E"
-		@colorEquals = "#FFEC81"
-		@colorError = "#FF6060"
-		@colorNeutral = "#FFFFFF"
-		@colorTextOriginal = "#000000"
-		@colorTextPlayer = "#4169E1"
-	    @partie = partie
+		@partie = partie
+		loadStyle()
+
 	end
 
 	def setCaseValeur(x, y, valeur)
@@ -124,7 +111,7 @@ class Grille < Gtk::Table
 	def colorCaseResolvable()
 		casesResolvable = @partie.getAide().caseResolvable()
 		casesResolvable.each{ |pos|
-			setCouleurCase(pos.getX(), pos.getY(), COUL_ROSE)
+			setCouleurAideCase(pos.getX(), pos.getY())
 		}
 	end
 
@@ -160,7 +147,7 @@ class Grille < Gtk::Table
 		else
 			a=80-(9*pos[1].getY+pos[1].getX)
 			@focus=children[a]
-			setCouleurCase(pos[1].getX(), pos[1].getY(), COUL_ORANGE)
+			setCouleurAideCase(pos[1].getX(), pos[1].getY())
 		end
 		return pos
 	end		
@@ -188,6 +175,18 @@ class Grille < Gtk::Table
      	css_provider.load :data=>css
      	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
 	end
+
+	def setCouleurAideCase(x, y)
+		css=<<-EOT
+		#cell{
+		background: #{@colorAide};
+     	}
+     	EOT
+     	css_provider = Gtk::CssProvider.new
+     	css_provider.load :data=>css
+     	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
+	end
+
 
 	def getCoordFocus()
 		if (@focus == nil)
@@ -238,6 +237,9 @@ class Grille < Gtk::Table
 
 	def setPartie(partie)
 		@partie=partie
+		loadStyle
+        resetColorOnAll
+    	rafraichirGrille
 	end
 
 	def setCadreAide(cadreAide)
@@ -255,6 +257,15 @@ class Grille < Gtk::Table
 		rafraichirGrille
 	end
 
+	def loadStyle()
+		@colorFocus = @partie.getPreferences().colorFocus
+		@colorEquals = @partie.getPreferences().colorEquals
+		@colorError = @partie.getPreferences().colorError
+		@colorAide = @partie.getPreferences().colorAide
+		@colorNeutral = @partie.getPreferences().colorNeutral
+		@colorTextOriginal = @partie.getPreferences().colorTextOriginal
+		@colorTextPlayer = @partie.getPreferences().colorTextPlayer
+	end
 	def setCadreImportation(cadreImportation)
 		@cadreImportation = cadreImportation
 	end

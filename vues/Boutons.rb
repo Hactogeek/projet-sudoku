@@ -28,7 +28,6 @@ class Boutons < Gtk::Box
 				if (@stylo)
 					@grille.setValeurSurFocus(widget.label.to_i)
 					@grille.resetColorOnAll()
-					@grille.setColorOnValue(widget.label, COUL_VERT)
 					pos=@grille.getCoordFocus
 					if(pos!=nil)
 						@grille.getPartie.getPlateau.enleverCandidat(pos, widget.label.to_i)
@@ -75,7 +74,7 @@ class Boutons < Gtk::Box
 	# Méthode qui reset la couleur du focus	
 	def resetCouleurSurFocus() 
 		if (@focus)
-			@focus.override_background_color(:normal, COUL_BLANC)
+			@focus.override_background_color(:normal, Gdk::RGBA::new(1.0, 1.0, 1.0, 1.0))
 		end
 	end
 

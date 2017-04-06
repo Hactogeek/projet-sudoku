@@ -17,7 +17,7 @@ class WindowSudoku < Gtk::Window
 		set_resizable(false)
 
 		#Taille de la fenêtre, correspondant à celle du jeu.
-		set_default_size(919, 602)
+	#	set_default_size(919, 602)
 
 		#Création de la table contenant les boutons
 		@tableMain = Gtk::Table.new(10, 10)
