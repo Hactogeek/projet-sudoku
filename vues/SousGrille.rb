@@ -71,7 +71,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		end
 		
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
-		print "\n\tCandidat : ", x, "-", y, candidat
+		#print "\n\tCandidat : ", x, "-", y, candidat
 		pos = (x*81 + y*3) + 1
 		for i in 0..2
 			for u in 0..2
@@ -118,7 +118,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
 		
 
-		print("\n Candidat en #{x+1},#{y+1}: ", candidat)
+		#print("\n Candidat en #{x+1},#{y+1}: ", candidat)
 		pos = (x*81 + y*3) + 1
 	    for i in 0..2
 		    for u in 0..2
@@ -153,7 +153,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			return
 		end
 
-		print "Undo ajouté lors du setCandidat"
+		#print "Undo ajouté lors du setCandidat"
 		@grille.getPartie.getUndoRedo.addMemento
 
 		pos = (posFocus.getX()*81 + posFocus.getY()*3) + 1
@@ -163,7 +163,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    		if (@grilleCandidat.children()[729-(pos+u+i*27)].text.to_i == candidat)
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_text("")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.remove(candidat)
-		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
+		    			#print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			# @grille.getPartie.getUndoRedo.addMemento
 
 						rafraichirGrille
@@ -171,7 +171,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		    		else
 		    			@grilleCandidat.children()[729-(pos+u+i*27)].set_markup("<span size=\"small\" foreground=\"#{@colorCandidat}\">#{candidat}</span>")
 		    			@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.add(candidat)
-		    			print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
+		    			#print(@grille.getPartie().getPlateau().getCase(posFocus).getCandidat.getListeCandidat())
 		    			# @grille.getPartie.getUndoRedo.addMemento
 						rafraichirGrille
 		    			return

@@ -84,7 +84,7 @@ class Aide
 		# print "\n\tlisteCase", listeCase
 
 		if listeCase.empty?
-			print "NIL"
+			#print "NIL"
 			return nil 
 		end
 

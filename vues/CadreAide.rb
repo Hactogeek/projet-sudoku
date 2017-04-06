@@ -45,9 +45,11 @@ class CadreAide < Gtk::Table
 	def startHint()
 		pos=@grille.getPartie.getAide.coupSuivant
 		if(pos[0]!=0)
-			if(pos[0]==1 || pos[0]==3)
+			if(pos[0]==1 || pos[0]==3 || pos[0]==4)
 				setAideText("Regardez ce que vous pouvez faire dans cette région.")
-				region=@grille.getPartie.getPlateau.getCaseRegion(pos[1].getX,pos[1].getY)
+				i=getPos(pos)[0]
+				j=getPos(pos)[1]
+				region=@grille.getPartie.getPlateau.getCaseRegion(i,j)
 				region.each do |x|
 					@grille.setCouleurAideCase(x.getPosition.getX, x.getPosition.getY)
 				end
@@ -84,11 +86,13 @@ class CadreAide < Gtk::Table
 	end
 
 	def moreHint(pos)
-		if(pos[0]==1 || pos[0]==3)
+		if(pos[0]==1 || pos[0]==3 || pos[0]==4)
 			setAideText("Regardez cette case.")
 			@grille.resetColorOnAll
-			@grille.setFocus(@grille.children[80-(9*pos[1].getY+pos[1].getX)])
-			@grille.setCouleurAideCase(pos[1].getX, pos[1].getY)
+			i=getPos(pos)[0]
+			j=getPos(pos)[1]
+			@grille.setFocus(@grille.children[80-(9*j+i)])
+			@grille.setCouleurAideCase(i, j)
 			remove(@moreButton)
 			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 			attach(@moreButton2, 3,5 ,0,1)
@@ -97,23 +101,25 @@ class CadreAide < Gtk::Table
 			end
 			@moreButton2.show
 		elsif(pos[0]==2)
+			@grille.getPartie.getUndoRedo.addMemento
 			setAideText("Voilà, ça va aller mieux comme ça.")
 			#puts("CANDIDAT? : " + @grille.getPartie.getPlateau.getCase(Position.new(2,3)).getCandidat.getListeCandidat.to_s)
-			print "ok1"
+			#print "ok1"
 			@sousGrille.setTest(true)
 			@sousGrille.loadAllCandidats
-			@grille.getPartie.getUndoRedo.addMemento
 			@grille.rafraichirGrille
-			print "ok2"
+			#print "ok2"
 			@moreButton.sensitive = false
 		end
 	end
 
 	def moreHint2(pos)
-		if(pos[0]==1 || pos[1]==3)
+		if(pos[0]==1 || pos[0]==3 || pos[0]==4)
 			setAideText("Voici la solution")
-			@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(pos[1].getX,pos[1].getY)))
-			@sousGrille.loadCandidatsCase(pos[1].getX,pos[1].getY)
+			i=getPos(pos)[0]
+			j=getPos(pos)[1]
+			@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(i,j)))
+			@sousGrille.rafraichirGrille
 
 
 			@moreButton.sensitive = false
@@ -134,6 +140,13 @@ class CadreAide < Gtk::Table
 						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/hiddenSingle.png", :width => 100, :heigth => 100))
 					end
 				elsif(pos[0]==3)
+					setAideText("Un candidat n'est pas toujours seul dans une ligne, mais il peut être unique!")
+					begin
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/candidatUnique.png", :width => 100, :heigth => 100))
+					rescue
+						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/candidatUnique.png", :width => 100, :heigth => 100))
+					end
+				elsif(pos[0]==4)
 					setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
@@ -182,5 +195,16 @@ class CadreAide < Gtk::Table
 	def setAideText(text)
 		textFormat = "<span size=\"large\" foreground=\"#200020\">"+text.to_s+"</span>\n"
 		@labelAide.set_markup(textFormat)
+	end
+
+	def getPos(pos)
+		if(pos[0]==3)
+			i=pos[1][0].getX
+			j=pos[1][0].getY
+		else
+			i=pos[1].getX
+			j=pos[1].getY
+		end
+		return i,j
 	end
 end

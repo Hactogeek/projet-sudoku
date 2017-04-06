@@ -22,12 +22,15 @@ class MethodeRes < WindowSudoku
 		@methode2 = Gtk::Button.new(:label =>"Affichez les candidats", :use_underline => nil, :stock_id => nil)
 		@methode2.override_background_color(:normal, @colorNeutral)
 		@methode2.set_size_request(205,50)
-		@methode3 = Gtk::Button.new(:label =>"Un seul candidat", :use_underline => nil, :stock_id => nil)
+		@methode3 = Gtk::Button.new(:label =>"Candidat unique", :use_underline => nil, :stock_id => nil)
 		@methode3.override_background_color(:normal, @colorNeutral)
 		@methode3.set_size_request(205,50)
-		@methode4 = Gtk::Button.new(:label =>"Intéraction entre régions", :use_underline => nil, :stock_id => nil)
+		@methode4 = Gtk::Button.new(:label =>"Un seul candidat", :use_underline => nil, :stock_id => nil)
 		@methode4.override_background_color(:normal, @colorNeutral)
 		@methode4.set_size_request(205,50)
+		@methode5 = Gtk::Button.new(:label =>"Intéraction entre régions", :use_underline => nil, :stock_id => nil)
+		@methode5.override_background_color(:normal, @colorNeutral)
+		@methode5.set_size_request(205,50)
 		retour = Gtk::Button.new(:label => "Retourner au menu")
 		retour.override_background_color(:normal, @colorNeutral)
 		retour.set_size_request(205,50)
@@ -55,6 +58,9 @@ class MethodeRes < WindowSudoku
 		@methode4.signal_connect "clicked" do |widget|
 			loadMethode(4)
 		end
+		@methode5.signal_connect "clicked" do |widget|
+			loadMethode(5)
+		end
 
 		retour.signal_connect "clicked" do |widget|
 			hide
@@ -70,6 +76,7 @@ class MethodeRes < WindowSudoku
 		tableMain.attach(@methode2, 0, 10, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@methode3, 0, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@methode4, 0, 10, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@methode5, 0, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@label, 0, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@imgEvent, 0, 10, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(retour, 0, 10, 9, 10, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
@@ -98,13 +105,20 @@ class MethodeRes < WindowSudoku
 				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/candidats.png", :width => 100, :heigth => 100))
 			end
 		when 3
+			@label.set_text("Un candidat n'est pas toujours seul dans une ligne, mais il peut être unique!")
+			begin
+				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/candidatUnique.png", :width => 100, :heigth => 100))
+			rescue
+				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/candidatUnique.png", :width => 100, :heigth => 100))
+			end
+		when 4
 			@label.set_text("S'il n'y a qu'un seul candidat dans une case, alors c'est la solution.")
 			begin
 				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 			rescue
 				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 			end
-		when 4
+		when 5
 			@label.set_text("Si dans 2 régions alignées, l'on peut constater qu'un candidat n'est pas présent dans une ligne.\n C'est qu'il se trouve dans cette ligne dans la 3ème région.")
 			begin
 				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/interactionRegion.png", :width => 100, :heigth => 100))
@@ -123,6 +137,7 @@ class MethodeRes < WindowSudoku
 		@methode2.hide()
 		@methode3.hide()
 		@methode4.hide()
+		@methode5.hide()
 		@label.show()
 		if (@backButton == nil)
 			@backButton = Gtk::Button.new(:label =>" Retour\nMéthodes", :use_underline => nil, :stock_id => nil)
@@ -146,5 +161,6 @@ class MethodeRes < WindowSudoku
 		@methode2.show
 		@methode3.show
 		@methode4.show
+		@methode5.show
 	end
 end

@@ -40,7 +40,7 @@ class GestionMemento
 		plateau = Marshal.dump(@partie.getPlateau())
 		@undos.push(plateau)
 		@redos.clear
-		puts("ajoutMemento")
+		#puts("ajoutMemento")
 		return self
 	end
 
@@ -54,7 +54,7 @@ class GestionMemento
 			plateau = @undos.pop
 			plateau = Marshal.load(plateau)
 			@partie.setPlateau(plateau)
-			print("\n","Undo effectue")
+			#print("\n","Undo effectue")
 		end
 		return nil
 	end
@@ -69,7 +69,7 @@ class GestionMemento
 			plateau = @redos.pop
 			plateau = Marshal.load(plateau)
 			@partie.setPlateau(plateau)
-			print("\n","Redo effectue")
+			#print("\n","Redo effectue")
 		end
 		return nil
 	end
