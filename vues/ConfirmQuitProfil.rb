@@ -8,7 +8,7 @@ class ConfirmQuitProfil < QuitConfirm
 		super()
 		
 		#Création du label
-		label.set_text("Voulez-vous sauvegarder avant de quitter la partie?")
+		label.set_text("Voulez-vous sauvegarder \navant de quitter la partie?")
 
 		#Création du bouton
 		retour = Gtk::Button.new(:label => "Retour")
