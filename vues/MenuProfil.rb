@@ -19,13 +19,13 @@ class MenuProfil < WindowSudoku
 		nomJoueur = Gtk::Label.new("Bonjour, " + File.split(Dir.getwd)[-1]+ " !")
 
 		#Création des boutons
-		nouvellePartie = Gtk::Button.new(:label => "Nouvelle partie")
+		nouvellePartie = Gtk::Button.new(:label => "Nouvelle\n  partie")
 		nouvellePartie.override_background_color(:normal, @colorNeutral)
 		nouvellePartie.set_size_request(102,50)
-		importerGrille = Gtk::Button.new(:label => "Importer grille")
+		importerGrille = Gtk::Button.new(:label => "Importer\n  grille")
 		importerGrille.override_background_color(:normal, @colorNeutral)
 		importerGrille.set_size_request(102,50)
-		chargerPartie = Gtk::Button.new(:label => "Charger partie")
+		chargerPartie = Gtk::Button.new(:label => "Charger\n partie")
 		chargerPartie.override_background_color(:normal, @colorNeutral)
 		chargerPartie.set_size_request(102,50)
 		statistique = Gtk::Button.new(:label => "Statistique")
@@ -37,7 +37,7 @@ class MenuProfil < WindowSudoku
 		methodeRes = Gtk::Button.new(:label => "Méthodes")
 		methodeRes.override_background_color(:normal, @colorNeutral)
 		methodeRes.set_size_request(102,50)
-		deconnexion = Gtk::Button.new(:label => "Deconnexion")
+		deconnexion = Gtk::Button.new(:label => "Quitter")
 		deconnexion.set_size_request(102,50)
 		deconnexion.set_name "deconnexion"
 
