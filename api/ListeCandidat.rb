@@ -21,6 +21,7 @@ class ListeCandidat
 	# * [Retourne :]
 	# 				self		
 	def add(symbole)
+		@tableauCandidat.delete_at(symbole)
 		@tableauCandidat.insert(symbole, symbole)
 		# @tableauCandidat.uniq
 		return self
@@ -33,8 +34,8 @@ class ListeCandidat
 	# 				self
 	def remove(symbole)
 		if(self.include?(symbole))
-			@tableauCandidat.delete(symbole)
-			#@tableauCandidat.insert(symbole, nil)
+			@tableauCandidat.delete_at(symbole)
+			@tableauCandidat.insert(symbole, nil)
 		end
 		return self
 	end
