@@ -38,6 +38,10 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 		#loadAllCandidats()
 	end
 
+	def setTest(bool)
+		@candidat = bool
+	end
+
 	def refreshAllCandidats()
 		if(!@candidat)
 			return
@@ -78,6 +82,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 
 
 	def loadAllCandidats()
+		# print "OKAllCandidat"
+		# 
 		if(!@candidat)
 			return
 		end
@@ -92,6 +98,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 	end
 
 	def loadCandidatsCase(x, y)
+		# print "OKloadCandidatCase"
 		if (!@candidat)
 			return
 		end
@@ -106,12 +113,12 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			end			
 			return
 		end
-		puts(@candidat.getListeCandidat)
+		# puts(@grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat())
 		@grille.getPartie().getPlateau().getCase(position).setCandidat(@grille.getPartie().getPlateau().candidatPossible(position))
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
 		
 
-		# print("\n Candidat en #{x+1},#{y+1}: ", candidat)
+		print("\n Candidat en #{x+1},#{y+1}: ", candidat)
 		pos = (x*81 + y*3) + 1
 	    for i in 0..2
 		    for u in 0..2

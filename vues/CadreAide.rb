@@ -99,7 +99,10 @@ class CadreAide < Gtk::Table
 		elsif(pos[0]==2)
 			setAideText("Voilà, ça va aller mieux comme ça.")
 			#puts("CANDIDAT? : " + @grille.getPartie.getPlateau.getCase(Position.new(2,3)).getCandidat.getListeCandidat.to_s)
+			print "ok1"
+			@sousGrille.setTest(true)
 			@sousGrille.loadAllCandidats
+			print "ok2"
 			@moreButton.sensitive = false
 		end
 	end

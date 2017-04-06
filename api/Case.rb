@@ -47,15 +47,16 @@ class Case
 	end
 
 	def setCandidat(listeCandidat)
-		for n in @candidat.getListeCandidat do
-			if !@candidat.include?(n)
-				@candidat.add(n)
-			else
-				if @candidat.include?(n)
-					@candidat.remove(n)
-				end
-			end
-		end
+		@candidat = listeCandidat
+		# for n in @candidat.getListeCandidat do
+		# 	if !@candidat.include?(n)
+		# 		@candidat.add(n)
+		# 	else
+		# 		if @candidat.include?(n)
+		# 			@candidat.remove(n)
+		# 		end
+		# 	end
+		# end
 	end
 
 	################################################################################
