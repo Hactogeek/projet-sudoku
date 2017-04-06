@@ -46,15 +46,28 @@ class CadreAide < Gtk::Table
 		pos=@grille.getPartie.getAide.coupSuivant
 		if(pos[0]!=0)
 			if(pos[0]==1 || pos[0]==3 || pos[0]==4)
-				setAideText("Regardez ce que vous pouvez faire dans cette région.")
 				i=getPos(pos)[0]
 				j=getPos(pos)[1]
-				region=@grille.getPartie.getPlateau.getCaseRegion(i,j)
-				region.each do |x|
+				if(pos[0]==3)
+					if(pos[1][2]==0)
+						setAideText("Regardez ce que vous pouvez faire dans cette région.")
+						aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
+					elsif(pos[1][2]==0)
+						setAideText("Regardez ce que vous pouvez faire dans cette ligne.")
+						aColorer=@grille.getPartie.getPlateau.getLigne(i)
+					else
+						setAideText("Regardez ce que vous pouvez faire dans cette colonne.")
+						aColorer=@grille.getPartie.getPlateau.getColonne(j)
+					end
+				else
+					setAideText("Regardez ce que vous pouvez faire dans cette région.")
+					aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
+				end
+				aColorer.each do |x|
 					@grille.setCouleurAideCase(x.getPosition.getX, x.getPosition.getY)
 				end
 			elsif(pos[0]==2)
-				setAideText("Il serait utile d'écrire les candidats pour chaque case.")
+				setAideText("Soit vous n'avez pas mis de candidats, soit il y en qui sont faux")
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
@@ -110,6 +123,8 @@ class CadreAide < Gtk::Table
 			@grille.rafraichirGrille
 			#print "ok2"
 			@moreButton.sensitive = false
+		elsif(pos[0]==5)
+			setAideText("INTERACTION ENTRE REGION!")
 		end
 	end
 
