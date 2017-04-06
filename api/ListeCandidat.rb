@@ -60,6 +60,7 @@ class ListeCandidat
 	#				boolean
 	def empty?
 		return @tableauCandidat.compact.empty?
+		
 	end
 
 	# Les méthodes de classe
