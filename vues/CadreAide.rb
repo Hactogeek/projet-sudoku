@@ -44,8 +44,6 @@ class CadreAide < Gtk::Table
 
 	def startHint()
 		pos=@grille.getPartie.getAide.coupSuivant
-		puts("CANDIDAT? : " + @grille.getPartie.getPlateau.getCase(Position.new(4,5)).getCandidat.getListeCandidat.to_s)
-
 		if(pos[0]!=0)
 			if(pos[0]==1 || pos[0]==3)
 				setAideText("Regardez ce que vous pouvez faire dans cette région.")
@@ -98,6 +96,14 @@ class CadreAide < Gtk::Table
 				moreHint2(pos)
 			end
 			@moreButton2.show
+		elsif(pos[0]==2)
+			setAideText("Voilà, ça va aller mieux comme ça.")
+			#puts("CANDIDAT? : " + @grille.getPartie.getPlateau.getCase(Position.new(2,3)).getCandidat.getListeCandidat.to_s)
+			print "ok1"
+			@sousGrille.setTest(true)
+			@sousGrille.loadAllCandidats
+			print "ok2"
+			@moreButton.sensitive = false
 		end
 	end
 
@@ -115,17 +121,18 @@ class CadreAide < Gtk::Table
 			attach(@learnButton, 0,2 ,0,1)
 			@learnButton.show
 			@learnButton.signal_connect "clicked" do |widget|
-				setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
 				if(@img!=nil)
 					@imgEvent.remove(@img)
 				end
 				if(pos[0]==1)
+					setAideText("En regardant attentivement la grille, vous pouvez remarquer\nque le 8 ne peut être posé qu'à un seul endroit dans la région 6.")
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/hiddenSingle.png", :width => 100, :heigth => 100))
 					rescue
 						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/hiddenSingle.png", :width => 100, :heigth => 100))
 					end
 				elsif(pos[0]==3)
+					setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 					rescue
