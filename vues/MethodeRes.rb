@@ -71,7 +71,7 @@ class MethodeRes < WindowSudoku
 		tableMain.attach(@methode3, 0, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@methode4, 0, 10, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(@label, 0, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@imgEvent, 0, 10, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@imgEvent, 0, 10, 7, 8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 		tableMain.attach(retour, 0, 10, 9, 10, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		show_all
@@ -125,11 +125,13 @@ class MethodeRes < WindowSudoku
 		@methode4.hide()
 		@label.show()
 		if (@backButton == nil)
-			@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
+			@backButton = Gtk::Button.new(:label =>" Retour\nMéthodes", :use_underline => nil, :stock_id => nil)
+			@backButton.override_background_color(:normal, @colorNeutral)
+			@backButton.set_size_request(205,50)
 			@backButton.signal_connect "clicked" do |widget|
 				loadMenu()
 			end
-			@tableMain.attach(@backButton, 2,8 ,7,8, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+			@tableMain.attach(@backButton, 0,10 ,8,9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 			@backButton.show()
 		else
 			@backButton.show()
