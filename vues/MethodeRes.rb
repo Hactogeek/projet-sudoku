@@ -83,7 +83,7 @@ class MethodeRes < WindowSudoku
 			end
 		case n
 		when 1
-			@label.set_text("En regardant attentivement la grille, vous pouvez remarquer\n que le 8 ne peut être posé qu'à un seul endroit dans la région 6.")
+			@label.set_text("En regardant attentivement la grille, vous pouvez remarquer\nque le 8 ne peut être posé qu'à un seul endroit dans la région 6.")
 			begin
 				@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/hiddenSingle.png", :width => 100, :heigth => 100))
 			rescue

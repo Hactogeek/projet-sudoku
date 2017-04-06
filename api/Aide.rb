@@ -165,16 +165,14 @@ class Aide
 	def coupSuivant()
 		solution = hiddenSingle()
 
-		if(@partie.getPlateau.aucunCandidat?)
-			puts("WSH")
-			return [2]
-		end
-
 		if solution != nil
 			# return solution
 			return 1, solution[rand(solution.length)]
 		end
 
+		if(@partie.getPlateau.aucunCandidat?)
+			return [2]
+		end
 		
 		solution = candidatUnique()
 

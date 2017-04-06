@@ -34,7 +34,7 @@ class ListeCandidat
 	def remove(symbole)
 		if(self.include?(symbole))
 			@tableauCandidat.delete(symbole)
-			@tableauCandidat.insert(symbole, nil)
+			#@tableauCandidat.insert(symbole, nil)
 		end
 		return self
 	end

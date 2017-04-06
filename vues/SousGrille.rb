@@ -86,7 +86,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 
 		for x in 0..8
 			for y in 0..8
-				refreshCandidatsCase(x,y)
+				loadCandidatsCase(x,y)
 			end
 		end
 	end
@@ -106,8 +106,8 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			end			
 			return
 		end
-		
-		@grille.getPartie().getPlateau().getCase(posiiton).setCandidat(candidatPossible(position))
+		puts(@candidat.getListeCandidat)
+		@grille.getPartie().getPlateau().getCase(position).setCandidat(@grille.getPartie().getPlateau().candidatPossible(position))
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
 		
 
