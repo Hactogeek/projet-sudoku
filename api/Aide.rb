@@ -16,17 +16,18 @@ class Aide
 		@partie.getPlateau().setCaseListeCandidat(position, @partie.getPlateau().candidatPossible(position))
 	end
 
+	# retourne [Position, valeur, (0->region, 1->ligne, 2->colonne)]
 	def candidatUnique()
 		listeCase = Array.new
 		@partie.getPlateau().each do |x,y,laCase|
 			laCase.getCandidat.getListeCandidat.compact.each do |val|
 				# print @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten,"\n"
 				if @partie.getPlateau().getLigne(x).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
-					listeCase.push([Position.new(x,y), val])
+					listeCase.push([Position.new(x,y), val, 1])
 				elsif @partie.getPlateau().getColonne(y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
-					listeCase.push([Position.new(x,y), val])
+					listeCase.push([Position.new(x,y), val, 2])
 				elsif @partie.getPlateau().getRegion(x,y).compact.map(&:getCandidat).map(&:getListeCandidat).flatten.compact.count(val) == 1
-					listeCase.push([Position.new(x,y), val])
+					listeCase.push([Position.new(x,y), val, 0])
 				end
 			end
 		end
