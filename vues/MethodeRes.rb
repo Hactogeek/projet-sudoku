@@ -7,12 +7,31 @@ class MethodeRes < WindowSudoku
 	def initialize(invite)
 		super("Méthodes de résolution")
 
+		begin
+			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
+		rescue
+			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 205, :heigth => 200)))
+		end
+		#Placement des images et ajout dans la table
+		tableMain.attach(header, 0, 10, 0, 2)
+
 		#Création des boutons
 		@methode1 = Gtk::Button.new(:label =>"Chiffre caché", :use_underline => nil, :stock_id => nil)
+		@methode1.override_background_color(:normal, @colorNeutral)
+		@methode1.set_size_request(205,50)
 		@methode2 = Gtk::Button.new(:label =>"Affichez les candidats", :use_underline => nil, :stock_id => nil)
+		@methode2.override_background_color(:normal, @colorNeutral)
+		@methode2.set_size_request(205,50)
 		@methode3 = Gtk::Button.new(:label =>"Un seul candidat", :use_underline => nil, :stock_id => nil)
+		@methode3.override_background_color(:normal, @colorNeutral)
+		@methode3.set_size_request(205,50)
 		@methode4 = Gtk::Button.new(:label =>"Intéraction entre régions", :use_underline => nil, :stock_id => nil)
+		@methode4.override_background_color(:normal, @colorNeutral)
+		@methode4.set_size_request(205,50)
 		retour = Gtk::Button.new(:label => "Retourner au menu")
+		retour.override_background_color(:normal, @colorNeutral)
+		retour.set_size_request(205,50)
+
 
 		#Création du label
 		@label = Gtk::Label.new("")
@@ -47,13 +66,13 @@ class MethodeRes < WindowSudoku
 		end
 
 		#Placement des boutons et ajout dans la table
-		tableMain.attach(@methode1, 2, 8, 2, 3, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@methode2, 2, 8, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@methode3, 2, 8, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@methode4, 2, 8, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@label, 2, 8, 2, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(@imgEvent, 2, 8, 4, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
-		tableMain.attach(retour, 2, 8, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@methode1, 0, 10, 2, 3, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@methode2, 0, 10, 3, 4, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@methode3, 0, 10, 4, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@methode4, 0, 10, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@label, 0, 10, 6, 7, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(@imgEvent, 0, 10, 8, 9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		tableMain.attach(retour, 0, 10, 9, 10, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		show_all
 	end

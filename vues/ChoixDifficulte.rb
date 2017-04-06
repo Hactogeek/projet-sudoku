@@ -7,7 +7,6 @@ class ChoixDifficulte < WindowSudoku
 	def initialize(invite, examen)
 		super("Choix de difficulté")
 
-		@colorRed   = "#FFc8c8"
 		begin
 			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
 		rescue
