@@ -8,8 +8,11 @@ class ChoixDifficulte < WindowSudoku
 		super("Choix de difficulté")
 
 		@colorRed   = "#FFc8c8"
-		header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
-
+		begin
+			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
+		rescue
+			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/header.png", :width => 205, :heigth => 200)))
+		end
 		#Placement des images et ajout dans la table
 		tableMain.attach(header, 0, 10, 0, 3)
 

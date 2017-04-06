@@ -35,7 +35,7 @@ class Invite < WindowSudoku
 		#Redirection des boutons
 		nouvellePartie.signal_connect "clicked" do |widget|
 			hide
-			newWindow=ChoixDifficulte.new(1)
+			newWindow=ChoixDifficulte.new(1,0)
 		end
 		importerGrille.signal_connect "clicked" do |widget|
 			hide
