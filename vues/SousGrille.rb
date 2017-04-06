@@ -107,7 +107,7 @@ class SousGrille < Gtk::Table # contenant elle même une grille
 			return
 		end
 		
-		@grille.getPartie().getPlateau().candidatPossible(position)
+		@grille.getPartie().getPlateau().getCase(posiiton).setCandidat(candidatPossible(position))
 		candidat = @grille.getPartie().getPlateau().getCase(position).getCandidat().getListeCandidat()
 		
 
