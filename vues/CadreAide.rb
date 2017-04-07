@@ -141,6 +141,8 @@ class CadreAide < Gtk::Table
 				methode="Candidat unique"
 			elsif(pos[0]==3)
 				methode="Un seul candidat"
+			else 
+				methode="Pas de méthode"
 			end
 				
 			setAideText("Voici la solution trouvée grâce à la méthode :\n" + methode)
