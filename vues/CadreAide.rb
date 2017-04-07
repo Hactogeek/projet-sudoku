@@ -3,14 +3,6 @@ Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class CadreAide < Gtk::Table
-	@grille
-	@sousGrille
-	@labelAide
-	@backButton
-	@moreButton
-	@hintButton
-	@finishButton
-
 	def initialize (grille, sousGrille)
 		super(12,8,true)
 		@grille = grille
@@ -36,7 +28,7 @@ class CadreAide < Gtk::Table
 		attach(@imgEvent, 0,8, 3,10)
 
 		@hintButton = Gtk::Button.new(:label =>"Indice", :use_underline => nil, :stock_id => nil)
-		@hintButton.signal_connect "clicked" do |widget|
+		@hintButton.signal_connect "clicked" do
 			startHint()
 		end
 		attach(@hintButton, 3,5 ,0,1)
@@ -52,43 +44,43 @@ class CadreAide < Gtk::Table
 				j=getPos(pos)[1]
 				if(pos[0]==3)
 					if(pos[1][2]==0)
-						setAideText("Regardez ce que vous pouvez faire dans cette région.")
+						setAideText("Regardez ce que vous pouvez\nfaire dans cette région.")
 						aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
 					elsif(pos[1][2]==1)
-						setAideText("Regardez ce que vous pouvez faire dans cette ligne.")
+						setAideText("Regardez ce que vous pouvez\nfaire dans cette ligne.")
 						aColorer=@grille.getPartie.getPlateau.getLigne(i)
 					else
-						setAideText("Regardez ce que vous pouvez faire dans cette colonne.")
+						setAideText("Regardez ce que vous pouvez\nfaire dans cette colonne.")
 						aColorer=@grille.getPartie.getPlateau.getColonne(j)
 					end
 				else
-					setAideText("Regardez ce que vous pouvez faire dans cette région.")
+					setAideText("Regardez ce que vous pouvez\nfaire dans cette région.")
 					aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
 				end
 				aColorer.each do |x|
 					@grille.setCouleurAideCase(x.getPosition.getX, x.getPosition.getY)
 				end
 			elsif(pos[0]==2)
-				setAideText("Soit vous n'avez pas mis de candidats, soit il y en qui sont faux")
+				setAideText("Soit vous n'avez pas mis de candidats,\nsoit il y en qui sont faux")
 			elsif(pos[0]==5)
 				setAideText("REGION INTERACTION")
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
 				@backButton = Gtk::Button.new(:label =>"Retour", :use_underline => nil, :stock_id => nil)
-				@backButton.signal_connect "clicked" do |widget|
+				@backButton.signal_connect "clicked" do
 					previousHint()
 				end
 				attach(@backButton, 0,2 ,0,1)
 
 				@moreButton = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
-				@moreButton.signal_connect "clicked" do |widget|
+				@moreButton.signal_connect "clicked" do
 					moreHint(pos)
 				end
 				attach(@moreButton, 3,5 ,0,1)
 
 				@finishButton = Gtk::Button.new(:label =>"Finir", :use_underline => nil, :stock_id => nil)
-				@finishButton.signal_connect "clicked" do |widget|
+				@finishButton.signal_connect "clicked" do
 					cancelHint()
 				end
 				attach(@finishButton, 6,8 ,0,1)
@@ -114,7 +106,7 @@ class CadreAide < Gtk::Table
 			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 			attach(@moreButton2, 3,5 ,0,1)
 			#puts("morehint : " + pos[0].to_s)
-			@moreButton2.signal_connect "clicked" do |widget|
+			@moreButton2.signal_connect "clicked" do
 				moreHint2(pos)
 			end
 			@moreButton2.show
@@ -161,7 +153,7 @@ class CadreAide < Gtk::Table
 			@learnButton.sensitive = true
 			attach(@learnButton, 0,2 ,0,1)
 			@learnButton.show
-			@learnButton.signal_connect "clicked" do |widget|
+			@learnButton.signal_connect "clicked" do
 				if(@img!=nil)
 					@imgEvent.remove(@img)
 				end
@@ -170,21 +162,21 @@ class CadreAide < Gtk::Table
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/hiddenSingle.png", :width => 100, :heigth => 100))
 					rescue
-						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/hiddenSingle.png", :width => 100, :heigth => 100))
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/hiddenSingle.png", :width => 100, :heigth => 100))
 					end
 				elsif(pos[0]==3)
 					setAideText("Un candidat n'est pas toujours seul dans une ligne, mais il peut être unique!")
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/candidatUnique.png", :width => 100, :heigth => 100))
 					rescue
-						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/candidatUnique.png", :width => 100, :heigth => 100))
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/candidatUnique.png", :width => 100, :heigth => 100))
 					end
 				elsif(pos[0]==4)
 					setAideText("Si après avoir placé tous les candidats pour chaque case du sudoku,\n vous voyez qu'une case ne possède qu'un seul candidat.\n Alors ce candidat est la solution de la case")
 					begin
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 					rescue
-						img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/unSeulCandidat.png", :width => 100, :heigth => 100))
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 					end
 				end
 				@imgEvent.add(@img)

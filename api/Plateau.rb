@@ -161,15 +161,15 @@ class Plateau
 	# 				listeCase	
 	def getCaseRegion(posX, posY)
 		listeCase = Array.new()
-		posX++
-		posY++
+		posX=posX+1
+		posY=posY+1
 
 		posX = posX-(posX%3)
 		posY = posY-(posY%3)
 
 		for n in (posX...posX+3)
 			for m in (posY...posY+3)
-						listeCase.push(@grid[n][m])
+				listeCase.push(@grid[n][m])
 			end
 		end
 
@@ -394,7 +394,7 @@ class Plateau
 				setCaseOriginale(Position.new(x, y), true)
 				setCaseJoueur(Position.new(x, y), pattern[x])
 			end
-			@base.times{|i| pattern.push pattern.shift}
+			@base.times{ pattern.push pattern.shift}
 			pattern.push pattern.shift if @base - (y % @base) == 1
 		end
 		return self
@@ -437,7 +437,6 @@ class Plateau
 	# * [Retourne :]
 	# 				booleen
 	def deuxOccurenceTab?(tab)
-		occurence = false
 		for i in (0...9)
 			if tab[i] != nil
 				kase1 = tab[i]
@@ -454,9 +453,7 @@ class Plateau
 					return true
 				end	
 			end
-
 		end
-
 		return false
 	end
 
@@ -464,7 +461,7 @@ class Plateau
 	# * [Retourne :]
 	# 				booleen	
 	def correctGrille?
-		self.each { |x,y,kase|
+		self.each { |x,y,_kase|
 			ligne = getLigne(y).compact.map(&:getSolutionJoueur)
 			colonne = getColonne(x).compact.map(&:getSolutionJoueur)
 			region = getRegion(x/3, y/3).compact.map(&:getSolutionJoueur)
@@ -479,7 +476,7 @@ class Plateau
 	# * [Retourne :]
 	# 				booleen	
 	def correctCandidat?
-		self.each { |x,y,kase|
+		self.each { |_x,_y,kase|
 			if (kase.getCandidat().include?(kase.getSolutionOriginale) == false) && kase.getSolutionJoueur == nil
 				return false
 			end
@@ -492,7 +489,7 @@ class Plateau
 	# 				booleen	
 	def plein?
 		pleine = true
-		self.each { |x,y,kase|
+		self.each { |_x,_y,kase|
 			if  kase.getSolutionJoueur == nil
 				pleine = false
 			end
@@ -504,7 +501,7 @@ class Plateau
 	# * [Retourne :]
 	# 				booleen	
 	def aucunCandidat?
-		self.each { |x,y,kase|
+		self.each { |_x,_y,kase|
 			if  kase.getCandidat().empty? == false
 				return false
 			end
@@ -529,7 +526,7 @@ class Plateau
     # Méthode pour réduire une grille en la gardant jouable
 	# * [Retourne :]
 	# 				self	
-	def reduireGrille (position, niveauDifficulte)
+	def reduireGrille (niveauDifficulte)
 
 		listeCase = Array.new()
 

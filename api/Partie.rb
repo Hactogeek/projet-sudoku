@@ -22,7 +22,7 @@ class Partie
 	def creerPartie
 		@plateau.completeGrille()
 		#puts @plateau.printOri()
-		@plateau.reduireGrille(0,@difficulte) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
+		@plateau.reduireGrille(@difficulte) # A modifier si on veut changer le niveau de difficulté 2:facile, 3:moyen, 4:difficile
 		@checkPoint.addMemento
 	end
 

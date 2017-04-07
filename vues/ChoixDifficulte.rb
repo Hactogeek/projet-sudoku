@@ -33,49 +33,49 @@ class ChoixDifficulte < WindowSudoku
 		retour.set_size_request(205,50)
 
 		#Redirection des boutons
-		facile.signal_connect "clicked" do |widget|
+		facile.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(3))
+				FenetreInvitee.new(Partie.nouvelle(3))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreExamen.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreApprentissage.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end
-		moyen.signal_connect "clicked" do |widget|
+		moyen.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(4))
+				FenetreInvitee.new(Partie.nouvelle(4))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreExamen.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreApprentissage.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end
-		difficile.signal_connect "clicked" do |widget|
+		difficile.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(5))
+				FenetreInvitee.new(Partie.nouvelle(5))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreExamen.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+					FenetreApprentissage.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=Invite.new
+				Invite.new
 			else
-				newWindow=ChoixMode.new
+				ChoixMode.new
 			end
 		end
 
