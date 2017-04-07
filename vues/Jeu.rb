@@ -170,15 +170,15 @@ class Jeu < Gtk::Window
 		    aideMenu.append(initialGrilleMenuItem)
 
 		    # etatInitial
-		    candidatGrilleMenuItem = Gtk::MenuItem.new(:label => "test", :use_underline => false)
-		    candidatGrilleMenuItem.signal_connect "activate" do
-				if @partie.getPlateau().aucunCandidat?
-					print("\n Vrai")
-				else
-					print("\n Faux")
-				end
-		    end
-		    aideMenu.append(candidatGrilleMenuItem)
+		  #   candidatGrilleMenuItem = Gtk::MenuItem.new(:label => "test", :use_underline => false)
+		  #   candidatGrilleMenuItem.signal_connect "activate" do
+				# if @partie.getPlateau().aucunCandidat?
+				# 	print("\n Vrai")
+				# else
+				# 	print("\n Faux")
+				# end
+		  #   end
+		  #   aideMenu.append(candidatGrilleMenuItem)
 
 
 		    
