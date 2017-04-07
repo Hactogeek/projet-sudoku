@@ -8,13 +8,6 @@ Dir[File.dirname(__FILE__) + '/../vues/*.rb'].each {|file| require file }
 # * *Heritage*	: Aucun lien
 #
 class Joueur
-	#pseudo du joueur
-	@pseudo
-	#identifiant du joueur
-	@tabScore
-	@preferences
-	
-
 	attr_accessor:d
 
 	private_class_method :new
@@ -40,7 +33,7 @@ class Joueur
 		Dir.chdir(Dir.pwd+"/profil")
 		if(Dir.exist?(@pseudo))
 			Dir.chdir("../")
-		 	return true
+			return true
 		else
 			Dir.mkdir(@pseudo)
 			Dir.chdir(@pseudo)
@@ -103,10 +96,9 @@ class Joueur
 	
 	# methode qui permet d'afficher les statistiques du joueur
 	def afficherStat
-		 @stat.each{ |key,valeur|
+		@stat.each do |key,valeur|
 			print key ," => " ,valeur," points \n"
-
-		}
+		end
 	end 
 	
 	# méthode d'affichage d'un joueur
