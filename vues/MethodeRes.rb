@@ -43,31 +43,31 @@ class MethodeRes < WindowSudoku
 		@imgEvent=Gtk::EventBox.new
 
 		#Action des boutons
-		@methode1.signal_connect "clicked" do |widget|
+		@methode1.signal_connect "clicked" do
 			loadMethode(1)
 		end
 
-		@methode2.signal_connect "clicked" do |widget|
+		@methode2.signal_connect "clicked" do
 			loadMethode(2)
 		end
 
-		@methode3.signal_connect "clicked" do |widget|
+		@methode3.signal_connect "clicked" do
 			loadMethode(3)
 		end
 
-		@methode4.signal_connect "clicked" do |widget|
+		@methode4.signal_connect "clicked" do
 			loadMethode(4)
 		end
-		@methode5.signal_connect "clicked" do |widget|
+		@methode5.signal_connect "clicked" do
 			loadMethode(5)
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=Invite.new
+				Invite.new
 			else
-				newWindow=MenuProfil.new
+				MenuProfil.new
 			end
 		end
 
@@ -86,8 +86,8 @@ class MethodeRes < WindowSudoku
 
 	def loadMethode(n)
 		if(@img!=nil)
-				@imgEvent.remove(@img)
-			end
+			@imgEvent.remove(@img)
+		end
 		case n
 		when 1
 			@label.set_text("En regardant attentivement la grille, vous pouvez remarquer\nque le 8 ne peut être posé qu'à un seul endroit dans la région 6.")
@@ -143,7 +143,7 @@ class MethodeRes < WindowSudoku
 			@backButton = Gtk::Button.new(:label =>" Retour\nMéthodes", :use_underline => nil, :stock_id => nil)
 			@backButton.override_background_color(:normal, @colorNeutral)
 			@backButton.set_size_request(205,50)
-			@backButton.signal_connect "clicked" do |widget|
+			@backButton.signal_connect "clicked" do
 				loadMenu()
 			end
 			@tableMain.attach(@backButton, 0,10 ,8,9, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)

@@ -33,30 +33,30 @@ class Invite < WindowSudoku
 		aPropos.set_size_request(102,50)
 
 		#Redirection des boutons
-		nouvellePartie.signal_connect "clicked" do |widget|
+		nouvellePartie.signal_connect "clicked" do
 			hide
-			newWindow=ChoixDifficulte.new(1,0)
+			ChoixDifficulte.new(1,0)
 		end
-		importerGrille.signal_connect "clicked" do |widget|
+		importerGrille.signal_connect "clicked" do
 			hide
-			newWindow=FenetreImportee.new(nil)
+			FenetreImportee.new(nil)
 		end
-		creerProfil.signal_connect "clicked" do |widget|
+		creerProfil.signal_connect "clicked" do
 			hide
-			newWindow=CreationProfil.new(1, nil)
+			CreationProfil.new(1, nil)
 		end
-		methodeRes.signal_connect "clicked" do |widget|
+		methodeRes.signal_connect "clicked" do
 			hide
-			newWindow=MethodeRes.new(1)
+			MethodeRes.new(1)
 		end
-		deconnexion.signal_connect "clicked" do |widget|
+		deconnexion.signal_connect "clicked" do
 			hide
 			#Dir.chdir("../..")
-			newWindow=Index.new
+			Index.new
 		end
-		aPropos.signal_connect "clicked" do |widget|
+		aPropos.signal_connect "clicked" do
 			hide
-			newWindow=APropos.new(1)
+			APropos.new(1)
 		end
 
 		#Placement des boutons et ajout dans la table

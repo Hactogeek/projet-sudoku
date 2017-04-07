@@ -46,15 +46,15 @@ class MenuProfil < WindowSudoku
 		aPropos.set_size_request(102,50)
 
 		#Redirection des boutons
-		nouvellePartie.signal_connect "clicked" do |widget|
+		nouvellePartie.signal_connect "clicked" do
 			hide
-			newWindow=ChoixMode.new
+			ChoixMode.new
 		end
-		importerGrille.signal_connect "clicked" do |widget|
+		importerGrille.signal_connect "clicked" do
 			hide
-			newWindow=FenetreImportee.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+			FenetreImportee.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
-		chargerPartie.signal_connect "clicked" do |widget|
+		chargerPartie.signal_connect "clicked" do
 			hide
 			newWindow=FenetreExamen.new(Partie.nouvelle(3), Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 			newWindow.chargement
@@ -64,25 +64,25 @@ class MenuProfil < WindowSudoku
 				newWindow2.chargement
 			end
 		end
-		statistique.signal_connect "clicked" do |widget|
+		statistique.signal_connect "clicked" do
 			hide
-			newWindow=Statistiques.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+			Statistiques.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
-		parametres.signal_connect "clicked" do |widget|
-			newWindow = Parametres.new(nil, nil,nil, Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+		parametres.signal_connect "clicked" do
+			Parametres.new(nil, nil,nil, Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
-		methodeRes.signal_connect "clicked" do |widget|
+		methodeRes.signal_connect "clicked" do
 			hide
-			newWindow=MethodeRes.new(0)
+			MethodeRes.new(0)
 		end
-		deconnexion.signal_connect "clicked" do |widget|
+		deconnexion.signal_connect "clicked" do
 			hide
 			Dir.chdir("../..")
-			newWindow=Index.new
+			Index.new
 		end
-		aPropos.signal_connect "clicked" do |widget|
+		aPropos.signal_connect "clicked" do
 			hide
-			newWindow=APropos.new(0)
+			APropos.new(0)
 		end
 
 		#Placement des boutons et ajout dans la table

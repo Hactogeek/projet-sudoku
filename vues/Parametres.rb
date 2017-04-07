@@ -4,10 +4,6 @@ Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class Parametres < Gtk::Window
-	@grille
-	@sousGrille
-	@partie
-
 	def initialize(grille, sousGrille, partie, joueur)
 		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do

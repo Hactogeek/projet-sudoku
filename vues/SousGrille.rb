@@ -3,11 +3,6 @@ Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 class SousGrille < Gtk::Table # contenant elle même une grille
-	@grilleCandidat
-	@candidat
-	@grille
-	@colorCandidat
-
 	attr_reader :colorCandidat
 
 	def new(grille)
