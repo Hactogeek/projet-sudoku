@@ -8,7 +8,7 @@ class FenetreImportee < Gtk::Window
 	# @sousGrille
 	# @grille
 
-	def initialize
+	def initialize(joueur)
 		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "delete_event" do
 			Gtk.main_quit
@@ -25,7 +25,8 @@ class FenetreImportee < Gtk::Window
 		# Initialisation des classe interface #
 		#=====================================#
 		@partie = Partie.nouvelle(0)
-		@grille = Grille.new(@partie)
+		@joueur=joueur
+		@grille = Grille.new(@partie,@joueur)
 		@sousGrille = SousGrille.new(@grille)
 		@cadreAide = CadreAide.new(@grille, @sousGrille)
 		@cadreImportation = CadreImportation.new(@grille, @sousGrille)

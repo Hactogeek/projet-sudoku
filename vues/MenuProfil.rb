@@ -52,7 +52,7 @@ class MenuProfil < WindowSudoku
 		end
 		importerGrille.signal_connect "clicked" do |widget|
 			hide
-			newWindow=FenetreImportee.new
+			newWindow=FenetreImportee.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
 		chargerPartie.signal_connect "clicked" do |widget|
 			hide
