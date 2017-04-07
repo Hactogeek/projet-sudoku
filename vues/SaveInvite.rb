@@ -41,13 +41,13 @@ class SaveInvite < Gtk::Window
 		retour.set_size_request(205,50)
 
 		#Redirection des boutons
-		creerProfil.signal_connect "clicked" do |widget|
+		creerProfil.signal_connect "clicked" do
 			hide
 			fenetre.hide
-			newWindow=CreationProfil.new(partie, fenetre)
+			CreationProfil.new(partie, fenetre)
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 		end
 

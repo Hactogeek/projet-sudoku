@@ -12,10 +12,10 @@ class ConfirmQuitInvite < QuitConfirm
 		label.set_text("Etes-vous sûr de vouloir quitter?")
 
 		#Redirection des boutons
-		oui.signal_connect "clicked" do |widget|
+		oui.signal_connect "clicked" do
 			Gtk.main_quit
 		end
-		non.signal_connect "clicked" do |widget|
+		non.signal_connect "clicked" do
 			hide
 		end
 

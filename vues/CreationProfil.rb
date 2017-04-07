@@ -28,7 +28,7 @@ class CreationProfil < WindowSudoku
 		retour.set_size_request(102,50)
 
 		#Redirection des boutons
-		valider.signal_connect "clicked" do |widget|
+		valider.signal_connect "clicked" do
 			if(name.text=="")
 				confirm.set_text("Veuillez rentrer un nom d'utilisateur")
 			else
@@ -39,20 +39,20 @@ class CreationProfil < WindowSudoku
 					hide
 					Sauvegarde.saveJoueur(joueur,joueur.getPseudo)
 					if(invite!=1 && invite!=0)
-						newWindow=FenetreApprentissage.new(invite, Sauvegarde.loadJoueur(joueur.getPseudo))
+						FenetreApprentissage.new(invite, Sauvegarde.loadJoueur(joueur.getPseudo))
 					else
-						newWindow=MenuProfil.new
+						MenuProfil.new
 					end
 				end
 			end
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=Invite.new
+				Invite.new
 			elsif(invite==0)
-				newWindow=Index.new
+				Index.new
 			else
 				fenetre.show_all
 			end

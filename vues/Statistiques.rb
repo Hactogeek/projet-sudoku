@@ -21,9 +21,9 @@ class Statistiques < WindowSudoku
 		retour.set_size_request(205,50)
 
 		#Redirection des boutons
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
-			newWindow=MenuProfil.new
+			MenuProfil.new
 		end
 
 		#Placement des boutons et ajout dans la table

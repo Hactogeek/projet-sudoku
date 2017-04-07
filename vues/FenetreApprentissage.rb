@@ -12,7 +12,7 @@ class FenetreApprentissage < Jeu
 		super(partie, joueur)
 
 		signal_connect "delete_event" do
-			newWindow = ConfirmQuitProfil.new(@partie, self, 1)
+			ConfirmQuitProfil.new(@partie, self, 1)
 		end
 		
 	    show_all

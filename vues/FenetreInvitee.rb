@@ -11,7 +11,7 @@ class FenetreInvitee < Jeu
 	def initialize (partie)
 		super(partie, nil)
 		signal_connect "delete_event" do
-			newWindow = ConfirmQuitInvite.new
+			ConfirmQuitInvite.new
 		end
 
 		fileMenu.remove(sauvergarderMenuItem)
@@ -21,14 +21,14 @@ class FenetreInvitee < Jeu
         # CreerProfil
         sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
         sauvergarderMenuItem.signal_connect "activate" do
-        	newWindow=SaveInvite.new(@partie,self)
+        	SaveInvite.new(@partie,self)
         end
         fileMenu.append(sauvergarderMenuItem)
 
         # Quitter
         quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
         quitterMenuItem.signal_connect "activate" do
-        	newWindow = Invite.new
+        	Invite.new
         end
         fileMenu.add(quitterMenuItem)
 

@@ -84,7 +84,6 @@ class Fenetre < Gtk::Window
 	    	@partie.getUndoRedo().undo
 	    	@grille.rafraichirGrille
 	    	@sousGrille.refreshAllCandidats()
-			# @sousGrille.loadAllCandidats
 		end
 		checkpointMenu.append(undoMenuItem)
 
@@ -170,7 +169,7 @@ class Fenetre < Gtk::Window
         # Paramètres
         parametresMenuItem = Gtk::MenuItem.new(:label => "Paramètres", :use_underline => false)
         parametresMenuItem.signal_connect "activate" do
-        	newWindow = Parametres.new(@grille, @sousGrille, @partie)
+        	Parametres.new(@grille, @sousGrille, @partie)
         end
         optionMenu.add(parametresMenuItem)
 

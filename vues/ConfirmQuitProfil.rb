@@ -14,7 +14,7 @@ class ConfirmQuitProfil < QuitConfirm
 		retour = Gtk::Button.new(:label => "Retour")
 
 		#Redirection des boutons
-		oui.signal_connect "clicked" do |widget|
+		oui.signal_connect "clicked" do
 			if(partie.getTimer.exam==1)
 				partie.stopTemps
 			end
@@ -24,21 +24,21 @@ class ConfirmQuitProfil < QuitConfirm
 			else
 				hide
 				fenetre.hide
-				newWindow = MenuProfil.new
+				MenuProfil.new
 			end
 		end
 
-		non.signal_connect "clicked" do |widget|
+		non.signal_connect "clicked" do
 			if(destroy==1)
 				Gtk.main_quit
 			else
 				hide
 				fenetre.hide
-				newWindow = MenuProfil.new
+				MenuProfil.new
 			end
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 		end
 

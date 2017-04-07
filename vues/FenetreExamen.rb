@@ -12,7 +12,7 @@ class FenetreExamen < Jeu
 		super(partie, joueur)
 
 		signal_connect "delete_event" do
-			newWindow = ConfirmQuitProfil.new(@partie, self, 1)
+			ConfirmQuitProfil.new(@partie, self, 1)
 		end
 
 		@time = Gtk::Box.new(:vertical, 0)
@@ -23,11 +23,11 @@ class FenetreExamen < Jeu
 		@timer=Timer.new
 		@timer.start(@partie.getTimer.getAccumulated)
 
-		thr= Thread.new{
+		Thread.new do
 			while (sleep 0.2) do
 				tempsLabel.set_markup(@timer.tick)
 			end
-			}
+		end
 		tableMain.attach(@time, 0,9,0,1)
 	    show_all
 	end

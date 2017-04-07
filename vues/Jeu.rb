@@ -79,7 +79,7 @@ class Jeu < Gtk::Window
 	        # Quitter
 	        @quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
             @quitterMenuItem.signal_connect "activate" do
-            	newWindow = ConfirmQuitProfil.new(@partie, self, 0)
+            	ConfirmQuitProfil.new(@partie, self, 0)
             end
             @fileMenu.add(quitterMenuItem)
 
@@ -194,7 +194,7 @@ class Jeu < Gtk::Window
 	        # Paramètres
 	        parametresMenuItem = Gtk::MenuItem.new(:label => "Paramètres", :use_underline => false)
             parametresMenuItem.signal_connect "activate" do
-            	newWindow = Parametres.new(@grille, @sousGrille, @partie, @joueur)
+            	Parametres.new(@grille, @sousGrille, @partie, @joueur)
             end
             optionMenu.add(parametresMenuItem)
 

@@ -33,12 +33,12 @@ class APropos < WindowSudoku
 		retour.set_size_request(205,50)
 
 		#Redirection des boutons
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 			if(invite==1)
-				newWindow=Invite.new
+				Invite.new
 			else
-				newWindow=MenuProfil.new
+				MenuProfil.new
 			end
 		end
 

@@ -47,16 +47,16 @@ class Connexion < WindowSudoku
 		retour.set_size_request(102,50)
 
 		#Redirection des boutons
-		valider.signal_connect "clicked" do |widget|
+		valider.signal_connect "clicked" do
 			hide
 			Dir.chdir("./" + nomTree.selection.selected[0])
-			newWindow=MenuProfil.new
+			MenuProfil.new
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
 			Dir.chdir("../")
-			newWindow=Index.new
+			Index.new
 		end
 
 		#Placement des boutons et ajout dans la table

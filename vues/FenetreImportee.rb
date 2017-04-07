@@ -58,9 +58,9 @@ class FenetreImportee < Gtk::Window
             quitterMenuItem.signal_connect "activate" do
             	hide
             	if(@joueur!=nil)
-            		newWindow = MenuProfil.new
+            		MenuProfil.new
             	else
-            		newWindow = Invite.new
+            		Invite.new
             	end
             end
             fileMenu.add(quitterMenuItem)
@@ -87,13 +87,13 @@ class FenetreImportee < Gtk::Window
 		tableMain.attach(@cadreImportation , 5,9,1,9) # Aide
 		tableMain.attach(@boutons   , 0,9,9,10) # Boutons
 
-		@cadreImportation.getHintButton.signal_connect "clicked" do |widget|
+		@cadreImportation.getHintButton.signal_connect "clicked" do
 			if @grille.getPartie().getPlateau().importerGrille
 				hide
 				if(@joueur==nil)
-					newWindow=FenetreInvitee.new(@grille.getPartie)
+					FenetreInvitee.new(@grille.getPartie)
 				else
-					newWindow=FenetreApprentissage.new(@grille.getPartie, joueur)
+					FenetreApprentissage.new(@grille.getPartie, joueur)
 				end
 			else
 				@cadreImportation.setAideText("Erreur")
