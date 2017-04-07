@@ -36,7 +36,7 @@ class ChoixDifficulte < WindowSudoku
 		facile.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(3))
 			else
 				if(examen==1)
 					newWindow=FenetreExamen.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
@@ -48,7 +48,7 @@ class ChoixDifficulte < WindowSudoku
 		moyen.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(4))
 			else
 				if(examen==1)
 					newWindow=FenetreExamen.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
@@ -60,7 +60,7 @@ class ChoixDifficulte < WindowSudoku
 		difficile.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(5))
 			else
 				if(examen==1)
 					newWindow=FenetreExamen.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))

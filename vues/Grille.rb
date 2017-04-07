@@ -271,13 +271,24 @@ class Grille < Gtk::Table
 	end
 
 	def loadStyle()
-		@colorFocus = @joueur.getPreferences().colorFocus
-		@colorEquals = @joueur.getPreferences().colorEquals
-		@colorError = @joueur.getPreferences().colorError
-		@colorAide = @joueur.getPreferences().colorAide
-		@colorNeutral = @joueur.getPreferences().colorNeutral
-		@colorTextOriginal = @joueur.getPreferences().colorTextOriginal
-		@colorTextPlayer = @joueur.getPreferences().colorTextPlayer
+		if(@joueur!=nil)
+			@colorFocus = @joueur.getPreferences().colorFocus
+			@colorEquals = @joueur.getPreferences().colorEquals
+			@colorError = @joueur.getPreferences().colorError
+			@colorAide = @joueur.getPreferences().colorAide
+			@colorNeutral = @joueur.getPreferences().colorNeutral
+			@colorTextOriginal = @joueur.getPreferences().colorTextOriginal
+			@colorTextPlayer = @joueur.getPreferences().colorTextPlayer
+		else
+			@colorFocus = "#EFC42E"
+			@colorEquals = "#FFEC81"
+			@colorError = "#FF6060"
+			@colorAide = "#FFA749"
+			@colorNeutral = "#FFFFFF"
+			@colorTextOriginal ="#000000"
+			@colorTextPlayer = "#4169E1"
+		end
+
 	end
 	def setCadreImportation(cadreImportation)
 		@cadreImportation = cadreImportation
