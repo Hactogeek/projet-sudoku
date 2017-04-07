@@ -120,14 +120,14 @@ class Aide
 
 	#Resoud la grille
 	def resoudre()
-		@partie.getPlateau().each do |x,y,laCase|
+		@partie.getPlateau().each do |_x,_y,laCase|
 			laCase.setSolutionJoueur(laCase.getSolutionOriginale)
 		end
 	end
 
 	# Méthode qui remet la grille à l'état initial
 	def etatInitial
-		@partie.getPlateau().each do |x,y,laCase|
+		@partie.getPlateau().each do |_x,_y,laCase|
 			if(laCase.getOriginaleGrille == true)
 				laCase.setSolutionJoueur(laCase.getSolutionOriginale)
 			else
@@ -205,46 +205,45 @@ class Aide
 
 	end
 	
-		# Retourne une liste de case
-		def singleBox()
-			listeCase = Array.new
-			@partie.getPlateau().each do |x,y,laCase|
-				if (laCase.getSolutionJoueur() == nil)
-					for candidat in laCase.getCandidat().getListeCandidat
-						add = true
-						ligne = true
-						colonne = true
+	# Retourne une liste de case
+	def singleBox()
+		listeCase = Array.new
+		@partie.getPlateau().each do |x,y,laCase|
+			if (laCase.getSolutionJoueur() == nil)
+				for candidat in laCase.getCandidat().getListeCandidat
+					add = true
+					ligne = true
+					colonne = true
 
-						posX = posX-(x%3)
-						posY = posY-(y%3)
+					posX = posX-(x%3)
+					posY = posY-(y%3)
 
-						for n in (posX...posX+3)
-							for m in (posY...posY+3)
-								if @partie.getPlateau.getCase(Position.new(n,m)).getSolutionJoueur() == nil
-									if n == x
-										if ligne 
-											ligne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
-										end
-									elsif m == y
-										if colonne
-											colonne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
-										end
-									else
-										add = !(@partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat))
+					for n in (posX...posX+3)
+						for m in (posY...posY+3)
+							if @partie.getPlateau.getCase(Position.new(n,m)).getSolutionJoueur() == nil
+								if n == x
+									if ligne 
+										ligne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
 									end
+								elsif m == y
+									if colonne
+										colonne = @partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat)
+									end
+								else
+									add = !(@partie.getPlateau.getCase(Position.new(n,m)).getCandidat.include?(candidat))
 								end
-								break if add == false || (ligne == false && colonne == false)
 							end
 							break if add == false || (ligne == false && colonne == false)
 						end
+						break if add == false || (ligne == false && colonne == false)
+					end
 
-						if add 
-							if ligne
+					if add 
+						if ligne
 
-							elsif colonne
-
-							end
-						# Supprimer le candidat des autres cases de la ligne ou de la colonne
+						elsif colonne
+							# Supprimer le candidat des autres cases de la ligne ou de la colonne
+						end
 					end
 				end
 			end
@@ -263,11 +262,6 @@ class Aide
 	# Méthode qui applique la technique Interactions entre régions
 	# @return listePosistion
 	def interactionsEntreRegions
-		posListePresent = Array.new
-		posListeAbsent = Array.new
-		posRegion = Array.new
-		posRegionEnlever = Array.new
-		
 		# Pour chaque case
 		for x in (0...9)
 			for y in (0...9)
