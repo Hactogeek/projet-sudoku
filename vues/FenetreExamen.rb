@@ -8,8 +8,8 @@ class FenetreExamen < Jeu
 	# @sousGrille
 	# @grille
 
-	def initialize (partie)
-		super(partie)
+	def initialize (partie, joueur)
+		super(partie, joueur)
 
 		signal_connect "delete_event" do
 			newWindow = ConfirmQuitProfil.new(@partie, self, 1)
@@ -33,6 +33,6 @@ class FenetreExamen < Jeu
 	end
 
 	def examen?
-		return !(@partie.getTimer.elapsed==0)
+		return (@partie.getTimer.elapsed==0)
 	end
 end

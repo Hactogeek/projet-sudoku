@@ -10,7 +10,7 @@ class Jeu < Gtk::Window
 	# @grille
 	attr_reader :tableMain, :partie, :fileMenu, :sauvergarderMenuItem, :chargerMenuItem, :quitterMenuItem
 
-	def initialize (partie)
+	def initialize (partie,joueur)
 		super(Gtk::WindowType::TOPLEVEL)
 
 		# Property
@@ -23,10 +23,11 @@ class Jeu < Gtk::Window
 		# Initialisation des classe interface #
 		#=====================================#
 		@partie = partie
-		@grille = Grille.new(@partie)
+		@joueur=joueur
+		@grille = Grille.new(@partie, @joueur)
 		@sousGrille = SousGrille.new(@grille)
 		@cadreAide = CadreAide.new(@grille, @sousGrille)
-		@boutons = Boutons.new(@grille, @sousGrille) 
+		@boutons = Boutons.new(@grille, @sousGrille)
 
 		#==========================#
 		# Remplissage de la grille #
@@ -67,6 +68,9 @@ class Jeu < Gtk::Window
 	        @chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
 	        @chargerMenuItem.signal_connect "activate" do
 	        	chargement
+	        end
+	        if(!File.exist?("partie1.txt"))
+	        	@chargerMenuItem.sensitive=false
 	        end
 	        @fileMenu.append(chargerMenuItem)
 
@@ -131,6 +135,8 @@ class Jeu < Gtk::Window
 		    # Candidat possible
 		    candidatPossibleMenuItem = Gtk::MenuItem.new(:label => "Candidat possible", :use_underline => false)
 		    candidatPossibleMenuItem.signal_connect "activate" do
+		    	@grille.getPartie.getUndoRedo.addMemento
+		    	@grille.incNbAide(1)
 		    	@sousGrille.loadAllCandidats
 			end
 		    aideMenu.append(candidatPossibleMenuItem)
@@ -139,14 +145,17 @@ class Jeu < Gtk::Window
 		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
 		    verificationGrilleMenuItem.signal_connect "activate" do
 				@grille.colorCaseIncorrect()
+				@grille.incNbAide(1)
 			end
 		    aideMenu.append(verificationGrilleMenuItem)
 
 		    # resoudre
 		    resoudreGrilleMenuItem = Gtk::MenuItem.new(:label => "Resoudre la grille", :use_underline => false)
 		    resoudreGrilleMenuItem.signal_connect "activate" do
+		    	@grille.getPartie.getUndoRedo.addMemento
 				@partie.getAide().resoudre()
-				@grille.rafraichirGrille
+				@grille.incNbAide(10000)
+				@sousGrille.rafraichirGrille
 			end
 		    aideMenu.append(resoudreGrilleMenuItem)
 
@@ -154,7 +163,7 @@ class Jeu < Gtk::Window
 		    initialGrilleMenuItem = Gtk::MenuItem.new(:label => "Grille initiale", :use_underline => false)
 		    initialGrilleMenuItem.signal_connect "activate" do
 				@partie.getAide().etatInitial
-				@grille.rafraichirGrille			
+				@sousGrille.rafraichirGrille			
 		    end
 		    aideMenu.append(initialGrilleMenuItem)
 
@@ -183,7 +192,7 @@ class Jeu < Gtk::Window
 	        # Paramètres
 	        parametresMenuItem = Gtk::MenuItem.new(:label => "Paramètres", :use_underline => false)
             parametresMenuItem.signal_connect "activate" do
-            	newWindow = Parametres.new(@grille, @sousGrille, @partie)
+            	newWindow = Parametres.new(@grille, @sousGrille, @partie, @joueur)
             end
             optionMenu.add(parametresMenuItem)
 

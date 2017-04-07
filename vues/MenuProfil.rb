@@ -56,17 +56,20 @@ class MenuProfil < WindowSudoku
 		end
 		chargerPartie.signal_connect "clicked" do |widget|
 			hide
-			newWindow=FenetreExamen.new(Partie.nouvelle(3))
+			newWindow=FenetreExamen.new(Partie.nouvelle(3), Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 			newWindow.chargement
 			if(!newWindow.examen?)
 				newWindow.hide
-				newWindow2=FenetreApprentissage.new(Partie.nouvelle(3))
+				newWindow2=FenetreApprentissage.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]) )
 				newWindow2.chargement
 			end
 		end
 		statistique.signal_connect "clicked" do |widget|
+			hide
+			newWindow=Statistiques.new(Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
 		parametres.signal_connect "clicked" do |widget|
+			newWindow = Parametres.new(nil, nil,nil, Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 		end
 		methodeRes.signal_connect "clicked" do |widget|
 			hide

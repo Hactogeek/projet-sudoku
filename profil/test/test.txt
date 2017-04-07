@@ -1,0 +1,1 @@
+o:Joueur:@tabScore[[I"07 April 2017:ETi:@preferenceso:Preferences:@colorFocusI"#EFC42E;T:@colorEqualsI"#FFEC81;T:@colorErrorI"#FF6060;T:@colorAideI"#FFA749;T:@colorNeutralI"#fce94f;T:@colorTextOriginalI"#000000;T:@colorTextPlayerI"#4169E1;T:@pseudoI"	test;T

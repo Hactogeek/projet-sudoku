@@ -71,8 +71,8 @@ class Aide
 
 					if (@partie.getPlateau.absentRegion(n,x,y) && !@partie.getPlateau().absentLigne(n, lig1) && !@partie.getPlateau().absentLigne(n, lig2) && !@partie.getPlateau().absentColonne(n, col1) && !@partie.getPlateau().absentColonne(n, col2))
 						if n == @partie.getPlateau.getCase(Position.new(x,y)).getSolutionOriginale
-							print "AJOUTER", x,"-",y,"\n"
-							print "\t", lig1,"/",lig2,"-",col1,"/",col2,"\n"
+							# print "AJOUTER", x,"-",y,"\n"
+							# print "\t", lig1,"/",lig2,"-",col1,"/",col2,"\n"
 							listeCase.push(Position.new(x,y))
 						else
 							print "Problème !"

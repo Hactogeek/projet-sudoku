@@ -8,8 +8,8 @@ class FenetreInvitee < Jeu
 	# @sousGrille
 	# @grille
 
-	def initialize (partie)
-		super(partie)
+	def initialize (partie, joueur)
+		super(partie, joueur)
 		signal_connect "delete_event" do
 			newWindow = ConfirmQuitInvite.new
 		end

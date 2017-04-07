@@ -8,15 +8,18 @@ class Parametres < Gtk::Window
 	@sousGrille
 	@partie
 
-	def initialize(grille, sousGrille, partie)
+	def initialize(grille, sousGrille, partie, joueur)
 		super(Gtk::WindowType::TOPLEVEL)
 		signal_connect "destroy" do
 			hide()
 		end
 
-		@grille = grille
-		@sousGrille = sousGrille
-		@partie = partie
+		if(grille!=nil)
+			@grille = grille
+			@sousGrille = sousGrille
+			@partie = partie
+		end
+		@joueur=joueur
 
 		# Property
 		set_title "Paramètres"
@@ -26,14 +29,16 @@ class Parametres < Gtk::Window
 		table = Gtk::Table.new(10,2)
 		table.attach(Gtk::Label.new().set_markup("<span font-weight=\"bold\">Choisissez votre thème:</span>"), 0,2 ,0 ,1)
 		
-		colorFocus = @partie.getPreferences().colorFocus
-		colorEquals =  @partie.getPreferences().colorEquals
-		colorError = @partie.getPreferences().colorError
-		colorAide = @partie.getPreferences().colorAide
-		colorNeutral = @partie.getPreferences().colorNeutral
-		colorTextOriginal = @partie.getPreferences().colorTextOriginal
-		colorTextPlayer = @partie.getPreferences().colorTextPlayer
-		colorTextCandidat = @sousGrille.colorCandidat
+		colorFocus = @joueur.getPreferences().colorFocus
+		colorEquals =  @joueur.getPreferences().colorEquals
+		colorError = @joueur.getPreferences().colorError
+		colorAide = @joueur.getPreferences().colorAide
+		colorNeutral = @joueur.getPreferences().colorNeutral
+		colorTextOriginal = @joueur.getPreferences().colorTextOriginal
+		colorTextPlayer = @joueur.getPreferences().colorTextPlayer
+		if(grille!=nil)
+			colorTextCandidat = @sousGrille.colorCandidat
+		end
 
 		labelFocus = Gtk::Label.new("Case Focus :")
 		labelEquals = Gtk::Label.new("Case Equivalente:")
@@ -92,23 +97,27 @@ class Parametres < Gtk::Window
 		}
 		table.attach(labelTextPlayer, 0,1,7,8)
 		table.attach(colorButtonTextPlayer, 1,2,7,8)
-
-		colorButtonTextCandidat = Gtk::ColorButton.new(Gdk::Color.parse(colorTextCandidat))
-		colorButtonTextCandidat.signal_connect("color-set"){
-			colorTextCandidat = colorButtonTextCandidat.color.to_s[0..2] + colorButtonTextCandidat.color.to_s[5..6] + colorButtonTextCandidat.color.to_s[9..10]
-		}
+		if(grille!=nil)
+			colorButtonTextCandidat = Gtk::ColorButton.new(Gdk::Color.parse(colorTextCandidat))
+			colorButtonTextCandidat.signal_connect("color-set"){
+				colorTextCandidat = colorButtonTextCandidat.color.to_s[0..2] + colorButtonTextCandidat.color.to_s[5..6] + colorButtonTextCandidat.color.to_s[9..10]
+			}
+			table.attach(colorButtonTextCandidat, 1,2,8,9)
+		end
 		table.attach(labelTextCandidat, 0,1,8,9)
-		table.attach(colorButtonTextCandidat, 1,2,8,9)
 
 
-		buttonSave = Gtk::Button.new(:label =>"Sauvergarder", :use_underline => nil, :stock_id => nil)
+		buttonSave = Gtk::Button.new(:label =>"Sauvegarder", :use_underline => nil, :stock_id => nil)
 		buttonSave.signal_connect("clicked"){
 			#@grille.setColorStyle(colorFocus, colorEquals, colorError, colorNeutral, colorTextOriginal, colorTextPlayer)
-			@partie.getPreferences().setColorStyle(colorFocus, colorEquals, colorError, colorAide, colorNeutral, colorTextOriginal, colorTextPlayer)
-			@grille.loadStyle()
-			@grille.resetColorOnAll()
-			@grille.rafraichirGrille()
-			@sousGrille.setColorCandidat(colorTextCandidat)
+			@joueur.getPreferences().setColorStyle(colorFocus, colorEquals, colorError, colorAide, colorNeutral, colorTextOriginal, colorTextPlayer)
+			Sauvegarde.saveJoueur(joueur, joueur.getPseudo)
+			if(grille!=nil)
+				@grille.loadStyle()
+				@grille.resetColorOnAll()
+				@grille.rafraichirGrille()
+				@sousGrille.setColorCandidat(colorTextCandidat)
+			end
 			hide()
 		}
 		table.attach(buttonSave, 0,2,9,10)

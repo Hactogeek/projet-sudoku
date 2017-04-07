@@ -36,36 +36,36 @@ class ChoixDifficulte < WindowSudoku
 		facile.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(3))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(3))
+					newWindow=FenetreExamen.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(3))
+					newWindow=FenetreApprentissage.new(Partie.nouvelle(3),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end
 		moyen.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(4))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(4))
+					newWindow=FenetreExamen.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(4))
+					newWindow=FenetreApprentissage.new(Partie.nouvelle(4),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end
 		difficile.signal_connect "clicked" do |widget|
 			hide
 			if(invite==1)
-				newWindow=FenetreInvitee.new(Partie.nouvelle(5))
+				newWindow=FenetreInvitee.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 			else
 				if(examen==1)
-					newWindow=FenetreExamen.new(Partie.nouvelle(5))
+					newWindow=FenetreExamen.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				else
-					newWindow=FenetreApprentissage.new(Partie.nouvelle(5))
+					newWindow=FenetreApprentissage.new(Partie.nouvelle(5),Sauvegarde.loadJoueur(File.split(Dir.getwd)[-1]))
 				end
 			end
 		end

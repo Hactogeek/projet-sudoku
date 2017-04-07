@@ -595,7 +595,7 @@ class Plateau
 
 		grille = grille.pop
 
-		print grille
+		#print grille
 		
 		grille.split("").map(&:to_i)
 
@@ -604,8 +604,8 @@ class Plateau
 				@grid[x][y].setSolutionOriginale(grille[x*9+y])
 			end
 		end
-		print "\n", self
-		print self.printOri
+		# print "\n", self
+		# print self.printOri
 		return true
 	end
 

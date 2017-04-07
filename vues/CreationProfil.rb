@@ -34,12 +34,10 @@ class CreationProfil < WindowSudoku
 			else
 				joueur=Joueur.creer(name.text)
 				if(joueur.creerProfil)
-				confirm.set_text("Ce profil existe déjà. \nVeuillez en choisir un autre.")
+					confirm.set_text("Ce profil existe déjà. \nVeuillez en choisir un autre.")
 				else
-					# Ca marche pas ça. C'est nul
-					# confirm.set_text("La création du profil est un succès")
-					# sleep(3)
 					hide
+					Sauvegarde.saveJoueur(joueur,joueur.getPseudo)
 					if(invite!=1 && invite!=0)
 						newWindow=FenetreApprentissage.new(invite)
 					else

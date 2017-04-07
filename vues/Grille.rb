@@ -17,12 +17,13 @@ class Grille < Gtk::Table
 
 	attr_reader :colorFocus  , :colorEquals, :colorError, :colorNeutral, :colorTextOriginal, :colorTextPlayer
 
-	def initialize (partie)
+	def initialize (partie, joueur)
 		super(9, 9, true)
 		set_margin_left(1)
 		@partie = partie
+		@nbAide=0
+		@joueur=joueur
 		loadStyle()
-
 	end
 
 	def setCaseValeur(x, y, valeur)
@@ -44,7 +45,15 @@ class Grille < Gtk::Table
 				@focus.children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{valeur}</span>")
 
 				if(@partie.getPlateau.complete?)
-					newWindow=FinJeu.new
+					score=0
+					if(@partie.getTimer.elapsed==0)
+						score=(1000*@partie.getDifficulte)/@partie.getTimer.getTime-@nbAide*10
+						#puts("SCORE : " + ((1000*@partie.getDifficulte)/@partie.getTimer.getTime).to_i.to_s)
+						#Ajout du score au profil joueur
+						@joueur.ajoutScore([Time.now.strftime("%d %B %Y"), score.to_i])
+						Sauvegarde.saveJoueur(@joueur,@joueur.getPseudo)
+					end
+					newWindow=FinJeu.new(score)
 					# @cadreAide.setAide("Félicitations! Vous avez résolu le sudoku.")
 					# @cadreAide 
 				end
@@ -61,6 +70,10 @@ class Grille < Gtk::Table
 				return
 			end
 		end
+	end
+
+	def incNbAide(i)
+		@nbAide+=i
 	end
 
 	def setCouleurSurFocus(couleur) # change couleur du focus
@@ -202,7 +215,7 @@ class Grille < Gtk::Table
 
 	def rafraichirGrille()
 		@partie.getPlateau().each { |x,y,val|
-			print(x , " " , y)  
+			#print(x , " " , y)  
 			
 			if(@partie.getPlateau().getCase(Position.new(x,y)).getOriginaleGrille == false)
 				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
@@ -258,13 +271,13 @@ class Grille < Gtk::Table
 	end
 
 	def loadStyle()
-		@colorFocus = @partie.getPreferences().colorFocus
-		@colorEquals = @partie.getPreferences().colorEquals
-		@colorError = @partie.getPreferences().colorError
-		@colorAide = @partie.getPreferences().colorAide
-		@colorNeutral = @partie.getPreferences().colorNeutral
-		@colorTextOriginal = @partie.getPreferences().colorTextOriginal
-		@colorTextPlayer = @partie.getPreferences().colorTextPlayer
+		@colorFocus = @joueur.getPreferences().colorFocus
+		@colorEquals = @joueur.getPreferences().colorEquals
+		@colorError = @joueur.getPreferences().colorError
+		@colorAide = @joueur.getPreferences().colorAide
+		@colorNeutral = @joueur.getPreferences().colorNeutral
+		@colorTextOriginal = @joueur.getPreferences().colorTextOriginal
+		@colorTextPlayer = @joueur.getPreferences().colorTextPlayer
 	end
 	def setCadreImportation(cadreImportation)
 		@cadreImportation = cadreImportation

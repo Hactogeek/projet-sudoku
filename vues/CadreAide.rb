@@ -43,7 +43,9 @@ class CadreAide < Gtk::Table
 	end
 
 	def startHint()
+		@grille.incNbAide(1)
 		pos=@grille.getPartie.getAide.coupSuivant
+		#puts("StartHINT : " + pos[0].to_s)
 		if(pos[0]!=0)
 			if(pos[0]==1 || pos[0]==3 || pos[0]==4)
 				i=getPos(pos)[0]
@@ -52,7 +54,7 @@ class CadreAide < Gtk::Table
 					if(pos[1][2]==0)
 						setAideText("Regardez ce que vous pouvez faire dans cette région.")
 						aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
-					elsif(pos[1][2]==0)
+					elsif(pos[1][2]==1)
 						setAideText("Regardez ce que vous pouvez faire dans cette ligne.")
 						aColorer=@grille.getPartie.getPlateau.getLigne(i)
 					else
@@ -68,6 +70,8 @@ class CadreAide < Gtk::Table
 				end
 			elsif(pos[0]==2)
 				setAideText("Soit vous n'avez pas mis de candidats, soit il y en qui sont faux")
+			elsif(pos[0]==5)
+				setAideText("REGION INTERACTION")
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
@@ -109,6 +113,7 @@ class CadreAide < Gtk::Table
 			remove(@moreButton)
 			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
 			attach(@moreButton2, 3,5 ,0,1)
+			#puts("morehint : " + pos[0].to_s)
 			@moreButton2.signal_connect "clicked" do |widget|
 				moreHint2(pos)
 			end
@@ -130,10 +135,21 @@ class CadreAide < Gtk::Table
 
 	def moreHint2(pos)
 		if(pos[0]==1 || pos[0]==3 || pos[0]==4)
-			setAideText("Voici la solution")
+			if(pos[0]==1)
+				methode="Chiffre caché"
+			elsif(pos[0]==3)
+				methode="Candidat unique"
+			elsif(pos[0]==3)
+				methode="Un seul candidat"
+			end
+				
+			setAideText("Voici la solution trouvée grâce à la méthode :\n" + methode)
+			#puts("morehint2 : " + pos[0].to_s)
 			i=getPos(pos)[0]
 			j=getPos(pos)[1]
-			@grille.setValeurSurFocus(@grille.getPartie.getPlateau.getCaseOriginale(Position.new(i,j)))
+			soluce=@grille.getPartie.getPlateau.getCaseOriginale(Position.new(i,j))
+			@grille.setValeurSurFocus(soluce)
+			@grille.getPartie.getPlateau.enleverCandidat(getPos(pos)[2], soluce)
 			@sousGrille.rafraichirGrille
 
 
@@ -213,13 +229,16 @@ class CadreAide < Gtk::Table
 	end
 
 	def getPos(pos)
+		#puts("getPOS : " + pos[0].to_s)
 		if(pos[0]==3)
+			a=pos[1][0]
 			i=pos[1][0].getX
 			j=pos[1][0].getY
 		else
+			a=pos[1]
 			i=pos[1].getX
 			j=pos[1].getY
 		end
-		return i,j
+		return i,j,a
 	end
 end

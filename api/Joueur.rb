@@ -11,14 +11,12 @@ class Joueur
 	#pseudo du joueur
 	@pseudo
 	#identifiant du joueur
-	@@identifiant=0
 	@tabScore
+	@preferences
 	
 
-	attr_accessor:tabScore
 	attr_accessor:d
 
-	attr_reader :pseudo
 	private_class_method :new
 
 	# méthode de création d'un joueur
@@ -28,11 +26,9 @@ class Joueur
 		new(unPseudo)
 	end
 	def initialize(unPseudo)
+		@tabScore=Array.new
+		@preferences = Preferences.new
 		@pseudo=unPseudo
-		@@identifiant+=1
-		@tabScore=Array.new(3){ |i|
-			i=0
-		}	
 		#@d=Dir.creer(unPseudo)
 
 		#@d.semettreDansProfil(unPseudo)
@@ -66,11 +62,22 @@ class Joueur
 	# * [Paramètre :]
 	# 				unScore score à ajouter
 	# 				niveauDifficulte niveau de difficulté de la partie où a été réalisé le score
-	def ajoutScore(unScore, niveauDifficulte)
-		indice=niveauDifficulte-2
-		if(@tabScore[indice] < unScore)
-			@tabScore[indice]=unScore
+	def ajoutScore(unScore)
+		if(unScore!=0)
+			@tabScore.push(unScore)
 		end
+	end
+
+	def getTabScore
+		return @tabScore
+	end
+
+	def afficherScore
+		score=""
+		@tabScore.each do |x|
+			score+=x[0].to_s+" : "+x[1].to_s+"\n"
+		end
+		return score
 	end
 
 	# méthode permettant de donner un score du joueur 
@@ -114,6 +121,9 @@ class Joueur
 		return self.pseudo==unJoueur.pseudo
 	end	
 
+	def getPreferences
+		return @preferences
+	end
 end
 
 

@@ -2,8 +2,8 @@ require 'gtk3'
 
 class FinJeu < Gtk::Window
 
-	def initialize
-		super
+	def initialize(score)
+		super()
 
 		# signal_connect "destroy" do
 		# 	Gtk.main_quit
@@ -17,7 +17,11 @@ class FinJeu < Gtk::Window
 		set_default_size(919, 602)
 
 		#Création du label
-		msgLabel = Gtk::Label.new("Félicitation !")
+		if(score==0)
+			msgLabel = Gtk::Label.new("Félicitation !")
+		else
+			msgLabel = Gtk::Label.new("Félicitation ! Vous avez fait un score de : " + score.to_i.to_s)
+		end
 
 
 		#Création de la table contenant les boutons

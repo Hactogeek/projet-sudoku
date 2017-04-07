@@ -63,6 +63,12 @@ class Timer
 		newtime = "#{h}:#{m}:#{s}"
 	end
 
+	def getTime
+		@elapsed = Time.now - @start
+		time=@accumulated+@elapsed
+		return time
+	end
+
 	#  Méthode qui renvoie accumulated
 	def getAccumulated
 		return @accumulated
