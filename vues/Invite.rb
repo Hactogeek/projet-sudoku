@@ -39,7 +39,7 @@ class Invite < WindowSudoku
 		end
 		importerGrille.signal_connect "clicked" do |widget|
 			hide
-			newWindow=FenetreImportee.new
+			newWindow=FenetreImportee.new(nil)
 		end
 		creerProfil.signal_connect "clicked" do |widget|
 			hide
