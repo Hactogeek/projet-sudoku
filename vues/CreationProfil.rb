@@ -39,7 +39,7 @@ class CreationProfil < WindowSudoku
 					hide
 					Sauvegarde.saveJoueur(joueur,joueur.getPseudo)
 					if(invite!=1 && invite!=0)
-						newWindow=FenetreApprentissage.new(invite)
+						newWindow=FenetreApprentissage.new(invite, Sauvegarde.loadJoueur(joueur.getPseudo))
 					else
 						newWindow=MenuProfil.new
 					end

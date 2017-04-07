@@ -7,6 +7,9 @@ class SaveInvite < Gtk::Window
 	def initialize(partie, fenetre)
 		super()
 
+		#Création de la table contenant les boutons
+		tableMain = Gtk::Table.new(10, 10)
+
 		begin
 			header = Gtk::EventBox.new().add(Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/header.png", :width => 205, :heigth => 200)))
 		rescue
@@ -36,9 +39,6 @@ class SaveInvite < Gtk::Window
 		retour = Gtk::Button.new(:label => "Retour")
 		retour.override_background_color(:normal, @colorNeutral)
 		retour.set_size_request(205,50)
-
-		#Création de la table contenant les boutons
-		tableMain = Gtk::Table.new(10, 10)
 
 		#Redirection des boutons
 		creerProfil.signal_connect "clicked" do |widget|

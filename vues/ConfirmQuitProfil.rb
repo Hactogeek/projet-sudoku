@@ -42,7 +42,7 @@ class ConfirmQuitProfil < QuitConfirm
 			hide
 		end
 
-		tableMain.attach(retour, 3, 5, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
+		#tableMain.attach(retour, 3, 5, 5, 6, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 0,0)
 
 		show_all
 	end
