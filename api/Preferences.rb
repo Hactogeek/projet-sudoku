@@ -1,13 +1,5 @@
 class Preferences
-	@colorFocus
-	@colorEquals
-	@colorError
-	@colorAide
-	@colorNeutral
-	@colorTextOriginal
-	@colorTextPlayer
-
-	attr_reader :colorFocus  , :colorEquals, :colorError, :colorAide, :colorNeutral, :colorTextOriginal, :colorTextPlayer
+	attr_reader :colorFocus , :colorEquals, :colorError, :colorAide, :colorNeutral, :colorTextOriginal, :colorTextPlayer
 
 	def initialize()
 		@colorFocus = "#EFC42E"

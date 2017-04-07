@@ -28,19 +28,19 @@ class ChoixMode < WindowSudoku
 		retour.set_size_request(205,50)
 
 		#Redirection des boutons
-		apprentissage.signal_connect "clicked" do |widget|
+		apprentissage.signal_connect "clicked" do
 			hide
-			newWindow=ChoixDifficulte.new(0, 0)
+			ChoixDifficulte.new(0, 0)
 		end
 
-		examen.signal_connect "clicked" do |widget|
+		examen.signal_connect "clicked" do
 			hide
-			newWindow=ChoixDifficulte.new(0, 1)
+			ChoixDifficulte.new(0, 1)
 		end
 
-		retour.signal_connect "clicked" do |widget|
+		retour.signal_connect "clicked" do
 			hide
-			newWindow=MenuProfil.new
+			MenuProfil.new
 		end
 
 		#Placement des boutons et ajout dans la table

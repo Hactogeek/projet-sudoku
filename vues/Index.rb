@@ -26,19 +26,19 @@ class Index < WindowSudoku
 		sessionInvite.set_size_request(205,50)
 
 		#Redirection des boutons
-		seConnecter.signal_connect "clicked" do |widget|
+		seConnecter.signal_connect "clicked" do
 			hide
 			Dir.chdir(Dir.pwd+"/profil")
-			newWindow=Connexion.new
+			Connexion.new
 		end
-		creerProfil.signal_connect "clicked" do |widget|
+		creerProfil.signal_connect "clicked" do
 			hide
-			newWindow=CreationProfil.new(0,nil)
+			CreationProfil.new(0,nil)
 		end
-		sessionInvite.signal_connect "clicked" do |widget|
+		sessionInvite.signal_connect "clicked" do
 			hide
 			#Dir.chdir(Dir.pwd+"/profil/Invite")
-			newWindow=Invite.new
+			Invite.new
 		end
 
 		tableMain.attach(seConnecter, 0, 10, 3, 5, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
