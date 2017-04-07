@@ -18,12 +18,17 @@ class Timer
 	#Temps du timer
 	@time
 
-	attr_reader :accumulated, :elapsed
+	attr_reader :accumulated, :elapsed, :exam
+
+	def initialize
+		@exam=0
+	end
 
 	# Méthode  d'initialisation et de lancement du timer
 	# * [Paramètre :]
 	# 				secStart le temps de l'initialisation que l'on souhaite pour l'amorçage du Timer en seconde
 	def start (secStart)
+		@exam=1
 		@accumulated = secStart
 		@elapsed = 0
 		@start = Time.now

@@ -33,6 +33,6 @@ class FenetreExamen < Jeu
 	end
 
 	def examen?
-		return (@partie.getTimer.elapsed==0)
+		return (@partie.getTimer.exam==1)
 	end
 end

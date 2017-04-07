@@ -59,7 +59,9 @@ class Jeu < Gtk::Window
 	        # Sauvegarder
 	        @sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
 	        @sauvergarderMenuItem.signal_connect "activate" do
-	        	@partie.stopTemps
+	        	if(@partie.getTimer.exam==1)
+	        		@partie.stopTemps
+	        	end
 	        	Sauvegarde.savePartie(@partie,"partie1")
 	        end
 	        @fileMenu.append(sauvergarderMenuItem)
@@ -226,8 +228,8 @@ class Jeu < Gtk::Window
 
 	def chargement
 		@partie=Sauvegarde.loadPartie("partie1")
-		@partie.lanceTemps(@partie.getTimer.getAccumulated)
-		if(@timer!=nil)
+		if(@partie.getTimer.exam==1)
+			@partie.lanceTemps(@partie.getTimer.getAccumulated)
         	@timer.start(@partie.getTimer.getAccumulated)
         end
         @grille.setPartie(@partie)

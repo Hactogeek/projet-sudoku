@@ -15,7 +15,9 @@ class ConfirmQuitProfil < QuitConfirm
 
 		#Redirection des boutons
 		oui.signal_connect "clicked" do |widget|
-			partie.stopTemps
+			if(partie.getTimer.exam==1)
+				partie.stopTemps
+			end
 			Sauvegarde.savePartie(partie,"partie1")
 			if(destroy==1)
 				Gtk.main_quit
