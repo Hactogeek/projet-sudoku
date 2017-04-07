@@ -8,16 +8,6 @@
 #
 
 class Timer
-
-	#Le temps accumulé  (seconde)
-	@accumulated
-	#Le temps écoulé entre t0 et t1
-	@elapsed
-	#Variable du temps
-	@start
-	#Temps du timer
-	@time
-
 	attr_reader :accumulated, :elapsed, :exam
 
 	def initialize

@@ -40,10 +40,9 @@ class Partie
 		if @plateau.complete?
 			print("La grille est complete")
 		end
-
 	end
 
- 	def lanceTemps(init)
+	def lanceTemps(init)
 		@timer.start(init)
 	end
 
@@ -101,6 +100,7 @@ class Partie
 
 	#nomPartie est le nom du fichier à charger.
 	def Partie.loadSave(nomPartie)
+		
 		return Marshal.load  File.open(nomPartie+'.txt', 'rb').read
 	end
 

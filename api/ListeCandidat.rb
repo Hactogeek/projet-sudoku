@@ -103,7 +103,7 @@ class ListeCandidat
 	end
 end
 
-liste = ListeCandidat.creer()
+# liste = ListeCandidat.creer()
 
 
 
