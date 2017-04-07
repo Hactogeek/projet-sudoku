@@ -4,18 +4,7 @@ Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
 
 class Grille < Gtk::Table
-	@focus # case actuellement selectionné
-	@partie
-	@cadreAide
-	@colorFocus
-	@colorEquals
-	@colorError
-	@colorAide
-	@colorNeutral
-	@colorTextOriginal
-	@colorTextPlayer
-
-	attr_reader :colorFocus  , :colorEquals, :colorError, :colorNeutral, :colorTextOriginal, :colorTextPlayer
+	attr_reader :colorFocus, :colorEquals, :colorError, :colorNeutral, :colorTextOriginal, :colorTextPlayer
 
 	def initialize (partie, joueur)
 		super(9, 9, true)
@@ -53,7 +42,7 @@ class Grille < Gtk::Table
 						@joueur.ajoutScore([Time.now.strftime("%d %B %Y"), score.to_i])
 						Sauvegarde.saveJoueur(@joueur,@joueur.getPseudo)
 					end
-					newWindow=FinJeu.new(score)
+					FinJeu.new(score)
 					# @cadreAide.setAide("Félicitations! Vous avez résolu le sudoku.")
 					# @cadreAide 
 				end
@@ -76,32 +65,28 @@ class Grille < Gtk::Table
 		@nbAide+=i
 	end
 
-	def setCouleurSurFocus(couleur) # change couleur du focus
+	def setCouleurSurFocus() # change couleur du focus
 		if (@focus)
 			css=<<-EOT
-	   		#cell{
-	      	background: #{@colorFocus};
-	    	}
-	    	EOT
-	    	css_provider = Gtk::CssProvider.new
-	    	css_provider.load :data=>css
+			#cell{background: #{@colorFocus};}
+			EOT
+			css_provider = Gtk::CssProvider.new
+			css_provider.load :data=>css
 			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
 	end
 
-	def setColorOnValue(value, couleur)
+	def setColorOnValue(value)
 		if (value == "")
 			return
 		end
 		for i in 0..self.children().size()-1
 			if (self.children()[i].children().first().text == value)
 				css=<<-EOT
-		   		#cell{
-		      	background: #{@colorEquals};
-		    	}
-		    	EOT
-		    	css_provider = Gtk::CssProvider.new
-		    	css_provider.load :data=>css
+				#cell{background: #{@colorEquals};}
+				EOT
+				css_provider = Gtk::CssProvider.new
+				css_provider.load :data=>css
 				self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 			end
 		end
@@ -110,15 +95,13 @@ class Grille < Gtk::Table
 	def resetColorOnAll()
 		for i in 0..self.children().size()-1
 			css=<<-EOT
-	   		#cell{
-	      	background: #{@colorNeutral};
-	    	}
-	    	EOT
-	    	css_provider = Gtk::CssProvider.new
-	    	css_provider.load :data=>css
+			#cell{background: #{@colorNeutral};}
+			EOT
+			css_provider = Gtk::CssProvider.new
+			css_provider.load :data=>css
 			self.children()[i].style_context.add_provider css_provider,GLib::MAXUINT
 		end
-		setCouleurSurFocus(@colorFocus)
+		setCouleurSurFocus()
 	end
 
 	def colorCaseResolvable()
@@ -166,38 +149,32 @@ class Grille < Gtk::Table
 	end		
 
 	def resetCouleurSurFocus() # change couleur du focus
-		if (@focus)
+		if (@focus) 
 			css=<<-EOT
-	   		#cell{
-	      	background: #{@colorNeutral};
-	    	}
-	    	EOT
-	    	css_provider = Gtk::CssProvider.new
-	    	css_provider.load :data=>css
+			#cell{background: #{@colorNeutral};}
+			EOT
+			css_provider = Gtk::CssProvider.new
+			css_provider.load :data=>css
 			@focus.style_context.add_provider css_provider,GLib::MAXUINT
 		end
 	end
 
 	def setCouleurCase(x, y, couleur)
 		css=<<-EOT
-		#cell{
-		background: #{couleur};
-     	}
-     	EOT
-     	css_provider = Gtk::CssProvider.new
-     	css_provider.load :data=>css
-     	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
+		#cell{background: #{couleur};}
+		EOT
+		css_provider = Gtk::CssProvider.new
+		css_provider.load :data=>css
+		self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
 	end
 
 	def setCouleurAideCase(x, y)
 		css=<<-EOT
-		#cell{
-		background: #{@colorAide};
-     	}
-     	EOT
-     	css_provider = Gtk::CssProvider.new
-     	css_provider.load :data=>css
-     	self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
+		#cell{background: #{@colorAide};}
+		EOT
+		css_provider = Gtk::CssProvider.new
+		css_provider.load :data=>css
+		self.children()[81 - ((x+1)+((y)*9))].style_context.add_provider css_provider,GLib::MAXUINT
 	end
 
 
@@ -209,7 +186,7 @@ class Grille < Gtk::Table
 		return Position.new(i%9,i/9)
 	end
 
-	def setCoordFocus(position)
+	def setCoordFocus()
 		@focus
 	end
 
@@ -219,10 +196,10 @@ class Grille < Gtk::Table
 			
 			if(@partie.getPlateau().getCase(Position.new(x,y)).getOriginaleGrille == false)
 				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextPlayer}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
-	    	else
-	    		children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextOriginal}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
-	    	end
-	    }
+			else
+				children()[81 - ((x+1)+((y)*9))].children().first().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextOriginal}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>")
+			end
+		}
 	end
 
 	def remplirGrille()
@@ -233,15 +210,15 @@ class Grille < Gtk::Table
 				resetCouleurSurFocus()
 				@focus = widget
 				resetColorOnAll()
-				setColorOnValue(widget.children().first().text, @colorEquals)
-				setCouleurSurFocus(@colorFocus)
+				setColorOnValue(widget.children().first().text)
+				setCouleurSurFocus()
 			end
 			attach(btn, y, y+1, x, x+1, Gtk::AttachOptions::EXPAND, Gtk::AttachOptions::EXPAND, 1,0)
 			btn.add(Gtk::Label.new().set_markup("<span size=\"x-large\" foreground=\"#{@colorTextOriginal}\" font-weight=\"bold\">#{val.getSolutionJoueur}</span>"))
 			btn.set_size_request(46,46)
 			btn.set_name "cell"
-	    }
-	   	resetColorOnAll()
+		}
+		resetColorOnAll()
 	end
 
 	def getPartie()
@@ -251,8 +228,8 @@ class Grille < Gtk::Table
 	def setPartie(partie)
 		@partie=partie
 		loadStyle
-        resetColorOnAll
-    	rafraichirGrille
+		resetColorOnAll
+		rafraichirGrille
 	end
 
 	def setCadreAide(cadreAide)
