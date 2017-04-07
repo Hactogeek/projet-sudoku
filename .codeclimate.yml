@@ -1,0 +1,11 @@
+ratings:
+  paths:
+  - "**.rb"
+exclude_paths:
+    - "**.css"
+    - "**.php"
+    - "**.js"
+    - "**.inc"
+    - "**.jsx"
+    - "**.module"
+    - "**.py"
