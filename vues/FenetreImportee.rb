@@ -56,6 +56,7 @@ class FenetreImportee < Gtk::Window
 	        # Quitter
 	        quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
             quitterMenuItem.signal_connect "activate" do
+            	hide
             	newWindow = MenuProfil.new
             end
             fileMenu.add(quitterMenuItem)
