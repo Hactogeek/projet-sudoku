@@ -17,8 +17,7 @@ class Sauvegarde
 	#
 	# * [Retourne :]
 	# 				La partie
-	def self.loadPartie(nomPartie)
-
+	def self.loadPartie nomPartie
 		return Marshal.load  File.open(nomPartie + '.txt', 'rb').read
 	end
 
@@ -40,8 +39,7 @@ class Sauvegarde
 	end
 
 	# Méthode qui sauvegarde un profil
-	def self.loadJoueur(nomJoueur)
-		
+	def self.loadJoueur nomJoueur 
 		return Marshal.load  File.open(nomJoueur + '.txt', 'rb').read
 	end
 end
