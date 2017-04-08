@@ -99,8 +99,7 @@ class Partie
 	end
 
 	#nomPartie est le nom du fichier à charger.
-	def Partie.loadSave(nomPartie)
-		
+	def self.loadSave(nomPartie)
 		return Marshal.load  File.open(nomPartie+'.txt', 'rb').read
 	end
 

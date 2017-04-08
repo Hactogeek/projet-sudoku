@@ -35,14 +35,14 @@ class Jeu < Gtk::Window
 		if(@partie.estVide?)
 			@partie.creerPartie
 		end
-	    @sousGrille.remplirGrille
+		@sousGrille.remplirGrille
 
 		#==========#
 		# Niveau 1 #
 		#==========#
 
 		vboxMain = Gtk::Box.new(:vertical, 0) # Menu + Table pour Grille, Aide et bouton
-	    add(vboxMain)
+		add(vboxMain)
 
 		#=========================#  Note: Menu = Groupe de MenuItem une fois définie un submenu d'un autres MenuItem qui sert de titre
 		# Creation Menu 		  #  Exemple:  Fichier [Menu: (Nouveau, Sauvegarder, ...)]
@@ -55,33 +55,34 @@ class Jeu < Gtk::Window
 	    fileMenuItem = Gtk::MenuItem.new(:label => "Fichier", :use_underline => false) # Item Fichier
 	    @fileMenu = Gtk::Menu.new() # Menu de Fichier
 	    fileMenuItem.set_submenu(@fileMenu)
-	        
-	        # Sauvegarder
-	        @sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
-	        @sauvergarderMenuItem.signal_connect "activate" do
-	        	if(@partie.getTimer.exam==1)
-	        		@partie.stopTemps
-	        	end
-	        	Sauvegarde.savePartie(@partie,"partie1")
-	        end
-	        @fileMenu.append(sauvergarderMenuItem)
 
-	        # Charger
-	        @chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
-	        @chargerMenuItem.signal_connect "activate" do
-	        	chargement
-	        end
-	        if(!File.exist?("partie1.txt"))
-	        	@chargerMenuItem.sensitive=false
-	        end
-	        @fileMenu.append(chargerMenuItem)
+##################################   
+        # Sauvegarder
+        @sauvergarderMenuItem = Gtk::MenuItem.new(:label => "Sauvegarder", :use_underline => false)
+        @sauvergarderMenuItem.signal_connect "activate" do
+        	if(@partie.getTimer.exam==1)
+        		@partie.stopTemps
+        	end
+        	Sauvegarde.savePartie(@partie,"partie1")
+        end
+        @fileMenu.append(sauvergarderMenuItem)
 
-	        # Quitter
-	        @quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
-            @quitterMenuItem.signal_connect "activate" do
-            	ConfirmQuitProfil.new(@partie, self, 0)
-            end
-            @fileMenu.add(quitterMenuItem)
+        # Charger
+        @chargerMenuItem = Gtk::MenuItem.new(:label => "Charger", :use_underline => false)
+        @chargerMenuItem.signal_connect "activate" do
+        	chargement
+        end
+        if(!File.exist?("partie1.txt"))
+        	@chargerMenuItem.sensitive=false
+        end
+        @fileMenu.append(chargerMenuItem)
+
+        # Quitter
+        @quitterMenuItem = Gtk::MenuItem.new(:label => "Retourner au menu", :use_underline => false)
+        @quitterMenuItem.signal_connect "activate" do
+        	ConfirmQuitProfil.new(@partie, self, 0)
+        end
+        @fileMenu.add(quitterMenuItem)
 
 
 		# Menu Checkpoint
@@ -89,85 +90,87 @@ class Jeu < Gtk::Window
 	    checkpointMenu = Gtk::Menu.new() # Menu de checkpoint
 	    checkpointMenuItem.set_submenu(checkpointMenu)
 
-		    # Undo
-		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
-		    undoMenuItem.signal_connect "activate" do
-				@partie.getUndoRedo().undo
-				@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(undoMenuItem)
-		    
-		    # Redo
-		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
-		    redoMenuItem.signal_connect "activate" do
-				@partie.getUndoRedo().redo
-				@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(redoMenuItem)
+##################################
+	    # Undo
+	    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
+	    undoMenuItem.signal_connect "activate" do
+	    	@partie.getUndoRedo().undo
+	    	@sousGrille.rafraichirGrille
+	    end
+	    checkpointMenu.append(undoMenuItem)
+	    
+	    # Redo
+	    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
+	    redoMenuItem.signal_connect "activate" do
+	    	@partie.getUndoRedo().redo
+	    	@sousGrille.rafraichirGrille
+	    end
+	    checkpointMenu.append(redoMenuItem)
 
 
-		    # Placer checkpoint
-		    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
-		    placerCPMenuItem.signal_connect "activate" do
-			@partie.getCheckPoint().addMemento()
-		    end
-		    checkpointMenu.append(placerCPMenuItem)
+	    # Placer checkpoint
+	    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
+	    placerCPMenuItem.signal_connect "activate" do
+	    	@partie.getCheckPoint().addMemento()
+	    end
+	    checkpointMenu.append(placerCPMenuItem)
 
-		    # undo checkpoint
-		    undoCPMenuItem = Gtk::MenuItem.new(:label => "Undo Checkpoint", :use_underline => false)
-		    undoCPMenuItem.signal_connect "activate" do
-				@partie.getCheckPoint().undo
-				@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(undoCPMenuItem)
+	    # undo checkpoint
+	    undoCPMenuItem = Gtk::MenuItem.new(:label => "Undo Checkpoint", :use_underline => false)
+	    undoCPMenuItem.signal_connect "activate" do
+	    	@partie.getCheckPoint().undo
+	    	@sousGrille.rafraichirGrille
+	    end
+	    checkpointMenu.append(undoCPMenuItem)
 
-		    # redo checkpoint
-		    redoCPMenuItem = Gtk::MenuItem.new(:label => "Redo Checkpoint", :use_underline => false)
-		    redoCPMenuItem.signal_connect "activate" do
-				@partie.getCheckPoint().redo
-				@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(redoCPMenuItem)
+	    # redo checkpoint
+	    redoCPMenuItem = Gtk::MenuItem.new(:label => "Redo Checkpoint", :use_underline => false)
+	    redoCPMenuItem.signal_connect "activate" do
+	    	@partie.getCheckPoint().redo
+	    	@sousGrille.rafraichirGrille
+	    end
+	    checkpointMenu.append(redoCPMenuItem)
 
 		# Menu Aide
-	    aideMenuItem = Gtk::MenuItem.new(:label => "Aides", :use_underline => false)
-	    aideMenu = Gtk::Menu.new()
-	    aideMenuItem.set_submenu(aideMenu)
+		aideMenuItem = Gtk::MenuItem.new(:label => "Aides", :use_underline => false)
+		aideMenu = Gtk::Menu.new()
+		aideMenuItem.set_submenu(aideMenu)
 
-		    # Candidat possible
-		    candidatPossibleMenuItem = Gtk::MenuItem.new(:label => "Candidat possible", :use_underline => false)
-		    candidatPossibleMenuItem.signal_connect "activate" do
-		    	@grille.getPartie.getUndoRedo.addMemento
-		    	@grille.incNbAide(1)
-		    	@sousGrille.loadAllCandidats
-			end
-		    aideMenu.append(candidatPossibleMenuItem)
+##################################
+	    # Candidat possible
+	    candidatPossibleMenuItem = Gtk::MenuItem.new(:label => "Candidat possible", :use_underline => false)
+	    candidatPossibleMenuItem.signal_connect "activate" do
+	    	@grille.getPartie.getUndoRedo.addMemento
+	    	@grille.incNbAide(1)
+	    	@sousGrille.loadAllCandidats
+	    end
+	    aideMenu.append(candidatPossibleMenuItem)
 
-		    # verification grille
-		    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
-		    verificationGrilleMenuItem.signal_connect "activate" do
-				@grille.colorCaseIncorrect()
-				@grille.incNbAide(1)
-			end
-		    aideMenu.append(verificationGrilleMenuItem)
+	    # verification grille
+	    verificationGrilleMenuItem = Gtk::MenuItem.new(:label => "Verifier la grille", :use_underline => false)
+	    verificationGrilleMenuItem.signal_connect "activate" do
+	    	@grille.colorCaseIncorrect()
+	    	@grille.incNbAide(1)
+	    end
+	    aideMenu.append(verificationGrilleMenuItem)
 
-		    # resoudre
-		    resoudreGrilleMenuItem = Gtk::MenuItem.new(:label => "Resoudre la grille", :use_underline => false)
-		    resoudreGrilleMenuItem.signal_connect "activate" do
-		    	@grille.getPartie.getUndoRedo.addMemento
-				@partie.getAide().resoudre()
-				@grille.incNbAide(10000)
-				@sousGrille.rafraichirGrille
-			end
-		    aideMenu.append(resoudreGrilleMenuItem)
+	    # resoudre
+	    resoudreGrilleMenuItem = Gtk::MenuItem.new(:label => "Resoudre la grille", :use_underline => false)
+	    resoudreGrilleMenuItem.signal_connect "activate" do
+	    	@grille.getPartie.getUndoRedo.addMemento
+	    	@partie.getAide().resoudre()
+	    	@grille.incNbAide(10000)
+	    	@sousGrille.rafraichirGrille
+	    end
+	    aideMenu.append(resoudreGrilleMenuItem)
 
-		    # etatInitial
-		    initialGrilleMenuItem = Gtk::MenuItem.new(:label => "Grille initiale", :use_underline => false)
-		    initialGrilleMenuItem.signal_connect "activate" do
-				@partie.getAide().etatInitial
-				@sousGrille.rafraichirGrille			
-		    end
-		    aideMenu.append(initialGrilleMenuItem)
+	    # etatInitial
+	    initialGrilleMenuItem = Gtk::MenuItem.new(:label => "Grille initiale", :use_underline => false)
+	    initialGrilleMenuItem.signal_connect "activate" do
+	    	@partie.getAide().etatInitial
+	    	@sousGrille.rafraichirGrille			
+	    end
+	    aideMenu.append(initialGrilleMenuItem)
 
 		    # etatInitial
 		  #   candidatGrilleMenuItem = Gtk::MenuItem.new(:label => "test", :use_underline => false)
@@ -181,7 +184,7 @@ class Jeu < Gtk::Window
 		  #   aideMenu.append(candidatGrilleMenuItem)
 
 
-		    
+
 		    #############################################################################
 		    ###############Rajouter la même chose chose qu'au dessus#####################
 		    #############################################################################
@@ -193,27 +196,27 @@ class Jeu < Gtk::Window
 
 	        # Paramètres
 	        parametresMenuItem = Gtk::MenuItem.new(:label => "Paramètres", :use_underline => false)
-            parametresMenuItem.signal_connect "activate" do
-            	Parametres.new(@grille, @sousGrille, @partie, @joueur)
-            end
-            optionMenu.add(parametresMenuItem)
+	        parametresMenuItem.signal_connect "activate" do
+	        	Parametres.new(@grille, @sousGrille, @partie, @joueur)
+	        end
+	        optionMenu.add(parametresMenuItem)
 
         # Barre des menus 
-	    menuBar.append(fileMenuItem)	
-	    menuBar.append(checkpointMenuItem)
-	    menuBar.append(aideMenuItem)
-	    menuBar.append(optionMenuItem)
-		
+        menuBar.append(fileMenuItem)	
+        menuBar.append(checkpointMenuItem)
+        menuBar.append(aideMenuItem)
+        menuBar.append(optionMenuItem)
+
 
 		#==========#
 		# Niveau 2 #
 		#==========#
 
-	    vboxMain.pack_start(menuBar,:expand => false, :fill => false, :padding => 0)
-	    @tableMain = Gtk::Table.new(10, 10)
-	    vboxMain.pack_start(@tableMain,:expand => true, :fill => true, :padding => 0)
+		vboxMain.pack_start(menuBar,:expand => false, :fill => false, :padding => 0)
+		@tableMain = Gtk::Table.new(10, 10)
+		vboxMain.pack_start(@tableMain,:expand => true, :fill => true, :padding => 0)
 
-	   
+
 
 		#==========#
 		# Niveau 3 #
@@ -223,17 +226,17 @@ class Jeu < Gtk::Window
 		@tableMain.attach(@cadreAide , 5,9,1,9) # Aide
 		@tableMain.attach(@boutons   , 0,9,9,10) # Boutons
 
-	    show_all
+		show_all
 	end
 
 	def chargement
 		@partie=Sauvegarde.loadPartie("partie1")
 		if(@partie.getTimer.exam==1)
 			@partie.lanceTemps(@partie.getTimer.getAccumulated)
-        	@timer.start(@partie.getTimer.getAccumulated)
-        end
-        @grille.setPartie(@partie)
-    	@sousGrille.rafraichirGrille
-    end
+			@timer.start(@partie.getTimer.getAccumulated)
+		end
+		@grille.setPartie(@partie)
+		@sousGrille.rafraichirGrille
+	end
 
 end

@@ -28,7 +28,7 @@ class Symbole
 	# Méthode pour supprimer un symbole
 	# @param [Fixnum] symbole
 	# @return : self
-	def remove(symbole)
+	def remove()
 		@symbole = nil
 		return self
 	end

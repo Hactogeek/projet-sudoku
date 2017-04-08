@@ -84,8 +84,8 @@ class Fenetre < Gtk::Window
 	    	@partie.getUndoRedo().undo
 	    	@grille.rafraichirGrille
 	    	@sousGrille.refreshAllCandidats()
-		end
-		checkpointMenu.append(undoMenuItem)
+	    end
+	    checkpointMenu.append(undoMenuItem)
 
 	    # Redo
 	    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
