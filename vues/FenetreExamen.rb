@@ -28,7 +28,7 @@ class FenetreExamen < Jeu
 				tempsLabel.set_markup(@timer.tick)
 			end
 		end
-		tableMain.attach(@time, 0,9,0,1)
+		tableMain.attach(@time, 0,10,0,1)
 	    show_all
 	end
 

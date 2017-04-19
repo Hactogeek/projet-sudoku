@@ -39,7 +39,7 @@ class CadreAide < Gtk::Table
 		pos=@grille.getPartie.getAide.coupSuivant
 		#puts("StartHINT : " + pos[0].to_s)
 		if(pos[0]!=0)
-			if(pos[0]==1 || pos[0]==3 || pos[0]==4)
+			if(pos[0]==1 || pos[0]==3 || pos[0]==4 || pos[0]==5)
 				i=getPos(pos)[0]
 				j=getPos(pos)[1]
 				if(pos[0]==3)
@@ -62,8 +62,6 @@ class CadreAide < Gtk::Table
 				end
 			elsif(pos[0]==2)
 				setAideText("Soit vous n'avez pas mis de candidats,\nsoit il y en qui sont faux")
-			elsif(pos[0]==5)
-				setAideText("REGION INTERACTION")
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
@@ -192,10 +190,12 @@ class CadreAide < Gtk::Table
 	def cancelHint()
 		@grille.resetColorOnAll()
 		@imgEvent.hide
-		@backButton.hide()
-		@moreButton.hide()
-		@finishButton.hide()
-		@hintButton.show()
+		if(@backButton!=nil)
+			@backButton.hide()
+			@moreButton.hide()
+			@finishButton.hide()
+			@hintButton.show()
+		end
 		@labelAide.set_text("")
 		if(@learnButton != nil)
 			remove(@learnButton)

@@ -161,8 +161,8 @@ class Plateau
 	# 				listeCase	
 	def getCaseRegion(posX, posY)
 		listeCase = Array.new()
-		posX=posX+1
-		posY=posY+1
+		# posX=posX+1
+		# posY=posY+1
 
 		posX = posX-(posX%3)
 		posY = posY-(posY%3)

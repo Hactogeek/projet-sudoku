@@ -2,7 +2,6 @@ require 'gtk3'
 Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 Dir[File.dirname(__FILE__) + '/../api/*.rb'].each {|file| require file }
 
-#Je ne sais absolument pas pourquoi, mais quand je renomme JeuApprenti par FenetreApprentissage, ça ne marche pas du tout
 class Jeu < Gtk::Window 
 	# @cadreAide
 	# @boutons
@@ -36,6 +35,26 @@ class Jeu < Gtk::Window
 			@partie.creerPartie
 		end
 		@sousGrille.remplirGrille
+
+		#===============#
+		# Aides boutons #
+		#===============#
+
+		@helpButtons = Gtk::Table.new(10, 10)
+		@undoButton = Gtk::Button.new(:label =>"Undo", :use_underline => nil, :stock_id => nil)
+		@undoButton.signal_connect "clicked" do
+			@partie.getUndoRedo.undo
+		    @sousGrille.rafraichirGrille
+		end
+
+		@redoButton = Gtk::Button.new(:label =>"Redo", :use_underline => nil, :stock_id => nil)
+		@redoButton.signal_connect "clicked" do
+			@partie.getUndoRedo.redo
+		    @sousGrille.rafraichirGrille
+		end
+
+		@helpButtons.attach(@undoButton, 0,1,0,1, Gtk::AttachOptions::SHRINK, Gtk::AttachOptions::SHRINK)
+		@helpButtons.attach(@redoButton, 1,2,0,1, Gtk::AttachOptions::SHRINK, Gtk::AttachOptions::SHRINK)
 
 		#==========#
 		# Niveau 1 #
@@ -87,23 +106,6 @@ class Jeu < Gtk::Window
 	    checkpointMenuItem = Gtk::MenuItem.new(:label => "Checkpoint", :use_underline => false) # Item Checkpoint
 	    checkpointMenu = Gtk::Menu.new() # Menu de checkpoint
 	    checkpointMenuItem.set_submenu(checkpointMenu)
-
-		    # Undo
-		    undoMenuItem = Gtk::MenuItem.new(:label => "Undo", :use_underline => false)
-		    undoMenuItem.signal_connect "activate" do
-		    	@partie.getUndoRedo().undo
-		    	@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(undoMenuItem)
-		    
-		    # Redo
-		    redoMenuItem = Gtk::MenuItem.new(:label => "Redo", :use_underline => false)
-		    redoMenuItem.signal_connect "activate" do
-		    	@partie.getUndoRedo().redo
-		    	@sousGrille.rafraichirGrille
-		    end
-		    checkpointMenu.append(redoMenuItem)
-
 		    # Placer checkpoint
 		    placerCPMenuItem = Gtk::MenuItem.new(:label => "Placer un Checkpoint", :use_underline => false)
 		    placerCPMenuItem.signal_connect "activate" do
@@ -217,9 +219,10 @@ class Jeu < Gtk::Window
 		# Niveau 3 #
 		#==========#
 
-		@tableMain.attach(@sousGrille, 0,5,1,9) # Support Grille (background + sous grille + grille)
-		@tableMain.attach(@cadreAide , 5,9,1,9) # Aide
-		@tableMain.attach(@boutons   , 0,9,9,10) # Boutons
+		@tableMain.attach(@sousGrille,  0,5,1,9,Gtk::AttachOptions::SHRINK,Gtk::AttachOptions::SHRINK) # Support Grille (background + sous grille + grille)
+		@tableMain.attach(@helpButtons, 5,9,1,2,Gtk::AttachOptions::FILL,Gtk::AttachOptions::FILL)
+		@tableMain.attach(@cadreAide ,  5,9,2,9,Gtk::AttachOptions::FILL,Gtk::AttachOptions::FILL) # Aide
+		@tableMain.attach(@boutons   ,  0,9,9,10,Gtk::AttachOptions::FILL,Gtk::AttachOptions::FILL) # Boutons
 
 		show_all
 	end
@@ -232,6 +235,7 @@ class Jeu < Gtk::Window
 		end
 		@grille.setPartie(@partie)
 		@sousGrille.rafraichirGrille
+		@cadreAide.cancelHint
 	end
 
 end

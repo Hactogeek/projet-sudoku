@@ -171,7 +171,7 @@ class Aide
 			return 1, solution[rand(solution.length)]
 		end
 
-		if(@partie.getPlateau.aucunCandidat? || !@partie.getPlateau.correctCandidat?)
+		if(@partie.getPlateau.aucunCandidat? && !@partie.getPlateau.correctCandidat?)
 			return [2]
 		end
 		

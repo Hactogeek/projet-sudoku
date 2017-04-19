@@ -16,7 +16,7 @@ class Invite < WindowSudoku
 		nouvellePartie = Gtk::Button.new(:label => "Nouvelle\n  partie")
 		nouvellePartie.override_background_color(:normal, @colorNeutral)
 		nouvellePartie.set_size_request(102,50)
-		importerGrille = Gtk::Button.new(:label => "Importer\n  grille")
+		importerGrille = Gtk::Button.new(:label => "Saisir\n  grille")
 		importerGrille.override_background_color(:normal, @colorNeutral)
 		importerGrille.set_size_request(102,50)
 		creerProfil = Gtk::Button.new(:label => " Créer\n  profil")
