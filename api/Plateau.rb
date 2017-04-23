@@ -176,6 +176,14 @@ class Plateau
 		return listeCase
 	end
 
+	def posToCase(pos)
+		listeCase = Array.new
+		pos.each do |x|
+			listeCase.push(@grid[x.getX][x.getY])
+		end
+		return listeCase
+	end
+
 
 
 	# Méthode qui retourne un tableau les cases d'une ligne dans une région spécifié

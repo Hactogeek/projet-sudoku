@@ -39,7 +39,7 @@ class CadreAide < Gtk::Table
 		pos=@grille.getPartie.getAide.coupSuivant
 		#puts("StartHINT : " + pos[0].to_s)
 		if(pos[0]!=0)
-			if(pos[0]==1 || pos[0]==3 || pos[0]==4 || pos[0]==5)
+			if(pos[0]==1 || pos[0]==3 || pos[0]==4)
 				i=getPos(pos)[0]
 				j=getPos(pos)[1]
 				if(pos[0]==3)
@@ -53,6 +53,7 @@ class CadreAide < Gtk::Table
 						setAideText("Regardez ce que vous pouvez\nfaire dans cette colonne.")
 						aColorer=@grille.getPartie.getPlateau.getColonne(j)
 					end
+				
 				else
 					setAideText("Regardez ce que vous pouvez\nfaire dans cette région.")
 					aColorer=@grille.getPartie.getPlateau.getCaseRegion(i,j)
@@ -62,6 +63,11 @@ class CadreAide < Gtk::Table
 				end
 			elsif(pos[0]==2)
 				setAideText("Soit vous n'avez pas mis de candidats,\nsoit il y en qui sont faux")
+			elsif(pos[0]==5)
+				setAideText("Regardez ce que vous pouvez\nfaire dans cette région.")
+				@grille.getPartie.getPlateau.posToCase(pos[1][3]).each do |x|
+					@grille.setCouleurAideCase(x.getPosition.getX, x.getPosition.getY)
+				end
 			end
 
 			if(@backButton == nil || !@backButton.no_show_all?)
@@ -100,14 +106,6 @@ class CadreAide < Gtk::Table
 			j=getPos(pos)[1]
 			@grille.setFocus(@grille.children[80-(9*j+i)])
 			@grille.setCouleurAideCase(i, j)
-			remove(@moreButton)
-			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
-			attach(@moreButton2, 3,5 ,0,1)
-			#puts("morehint : " + pos[0].to_s)
-			@moreButton2.signal_connect "clicked" do
-				moreHint2(pos)
-			end
-			@moreButton2.show
 		elsif(pos[0]==2)
 			@grille.getPartie.getUndoRedo.addMemento
 			setAideText("Voilà, ça va aller mieux comme ça.")
@@ -119,30 +117,60 @@ class CadreAide < Gtk::Table
 			#print "ok2"
 			@moreButton.sensitive = false
 		elsif(pos[0]==5)
-			setAideText("INTERACTION ENTRE REGION!")
+			@grille.resetColorOnAll
+			setAideText("Observez bien ce que nous mettons en surbrillance.")
+			@grille.getPartie.getPlateau.posToCase(pos[1][1]).each do |x|
+				@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, "#FFA749")
+			end
+			@grille.getPartie.getPlateau.posToCase(pos[1][2]).each do |x|
+				@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, "#ED0000")
+			end
+			@grille.getPartie.getPlateau.posToCase(pos[1][4]).each do |x|
+				@grille.setCouleurCase(x.getPosition.getX, x.getPosition.getY, "#32CD32")
+			end
+		end
+		if(pos[0]==1 || pos[0]==3 || pos[0]==4 || pos[0]==5)
+			remove(@moreButton)
+			@moreButton2 = Gtk::Button.new(:label =>"Suivant", :use_underline => nil, :stock_id => nil)
+			attach(@moreButton2, 3,5 ,0,1)
+			@moreButton2.signal_connect "clicked" do
+				moreHint2(pos)
+			end
+			@moreButton2.show
 		end
 	end
 
 	def moreHint2(pos)
-		if(pos[0]==1 || pos[0]==3 || pos[0]==4)
+		if(pos[0]==1 || pos[0]==3 || pos[0]==4 || pos[0]==5)
 			if(pos[0]==1)
 				methode="Chiffre caché"
 			elsif(pos[0]==3)
 				methode="Candidat unique"
-			elsif(pos[0]==3)
+			elsif(pos[0]==4)
 				methode="Un seul candidat"
+			elsif(pos[0]==5)
+				methode="Interaction entre région"
 			else 
 				methode="Pas de méthode"
 			end
-				
-			setAideText("Voici la solution trouvée grâce à la méthode :\n" + methode)
-			#puts("morehint2 : " + pos[0].to_s)
-			i=getPos(pos)[0]
-			j=getPos(pos)[1]
-			soluce=@grille.getPartie.getPlateau.getCaseOriginale(Position.new(i,j))
-			@grille.setValeurSurFocus(soluce)
-			@grille.getPartie.getPlateau.enleverCandidat(getPos(pos)[2], soluce)
-			@sousGrille.rafraichirGrille
+			
+			if(pos[0]==5)
+				@grille.resetColorOnAll
+				setAideText("Des candidats ont été enlevé, trouvée grâce à la méthode :\n" + methode)
+				symb=pos[1][0]
+				pos[1][4].each do |x|
+					@grille.getPartie.getPlateau.enleverCandidat(x, symb)
+				end
+				@sousGrille.rafraichirGrille
+			else
+				setAideText("Voici la solution trouvée grâce à la méthode :\n" + methode)
+				i=getPos(pos)[0]
+				j=getPos(pos)[1]
+				soluce=@grille.getPartie.getPlateau.getCaseOriginale(Position.new(i,j))
+				@grille.setValeurSurFocus(soluce)
+				@grille.getPartie.getPlateau.enleverCandidat(getPos(pos)[2], soluce)
+				@sousGrille.rafraichirGrille
+			end
 
 
 			@moreButton.sensitive = false
@@ -175,6 +203,13 @@ class CadreAide < Gtk::Table
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/unSeulCandidat.png", :width => 100, :heigth => 100))
 					rescue
 						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/unSeulCandidat.png", :width => 100, :heigth => 100))
+					end
+				elsif(pos[0]==5)
+					setAideText("Si dans 2 régions alignées, l'on peut constater qu'un candidat n'est pas présent dans une ligne.\n C'est qu'il se trouve dans cette ligne dans la 3ème région.")
+					begin
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "../../vues/interactionRegion.png", :width => 100, :heigth => 100))
+					rescue
+						@img=Gtk::Image.new( :pixbuf => GdkPixbuf::Pixbuf.new(:file => "./vues/interactionRegion.png", :width => 100, :heigth => 100))
 					end
 				end
 				@imgEvent.add(@img)
